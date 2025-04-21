@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg0laxtfcxvd6"]
+
+[ext_resource type="Script" uid="uid://ch042u2ss1st0" path="res://scripts/powers/fireBallPower.gd" id="1_4dffe"]
+[ext_resource type="Texture2D" uid="uid://dra21fmg4osye" path="res://assets/images/cross_hair.png" id="2_4dffe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2mhxt"]
+radius = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ynx13"]
+blend_mode = 1
+
+[node name="FireBallPower" type="Area2D"]
+script = ExtResource("1_4dffe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_2mhxt")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+material = SubResource("CanvasItemMaterial_ynx13")
+position = Vector2(19, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+position = Vector2(-1.78814e-07, 0)
+scale = Vector2(-0.0028825, -0.00302519)
+texture = ExtResource("2_4dffe")

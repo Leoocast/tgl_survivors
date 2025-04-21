@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=3 uid="uid://bho6vtjt65spc"]
+
+[ext_resource type="Script" uid="uid://cyruv4aw76xho" path="res://scripts/options_menu.gd" id="1_8uxyx"]
+[ext_resource type="Texture2D" uid="uid://dtj1mgr7iamfu" path="res://assets/images/title_background.jpg" id="2_h1qqt"]
+[ext_resource type="FontFile" uid="uid://bncjg28utk7b4" path="res://assets/fonts/Pixellari.ttf" id="3_ve2r7"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8uxyx")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -15.0
+offset_right = 120.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_h1qqt")
+expand_mode = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -485.0
+offset_top = 177.0
+offset_right = 484.0
+offset_bottom = 304.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_ve2r7")
+theme_override_font_sizes/font_size = 126
+text = "TGL SURVIVORS"
+
+[node name="Subtitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 215.0
+offset_top = 287.0
+offset_right = 573.0
+offset_bottom = 414.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_ve2r7")
+theme_override_font_sizes/font_size = 66
+text = "Opciones"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -267.0
+offset_top = -94.0
+offset_right = 268.0
+offset_bottom = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Volume" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ve2r7")
+theme_override_font_sizes/font_size = 90
+text = "Volumen"
+
+[node name="Resolution" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ve2r7")
+theme_override_font_sizes/font_size = 90
+text = "Resolución"
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ve2r7")
+theme_override_font_sizes/font_size = 90
+text = "< Atrás"
+
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

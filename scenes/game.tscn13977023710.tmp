@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://01hpvs7dnows"]
+
+[ext_resource type="Texture2D" uid="uid://45otkswimph6" path="res://assets/images/test_floor_2.png" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://dpaylveje0dg4" path="res://scenes/player.tscn" id="2_yqjtg"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Floor" type="TextureRect" parent="."]
+offset_left = -10951.0
+offset_top = -5216.0
+offset_right = 13200.0
+offset_bottom = 7379.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_yqjtg")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(852, 493)
