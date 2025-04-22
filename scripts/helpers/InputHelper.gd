@@ -9,7 +9,7 @@ func getDirectionX() -> float:
 	return direction.x
 
 func isAttacking() -> bool:
-	return Input.is_action_just_pressed("attack")
+	return Input.is_action_pressed("attack")
 	
 func isDashing() -> bool:
 	return Input.is_action_just_pressed("dash")

@@ -10,6 +10,8 @@ radius = 1.0
 blend_mode = 1
 
 [node name="FireBallPower" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_4dffe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

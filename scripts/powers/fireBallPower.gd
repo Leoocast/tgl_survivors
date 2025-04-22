@@ -5,7 +5,7 @@ const fireBall_asset = preload(GameConstants.ASSETS.PROJECTILES.FIRE_BAll)
 var canShoot := true
 var cooldown := 0.3
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	lookAtMouse()
 	
 func shoot() -> void:

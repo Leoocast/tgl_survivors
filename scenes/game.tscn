@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://01hpvs7dnows"]
+[gd_scene load_steps=4 format=3 uid="uid://01hpvs7dnows"]
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://dpaylveje0dg4" path="res://scenes/player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://lwhasyj8po1m" path="res://scenes/enemies/slime.tscn" id="3_lnu2h"]
 
 [node name="Game" type="Node2D"]
 
@@ -17,4 +18,17 @@ expand_mode = 1
 stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_yqjtg")]
+unique_name_in_owner = true
 position = Vector2(852, 493)
+
+[node name="Slime" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(1450, 354)
+scale = Vector2(3.60001, 3.60001)
+
+[node name="Slime2" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(1482, 645)
+scale = Vector2(3.60001, 3.60001)
+
+[node name="Slime3" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(370, 247)
+scale = Vector2(3.60001, 3.60001)
