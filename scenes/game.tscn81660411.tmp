@@ -2,9 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://dpaylveje0dg4" path="res://scenes/player.tscn" id="2_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://ctfsj4jc7odve" path="res://scenes/enemies/slime.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://be7wcw2ddm53w" path="res://scenes/enemies/slime.tscn" id="3_lnu2h"]
 
 [node name="Game" type="Node2D"]
+
+[node name="Slime" parent="." instance=ExtResource("3_lnu2h")]
 
 [node name="Floor" type="TextureRect" parent="."]
 offset_left = -10951.0
@@ -20,7 +22,3 @@ stretch_mode = 1
 [node name="Player" parent="." instance=ExtResource("2_yqjtg")]
 unique_name_in_owner = true
 position = Vector2(852, 493)
-
-[node name="Slime" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(1322, 223)
-scale = Vector2(4.89164, 4.89164)
