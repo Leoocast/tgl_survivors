@@ -23,12 +23,17 @@ func _ready():
 	})
 
 	animationController.playIdle()
+	healthBarController.hideBars()
 	disableAttackHitbox()
+
 
 func _physics_process(_delta):
 	moveTowardsPlayer()
 	flipTowardsPlayer()
 	attackPlayer()
+
+	if healthController.isDamaged && not healthBarController.alreadyShowed:
+		healthBarController.showBars()
 
 func flipTowardsPlayer():
 	if self.global_position.x > player.global_position.x:

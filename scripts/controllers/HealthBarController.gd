@@ -4,18 +4,23 @@ extends Control
 #Setup
 var entity : Node2D
 var healthController : HealthController
+var color : Color
 
 #Nodes
 @onready var ui_mainBar := $MainBar
 @onready var ui_whiteBar := $WhiteBar
 @onready var ui_blackBar := $Blackbar
 
+#Vars
+var alreadyShowed := false
+
 #-------------------------#
 func setup(_entity: Node2D, _healthController: HealthController, _color: Color) -> void:
 	self.entity = _entity
 	self.healthController = _healthController
+	self.color = _color
+	createMainBar()
 	setupHealth()
-	createMainBar(_color)
 	
 func takeDamage(damage: float) -> void:
 	var current = healthController.health
@@ -33,13 +38,15 @@ func hideBars() -> void:
 	ui_whiteBar.hide()
 	ui_blackBar.hide()
 
-func createMainBar(color: Color) -> void:
-	var stylebox = ui_mainBar.get("custom_styles/fill")
-	
-	if stylebox != null:
-		return
+func showBars() -> void:
+	ui_mainBar.show()
+	ui_whiteBar.show()
+	ui_blackBar.show()
+	createMainBar()
+	alreadyShowed = true
 
-	stylebox = StyleBoxFlat.new()
+func createMainBar() -> void:
+	var stylebox = StyleBoxFlat.new()
 	stylebox.corner_radius_top_left = 8
 	stylebox.corner_radius_top_right = 8
 	stylebox.corner_radius_bottom_left = 8
