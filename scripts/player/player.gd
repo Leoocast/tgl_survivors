@@ -16,7 +16,6 @@ extends CharacterBody2D
 const HEALTH := 20
 const HEALTH_COLOR := Color8(0, 158, 103)
 const SPEED := 600
-const ATTACK_DAMAGE := 10.0
 
 #-------------------------#
 func _ready() -> void:

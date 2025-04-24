@@ -2,9 +2,10 @@ extends Area2D
 
 const speed := 1150
 const attackRange := 1000
+var damage : float
 
+#Internal
 var travelledDistance := 0.0
-
 var direction: Vector2 = Vector2.ZERO 
 
 func _ready() -> void:
@@ -20,5 +21,4 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(enemy: Enemy) -> void:
 	queue_free()
-	#FIXME:
-	enemy.takeDamage(2)
+	enemy.takeDamage(damage)

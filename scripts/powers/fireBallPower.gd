@@ -23,7 +23,7 @@ func shoot() -> void:
 	var direction = (mousePosition - source).normalized()
 	projectile.direction = direction
 	projectile.rotation = direction.angle()
-
+	projectile.damage = damage
 	var game = get_tree()
 	game.current_scene.add_child(projectile)
 
