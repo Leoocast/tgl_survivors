@@ -28,9 +28,9 @@ func takeDamage(damage: float) -> void:
 	ui_whiteBar.value = current + damage
 	ui_blackBar.value = current + damage
 
-	await GameHelper.showHide(ui_whiteBar, 0.08)
+	await GameUtils.showHide(ui_whiteBar, 0.08)
 
-	var tween = GameHelper.create_tween()
+	var tween = GameUtils.create_tween()
 	tween.tween_property(ui_blackBar, "value", current, 0.3).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 
 func hideBars() -> void:

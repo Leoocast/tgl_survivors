@@ -10,15 +10,15 @@ extends CharacterBody2D
 
 #Nodes
 @onready var fireBallPower = $FireBallPower
+@onready var ui_attackCdBar = $UI/AttackCdBar
 
 # Attributes
 const HEALTH := 20
 const HEALTH_COLOR := Color8(0, 158, 103)
 const SPEED := 600
-const ATTACK_DAMAGE := 1.0
+const ATTACK_DAMAGE := 10.0
 
-@onready var ui_attackCdBar = $UI/AttackCdBar
-
+#-------------------------#
 func _ready() -> void:
 	healthController.setup(self, HEALTH)
 	attackController.setup(self, fireBallPower)
@@ -32,10 +32,10 @@ func _physics_process(_delta: float) -> void:
 	if not dashController.isDashing:
 		move()
 		
-	if InputHelper.isDashing():
+	if InputHandler.isDashing():
 		dashController.tryDash()
 	
-	if not attackController.isAttacking and attackController.canAttack and InputHelper.isAttacking():
+	if not attackController.isAttacking and attackController.canAttack and InputHandler.isAttacking():
 		attackController.attack(animateAttackCdBar)
 	
 	if not attackController.isAttacking:
@@ -47,13 +47,13 @@ func flipSpriteMouse() -> void:
 	animationController.flipHorizontal(mouse_pos.x < global_position.x)
 
 func move() -> void:
-	var direction = InputHelper.getDirection()
+	var direction = InputHandler.getDirection()
 	self.velocity = direction * SPEED
 	move_and_slide()
 
 func animateAttackCdBar() -> void:
 	ui_attackCdBar.value = 0
-	var tween = GameHelper.create_tween()
+	var tween = GameUtils.create_tween()
 	tween.tween_property(ui_attackCdBar, "value", 100, fireBallPower.cooldown + .4).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 
 func takeDamage(damage: float) -> void:

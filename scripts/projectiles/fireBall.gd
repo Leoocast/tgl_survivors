@@ -20,4 +20,5 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(enemy: Enemy) -> void:
 	queue_free()
+	#FIXME:
 	enemy.takeDamage(2)

@@ -18,7 +18,6 @@ var isTakingDamage := false
 var isPlayerInRange := false
 
 #-------------------------#
-
 func setup(data: Dictionary) -> void:
 	self.speed = data.speed
 	self.stopDistance = data.stopDistance 
@@ -46,7 +45,7 @@ func takeDamage(damage: float) -> void:
 	isTakingDamage = true
 	healthController.takeDamage(damage)
 	animationController.playTakeDamage()
-	GameHelper.flash(animationController.sprite)
+	GameUtils.flash(animationController.sprite)
 	healthBarController.takeDamage(damage)
 	if healthController.isDead:
 		death()

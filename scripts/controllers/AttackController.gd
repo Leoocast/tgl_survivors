@@ -32,6 +32,6 @@ func attack(executeAfterAttack: Callable = func():, executeAfterAttackAnimation:
 		executeAfterAttackAnimation.call()   
 
 	isAttacking = false
-	await GameHelper.waitFor(weapon.cooldown)
+	await GameUtils.waitFor(weapon.cooldown)
 	canAttack = true
 	

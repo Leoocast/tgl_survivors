@@ -1,10 +1,14 @@
 extends Node2D
 
-const fireBall_asset = preload(GameConstants.ASSETS.PROJECTILES.FIRE_BAll) 
+#Preload
+const fireBall_asset = preload(Constants.ASSETS.PROJECTILES.FIRE_BAll) 
 
-var damage := 1.0
+#Config
+const damage := 1.0
+const cooldown := 0.3
+
+#Internal
 var canShoot := true
-var cooldown := 0.3
 
 func _process(_delta: float) -> void:
 	lookAtMouse()

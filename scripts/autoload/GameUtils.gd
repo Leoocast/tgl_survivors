@@ -10,15 +10,6 @@ func destroyAfter(time: float, node: Node) -> void:
     if is_instance_valid(node):
         node.queue_free()
 
-func isDamageable(node: Node, debug: bool = false) -> bool:
-    var hasTakeDamage =  node.has_method("takeDamage")
-
-    if debug:
-        if not hasTakeDamage:
-             push_error(node.name, " no implementa el método -> takeDamage()")
-
-    return "damageable" in node and node.damageable is Damageable and hasTakeDamage
-
 func waitFor(time: float) -> void:
     await tree.create_timer(time).timeout
 
@@ -27,11 +18,19 @@ func createTween() -> void:
 
 func showHide(node: Node, time: float) -> void:
     node.show()
-    await GameHelper.waitFor(time)
+    await GameUtils.waitFor(time)
     node.hide()
 
 func flash(sprite: AnimatedSprite2D) -> void:
     var originalColor = sprite.self_modulate
     sprite.self_modulate = Color(2,2,2)
-    await GameHelper.waitFor(0.2)
+    await GameUtils.waitFor(0.2)
     sprite.self_modulate = originalColor
+
+func flipColliderHorizontal(collider: CollisionShape2D, flip: bool) -> void:
+    if flip:
+        collider.position.x = -abs(collider.position.x)
+    else:
+        collider.position.x = abs(collider.position.x)
+
+    

@@ -16,9 +16,9 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
 
-GameConstants="*res://scripts/autoload/GameConstants.gd"
-InputHelper="*res://scripts/helpers/InputHelper.gd"
-GameHelper="*res://scripts/helpers/GameHelper.gd"
+Constants="*res://scripts/autoload/Constants.gd"
+InputHandler="*res://scripts/autoload/InputHandler.gd"
+GameUtils="*res://scripts/autoload/GameUtils.gd"
 
 [display]
 

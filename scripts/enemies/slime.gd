@@ -36,12 +36,10 @@ func _physics_process(_delta):
 		healthBarController.showBars()
 
 func flipTowardsPlayer():
-	if self.global_position.x > player.global_position.x:
-		$AttackArea/AttackCollision.position.x = -abs($AttackArea/AttackCollision.position.x)
-		animationController.flipHorizontal(true)
-	else:
-		$AttackArea/AttackCollision.position.x = abs($AttackArea/AttackCollision.position.x)
-		animationController.flipHorizontal(false)
+	var shouldFlip = self.global_position.x > player.global_position.x
+
+	GameUtils.flipColliderHorizontal($AttackArea/AttackCollision, shouldFlip)
+	animationController.flipHorizontal(shouldFlip)
 
 func death() -> void:
 	healthBarController.hideBars()

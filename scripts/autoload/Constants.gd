@@ -1,4 +1,4 @@
-# Game Constants
+# Constants
 extends Node
 
 const SCENES = {
@@ -10,7 +10,7 @@ const SCENES = {
 const CONTROLLERS = {
 	"DashController": "res://scripts/player/DashController.gd"
 }
-#
+
 const ASSETS = {
 	"PROJECTILES": {
 		"FIRE_BAll": "res://scenes/projectiles/fireBall.tscn"
@@ -24,4 +24,3 @@ const ANIMATIONS = {
 	"TAKE_DAMAGE": "take_damage",
 	"DEATH": "death"
 }
-

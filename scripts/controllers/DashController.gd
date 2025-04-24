@@ -30,16 +30,16 @@ func tryDash() -> void:
 	if not canDash:
 		return
 	
-	dashDirection = InputHelper.getDirection().normalized()
+	dashDirection = InputHandler.getDirection().normalized()
 	isDashing = true
 	canDash = false
 	
 	# Dash duration
-	await GameHelper.waitFor(DURATION)
+	await GameUtils.waitFor(DURATION)
 	isDashing = false
 	
 	# Cooldown
-	await GameHelper.waitFor(COOLDOWN)
+	await GameUtils.waitFor(COOLDOWN)
 	canDash = true
 
 func executeDash() -> void:

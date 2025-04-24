@@ -4,14 +4,15 @@ extends Node
 #Setup
 var sprite : AnimatedSprite2D
 
-const ANIMATIONS = GameConstants.ANIMATIONS
+#Internal
+const ANIMATIONS = Constants.ANIMATIONS
 
 #-------------------------#
 func setup(_sprite: AnimatedSprite2D) -> void:
 	self.sprite = _sprite
 
 func playDefault() -> void:
-	var direction = InputHelper.getDirection()
+	var direction = InputHandler.getDirection()
 	if direction != Vector2.ZERO:
 		playRun()
 	else:
