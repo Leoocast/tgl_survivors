@@ -16,3 +16,12 @@ const ASSETS = {
 		"FIRE_BAll": "res://scenes/projectiles/fireBall.tscn"
 	}
 }
+
+const ANIMATIONS = {
+    "IDLE" : "idle",
+    "RUN" : "run",
+    "ATTACK" : "attack",
+	"TAKE_DAMAGE": "take_damage",
+	"DEATH": "death"
+}
+

@@ -29,3 +29,9 @@ func showHide(node: Node, time: float) -> void:
     node.show()
     await GameHelper.waitFor(time)
     node.hide()
+
+func flash(sprite: AnimatedSprite2D) -> void:
+    var originalColor = sprite.self_modulate
+    sprite.self_modulate = Color(2,2,2)
+    await GameHelper.waitFor(0.2)
+    sprite.self_modulate = originalColor

@@ -1,0 +1,63 @@
+class_name HealthBarController
+extends Control
+
+#Setup
+var entity : Node2D
+var healthController : HealthController
+
+#Nodes
+@onready var ui_mainBar := $MainBar
+@onready var ui_whiteBar := $WhiteBar
+@onready var ui_blackBar := $Blackbar
+
+#-------------------------#
+func setup(_entity: Node2D, _healthController: HealthController, _color: Color) -> void:
+	self.entity = _entity
+	self.healthController = _healthController
+	setupHealth()
+	createMainBar(_color)
+	
+func takeDamage(damage: float) -> void:
+	var current = healthController.health
+	ui_mainBar.value = current
+	ui_whiteBar.value = current + damage
+	ui_blackBar.value = current + damage
+
+	await GameHelper.showHide(ui_whiteBar, 0.08)
+
+	var tween = GameHelper.create_tween()
+	tween.tween_property(ui_blackBar, "value", current, 0.3).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+
+func hideBars() -> void:
+	ui_mainBar.hide()
+	ui_whiteBar.hide()
+	ui_blackBar.hide()
+
+func createMainBar(color: Color) -> void:
+	var stylebox = ui_mainBar.get("custom_styles/fill")
+	
+	if stylebox != null:
+		return
+
+	stylebox = StyleBoxFlat.new()
+	stylebox.corner_radius_top_left = 8
+	stylebox.corner_radius_top_right = 8
+	stylebox.corner_radius_bottom_left = 8
+	stylebox.corner_radius_bottom_right = 8
+	
+	stylebox.border_width_left = 2
+	stylebox.border_width_top = 2
+	stylebox.border_width_right = 2
+	stylebox.border_width_bottom = 2
+	stylebox.bg_color = color
+
+	ui_mainBar.add_theme_stylebox_override("fill", stylebox)
+
+func setupHealth() -> void:
+	ui_mainBar.max_value = healthController.health
+	ui_whiteBar.max_value = healthController.health
+	ui_blackBar.max_value = healthController.health
+
+	ui_mainBar.value = healthController.health
+	ui_whiteBar.value = healthController.health
+	ui_blackBar.value = healthController.health

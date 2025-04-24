@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc4i6q7r02mdm"]
+
+[ext_resource type="Script" uid="uid://b7etg5kapxkuf" path="res://scripts/controllers/HealthBarController.gd" id="1_0ucuy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xpa3b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spvli"]
+bg_color = Color(0.386442, 0.00682079, 0.00759525, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vr2f"]
+bg_color = Color(0, 0, 0, 0.258824)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r72rs"]
+bg_color = Color(3.94672e-06, 0.618885, 0.40283, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sk0r1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aiha7"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="HealthBar" type="Control"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 0.388615
+offset_top = 18.2643
+offset_right = 40.3886
+offset_bottom = 58.2642
+scale = Vector2(0.401799, 0.401799)
+script = ExtResource("1_0ucuy")
+
+[node name="Blackbar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 37.0
+offset_right = 214.0
+offset_bottom = 72.0
+scale = Vector2(0.193979, 0.193979)
+theme_override_styles/background = SubResource("StyleBoxEmpty_xpa3b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_spvli")
+value = 100.0
+show_percentage = false
+
+[node name="MainBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 37.0
+offset_right = 214.0
+offset_bottom = 72.0
+scale = Vector2(0.193979, 0.193979)
+theme_override_styles/background = SubResource("StyleBoxFlat_0vr2f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r72rs")
+value = 60.0
+show_percentage = false
+
+[node name="WhiteBar" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 34.0
+offset_top = 37.0
+offset_right = 214.0
+offset_bottom = 72.0
+scale = Vector2(0.193979, 0.193979)
+theme_override_styles/background = SubResource("StyleBoxEmpty_sk0r1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aiha7")
+value = 100.0
+show_percentage = false

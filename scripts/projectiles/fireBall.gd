@@ -19,12 +19,5 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(enemy: Enemy) -> void:
-
-	if not GameHelper.isDamageable(enemy):
-		return
-
-	if not enemy.damageable.canTakeDamage:
-		return
-	
 	queue_free()
-	enemy.takeDamage()
+	enemy.takeDamage(2)

@@ -2,6 +2,7 @@ extends Node2D
 
 const fireBall_asset = preload(GameConstants.ASSETS.PROJECTILES.FIRE_BAll) 
 
+var damage := 1.0
 var canShoot := true
 var cooldown := 0.3
 

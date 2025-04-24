@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # Esto es slime, pasar enemy a una clase para heredar de ella
-class_name Enemy
+class_name Slime
 
 const speed := 200.0
 const attackCd := 0.4
@@ -14,7 +14,6 @@ var isDead := false
 var isTakingDamage := false
 var isAttacking := false
 var isPlayerInRange := false
-
 
 @onready var ui_redBar := $HealthBar/RedBar
 @onready var ui_whiteBar := $HealthBar/WhiteBar
@@ -101,19 +100,16 @@ func death()-> void:
 	fadeOutAndDisapear()
 	$CollisionShape2D.queue_free()
 
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is not Player:
 		return
 	isPlayerInRange = true
 	attackPlayer()
 
-
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is not Player:
 		return
 	isPlayerInRange = false
-
 
 func attackPlayer() -> void:
 	if not isPlayerInRange: 
@@ -129,13 +125,11 @@ func attackPlayer() -> void:
 	if isPlayerInRange:
 		attackPlayer()
 	
-
 func enableAttackHitbox() -> void:
-	$AttackArea/AttackCollision.disabled = false
-
+	$AttackArea/AttackCollision.call_deferred("set_disabled", false)
 
 func disableAttackHitbox() -> void:
-	$AttackArea/AttackCollision.disabled = true
+	$AttackArea/AttackCollision.call_deferred("set_disabled", true)
 
 func _on_animated_sprite_2d_frame_changed() -> void:
 	if $AnimatedSprite2D.animation == "attack":
@@ -144,7 +138,6 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 			enableAttackHitbox()
 		else:
 			disableAttackHitbox()
-
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body is Player:
