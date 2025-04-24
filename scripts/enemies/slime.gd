@@ -4,7 +4,7 @@ extends Enemy
 #Config
 const SPEED := 200.0
 const STOP_DISTANCE := 70.0
-const HEALTH := 50.0
+const HEALTH := 2.0
 var SLIME_WEAPON : Weapon
 
 #-------------------------#

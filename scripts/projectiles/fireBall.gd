@@ -1,18 +1,25 @@
 extends Area2D
 
-const speed := 1150
-const attackRange := 1000
+#Config
+var speed := 0.0
+var attackRange := 0.0
 var damage : float
+var direction: Vector2
 
 #Internal
 var travelledDistance := 0.0
-var direction: Vector2 = Vector2.ZERO 
+
+#-------------------------#
+func setup(_speed: float, _attackRange: float, _damage: float, _direction: Vector2) -> void:
+	speed = _speed
+	attackRange = _attackRange
+	direction = _direction
+	damage = _damage
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("attack")
 
 func _physics_process(delta: float) -> void:
-	direction = Vector2.RIGHT.rotated(rotation)
 	self.position += direction * speed * delta 
 	travelledDistance += speed * delta 
 	
