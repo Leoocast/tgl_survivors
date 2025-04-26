@@ -24,3 +24,27 @@ position = Vector2(852, 493)
 [node name="Slime" parent="." instance=ExtResource("3_lnu2h")]
 position = Vector2(1322, 223)
 scale = Vector2(4.89164, 4.89164)
+
+[node name="Slime2" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(1425, 588)
+scale = Vector2(4.89164, 4.89164)
+
+[node name="Slime3" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(1733, 180)
+scale = Vector2(4.89164, 4.89164)
+
+[node name="Slime4" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(915, 2.00002)
+scale = Vector2(4.89164, 4.89164)
+
+[node name="Slime5" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(443, -10)
+scale = Vector2(4.89164, 4.89164)
+
+[node name="Slime6" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(768, -378)
+scale = Vector2(4.89164, 4.89164)
+
+[node name="Slime7" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(1365, -197)
+scale = Vector2(4.89164, 4.89164)

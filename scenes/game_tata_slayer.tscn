@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1s51dtivbell"]
+[gd_scene load_steps=4 format=3 uid="uid://b1s51dtivbell"]
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_6chfy"]
 [ext_resource type="PackedScene" uid="uid://ck0sepqdcmnr" path="res://scenes/player/sanJacintoElTataSlayer.tscn" id="2_2yqfl"]
+[ext_resource type="PackedScene" uid="uid://ctfsj4jc7odve" path="res://scenes/enemies/slime.tscn" id="3_6chfy"]
 
 [node name="Game" type="Node2D"]
 
@@ -16,6 +17,75 @@ texture = ExtResource("1_6chfy")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="San Jacinto El Tata Slayer" parent="." instance=ExtResource("2_2yqfl")]
+[node name="Player" parent="." instance=ExtResource("2_2yqfl")]
+unique_name_in_owner = true
 position = Vector2(774, 425)
-scale = Vector2(8.84947, 8.84947)
+scale = Vector2(8.84947, 9.15654)
+
+[node name="Slime" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(1249, 348)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime2" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(1243, 655)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime3" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(1508, 477)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime4" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(980, 133)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime5" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(1293, 7)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime6" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(420, -39)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime7" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(-104, 145)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime8" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(178, 55)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime9" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(701, -6)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime10" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(427, 240)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime11" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(73, 325)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime12" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(-182, 617)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime13" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(165, 693)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime14" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(453, 504)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime15" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(466, 823)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime16" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(986, 420)
+scale = Vector2(4.12573, 4.16775)
+
+[node name="Slime17" parent="." instance=ExtResource("3_6chfy")]
+position = Vector2(934, -153)
+scale = Vector2(4.12573, 4.16775)

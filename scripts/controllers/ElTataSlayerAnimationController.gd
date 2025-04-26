@@ -42,6 +42,9 @@ func playRun(direction: Vector2) -> void:
 func playAttack(mouseDirection: Vector2) -> void:
 	matchDirection("attack", mouseDirection)
 
+func playAttack2(mouseDirection: Vector2) -> void:
+	matchDirection("attack_2", mouseDirection)
+
 func playTakeDamage() -> void:
 	print("Taking damage!")
 

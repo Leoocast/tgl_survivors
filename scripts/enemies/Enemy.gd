@@ -11,7 +11,7 @@ extends CharacterBody2D
 var speed : float 
 var stopDistance : float
 var weapon: Weapon
-var player: Player
+var player: Node2D
 
 #Internal
 var isTakingDamage := false

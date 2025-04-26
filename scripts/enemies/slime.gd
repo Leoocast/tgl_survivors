@@ -9,13 +9,13 @@ var SLIME_WEAPON : Weapon
 
 #-------------------------#
 func _ready():
-	SLIME_WEAPON = Weapon.new(10, 0.4)
+	SLIME_WEAPON = Weapon.new(1, 0.4)
 	
 	self.setup({
 		"speed": SPEED,
 		"stopDistance": STOP_DISTANCE,
 		#FIXME: Al instanciar se debe pasar el player
-		"player": %Player as Player,
+		"player": %Player as Node2D,
 		"health": HEALTH, 
 		"healthColor": Color8(214,0,71),
 		"weapon": SLIME_WEAPON,
@@ -70,17 +70,21 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 
 # Cuando entra al rango empieza atacar
 func _on_area_2d_body_entered(body:Node2D) -> void:
-	if body is not Player:
+	# if body is not Player:
+	if body is not ElTataSlayer:
 		return
 	isPlayerInRange = true
 	attackPlayer()
 
 #Si esta a rango del collider de ataque, recibe da;o
 func _on_attack_area_body_entered(body:Node2D) -> void:
-	if body is Player:
+	# if body is Player:
+	# 	player.takeDamage(weapon.damage)
+	if body is ElTataSlayer:
 		player.takeDamage(weapon.damage)
 
 func _on_area_2d_body_exited(body:Node2D) -> void:
-	if body is not Player:
+	# if body is not Player:
+	if body is not ElTataSlayer:
 		return
 	isPlayerInRange = false

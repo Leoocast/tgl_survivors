@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=140 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/ElTataSlayer.gd" id="1_ew0gd"]
@@ -11,9 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://twdx03vpwl3u" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Left-Sheet.png" id="2_x3n3s"]
 [ext_resource type="Texture2D" uid="uid://ji5ds6c74hkg" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Right-Sheet.png" id="3_2a547"]
 [ext_resource type="Texture2D" uid="uid://w2uhc7amjlts" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Right-Sheet.png" id="3_bv6fa"]
-[ext_resource type="Script" uid="uid://bd2ck67scl55k" path="res://scripts/controllers/AttackController.gd" id="3_ew0gd"]
 [ext_resource type="Texture2D" uid="uid://31efsluwuarv" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Right-Sheet.png" id="3_h2aec"]
 [ext_resource type="Texture2D" uid="uid://i1x4ov3djcwo" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Up-Sheet.png" id="4_dlcrf"]
+[ext_resource type="Script" uid="uid://qd2qmvdelfq7" path="res://scripts/controllers/ElTataSlayerAttackController.gd" id="4_ew0gd"]
 [ext_resource type="Texture2D" uid="uid://bug533pj87tuh" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Up-Sheet.png" id="4_gmyuh"]
 [ext_resource type="Texture2D" uid="uid://cq71a5wmgdsky" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Up-Sheet.png" id="4_muky4"]
 [ext_resource type="Texture2D" uid="uid://760mujhktmpl" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Down-Sheet.png" id="5_4wgry"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://biopw6ke005ye" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Right-Sheet.png" id="7_ruyvi"]
 [ext_resource type="Texture2D" uid="uid://cka4y6i5bwevc" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Up-Sheet.png" id="8_uo61b"]
 [ext_resource type="PackedScene" uid="uid://bc4i6q7r02mdm" path="res://scenes/healthBar.tscn" id="21_lk38t"]
+[ext_resource type="Script" uid="uid://b6fb3dkqyjvc3" path="res://scenes/weapons/ElTataSlayerMachete.gd" id="23_2bla2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5njuf"]
 atlas = ExtResource("1_rnjux")
@@ -55,14 +56,6 @@ region = Rect2(768, 0, 128, 128)
 atlas = ExtResource("1_rnjux")
 region = Rect2(896, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yf37u"]
-atlas = ExtResource("1_rnjux")
-region = Rect2(1024, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8l4ca"]
-atlas = ExtResource("1_rnjux")
-region = Rect2(1152, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_pttr7"]
 atlas = ExtResource("2_x3n3s")
 region = Rect2(0, 0, 128, 128)
@@ -94,14 +87,6 @@ region = Rect2(768, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lq7nd"]
 atlas = ExtResource("2_x3n3s")
 region = Rect2(896, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d3sei"]
-atlas = ExtResource("2_x3n3s")
-region = Rect2(1024, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_43781"]
-atlas = ExtResource("2_x3n3s")
-region = Rect2(1152, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jhc1q"]
 atlas = ExtResource("3_h2aec")
@@ -135,14 +120,6 @@ region = Rect2(768, 0, 128, 128)
 atlas = ExtResource("3_h2aec")
 region = Rect2(896, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_for5t"]
-atlas = ExtResource("3_h2aec")
-region = Rect2(1024, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nhxpy"]
-atlas = ExtResource("3_h2aec")
-region = Rect2(1152, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_e8y7b"]
 atlas = ExtResource("4_gmyuh")
 region = Rect2(0, 0, 128, 128)
@@ -174,14 +151,6 @@ region = Rect2(768, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6r7jv"]
 atlas = ExtResource("4_gmyuh")
 region = Rect2(896, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_whbj6"]
-atlas = ExtResource("4_gmyuh")
-region = Rect2(1024, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ift2q"]
-atlas = ExtResource("4_gmyuh")
-region = Rect2(1152, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7hfph"]
 atlas = ExtResource("1_nbhxp")
@@ -529,12 +498,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nvk3v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yf37u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8l4ca")
 }],
 "loop": false,
 "name": &"attack_2_down",
@@ -564,12 +527,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lq7nd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d3sei")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_43781")
 }],
 "loop": false,
 "name": &"attack_2_left",
@@ -599,12 +556,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lfg2v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_for5t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nhxpy")
 }],
 "loop": false,
 "name": &"attack_2_right",
@@ -634,12 +585,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6r7jv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_whbj6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ift2q")
 }],
 "loop": false,
 "name": &"attack_2_up",
@@ -957,6 +902,7 @@ color = Color(0, 0, 0, 0.219608)
 thickness = 10
 
 [node name="San Jacinto El Tata Slayer" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_ew0gd")
 
 [node name="Controllers" type="Node" parent="."]
@@ -971,15 +917,16 @@ script = ExtResource("2_lk38t")
 
 [node name="AttackController" type="Node" parent="Controllers"]
 unique_name_in_owner = true
-script = ExtResource("3_ew0gd")
+script = ExtResource("4_ew0gd")
 
 [node name="AnimationController" type="Node" parent="Controllers"]
 unique_name_in_owner = true
 script = ExtResource("5_ew0gd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 2)
 sprite_frames = SubResource("SpriteFrames_4wgry")
-animation = &"idle_down"
+animation = &"attack_2_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rnjux")
@@ -1008,3 +955,54 @@ value = 100.0
 show_percentage = false
 
 [node name="HealthBar" parent="UI" instance=ExtResource("21_lk38t")]
+
+[node name="Weapon" type="Node2D" parent="."]
+script = ExtResource("23_2bla2")
+
+[node name="AttackArea" type="Area2D" parent="Weapon"]
+collision_mask = 2
+
+[node name="DownCollision" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
+visible = false
+polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
+
+[node name="DownCollision2" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
+visible = false
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
+
+[node name="RightCollision" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
+visible = false
+rotation = -1.57079
+polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
+
+[node name="RightCollision2" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
+visible = false
+rotation = -1.57079
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
+
+[node name="UpCollision" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
+visible = false
+rotation = -3.14132
+polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
+
+[node name="UpCollision2" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
+visible = false
+rotation = -3.14132
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
+
+[node name="LeftCollision" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
+visible = false
+rotation = -4.71455
+polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
+
+[node name="LeftCollision2" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
+visible = false
+rotation = 1.5708
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="body_entered" from="Weapon/AttackArea" to="." method="_on_attack_area_body_entered"]
