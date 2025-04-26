@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1s51dtivbell"]
+
+[ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_6chfy"]
+[ext_resource type="PackedScene" uid="uid://ck0sepqdcmnr" path="res://scenes/player/sanJacintoElTataSlayer.tscn" id="2_2yqfl"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Floor" type="TextureRect" parent="."]
+offset_left = -10951.0
+offset_top = -5216.0
+offset_right = 13200.0
+offset_bottom = 7379.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="San Jacinto El Tata Slayer" parent="." instance=ExtResource("2_2yqfl")]
+position = Vector2(774, 425)
+scale = Vector2(8.84947, 8.84947)

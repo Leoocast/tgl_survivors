@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://epm11iyha7nh"
-path="res://.godot/imported/hurt.png-7401b2039dabeccd3e15cd3fe3c208e6.ctex"
+uid="uid://w2uhc7amjlts"
+path="res://.godot/imported/Sword_6_Template_Attack_1_Right-Sheet.png-8fa989fb1add8d87e010fa34983adb0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/hurt.png"
-dest_files=["res://.godot/imported/hurt.png-7401b2039dabeccd3e15cd3fe3c208e6.ctex"]
+source_file="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Right-Sheet.png"
+dest_files=["res://.godot/imported/Sword_6_Template_Attack_1_Right-Sheet.png-8fa989fb1add8d87e010fa34983adb0f.ctex"]
 
 [params]
 

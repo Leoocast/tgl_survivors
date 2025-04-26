@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwkga2vwj87vb"
-path="res://.godot/imported/walk.png-c16a4b53f3d0c28d4e3c6cdac598b111.ctex"
+uid="uid://csa40uu18kaw4"
+path="res://.godot/imported/Sword_7_Template_Attack_1_End_Right-Sheet.png-c6a722c9b0c8b2d7f409e05f625b1547.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/walk.png"
-dest_files=["res://.godot/imported/walk.png-c16a4b53f3d0c28d4e3c6cdac598b111.ctex"]
+source_file="res://assets/sprites/san_jacinto/Sword_7_Template_Attack_1_End_Right-Sheet.png"
+dest_files=["res://.godot/imported/Sword_7_Template_Attack_1_End_Right-Sheet.png-c6a722c9b0c8b2d7f409e05f625b1547.ctex"]
 
 [params]
 

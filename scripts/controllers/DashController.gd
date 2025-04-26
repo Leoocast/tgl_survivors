@@ -7,7 +7,7 @@ const DURATION := 0.2
 const COOLDOWN := 0.5
 
 #Setup player
-var player : Player
+var player : Node2D
 var playerCollider : CollisionShape2D
 
 #Internal
@@ -16,7 +16,8 @@ var canDash := true
 var dashDirection := Vector2.ZERO
 
 #-------------------------#
-func setup(_player: Player, _playerCollider: CollisionShape2D) -> void:
+#FIXME: Que ElTataSlayer herede de player
+func setup(_player: Node2D, _playerCollider: CollisionShape2D) -> void:
 	self.player = _player
 	self.playerCollider = _playerCollider
 

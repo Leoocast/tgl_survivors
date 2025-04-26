@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csxa87xmwyy2y"
-path="res://.godot/imported/run.png-41fe581b40f1902d53f94194ab462570.ctex"
+uid="uid://k2oaj7w871mo"
+path="res://.godot/imported/Sword_7_Template_Attack_1_End_Down-Sheet.png-f02ea7810b6b3ec4dc0e9ab416fe0f8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/run.png"
-dest_files=["res://.godot/imported/run.png-41fe581b40f1902d53f94194ab462570.ctex"]
+source_file="res://assets/sprites/san_jacinto/Sword_7_Template_Attack_1_End_Down-Sheet.png"
+dest_files=["res://.godot/imported/Sword_7_Template_Attack_1_End_Down-Sheet.png-f02ea7810b6b3ec4dc0e9ab416fe0f8b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0bx1oofp3hhu"
-path="res://.godot/imported/death.png-58af26607f80fb906bb8d8bb220a7a6a.ctex"
+uid="uid://djt74mxs7da8h"
+path="res://.godot/imported/Sword_6_Template_Attack_1_Left-Sheet.png-c2126a2ac3eaabe11f743934156f17f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/death.png"
-dest_files=["res://.godot/imported/death.png-58af26607f80fb906bb8d8bb220a7a6a.ctex"]
+source_file="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Left-Sheet.png"
+dest_files=["res://.godot/imported/Sword_6_Template_Attack_1_Left-Sheet.png-c2126a2ac3eaabe11f743934156f17f9.ctex"]
 
 [params]
 

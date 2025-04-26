@@ -35,3 +35,23 @@ func attack(executeAfterAttack: Callable = func():, executeAfterAttackAnimation:
 	await GameUtils.waitFor(weapon.cooldown)
 	canAttack = true
 	
+func elTataSlayerAttack(mouseDirection : Vector2, executeAfterAttack: Callable = func():, executeAfterAttackAnimation: Callable = func():) -> void:
+	if not canAttack: 
+		return
+
+	canAttack = false
+	isAttacking = true
+	weapon.shoot()
+	entity.animationController.playAttack(mouseDirection)
+  
+	if executeAfterAttack.is_valid():
+		executeAfterAttack.call()   
+  
+	await entity.animationController.waitAnimationFinished()
+
+	if executeAfterAttackAnimation.is_valid():
+		executeAfterAttackAnimation.call()   
+
+	isAttacking = false
+	await GameUtils.waitFor(weapon.cooldown)
+	canAttack = true

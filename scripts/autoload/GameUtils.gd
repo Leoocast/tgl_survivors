@@ -32,5 +32,4 @@ func flipColliderHorizontal(collider: CollisionShape2D, flip: bool) -> void:
         collider.position.x = -abs(collider.position.x)
     else:
         collider.position.x = abs(collider.position.x)
-
     
