@@ -13,7 +13,13 @@ const CONTROLLERS = {
 
 const ASSETS = {
 	"PROJECTILES": {
-		"FIRE_BAll": "res://scenes/projectiles/fireBall.tscn"
+		"FIRE_BAll": "res://scenes/projectiles/fireBall.tscn",
+	},
+	"ENEMIES":{
+		"SLIME": "res://scenes/enemies/slime.tscn"
+	},
+	"DROP": {
+		"XP": "res://scenes/game/exp_drop.tscn"
 	}
 }
 
@@ -23,6 +29,10 @@ const ANIMATIONS = {
     "ATTACK" : "attack",
 	"TAKE_DAMAGE": "take_damage",
 	"DEATH": "death"
+}
+
+const GROUPS = {
+	"EXP_DROP": "expDrop"
 }
 
 const EL_TATA_SLAYER_ANIMATIONS = {

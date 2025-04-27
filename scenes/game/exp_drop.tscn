@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpkcttnyqf0e"]
+
+[ext_resource type="Texture2D" uid="uid://tsemch6ws775" path="res://assets/sprites/drops/coca.png" id="1_a1lr6"]
+[ext_resource type="Script" uid="uid://bhunkx4ss2k3w" path="res://scripts/game/ExpDrop.gd" id="1_rpi7t"]
+[ext_resource type="Texture2D" uid="uid://deun8a47sg8jp" path="res://assets/sprites/drops/malboro.png" id="2_hmmwt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hmmwt"]
+radius = 7.0
+
+[node name="ExpDrop" type="Area2D"]
+scale = Vector2(6.58559, 6.58559)
+script = ExtResource("1_rpi7t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hmmwt")
+
+[node name="Coca" type="Sprite2D" parent="."]
+scale = Vector2(0.022551, 0.022551)
+texture = ExtResource("1_a1lr6")
+
+[node name="Malboro" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.029861, 0.029861)
+texture = ExtResource("2_hmmwt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

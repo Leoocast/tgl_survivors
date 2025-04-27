@@ -8,7 +8,9 @@ extends CharacterBody2D
 @onready var attackController := %AttackController as ElTataSlayerAttackController
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
 
+
 #Nodes
+@onready var expArea := $ExpArea
 @onready var attackArea := $Weapon/AttackArea
 @onready var collisionAttackMap := {
 	"up": attackArea.get_node("UpCollision"),
@@ -29,6 +31,9 @@ const HEALTH_COLOR := Color8(0, 158, 103)
 const SPEED := 800
 var weapon : Weapon
 
+var xp := 0
+
+#-------------------------#
 func _ready() -> void:
 	weapon = Weapon.new(1, 0.1)
 	setupControllers()
@@ -89,6 +94,10 @@ func disableAllAttackCollisions() -> void:
 		else:
 			collision.disabled = true
 
+func addExp(_xp : int) -> void:
+	xp += _xp
+
+#Signals
 func _on_attack_area_body_entered(enemy: Enemy) -> void:
 	enemy.takeDamage(weapon.damage)
 
@@ -104,3 +113,8 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 
 	if isAttacking and currentFrame == activationFrame:
 		collisionAttackMap[animationDirection].disabled = false
+
+func _on_exp_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group(Constants.GROUPS.EXP_DROP):
+		var expDrop = area as ExpDrop
+		expDrop.flyToTarget(self)

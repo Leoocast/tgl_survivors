@@ -1,4 +1,4 @@
-[gd_scene load_steps=192 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=193 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/ElTataSlayer.gd" id="1_ew0gd"]
@@ -1261,6 +1261,9 @@ height = 14.0
 color = Color(0, 0, 0, 0.219608)
 thickness = 10
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_pauyt"]
+radius = 25.0
+
 [node name="San Jacinto El Tata Slayer" type="CharacterBody2D"]
 collision_mask = 3
 script = ExtResource("1_ew0gd")
@@ -1286,7 +1289,7 @@ script = ExtResource("5_ew0gd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_4wgry")
-animation = &"attack_2_up"
+animation = &"attack_2_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)
@@ -1365,5 +1368,13 @@ rotation = 1.5708
 scale = Vector2(-1, 1)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
+[node name="ExpArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ExpArea"]
+shape = SubResource("CircleShape2D_pauyt")
+
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="Weapon/AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="area_entered" from="ExpArea" to="." method="_on_exp_area_area_entered"]

@@ -1,9 +1,13 @@
 extends Node2D
 
-const SLIME_ASSET = preload("res://scenes/enemies/slime.tscn")
+#Assets
+const SLIME_ASSET = preload(Constants.ASSETS.ENEMIES.SLIME)
+
+#Nodes
 @onready var player = %Player
 @onready var spawner = $Path2D/PathFollow2D
 
+#-------------------------#
 func _process(_delta):
 	if player:
 		global_position = player.global_position

@@ -55,10 +55,10 @@ script = ExtResource("1_0ucuy")
 
 [node name="Blackbar" type="ProgressBar" parent="."]
 layout_mode = 0
-offset_left = 34.0
-offset_top = 37.0
-offset_right = 214.0
-offset_bottom = 72.0
+offset_left = 44.0
+offset_top = 42.0
+offset_right = 160.0
+offset_bottom = 53.0
 scale = Vector2(0.193979, 0.193979)
 theme_override_styles/background = SubResource("StyleBoxEmpty_xpa3b")
 theme_override_styles/fill = SubResource("StyleBoxFlat_spvli")
@@ -67,10 +67,10 @@ show_percentage = false
 
 [node name="MainBar" type="ProgressBar" parent="."]
 layout_mode = 0
-offset_left = 34.0
-offset_top = 37.0
-offset_right = 214.0
-offset_bottom = 72.0
+offset_left = 44.0
+offset_top = 42.0
+offset_right = 158.0
+offset_bottom = 53.0
 scale = Vector2(0.193979, 0.193979)
 theme_override_styles/background = SubResource("StyleBoxFlat_0vr2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_r72rs")
@@ -80,10 +80,10 @@ show_percentage = false
 [node name="WhiteBar" type="ProgressBar" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 34.0
-offset_top = 37.0
-offset_right = 214.0
-offset_bottom = 72.0
+offset_left = 44.0
+offset_top = 42.0
+offset_right = 160.0
+offset_bottom = 53.0
 scale = Vector2(0.193979, 0.193979)
 theme_override_styles/background = SubResource("StyleBoxEmpty_sk0r1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_aiha7")
