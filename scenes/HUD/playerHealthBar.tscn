@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://biwnsoaronbtp"]
+
+[ext_resource type="Script" uid="uid://b7etg5kapxkuf" path="res://scripts/controllers/HealthBarController.gd" id="1_bcrve"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xpa3b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spvli"]
+bg_color = Color(0.386442, 0.00682079, 0.00759525, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8suu"]
+bg_color = Color(0, 0, 0, 0.156863)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_krwlh"]
+bg_color = Color(0.596853, 1.66051e-06, 2.88785e-07, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sk0r1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aiha7"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="PlayerHealthBar" type="Control"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 0.388615
+offset_top = 18.2643
+offset_right = 40.3886
+offset_bottom = 58.2642
+scale = Vector2(6.09492, 6.09492)
+script = ExtResource("1_bcrve")
+
+[node name="Blackbar" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 39.0
+offset_top = 42.0
+offset_right = 206.0
+offset_bottom = 53.0
+scale = Vector2(0.193979, 0.193979)
+theme_override_styles/background = SubResource("StyleBoxEmpty_xpa3b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_spvli")
+value = 100.0
+show_percentage = false
+
+[node name="MainBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 42.0
+offset_right = 206.0
+offset_bottom = 55.0
+scale = Vector2(0.193979, 0.193979)
+theme_override_styles/background = SubResource("StyleBoxFlat_a8suu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_krwlh")
+value = 70.0
+show_percentage = false
+
+[node name="WhiteBar" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 39.0
+offset_top = 42.0
+offset_right = 206.0
+offset_bottom = 53.0
+scale = Vector2(0.193979, 0.193979)
+theme_override_styles/background = SubResource("StyleBoxEmpty_sk0r1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aiha7")
+value = 100.0
+show_percentage = false

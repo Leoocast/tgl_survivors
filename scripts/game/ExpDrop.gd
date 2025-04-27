@@ -52,10 +52,7 @@ func flyToTarget(_target : Node2D) -> void:
 func addExperiencieToTarget() -> void:
 	var newExp = expValue * 2 if isMalboro else expValue
 	target.addExp(newExp)
-	print("Experiencia total: ", target.xp)
 #Signals
-
-
 
 # func _on_body_entered(body: Node2D) -> void:
 # 	if body is not ElTataSlayer:
@@ -67,4 +64,3 @@ func addExperiencieToTarget() -> void:
 # 	player.addExp(newExp)
 # 	GameUtils.fadeOutAndDissapear(self, 0.2)
 # 	
-	

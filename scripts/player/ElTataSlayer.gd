@@ -3,15 +3,14 @@ extends CharacterBody2D
 
 #Controllers
 @onready var healthController := %HealthController as HealthController
-@onready var healthBarController := %HealthBar as HealthBarController
 @onready var dashController := %DashController as DashController
 @onready var attackController := %AttackController as ElTataSlayerAttackController
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
 
-
 #Nodes
 @onready var expArea := $ExpArea
 @onready var attackArea := $Weapon/AttackArea
+@onready var ui_attackCdBar = $UI/AttackCdBar
 @onready var collisionAttackMap := {
 	"up": attackArea.get_node("UpCollision"),
 	"down": attackArea.get_node("DownCollision"),
@@ -23,15 +22,23 @@ extends CharacterBody2D
 	"2_left": attackArea.get_node("LeftCollision2"),
 	"2_right": attackArea.get_node("RightCollision2"),
 }
-@onready var ui_attackCdBar = $UI/AttackCdBar
 
 # Attributes
-const HEALTH := 2
-const HEALTH_COLOR := Color8(0, 158, 103)
+const HEALTH := 20
+const HEALTH_COLOR := Color8(150, 0, 0)
 const SPEED := 800
 var weapon : Weapon
 
+#FIXME: Pasar esto a un controller de XP
+#Exp System 
 var xp := 0
+var level := 1
+var xpToNextLvl := 3
+
+#Signals
+signal take_damage_signal(damage: float)
+signal lvl_up_signal(newLvl: int, xpNextLvl: int, currentXp: int)
+signal add_xp_signal(xp: int)
 
 #-------------------------#
 func _ready() -> void:
@@ -41,7 +48,6 @@ func _ready() -> void:
 
 func setupControllers() -> void:
 	healthController.setup(self, HEALTH)
-	healthBarController.setup(self, healthController, HEALTH_COLOR)
 	attackController.setup(self, weapon)
 	dashController.setup(self, $CollisionShape2D)
 	animationController.setup($AnimatedSprite2D)
@@ -64,7 +70,6 @@ func _physics_process(_delta: float) -> void:
 	if not attackController.isAttacking:
 		animationController.playDefault(mousePosition)
 	
-		
 func move() -> void:
 	var direction = InputHandler.getDirection()
 	self.velocity = direction * SPEED
@@ -80,7 +85,7 @@ func takeDamage(damage: float) -> void:
 		return
 	var mousePosition = calculateMousePosition()
 	healthController.takeDamageTataSlayer(damage, mousePosition)
-	healthBarController.takeDamage(damage)
+	emit_signal("take_damage_signal", damage)
 	
 func animateAttackCdBar() -> void:
 	ui_attackCdBar.value = 0
@@ -94,8 +99,27 @@ func disableAllAttackCollisions() -> void:
 		else:
 			collision.disabled = true
 
+#FIXME: XP System
 func addExp(_xp : int) -> void:
 	xp += _xp
+	checkLvlUp()
+
+func checkLvlUp() -> void:
+	while xp >= xpToNextLvl:
+		# Primero, llenar la barra al tope
+		emit_signal("add_xp_signal", xpToNextLvl) # Visualmente llénala
+		
+		xp -= xpToNextLvl
+		
+		# Subir nivel
+		level += 1
+		xpToNextLvl = int(xpToNextLvl * 1.5)
+		
+		# Resetear barra para el siguiente nivel
+		emit_signal("lvl_up_signal", level, xpToNextLvl, 0) # XP a 0
+
+	# Finalmente, mostrar la experiencia sobrante
+	emit_signal("add_xp_signal", xp)
 
 #Signals
 func _on_attack_area_body_entered(enemy: Enemy) -> void:

@@ -1307,10 +1307,10 @@ offset_bottom = 22.0
 
 [node name="AttackCdBar" type="ProgressBar" parent="UI"]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 33.0
-offset_right = 120.0
-offset_bottom = 49.0
+offset_left = 14.5078
+offset_top = 30.829
+offset_right = 119.508
+offset_bottom = 46.829
 scale = Vector2(0.110131, 0.0787549)
 theme_override_styles/background = SubResource("StyleBoxEmpty_ew0gd")
 theme_override_styles/fill = SubResource("StyleBoxLine_2bla2")

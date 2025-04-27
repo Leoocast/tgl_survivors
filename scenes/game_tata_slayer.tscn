@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1s51dtivbell"]
+[gd_scene load_steps=8 format=3 uid="uid://b1s51dtivbell"]
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_6chfy"]
 [ext_resource type="PackedScene" uid="uid://ck0sepqdcmnr" path="res://scenes/player/sanJacintoElTataSlayer.tscn" id="2_2yqfl"]
+[ext_resource type="PackedScene" uid="uid://biwnsoaronbtp" path="res://scenes/HUD/playerHealthBar.tscn" id="4_41jvh"]
 [ext_resource type="PackedScene" uid="uid://dqewskq6n0yb0" path="res://scenes/game/enemy_spawner.tscn" id="4_fdb3b"]
+[ext_resource type="Script" uid="uid://c8mdvk6s6qita" path="res://scripts/game/UIController.gd" id="4_h5e45"]
+[ext_resource type="FontFile" uid="uid://bncjg28utk7b4" path="res://assets/fonts/Pixellari.ttf" id="6_h5e45"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41jvh"]
+bg_color = Color(0, 0.625536, 0.99609, 1)
 
 [node name="Game" type="Node2D"]
 
@@ -24,3 +30,31 @@ position = Vector2(774, 425)
 scale = Vector2(8.84947, 9.15654)
 
 [node name="Enemy Spawner" parent="." instance=ExtResource("4_fdb3b")]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_h5e45")
+
+[node name="PlayerHealthBar" parent="HUD" instance=ExtResource("4_41jvh")]
+offset_left = -449.0
+offset_top = -93.0
+offset_right = -409.0
+offset_bottom = -53.0001
+scale = Vector2(24.1314, 24.1314)
+
+[node name="PlayerXP" type="ProgressBar" parent="HUD"]
+offset_left = 137.0
+offset_top = 1012.0
+offset_right = 456.0
+offset_bottom = 1048.0
+scale = Vector2(4.73609, 0.525607)
+theme_override_styles/fill = SubResource("StyleBoxFlat_41jvh")
+show_percentage = false
+
+[node name="XPLvl" type="Label" parent="HUD"]
+offset_left = 30.0
+offset_top = 938.0
+offset_right = 46.0
+offset_bottom = 954.0
+scale = Vector2(7.75478, 7.75478)
+theme_override_fonts/font = ExtResource("6_h5e45")
+text = "0"

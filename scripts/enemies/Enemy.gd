@@ -11,7 +11,7 @@ extends CharacterBody2D
 var speed : float 
 var stopDistance : float
 var weapon: Weapon
-var player: Node2D
+var player: ElTataSlayer
 
 #Internal
 var isTakingDamage := false
@@ -57,9 +57,9 @@ func takeDamage(damage: float) -> void:
 	isTakingDamage = false
 
 func attackPlayer() -> void:
-	if not isPlayerInRange: 
+	if not isPlayerInRange or healthController.isDead: 
 		return
-
+	
 	await attackController.attack(func ():, animationController.playIdle)
    
 func death() -> void:

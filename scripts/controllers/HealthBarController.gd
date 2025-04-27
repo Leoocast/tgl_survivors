@@ -5,6 +5,7 @@ extends Control
 var entity : Node2D
 var healthController : HealthController
 var color : Color
+var isPlayerUI := false
 
 #Nodes
 @onready var ui_mainBar := $MainBar
@@ -15,10 +16,11 @@ var color : Color
 var alreadyShowed := false
 
 #-------------------------#
-func setup(_entity: Node2D, _healthController: HealthController, _color: Color) -> void:
+func setup(_entity: Node2D, _healthController: HealthController, _color: Color, _isPlayerUI : bool = false) -> void:
 	self.entity = _entity
 	self.healthController = _healthController
 	self.color = _color
+	self.isPlayerUI = _isPlayerUI
 	createMainBar()
 	setupHealth()
 	
@@ -47,15 +49,29 @@ func showBars() -> void:
 
 func createMainBar() -> void:
 	var stylebox = StyleBoxFlat.new()
-	stylebox.corner_radius_top_left = 8
-	stylebox.corner_radius_top_right = 8
-	stylebox.corner_radius_bottom_left = 8
-	stylebox.corner_radius_bottom_right = 8
+
+	#FIXME:
+	if not isPlayerUI:
+		stylebox.corner_radius_top_left = 8
+		stylebox.corner_radius_top_right = 8
+		stylebox.corner_radius_bottom_left = 8
+		stylebox.corner_radius_bottom_right = 8
 	
-	stylebox.border_width_left = 2
-	stylebox.border_width_top = 2
-	stylebox.border_width_right = 2
-	stylebox.border_width_bottom = 2
+		stylebox.border_width_left = 2
+		stylebox.border_width_top = 2
+		stylebox.border_width_right = 2
+		stylebox.border_width_bottom = 2
+	else:
+		stylebox.corner_radius_top_left = 2
+		stylebox.corner_radius_top_right = 2
+		stylebox.corner_radius_bottom_left = 2
+		stylebox.corner_radius_bottom_right = 2
+
+		# stylebox.border_width_left = 1
+		# stylebox.border_width_top = 1
+		# stylebox.border_width_right = 1
+		# stylebox.border_width_bottom = 1
+	
 	stylebox.bg_color = color
 
 	ui_mainBar.add_theme_stylebox_override("fill", stylebox)
