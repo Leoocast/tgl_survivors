@@ -2,13 +2,18 @@ extends CanvasLayer
 
 @onready var playerHealthBar := %PlayerHealthBar as HealthBarController
 @onready var player := %Player as ElTataSlayer
-@onready var xpLabel := $XPLvl
-@onready var playerXPBar := $PlayerXP
+@onready var xpLabel := $Control/XPLvl
+@onready var comboLabel := $Control/Combo
+@onready var playerXPBar := $Control/PlayerXP
+
+#Internal
+var comboCounter := 0
 
 func _ready():
 	player.connect("take_damage_signal", _on_health_changed)
 	player.connect("lvl_up_signal", _on_lvl_up)
 	player.connect("add_xp_signal", _on_add_xp)
+
 	playerHealthBar.setup(player, player.healthController, player.HEALTH_COLOR, true)
 	playerXPBar.max_value = player.xpToNextLvl
 

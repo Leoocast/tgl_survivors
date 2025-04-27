@@ -10,6 +10,9 @@ const STOP_DISTANCE := 70.0
 const HEALTH := 2.0
 var SLIME_WEAPON : Weapon
 
+#Signals
+signal kill_slime()
+
 #-------------------------#
 func _ready():
 	SLIME_WEAPON = Weapon.new(1, 0.4)
@@ -46,8 +49,10 @@ func death() -> void:
 	await animationController.waitAnimationFinished()
 	animationController.playDeath()
 	isntantiateDrop()
+	emit_signal("kill_slime")
 	fadeOutAndDisapear()
 	$CollisionShape2D.queue_free()
+	
 
 
 func enableAttackHitbox() -> void:
