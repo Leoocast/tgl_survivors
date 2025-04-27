@@ -24,7 +24,7 @@ extends CharacterBody2D
 @onready var ui_attackCdBar = $UI/AttackCdBar
 
 # Attributes
-const HEALTH := 20
+const HEALTH := 2
 const HEALTH_COLOR := Color8(0, 158, 103)
 const SPEED := 800
 var weapon : Weapon
@@ -36,12 +36,15 @@ func _ready() -> void:
 
 func setupControllers() -> void:
 	healthController.setup(self, HEALTH)
+	healthBarController.setup(self, healthController, HEALTH_COLOR)
 	attackController.setup(self, weapon)
 	dashController.setup(self, $CollisionShape2D)
 	animationController.setup($AnimatedSprite2D)
-	healthBarController.setup(self, healthController, HEALTH_COLOR)
 
 func _physics_process(_delta: float) -> void:
+	if healthController.isDead:
+		return
+	
 	var mousePosition = calculateMousePosition()
 	
 	if InputHandler.isDashing():
@@ -55,6 +58,7 @@ func _physics_process(_delta: float) -> void:
 
 	if not attackController.isAttacking:
 		animationController.playDefault(mousePosition)
+	
 		
 func move() -> void:
 	var direction = InputHandler.getDirection()
@@ -67,9 +71,12 @@ func calculateMousePosition() -> Vector2:
 	return directionToMouse
 
 func takeDamage(damage: float) -> void:
-	healthController.takeDamage(damage)
+	if healthController.isDead:
+		return
+	var mousePosition = calculateMousePosition()
+	healthController.takeDamageTataSlayer(damage, mousePosition)
 	healthBarController.takeDamage(damage)
-
+	
 func animateAttackCdBar() -> void:
 	ui_attackCdBar.value = 0
 	var tween = GameUtils.create_tween()
@@ -77,7 +84,10 @@ func animateAttackCdBar() -> void:
 
 func disableAllAttackCollisions() -> void:
 	for collision: CollisionPolygon2D in attackArea.get_children():
-		collision.disabled = true
+		if healthController.isDead:
+			collision.call_deferred("set_disabled", true)
+		else:
+			collision.disabled = true
 
 func _on_attack_area_body_entered(enemy: Enemy) -> void:
 	enemy.takeDamage(weapon.damage)

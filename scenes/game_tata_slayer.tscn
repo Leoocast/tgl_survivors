@@ -7,10 +7,11 @@
 [node name="Game" type="Node2D"]
 
 [node name="Floor" type="TextureRect" parent="."]
-offset_left = -10951.0
-offset_top = -5216.0
-offset_right = 13200.0
-offset_bottom = 7379.0
+offset_left = -3227.0
+offset_top = -1776.0
+offset_right = 20924.0
+offset_bottom = 10819.0
+scale = Vector2(0.318397, 0.318397)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("1_6chfy")
@@ -24,68 +25,4 @@ scale = Vector2(8.84947, 9.15654)
 
 [node name="Slime" parent="." instance=ExtResource("3_6chfy")]
 position = Vector2(1249, 348)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime2" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(1243, 655)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime3" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(1508, 477)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime4" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(980, 133)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime5" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(1293, 7)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime6" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(420, -39)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime7" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(-104, 145)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime8" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(178, 55)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime9" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(701, -6)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime10" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(427, 240)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime11" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(73, 325)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime12" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(-182, 617)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime13" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(165, 693)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime14" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(453, 504)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime15" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(466, 823)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime16" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(986, 420)
-scale = Vector2(4.12573, 4.16775)
-
-[node name="Slime17" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(934, -153)
 scale = Vector2(4.12573, 4.16775)

@@ -48,8 +48,8 @@ func playAttack2(mouseDirection: Vector2) -> void:
 func playTakeDamage() -> void:
 	print("Taking damage!")
 
-func playDeath() -> void:
-	print("I'm Death!")
+func playDeath(mouseDirection: Vector2) -> void:
+	matchDirection("death", mouseDirection)
 
 func waitAnimationFinished() -> void:
 	await sprite.animation_finished
