@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_6chfy"]
 [ext_resource type="PackedScene" uid="uid://ck0sepqdcmnr" path="res://scenes/player/sanJacintoElTataSlayer.tscn" id="2_2yqfl"]
-[ext_resource type="PackedScene" uid="uid://ctfsj4jc7odve" path="res://scenes/enemies/slime.tscn" id="3_6chfy"]
+[ext_resource type="PackedScene" uid="uid://dqewskq6n0yb0" path="res://scenes/game/enemy_spawner.tscn" id="4_fdb3b"]
 
 [node name="Game" type="Node2D"]
 
@@ -23,6 +23,4 @@ unique_name_in_owner = true
 position = Vector2(774, 425)
 scale = Vector2(8.84947, 9.15654)
 
-[node name="Slime" parent="." instance=ExtResource("3_6chfy")]
-position = Vector2(1249, 348)
-scale = Vector2(4.12573, 4.16775)
+[node name="Enemy Spawner" parent="." instance=ExtResource("4_fdb3b")]

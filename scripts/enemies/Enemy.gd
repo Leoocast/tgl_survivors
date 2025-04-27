@@ -21,13 +21,15 @@ var isPlayerInRange := false
 func setup(data: Dictionary) -> void:
 	self.speed = data.speed
 	self.stopDistance = data.stopDistance 
-	self.player = data.player
 	self.weapon = data.weapon
 
 	healthController.setup(self, data.health)
 	healthBarController.setup(self, healthController, data.healthColor)
 	attackController.setup(self, data.weapon)
 	animationController.setup(data.sprite)
+
+func setupPlayer(_player: Node2D) -> void:
+	self.player = _player
 
 
 func moveTowardsPlayer() -> void:

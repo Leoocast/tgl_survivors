@@ -14,8 +14,6 @@ func _ready():
 	self.setup({
 		"speed": SPEED,
 		"stopDistance": STOP_DISTANCE,
-		#FIXME: Al instanciar se debe pasar el player
-		"player": %Player as Node2D,
 		"health": HEALTH, 
 		"healthColor": Color8(214,0,71),
 		"weapon": SLIME_WEAPON,
