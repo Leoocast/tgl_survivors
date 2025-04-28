@@ -6,6 +6,7 @@ const SLIME_ASSET = preload(Constants.ASSETS.ENEMIES.SLIME)
 #Nodes
 @onready var player = %Player
 @onready var spawner = $Path2D/PathFollow2D
+@onready var game = self.get_parent() as GameState
 
 #-------------------------#
 func _process(_delta):
@@ -17,6 +18,7 @@ func spawnEnemy() -> void:
 	slimeInstance.setupPlayer(player)
 	spawner.progress_ratio = randf()
 	slimeInstance.global_position = spawner.global_position
+	game.registerEnemy(slimeInstance)
 	get_parent().add_child(slimeInstance)
 
 func _on_timer_timeout() -> void:

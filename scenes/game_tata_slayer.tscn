@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1s51dtivbell"]
+[gd_scene load_steps=10 format=3 uid="uid://b1s51dtivbell"]
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_6chfy"]
+[ext_resource type="Script" uid="uid://h53677tce2mx" path="res://scenes/game/GameState.gd" id="1_crk6h"]
 [ext_resource type="PackedScene" uid="uid://ck0sepqdcmnr" path="res://scenes/player/sanJacintoElTataSlayer.tscn" id="2_2yqfl"]
 [ext_resource type="PackedScene" uid="uid://biwnsoaronbtp" path="res://scenes/HUD/playerHealthBar.tscn" id="4_41jvh"]
 [ext_resource type="PackedScene" uid="uid://dqewskq6n0yb0" path="res://scenes/game/enemy_spawner.tscn" id="4_fdb3b"]
@@ -12,6 +13,7 @@
 bg_color = Color(0, 0.625536, 0.99609, 1)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_crk6h")
 
 [node name="Floor" type="TextureRect" parent="."]
 offset_left = -3227.0
@@ -97,14 +99,14 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -588.0
-offset_top = 114.0
-offset_right = -529.0
-offset_bottom = 143.0
+offset_left = -800.0
+offset_top = 149.0
+offset_right = -712.0
+offset_bottom = 178.0
 grow_horizontal = 0
 rotation = -0.160442
 scale = Vector2(7.75478, 7.75478)
 theme_override_fonts/font = ExtResource("7_6d208")
 theme_override_font_sizes/font_size = 16
-text = "SSadistic!"
+text = "ASSASSINATION"
 horizontal_alignment = 2

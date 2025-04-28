@@ -11,7 +11,7 @@ const HEALTH := 2.0
 var SLIME_WEAPON : Weapon
 
 #Signals
-signal kill_slime()
+signal died_signal
 
 #-------------------------#
 func _ready():
@@ -45,16 +45,14 @@ func flipTowardsPlayer():
 	animationController.flipHorizontal(shouldFlip)
 
 func death() -> void:
+	emit_signal("died_signal")
 	healthBarController.hideBars()
 	await animationController.waitAnimationFinished()
 	animationController.playDeath()
 	isntantiateDrop()
-	emit_signal("kill_slime")
 	fadeOutAndDisapear()
 	$CollisionShape2D.queue_free()
 	
-
-
 func enableAttackHitbox() -> void:
 	$AttackArea/AttackCollision.call_deferred("set_disabled", false)
 	
