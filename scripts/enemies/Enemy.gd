@@ -27,9 +27,10 @@ func setup(data: Dictionary) -> void:
 	healthBarController.setup(self, healthController, data.healthColor)
 	attackController.setup(self, data.weapon)
 	animationController.setup(data.sprite)
-
-func setupPlayer(_player: Node2D) -> void:
+#FIXME:
+func setupPlayer(_player: Node2D, zIndex : int = 0 ) -> void:
 	self.player = _player
+	self.z_index = zIndex
 
 
 func moveTowardsPlayer() -> void:

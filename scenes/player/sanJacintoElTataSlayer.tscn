@@ -1264,7 +1264,7 @@ thickness = 10
 radius = 25.0
 
 [node name="San Jacinto El Tata Slayer" type="CharacterBody2D"]
-collision_mask = 3
+z_index = 1
 script = ExtResource("1_ew0gd")
 
 [node name="Controllers" type="Node" parent="."]

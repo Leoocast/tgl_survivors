@@ -15,7 +15,9 @@ func _process(_delta):
 
 func spawnEnemy() -> void:
 	var slimeInstance = SLIME_ASSET.instantiate() as Slime
-	slimeInstance.setupPlayer(player)
+
+	var zIndex = [0, 2].pick_random()
+	slimeInstance.setupPlayer(player, zIndex)
 	spawner.progress_ratio = randf()
 	slimeInstance.global_position = spawner.global_position
 	game.registerEnemy(slimeInstance)

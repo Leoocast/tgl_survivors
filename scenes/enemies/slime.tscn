@@ -153,7 +153,7 @@ radius = 18.0
 [node name="Slime" type="CharacterBody2D"]
 scale = Vector2(4.81573, 4.81573)
 collision_layer = 2
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_ahq63")
 
 [node name="Controllers" type="Node" parent="."]
