@@ -39,7 +39,6 @@ func _physics_process(_delta: float) -> void:
 	
 	if not attackController.isAttacking:
 		animationController.playDefault()
-		
 			
 func flipSpriteMouse() -> void:
 	var mouse_pos = get_global_mouse_position()

@@ -10,6 +10,10 @@ const SLIME_ASSET = preload(Constants.ASSETS.ENEMIES.SLIME)
 
 #-------------------------#
 func _process(_delta):
+
+	if game.isPaused:
+		return
+
 	if player:
 		global_position = player.global_position
 
@@ -17,11 +21,14 @@ func spawnEnemy() -> void:
 	var slimeInstance = SLIME_ASSET.instantiate() as Slime
 
 	var zIndex = [0, 2].pick_random()
-	slimeInstance.setupPlayer(player, zIndex)
+	slimeInstance.setupPlayer(player, game, zIndex)
 	spawner.progress_ratio = randf()
 	slimeInstance.global_position = spawner.global_position
 	game.registerEnemy(slimeInstance)
 	get_parent().add_child(slimeInstance)
 
 func _on_timer_timeout() -> void:
+	if game.isPaused:
+		return
+		
 	spawnEnemy()

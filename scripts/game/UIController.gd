@@ -5,6 +5,8 @@ extends CanvasLayer
 @onready var xpLabel := $Control/XPLvl
 @onready var comboLabel := $Control/Combo
 @onready var playerXPBar := $Control/PlayerXP
+@onready var lvlUpUi = %LvlUpUI
+@onready var game = get_parent() as GameState
 
 #Internal
 var comboCounter := 0
@@ -17,6 +19,10 @@ func _ready():
 	playerHealthBar.setup(player, player.healthController, player.HEALTH_COLOR, true)
 	playerXPBar.max_value = player.xpToNextLvl
 
+func showLevelUpUI():
+	game.pause()
+	lvlUpUi.show()
+
 #Signal Event
 func _on_health_changed(damage: float) -> void:
 	playerHealthBar.takeDamage(damage)
@@ -28,3 +34,4 @@ func _on_lvl_up(newLvl : int, xpToNextLvl : int, currentXp : int) -> void:
 	xpLabel.text = str(newLvl)
 	playerXPBar.max_value = xpToNextLvl
 	playerXPBar.value = clamp(currentXp, 0, xpToNextLvl)
+	showLevelUpUI()

@@ -42,3 +42,10 @@ func flipColliderHorizontal(collider: CollisionShape2D, flip: bool) -> void:
 	else:
 		collider.position.x = abs(collider.position.x)
 	
+func getGlobalNode(_name: String) -> Node2D:
+	var node := tree.get_root().get_node(_name)
+	return node
+
+func getGame() -> GameState:
+	var game = getGlobalNode("Game") as GameState
+	return game

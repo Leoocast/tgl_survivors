@@ -7,11 +7,13 @@ extends CharacterBody2D
 @onready var attackController := %AttackController as AttackController
 @onready var animationController := %AnimationController as AnimationController
 
+
 #Config
 var speed : float 
 var stopDistance : float
 var weapon: Weapon
 var player: ElTataSlayer
+var game : GameState
 
 #Internal
 var isTakingDamage := false
@@ -35,8 +37,9 @@ func setup(data: Dictionary) -> void:
 	add_child(soundEffectPlayer)
 
 #FIXME:
-func setupPlayer(_player: Node2D, zIndex : int = 0 ) -> void:
+func setupPlayer(_player: Node2D, _game : GameState, zIndex : int = 0 ) -> void:
 	self.player = _player
+	self.game = _game
 	self.z_index = zIndex
 
 func moveTowardsPlayer() -> void:

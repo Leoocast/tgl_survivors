@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var dashController := %DashController as DashController
 @onready var attackController := %AttackController as ElTataSlayerAttackController
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
+@onready var game = get_parent() as GameState
 
 #Nodes
 @onready var expArea := $ExpArea
@@ -26,7 +27,7 @@ extends CharacterBody2D
 # Attributes
 const HEALTH := 20
 const HEALTH_COLOR := Color8(150, 0, 0)
-const SPEED := 800
+const SPEED := 470
 var weapon : Weapon
 
 #FIXME: Pasar esto a un controller de XP
@@ -53,6 +54,10 @@ func setupControllers() -> void:
 	animationController.setup($AnimatedSprite2D)
 
 func _physics_process(_delta: float) -> void:
+
+	if game.isPaused:
+		return
+
 	if healthController.isDead:
 		return
 	
@@ -83,6 +88,7 @@ func calculateMousePosition() -> Vector2:
 func takeDamage(damage: float) -> void:
 	if healthController.isDead:
 		return
+
 	var mousePosition = calculateMousePosition()
 	
 	animationController.modulateTakingDamage()
@@ -120,6 +126,7 @@ func checkLvlUp() -> void:
 		
 		# Subir nivel
 		level += 1
+		
 		xpToNextLvl = int(xpToNextLvl * 1.5)
 		
 		# Resetear barra para el siguiente nivel

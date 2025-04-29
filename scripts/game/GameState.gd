@@ -19,7 +19,7 @@ var currentTreshHold := 0
 
 #FIXME: Audio
 var this_game_is_over = load("res://assets/audio/voice_lines/This_game_is_Over.ogg")
-var reawakeR = load("res://assets/audio/music/ReawakeR_-Instrumental-.wav")
+var reawakeR = load("res://assets/audio/music/ReawakeR_-Instrumental-.ogg")
 var announcerAudios = [
 	load("res://assets/audio/announcer/Dirty.mp3"),
 	load("res://assets/audio/announcer/Crazy.mp3"),
@@ -30,15 +30,33 @@ var announcerAudios = [
 	load("res://assets/audio/announcer/SSSensational.mp3")
 	
 ]
+var pauseMusic = load("res://assets/audio/music/ReawakeR_loop.ogg")
+
+#PAUSA
+var isPaused := false
 
 #--------------------------------------------------------#
+
 func _ready() -> void:
 	hideComboStuff()
 	# await AudioManager.playAndAwaitVoice(this_game_is_over)
-	# AudioManager.playMusic(reawakeR)
+	AudioManager.playMusic(reawakeR)
+
 
 func _process(_delta):
 	updateComboBar()
+
+func pause() -> void:
+	isPaused = true
+	AudioManager.fadeOutMusicAndPause()
+	AudioManager.playSelectionUpdateMusic(pauseMusic)
+	push_warning("GAME PAUSED")
+
+func resume() -> void:
+	isPaused = false
+	AudioManager.fadeInMusicAndPlay()
+	AudioManager.stopSelectionUpdateMusic()
+	push_warning("GAME RESUMED")
 
 func registerEnemy(enemy: Enemy) -> void:
 	enemy.died_signal.connect(_on_enemy_died_suscription)
@@ -65,7 +83,7 @@ func _on_enemy_died_suscription() -> void:
 	comboKillCount += 1
 	if comboKillCount == KILL_TRESHOLDS[currentTreshHold]:
 		comboLabel.text = KILL_MESSAGES[currentTreshHold]
-		# AudioManager.playAnnouncer(announcerAudios[currentTreshHold])
+		AudioManager.playAnnouncer(announcerAudios[currentTreshHold])
 		showComboStuff()
 		comboTimer.start()
 

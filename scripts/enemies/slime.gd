@@ -35,6 +35,10 @@ func _ready():
 	disableAttackHitbox()
 
 func _physics_process(_delta):
+
+	if game.isPaused:
+		return
+
 	moveTowardsPlayer()
 	flipTowardsPlayer()
 	attackPlayer()
