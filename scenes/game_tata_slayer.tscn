@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1s51dtivbell"]
+[gd_scene load_steps=11 format=3 uid="uid://b1s51dtivbell"]
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_6chfy"]
 [ext_resource type="Script" uid="uid://h53677tce2mx" path="res://scenes/game/GameState.gd" id="1_crk6h"]
@@ -11,6 +11,9 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41jvh"]
 bg_color = Color(0, 0.625536, 0.99609, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crk6h"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_crk6h")
@@ -33,6 +36,12 @@ position = Vector2(774, 425)
 scale = Vector2(8.84947, 9.15654)
 
 [node name="Enemy Spawner" parent="." instance=ExtResource("4_fdb3b")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("4_h5e45")
@@ -94,15 +103,22 @@ scale = Vector2(7.75478, 7.75478)
 theme_override_fonts/font = ExtResource("6_h5e45")
 text = "0"
 
-[node name="Combo" type="Label" parent="HUD/Control"]
+[node name="Combo" type="Control" parent="HUD/Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -800.0
-offset_top = 148.0
-offset_right = -712.0
-offset_bottom = 177.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="HUD/Control/Combo"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -733.0
+offset_top = 111.02
+offset_right = -645.0
+offset_bottom = 140.02
 grow_horizontal = 0
 rotation = -0.160442
 scale = Vector2(7.75478, 7.75478)
@@ -110,3 +126,27 @@ theme_override_fonts/font = ExtResource("7_6d208")
 theme_override_font_sizes/font_size = 16
 text = "ASSASSINATION"
 horizontal_alignment = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/Control/Combo"]
+modulate = Color(1, 1, 1, 0.262745)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -331.0
+offset_top = 279.02
+offset_right = -12.0
+offset_bottom = 315.02
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.923995, 0.461993)
+theme_override_styles/fill = SubResource("StyleBoxFlat_crk6h")
+value = 70.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="HUD/Control/Combo"]
+wait_time = 7.0
+
+[connection signal="timeout" from="HUD/Control/Combo/Timer" to="." method="_on_combo_timer_timeout"]
