@@ -17,21 +17,27 @@ var player: ElTataSlayer
 var isTakingDamage := false
 var isPlayerInRange := false
 
+#SFX
+@onready var soundEffectPlayer := AudioStreamPlayer.new()
+var sfx_hurt : AudioStream
+
 #-------------------------#
 func setup(data: Dictionary) -> void:
 	self.speed = data.speed
 	self.stopDistance = data.stopDistance 
 	self.weapon = data.weapon
+	self.sfx_hurt = data.sfx_hurt
 
 	healthController.setup(self, data.health)
 	healthBarController.setup(self, healthController, data.healthColor)
 	attackController.setup(self, data.weapon)
 	animationController.setup(data.sprite)
+	add_child(soundEffectPlayer)
+
 #FIXME:
 func setupPlayer(_player: Node2D, zIndex : int = 0 ) -> void:
 	self.player = _player
 	self.z_index = zIndex
-
 
 func moveTowardsPlayer() -> void:
 	if player == null or healthController.isDead or attackController.isAttacking or isTakingDamage: return
@@ -48,6 +54,7 @@ func takeDamage(damage: float) -> void:
 	isTakingDamage = true
 	healthController.takeDamage(damage)
 	animationController.playTakeDamage()
+	sfx_playHurt()
 	GameUtils.flash(animationController.sprite)
 	healthBarController.takeDamage(damage)
 	if healthController.isDead:
@@ -58,10 +65,17 @@ func takeDamage(damage: float) -> void:
 	isTakingDamage = false
 
 func attackPlayer() -> void:
-	if not isPlayerInRange or healthController.isDead: 
+	if not isPlayerInRange or healthController.isDead or attackController.isAttacking: 
 		return
 	
+	
 	await attackController.attack(func ():, animationController.playIdle)
+	
    
+#SFX
+func sfx_playHurt() -> void:
+	soundEffectPlayer.stream = sfx_hurt
+	soundEffectPlayer.play()
+
 func death() -> void:
 	pass

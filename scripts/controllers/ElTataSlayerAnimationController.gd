@@ -5,6 +5,8 @@ extends Node
 
 #Setup
 var sprite : AnimatedSprite2D
+var modulatedTakingDamageColor := Color(2, 2, 2)
+var modulatedOriginalColor := Color8(255,255,255)
 
 #Internal
 const ANIMATIONS = Constants.ANIMATIONS
@@ -72,3 +74,9 @@ func matchDirection(animationName : String, direction: Vector2) -> void:
 			sprite.play(animationName + directions.down)
 		else:
 			sprite.play(animationName + directions.up)
+	
+func modulateTakingDamage() -> void:
+	sprite.self_modulate = modulatedTakingDamageColor
+
+func modulateReset() -> void:
+	sprite.self_modulate = modulatedOriginalColor

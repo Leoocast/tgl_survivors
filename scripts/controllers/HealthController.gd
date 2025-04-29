@@ -10,6 +10,7 @@ var startHealth : float
 var canTakeDamage := true
 var isDead := false
 var isDamaged := false
+var isTakingDamage := false
 
 #-------------------------#
 func setup(_entity: Node2D, _health: int) -> void:
@@ -37,6 +38,8 @@ func takeDamageTataSlayer(damage: float, mouseDirection: Vector2) -> void:
 	if not canTakeDamage or isDead:
 		return
 
+	isTakingDamage = true
+
 	health -= damage
 
 	if health < startHealth:
@@ -48,6 +51,8 @@ func takeDamageTataSlayer(damage: float, mouseDirection: Vector2) -> void:
 
 		if entity.animationController.playDeath.is_valid:
 			entity.animationController.playDeath(mouseDirection)
+
+	isTakingDamage = false
 
 func stopTakingDamage() -> void:
 	canTakeDamage = false

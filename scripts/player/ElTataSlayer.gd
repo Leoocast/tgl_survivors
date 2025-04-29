@@ -84,8 +84,14 @@ func takeDamage(damage: float) -> void:
 	if healthController.isDead:
 		return
 	var mousePosition = calculateMousePosition()
+	
+	animationController.modulateTakingDamage()
+		
 	healthController.takeDamageTataSlayer(damage, mousePosition)
-	emit_signal("take_damage_signal", damage)
+	take_damage_signal.emit(damage)
+
+	await GameUtils.waitFor(0.1)
+	animationController.modulateReset()
 	
 func animateAttackCdBar() -> void:
 	ui_attackCdBar.value = 0
@@ -107,7 +113,8 @@ func addExp(_xp : int) -> void:
 func checkLvlUp() -> void:
 	while xp >= xpToNextLvl:
 		# Primero, llenar la barra al tope
-		emit_signal("add_xp_signal", xpToNextLvl) # Visualmente llénala
+		add_xp_signal.emit(xp)
+		emit_signal("add_xp_signal", xpToNextLvl) # Llenar la barra visualmente
 		
 		xp -= xpToNextLvl
 		
@@ -116,10 +123,10 @@ func checkLvlUp() -> void:
 		xpToNextLvl = int(xpToNextLvl * 1.5)
 		
 		# Resetear barra para el siguiente nivel
-		emit_signal("lvl_up_signal", level, xpToNextLvl, 0) # XP a 0
+		lvl_up_signal.emit(level, xpToNextLvl, 0) # XP a 0
 
-	# Finalmente, mostrar la experiencia sobrante
-	emit_signal("add_xp_signal", xp)
+	# Mostrar la experiencia sobrante
+	add_xp_signal.emit(xp)
 
 #Signals
 func _on_attack_area_body_entered(enemy: Enemy) -> void:

@@ -22,12 +22,14 @@ func attack(executeAfterAttack: Callable = func():, executeAfterAttackAnimation:
 	isAttacking = true
 	weapon.shoot()
 	entity.animationController.playAttack()
+	entity.animationController.modulateAttack()
   
 	if executeAfterAttack.is_valid():
 		executeAfterAttack.call()   
   
 	await entity.animationController.waitAnimationFinished()
-
+	entity.animationController.modulateReset()
+	
 	if executeAfterAttackAnimation.is_valid():
 		executeAfterAttackAnimation.call()   
 

@@ -13,11 +13,15 @@ var SLIME_WEAPON : Weapon
 #Signals
 signal died_signal
 
+#Audio
+var sfx_hurt_asset = load("res://assets/audio/sound_effects/slime_hurt.wav")
+
 #-------------------------#
 func _ready():
 	SLIME_WEAPON = Weapon.new(1, 0.4)
 	
 	self.setup({
+		"sfx_hurt": sfx_hurt_asset, 
 		"speed": SPEED,
 		"stopDistance": STOP_DISTANCE,
 		"health": HEALTH, 

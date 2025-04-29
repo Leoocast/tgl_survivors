@@ -3,9 +3,13 @@ extends Node
 
 #Setup
 var sprite : AnimatedSprite2D
+var modulatedAttackColor := Color8(255, 98, 113)
+var modulatedTakingDamageColor := Color(2, 2, 2)
+var modulatedOriginalColor := Color8(255,255,255)
 
 #Internal
 const ANIMATIONS = Constants.ANIMATIONS
+
 
 #-------------------------#
 func setup(_sprite: AnimatedSprite2D) -> void:
@@ -45,3 +49,12 @@ func waitAnimationFinished() -> void:
 
 func flipHorizontal(flip: bool) -> void:
 	sprite.flip_h = flip
+
+func modulateAttack() -> void:
+	sprite.self_modulate = modulatedAttackColor
+
+func modulateTakingDamage() -> void:
+	sprite.self_modulate = modulatedTakingDamageColor
+
+func modulateReset() -> void:
+	sprite.self_modulate = modulatedOriginalColor

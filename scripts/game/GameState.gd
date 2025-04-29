@@ -34,8 +34,8 @@ var announcerAudios = [
 #--------------------------------------------------------#
 func _ready() -> void:
 	hideComboStuff()
-	await AudioManager.playAndAwaitVoice(this_game_is_over)
-	AudioManager.playMusic(reawakeR)
+	# await AudioManager.playAndAwaitVoice(this_game_is_over)
+	# AudioManager.playMusic(reawakeR)
 
 func _process(_delta):
 	updateComboBar()
@@ -65,7 +65,7 @@ func _on_enemy_died_suscription() -> void:
 	comboKillCount += 1
 	if comboKillCount == KILL_TRESHOLDS[currentTreshHold]:
 		comboLabel.text = KILL_MESSAGES[currentTreshHold]
-		AudioManager.playAnnouncer(announcerAudios[currentTreshHold])
+		# AudioManager.playAnnouncer(announcerAudios[currentTreshHold])
 		showComboStuff()
 		comboTimer.start()
 
