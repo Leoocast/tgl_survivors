@@ -36,7 +36,7 @@ var weapon : Weapon
 #Exp System 
 var xp := 0
 var level := 1
-var xpToNextLvl := 10
+var xpToNextLvl := 8
 
 #Signals
 signal take_damage_signal(damage: float)

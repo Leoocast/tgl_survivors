@@ -8,7 +8,7 @@ extends Node2D
 
 
 #Config
-const KILL_TRESHOLDS := [10, 15, 22, 32, 42, 55, 75]
+const KILL_TRESHOLDS := [15, 30, 50, 75, 100, 150, 250]
 const KILL_MESSAGES := ["DIRTY", "CRAZY","BRUTAL", "ANARCHY", "SAVAGE", "SSADISTIC", "SSSENSATIONAL"]
 const MESSAGE_DURATION := 2.0
 
@@ -48,14 +48,14 @@ func _process(_delta):
 
 func pause() -> void:
 	isPaused = true
-	AudioManager.fadeOutMusicAndPause()
-	AudioManager.playSelectionUpdateMusic(pauseMusic)
+	AudioManager.fadeOutMusic()
+	# AudioManager.playSelectionUpdateMusic(pauseMusic)
 	push_warning("GAME PAUSED")
 
 func resume() -> void:
 	isPaused = false
-	AudioManager.fadeInMusicAndPlay()
-	AudioManager.stopSelectionUpdateMusic()
+	AudioManager.fadeInMusic()
+	# AudioManager.stopSelectionUpdateMusic()
 	push_warning("GAME RESUMED")
 
 func registerEnemy(enemy: Enemy) -> void:

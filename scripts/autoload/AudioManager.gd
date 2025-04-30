@@ -25,6 +25,14 @@ func fadeOutMusicAndPause():
 	tween.tween_property(musicPlayer, "volume_db", -80, 1.5)
 	tween.tween_callback(Callable(self, "_on_fade_out_complete"))
 
+func fadeOutMusic():
+	var tween := create_tween()
+	tween.tween_property(musicPlayer, "volume_db", -10, .5)
+
+func fadeInMusic():
+	var tween := create_tween()
+	tween.tween_property(musicPlayer, "volume_db", 0, .5)
+
 func _pause_music():
 	musicPlayer.stream_paused = true
 
