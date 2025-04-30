@@ -1380,6 +1380,8 @@ collision_mask = 5
 shape = SubResource("CircleShape2D_pauyt")
 
 [node name="LevelUpDamageArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelUpDamageArea"]
 position = Vector2(1, -6)

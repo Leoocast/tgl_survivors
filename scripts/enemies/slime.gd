@@ -52,12 +52,15 @@ func flipTowardsPlayer():
 	GameUtils.flipColliderHorizontal($AttackArea/AttackCollision, shouldFlip)
 	animationController.flipHorizontal(shouldFlip)
 
-func death() -> void:
+func death(damageByLevelUp : bool = false) -> void:
 	emit_signal("died_signal")
 	healthBarController.hideBars()
 	await animationController.waitAnimationFinished()
 	animationController.playDeath()
-	isntantiateDrop()
+
+	if not damageByLevelUp: 
+		isntantiateDrop()
+	
 	fadeOutAndDisapear()
 	$CollisionShape2D.queue_free()
 	

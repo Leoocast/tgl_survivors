@@ -11,6 +11,7 @@ extends CharacterBody2D
 
 #Nodes
 @onready var expArea := $ExpArea
+@onready var levelUpDamageArea := $LevelUpDamageArea
 @onready var attackArea := $Weapon/AttackArea
 @onready var ssjAura = $SsjAura
 @onready var ui_attackCdBar = $UI/AttackCdBar
@@ -29,7 +30,7 @@ extends CharacterBody2D
 # Attributes
 const HEALTH := 20
 const HEALTH_COLOR := Color8(150, 0, 0)
-const BASE_SPEED = 490.0
+const BASE_SPEED = 550
 const XP_MULTIPLIER = 1.3
 var speed := BASE_SPEED
 var weapon : Weapon
@@ -39,8 +40,8 @@ var auraDamage := 3.0
 #Exp System 
 var xp := 0
 var level := 1
-# var xpToNextLvl := 8
-var xpToNextLvl := 1
+var xpToNextLvl := 8
+# var xpToNextLvl := 1
 
 #Signals
 signal take_damage_signal(damage: float)
@@ -60,7 +61,6 @@ func setupControllers() -> void:
 	dashController.setup(self, $CollisionShape2D)
 
 func _physics_process(_delta: float) -> void:
-
 	if game.isPaused:
 		return
 

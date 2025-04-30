@@ -55,7 +55,7 @@ func moveTowardsPlayer() -> void:
 		self.velocity = direction * speed
 		move_and_slide()
 
-func takeDamage(damage: float) -> void:
+func takeDamage(damage: float, damageByLevelUp: bool = false) -> void:
 	isTakingDamage = true
 	healthController.takeDamage(damage)
 
@@ -66,7 +66,7 @@ func takeDamage(damage: float) -> void:
 	GameUtils.flash(animationController.sprite)
 	healthBarController.takeDamage(damage)
 	if healthController.isDead:
-		death()
+		death(damageByLevelUp)
 	else:
 		await animationController.waitAnimationFinished()
 		animationController.playIdle()
@@ -91,5 +91,5 @@ func sfx_playHurt() -> void:
 	soundEffectPlayer.stream = sfx_hurt
 	soundEffectPlayer.play()
 
-func death() -> void:
+func death(_damageByLevelUp : bool = false) -> void:
 	pass

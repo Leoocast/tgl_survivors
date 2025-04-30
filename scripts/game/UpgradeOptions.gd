@@ -13,10 +13,6 @@ var panelNormalStyle = theme.get_stylebox("normal", "Panel")
 signal upgrade_selected_signal(upgrade: Upgrade)
 
 func setup(_name : String, _desc : String) -> void:
-
-	print("New _name", _name)
-	print("New _desc", _desc )
-
 	nameLabel.text = _name
 	descLabel.text = _desc
 

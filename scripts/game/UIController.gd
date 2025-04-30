@@ -21,6 +21,9 @@ func _ready():
 	playerXPBar.max_value = player.xpToNextLvl
 
 func showLevelUpUI():
+
+	player.attackController.executeLevelUpDamage()
+
 	game.pause()
 
 	#FIXME: Esto no se donde deba ir??

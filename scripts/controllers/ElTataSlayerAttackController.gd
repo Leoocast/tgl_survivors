@@ -4,7 +4,7 @@ extends Node
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
 
 #Setup
-var entity : Node2D
+var entity : ElTataSlayer
 var weapon : Weapon
 
 #Internal
@@ -16,7 +16,7 @@ var firstAttack := true
 var sfx_sword_1 = load("res://assets/audio/sound_effects/sword_effect_1.wav")
 var sfx_sword_2 = load("res://assets/audio/sound_effects/sword_effect_2.wav")
 #-------------------------#
-func setup(_entity: Node2D, _weapon: Weapon) -> void:
+func setup(_entity: ElTataSlayer, _weapon: Weapon) -> void:
 	self.entity = _entity
 	self.weapon = _weapon
 	
@@ -56,3 +56,12 @@ func attack(mouseDirection : Vector2, executeAfterAttack: Callable = func():, ex
 func playSfxDelayed() -> void:
 	await GameUtils.waitFor(0.3)
 	AudioManager.playSoundEffect(sfx_sword_1)
+
+func executeLevelUpDamage() -> void:
+	var enemiesInside = entity.levelUpDamageArea.get_overlapping_bodies()
+	
+	if enemiesInside.size() <= 0:
+		return
+
+	for enemy : Enemy in enemiesInside:
+		enemy.takeDamage(entity.auraDamage, true)

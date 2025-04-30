@@ -40,8 +40,8 @@ var isPaused := false
 
 func _ready() -> void:
 	hideComboStuff()
-	await AudioManager.playAndAwaitVoice(this_game_is_over)
-	AudioManager.playMusic(reawakeR)
+	# await AudioManager.playAndAwaitVoice(this_game_is_over)
+	# AudioManager.playMusic(reawakeR)
 
 func _process(_delta):
 	updateComboBar()

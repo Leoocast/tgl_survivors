@@ -33,5 +33,5 @@ func _on_upgrade_selected(upgrade: Upgrade) -> void:
 	var game = GameUtils.getGame()
 	var lvlUpUi = game.get_node("LvlUpUI")
 	lvlUpUi.hide()
-	await GameUtils.waitFor(0.05)
+	await GameUtils.waitFor(0.1)
 	game.resume()
