@@ -1,9 +1,11 @@
 class_name ElTataSlayerAttackController
 extends Node
 
+@onready var animationController := %AnimationController as ElTataSlayerAnimationController
+
 #Setup
 var entity : Node2D
-var weapon : Node2D
+var weapon : Weapon
 
 #Internal
 var isAttacking := false
@@ -14,7 +16,7 @@ var firstAttack := true
 var sfx_sword_1 = load("res://assets/audio/sound_effects/sword_effect_1.wav")
 var sfx_sword_2 = load("res://assets/audio/sound_effects/sword_effect_2.wav")
 #-------------------------#
-func setup(_entity: Node2D, _weapon: Node2D) -> void:
+func setup(_entity: Node2D, _weapon: Weapon) -> void:
 	self.entity = _entity
 	self.weapon = _weapon
 	
@@ -28,9 +30,7 @@ func attack(mouseDirection : Vector2, executeAfterAttack: Callable = func():, ex
 
 	if firstAttack:
 		entity.animationController.playAttack(mouseDirection)
-		#FIXME:
-		await GameUtils.waitFor(0.3)
-		AudioManager.playSoundEffect(sfx_sword_1)
+		playSfxDelayed()
 	else:
 		entity.animationController.playAttack2(mouseDirection)
 		await GameUtils.waitFor(0.1)
@@ -45,10 +45,14 @@ func attack(mouseDirection : Vector2, executeAfterAttack: Callable = func():, ex
 		executeAfterAttackAnimation.call()   
 
 	isAttacking = false
-	await GameUtils.waitFor(weapon.cooldown)
+	# await GameUtils.waitFor(weapon.cooldown)
 	canAttack = true
 
 	if InputHandler.isAttacking():
 		firstAttack = !firstAttack
 	else:
 		firstAttack = true
+
+func playSfxDelayed() -> void:
+	await GameUtils.waitFor(0.3)
+	AudioManager.playSoundEffect(sfx_sword_1)

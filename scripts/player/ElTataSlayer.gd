@@ -27,14 +27,16 @@ extends CharacterBody2D
 # Attributes
 const HEALTH := 20
 const HEALTH_COLOR := Color8(150, 0, 0)
-var speed := 470.0
+const BASE_SPEED = 490.0
+const XP_MULTIPLIER = 1.3
+var speed := BASE_SPEED
 var weapon : Weapon
 
 #FIXME: Pasar esto a un controller de XP
 #Exp System 
 var xp := 0
 var level := 1
-var xpToNextLvl := 3
+var xpToNextLvl := 10
 
 #Signals
 signal take_damage_signal(damage: float)
@@ -43,15 +45,15 @@ signal add_xp_signal(xp: int)
 
 #-------------------------#
 func _ready() -> void:
-	weapon = Weapon.new(1, 0.1)
+	weapon = Weapon.new(1, 0.5)
 	setupControllers()
 	disableAllAttackCollisions()
 
 func setupControllers() -> void:
+	animationController.setup($AnimatedSprite2D)
 	healthController.setup(self, HEALTH)
 	attackController.setup(self, weapon)
 	dashController.setup(self, $CollisionShape2D)
-	animationController.setup($AnimatedSprite2D)
 
 func _physics_process(_delta: float) -> void:
 
@@ -127,7 +129,7 @@ func checkLvlUp() -> void:
 		# Subir nivel
 		level += 1
 		
-		xpToNextLvl = int(xpToNextLvl * 1.5)
+		xpToNextLvl = int(xpToNextLvl * XP_MULTIPLIER)
 		
 		# Resetear barra para el siguiente nivel
 		lvl_up_signal.emit(level, xpToNextLvl, 0) # XP a 0
@@ -137,7 +139,13 @@ func checkLvlUp() -> void:
 
 #Updates FIXME:, mover a UpdatesController
 func increaseMovementSpeed(multiplier: float) -> void:
-	speed *= multiplier
+	speed += multiplier
+
+func increaseAttackDamage(multiplier: float) -> void:
+	weapon = Weapon.new(weapon.damage * multiplier, weapon.cooldown)
+
+func increaseAttackSpeed(multiplier: float) -> void:
+	animationController.setAttackFpsMultiplier(multiplier)
 
 #Signals
 func _on_attack_area_body_entered(enemy: Enemy) -> void:

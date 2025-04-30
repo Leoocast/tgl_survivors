@@ -8,7 +8,7 @@ extends Node2D
 
 
 #Config
-const KILL_TRESHOLDS := [10, 15, 20, 25, 30, 35, 40]
+const KILL_TRESHOLDS := [10, 15, 22, 32, 42, 55, 75]
 const KILL_MESSAGES := ["DIRTY", "CRAZY","BRUTAL", "ANARCHY", "SAVAGE", "SSADISTIC", "SSSENSATIONAL"]
 const MESSAGE_DURATION := 2.0
 
@@ -40,9 +40,8 @@ var isPaused := false
 
 func _ready() -> void:
 	hideComboStuff()
-	# await AudioManager.playAndAwaitVoice(this_game_is_over)
-	# AudioManager.playMusic(reawakeR)
-
+	await AudioManager.playAndAwaitVoice(this_game_is_over)
+	AudioManager.playMusic(reawakeR)
 
 func _process(_delta):
 	updateComboBar()

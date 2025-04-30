@@ -696,7 +696,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_2_down",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -725,7 +725,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_2_left",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -754,7 +754,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_2_right",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -783,7 +783,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_2_up",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -812,7 +812,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_down",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -841,7 +841,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_left",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -870,7 +870,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_right",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -899,7 +899,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_up",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1288,7 +1288,7 @@ script = ExtResource("5_ew0gd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_4wgry")
-animation = &"attack_2_right"
+animation = &"attack_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)

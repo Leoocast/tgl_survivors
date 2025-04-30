@@ -3,7 +3,10 @@
 class_name ElTataSlayerAnimationController
 extends Node
 
+
 #Setup
+const BASE_ATTACK_FPS := 8.0
+var newFps := BASE_ATTACK_FPS
 var sprite : AnimatedSprite2D
 var modulatedTakingDamageColor := Color(2, 2, 2)
 var modulatedOriginalColor := Color8(255,255,255)
@@ -80,3 +83,23 @@ func modulateTakingDamage() -> void:
 
 func modulateReset() -> void:
 	sprite.self_modulate = modulatedOriginalColor
+
+func setAttackFpsMultiplier(multiplier: float) -> void:
+
+	# 8 * 0.2 = 1.6
+	var result = BASE_ATTACK_FPS * multiplier
+
+	# 8 + 1.6 -> 9.6 + 1.6 -> 11.12 + 1.6, etc..
+	newFps += result
+
+	print("newFps", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_up", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_left", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_right", newFps)
+	
+	sprite.sprite_frames.set_animation_speed("attack_2_up", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_2_down", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_2_left", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_2_right", newFps)

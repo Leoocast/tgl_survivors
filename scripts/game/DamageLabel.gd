@@ -10,7 +10,10 @@ const FLOAT_SPEED := 30.0
 var velocity := Vector2.UP * FLOAT_SPEED
 
 func setup(damage: float) -> void:
-	damage_label.text = str(int(round(damage)))
+	var formatted := "%.2f" % damage
+	formatted = formatted.rstrip("0").rstrip(".")
+	damage_label.text = formatted
+	# damage_label.text = str(int(round(damage)))
 	modulate.a = 0.0  # Comienza invisible
 
 	var tween := create_tween()
