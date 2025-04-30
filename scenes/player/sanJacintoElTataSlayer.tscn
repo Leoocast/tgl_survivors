@@ -1,4 +1,4 @@
-[gd_scene load_steps=192 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=194 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/ElTataSlayer.gd" id="1_ew0gd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://jlk8ejx7k271" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Down-Sheet.png" id="1_nbhxp"]
 [ext_resource type="Texture2D" uid="uid://crmkugpf3d8fn" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Down-Sheet.png" id="1_rnjux"]
 [ext_resource type="Script" uid="uid://cg1fh05pqul4o" path="res://scripts/controllers/DashController.gd" id="2_lk38t"]
+[ext_resource type="PackedScene" uid="uid://35gexdxbybke" path="res://scenes/player/ssj.tscn" id="2_pauyt"]
 [ext_resource type="Texture2D" uid="uid://caxirt76mwm8f" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Left-Sheet.png" id="2_son5e"]
 [ext_resource type="Texture2D" uid="uid://djt74mxs7da8h" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Left-Sheet.png" id="2_ty0ju"]
 [ext_resource type="Texture2D" uid="uid://twdx03vpwl3u" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Left-Sheet.png" id="2_x3n3s"]
@@ -1263,9 +1264,15 @@ thickness = 10
 [sub_resource type="CircleShape2D" id="CircleShape2D_pauyt"]
 radius = 25.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2cq5b"]
+radius = 24.0
+
 [node name="San Jacinto El Tata Slayer" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_ew0gd")
+
+[node name="SsjAura" parent="." instance=ExtResource("2_pauyt")]
+position = Vector2(1, -26)
 
 [node name="Controllers" type="Node" parent="."]
 
@@ -1288,7 +1295,7 @@ script = ExtResource("5_ew0gd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_4wgry")
-animation = &"attack_up"
+animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)
@@ -1369,8 +1376,16 @@ polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39
 collision_layer = 8
 collision_mask = 5
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ExpArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExpArea"]
 shape = SubResource("CircleShape2D_pauyt")
+
+[node name="LevelUpDamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelUpDamageArea"]
+position = Vector2(1, -6)
+scale = Vector2(1.12149, 1.12149)
+shape = SubResource("CircleShape2D_2cq5b")
+debug_color = Color(0.557828, 0.558126, 0.154713, 0.42)
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="Weapon/AttackArea" to="." method="_on_attack_area_body_entered"]

@@ -3,13 +3,16 @@
 class_name ElTataSlayerAnimationController
 extends Node
 
-
 #Setup
 const BASE_ATTACK_FPS := 8.0
 var newFps := BASE_ATTACK_FPS
 var sprite : AnimatedSprite2D
 var modulatedTakingDamageColor := Color(2, 2, 2)
 var modulatedOriginalColor := Color8(255,255,255)
+
+#VFX
+var levelUpAuraRed: AnimatedSprite2D
+var levelUpAuraYellow: AnimatedSprite2D
 
 #Internal
 const ANIMATIONS = Constants.ANIMATIONS
@@ -21,8 +24,11 @@ var directions = {
 }
 
 #-------------------------#
-func setup(_sprite: AnimatedSprite2D) -> void:
+func setup(_sprite: AnimatedSprite2D, ssjAura : Node2D) -> void:
 	self.sprite = _sprite
+	#FIXME: Mover a una constante los nombres de los nodos
+	self.levelUpAuraRed = ssjAura.get_node("AuraRed") as AnimatedSprite2D
+	self.levelUpAuraYellow = ssjAura.get_node("AuraYellow") as AnimatedSprite2D
 
 func playDefault(mouseDirection: Vector2) -> void:
 	var inputDirection = InputHandler.getDirection()
@@ -103,3 +109,16 @@ func setAttackFpsMultiplier(multiplier: float) -> void:
 	sprite.sprite_frames.set_animation_speed("attack_2_down", newFps)
 	sprite.sprite_frames.set_animation_speed("attack_2_left", newFps)
 	sprite.sprite_frames.set_animation_speed("attack_2_right", newFps)
+
+func playAndAwaitSsj() -> void:
+
+	levelUpAuraRed.show()
+	levelUpAuraYellow.show()
+
+	levelUpAuraRed.play("default")
+	levelUpAuraYellow.play("default")
+
+	await levelUpAuraYellow.animation_finished
+
+	levelUpAuraRed.hide()
+	levelUpAuraYellow.hide()

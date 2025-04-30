@@ -8,9 +8,11 @@ extends CharacterBody2D
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
 @onready var game = get_parent() as GameState
 
+
 #Nodes
 @onready var expArea := $ExpArea
 @onready var attackArea := $Weapon/AttackArea
+@onready var ssjAura = $SsjAura
 @onready var ui_attackCdBar = $UI/AttackCdBar
 @onready var collisionAttackMap := {
 	"up": attackArea.get_node("UpCollision"),
@@ -31,12 +33,14 @@ const BASE_SPEED = 490.0
 const XP_MULTIPLIER = 1.3
 var speed := BASE_SPEED
 var weapon : Weapon
+var auraDamage := 3.0
 
 #FIXME: Pasar esto a un controller de XP
 #Exp System 
 var xp := 0
 var level := 1
-var xpToNextLvl := 8
+# var xpToNextLvl := 8
+var xpToNextLvl := 1
 
 #Signals
 signal take_damage_signal(damage: float)
@@ -50,7 +54,7 @@ func _ready() -> void:
 	disableAllAttackCollisions()
 
 func setupControllers() -> void:
-	animationController.setup($AnimatedSprite2D)
+	animationController.setup($AnimatedSprite2D, ssjAura)
 	healthController.setup(self, HEALTH)
 	attackController.setup(self, weapon)
 	dashController.setup(self, $CollisionShape2D)

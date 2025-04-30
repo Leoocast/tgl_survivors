@@ -22,9 +22,19 @@ func _ready():
 
 func showLevelUpUI():
 	game.pause()
+
+	#FIXME: Esto no se donde deba ir??
+	player.z_index = 99
+	player.healthController.canTakeDamage = false
+	await player.animationController.playAndAwaitSsj()
+	player.z_index = 1
+	
 	var randomUpgrades = upgradesController.getRandomUpgrades(3)
 	lvlUpUi.setup(player, randomUpgrades)
 	lvlUpUi.show()
+
+	#FIXME: Esto no se donde deba ir??
+	player.healthController.canTakeDamage = true
 
 #Signal Event
 func _on_health_changed(damage: float) -> void:
