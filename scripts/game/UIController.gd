@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var playerXPBar := $Control/PlayerXP
 @onready var lvlUpUi = %LvlUpUI
 @onready var game = get_parent() as GameState
+@onready var upgradesController = %UpgradesController as UpgradesController
 
 #Internal
 var comboCounter := 0
@@ -21,6 +22,8 @@ func _ready():
 
 func showLevelUpUI():
 	game.pause()
+	var randomUpgrades = upgradesController.getRandomUpgrades(3)
+	lvlUpUi.setup(player, randomUpgrades)
 	lvlUpUi.show()
 
 #Signal Event

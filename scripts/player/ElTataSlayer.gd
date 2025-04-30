@@ -27,7 +27,7 @@ extends CharacterBody2D
 # Attributes
 const HEALTH := 20
 const HEALTH_COLOR := Color8(150, 0, 0)
-const SPEED := 470
+var speed := 470.0
 var weapon : Weapon
 
 #FIXME: Pasar esto a un controller de XP
@@ -77,7 +77,7 @@ func _physics_process(_delta: float) -> void:
 	
 func move() -> void:
 	var direction = InputHandler.getDirection()
-	self.velocity = direction * SPEED
+	self.velocity = direction * speed
 	move_and_slide()
 
 func calculateMousePosition() -> Vector2:
@@ -134,6 +134,10 @@ func checkLvlUp() -> void:
 
 	# Mostrar la experiencia sobrante
 	add_xp_signal.emit(xp)
+
+#Updates FIXME:, mover a UpdatesController
+func increaseMovementSpeed(multiplier: float) -> void:
+	speed *= multiplier
 
 #Signals
 func _on_attack_area_body_entered(enemy: Enemy) -> void:

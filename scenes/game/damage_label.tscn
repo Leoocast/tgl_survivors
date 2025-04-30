@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0kokirwcjd6f"]
+
+[ext_resource type="Script" uid="uid://coajg0saxhsna" path="res://scripts/game/DamageLabel.gd" id="1_07bpa"]
+[ext_resource type="FontFile" uid="uid://bncjg28utk7b4" path="res://assets/fonts/Pixellari.ttf" id="2_t273b"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_07bpa")
+
+[node name="DamageLabel" type="Label" parent="."]
+offset_left = -30.0
+offset_top = -48.0
+offset_right = 29.0
+offset_bottom = 3.0
+theme_override_fonts/font = ExtResource("2_t273b")
+theme_override_font_sizes/font_size = 50
+text = "24"

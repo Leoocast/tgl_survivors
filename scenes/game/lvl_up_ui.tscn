@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://do8uedlbkaui3"]
+[gd_scene load_steps=5 format=3 uid="uid://do8uedlbkaui3"]
 
 [ext_resource type="PackedScene" uid="uid://cy26nn3koc77q" path="res://scenes/game/upgrade_option.tscn" id="1_8kp1u"]
 [ext_resource type="FontFile" uid="uid://bncjg28utk7b4" path="res://assets/fonts/Pixellari.ttf" id="1_lujru"]
+[ext_resource type="Script" uid="uid://cpf2lsm5ms8sb" path="res://scripts/game/LevelUpUI.gd" id="1_w6clr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lujru"]
 bg_color = Color(0, 0, 0, 0.215686)
 
 [node name="LvlUpUI" type="CanvasLayer"]
+script = ExtResource("1_w6clr")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
@@ -32,22 +34,35 @@ theme_override_fonts/font = ExtResource("1_lujru")
 theme_override_font_sizes/font_size = 131
 text = "Selecciona una mejora:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -778.0
+offset_top = -432.0
+offset_right = 798.0
+offset_bottom = 393.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
 mouse_filter = 0
+theme_override_constants/separation = 100
 
-[node name="UpgradeOption" parent="HBoxContainer" instance=ExtResource("1_8kp1u")]
+[node name="UpgradeOption" parent="CenterContainer/HBoxContainer" instance=ExtResource("1_8kp1u")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="UpgradeOption2" parent="HBoxContainer" instance=ExtResource("1_8kp1u")]
+[node name="UpgradeOption2" parent="CenterContainer/HBoxContainer" instance=ExtResource("1_8kp1u")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="UpgradeOption3" parent="HBoxContainer" instance=ExtResource("1_8kp1u")]
+[node name="UpgradeOption3" parent="CenterContainer/HBoxContainer" instance=ExtResource("1_8kp1u")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 6

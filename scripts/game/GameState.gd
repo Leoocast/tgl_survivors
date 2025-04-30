@@ -6,6 +6,7 @@ extends Node2D
 @onready var comboLabel = $HUD/Control/Combo/Label
 @onready var comboTimeBar = $HUD/Control/Combo/ProgressBar
 
+
 #Config
 const KILL_TRESHOLDS := [10, 15, 20, 25, 30, 35, 40]
 const KILL_MESSAGES := ["DIRTY", "CRAZY","BRUTAL", "ANARCHY", "SAVAGE", "SSADISTIC", "SSSENSATIONAL"]
@@ -40,7 +41,7 @@ var isPaused := false
 func _ready() -> void:
 	hideComboStuff()
 	# await AudioManager.playAndAwaitVoice(this_game_is_over)
-	AudioManager.playMusic(reawakeR)
+	# AudioManager.playMusic(reawakeR)
 
 
 func _process(_delta):

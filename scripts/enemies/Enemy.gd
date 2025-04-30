@@ -1,12 +1,14 @@
 class_name Enemy
 extends CharacterBody2D
 
+#Preload
+const DAMAGE_LABEL_ASSET = preload("res://scenes/game/damage_label.tscn")
+
 #Nodes
 @onready var healthController := %HealthController as HealthController
 @onready var healthBarController := %HealthBar as HealthBarController
 @onready var attackController := %AttackController as AttackController
 @onready var animationController := %AnimationController as AnimationController
-
 
 #Config
 var speed : float 
@@ -56,6 +58,9 @@ func moveTowardsPlayer() -> void:
 func takeDamage(damage: float) -> void:
 	isTakingDamage = true
 	healthController.takeDamage(damage)
+
+	showDamageLabel(damage)
+
 	animationController.playTakeDamage()
 	sfx_playHurt()
 	GameUtils.flash(animationController.sprite)
@@ -71,10 +76,16 @@ func attackPlayer() -> void:
 	if not isPlayerInRange or healthController.isDead or attackController.isAttacking: 
 		return
 	
-	
 	await attackController.attack(func ():, animationController.playIdle)
 	
-   
+
+#VFX
+func showDamageLabel(damage: float) -> void:
+	var label = DAMAGE_LABEL_ASSET.instantiate() as DamageLabel
+	label.global_position = self.global_position + Vector2(0, -20)
+	GameUtils.tree.current_scene.add_child(label)
+	label.setup(damage)
+
 #SFX
 func sfx_playHurt() -> void:
 	soundEffectPlayer.stream = sfx_hurt

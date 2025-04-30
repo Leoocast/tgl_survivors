@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1s51dtivbell"]
+[gd_scene load_steps=13 format=3 uid="uid://b1s51dtivbell"]
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_6chfy"]
 [ext_resource type="Script" uid="uid://h53677tce2mx" path="res://scripts/game/GameState.gd" id="1_crk6h"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://bncjg28utk7b4" path="res://assets/fonts/Pixellari.ttf" id="6_h5e45"]
 [ext_resource type="FontFile" uid="uid://c8vs1sqrongty" path="res://assets/fonts/Another Danger - Demo.otf" id="7_6d208"]
 [ext_resource type="PackedScene" uid="uid://do8uedlbkaui3" path="res://scenes/game/lvl_up_ui.tscn" id="9_amjvs"]
+[ext_resource type="Script" uid="uid://cdcbmvctucc3x" path="res://scripts/controllers/UpgradesController.gd" id="10_o4hyi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41jvh"]
 bg_color = Color(0, 0.625536, 0.99609, 1)
@@ -153,5 +154,9 @@ wait_time = 7.0
 [node name="LvlUpUI" parent="." instance=ExtResource("9_amjvs")]
 unique_name_in_owner = true
 visible = false
+
+[node name="UpgradesController" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_o4hyi")
 
 [connection signal="timeout" from="HUD/Control/Combo/Timer" to="." method="_on_combo_timer_timeout"]
