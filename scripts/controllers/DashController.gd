@@ -1,7 +1,13 @@
 class_name DashController
-extends Node
+extends Node2D
 
-# Config
+
+#Trail
+@export var trail : Line2D
+var trailQueue : Array
+var trailMaxLenth : int
+
+#Config
 const SPEED := 1500
 const DURATION := 0.2
 const COOLDOWN := 0.5
@@ -14,6 +20,7 @@ var playerCollider : CollisionShape2D
 var isDashing := false
 var canDash := true
 var dashDirection := Vector2.ZERO
+
 
 #-------------------------#
 #FIXME: Que ElTataSlayer herede de player

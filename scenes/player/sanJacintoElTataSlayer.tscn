@@ -1,4 +1,4 @@
-[gd_scene load_steps=194 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=196 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/ElTataSlayer.gd" id="1_ew0gd"]
@@ -27,6 +27,13 @@
 [ext_resource type="Texture2D" uid="uid://n2unsq4ttmv0" path="res://assets/sprites/san_jacinto/5_Template_Death_Right-Sheet.png" id="16_2cq5b"]
 [ext_resource type="Texture2D" uid="uid://budwjct5v7ss4" path="res://assets/sprites/san_jacinto/5_Template_Death_Up-Sheet.png" id="17_fo76y"]
 [ext_resource type="Script" uid="uid://b6fb3dkqyjvc3" path="res://scenes/weapons/ElTataSlayerMachete.gd" id="23_2bla2"]
+
+[sub_resource type="Curve" id="Curve_pauyt"]
+_data = [Vector2(0, 0.619601), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_2cq5b"]
+colors = PackedColorArray(1, 1, 1, 0.74902, 1, 1, 1, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5njuf"]
 atlas = ExtResource("1_rnjux")
@@ -1267,9 +1274,18 @@ radius = 25.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_2cq5b"]
 radius = 24.0
 
-[node name="San Jacinto El Tata Slayer" type="CharacterBody2D"]
+[node name="San Jacinto El Tata Slayer" type="CharacterBody2D" node_paths=PackedStringArray("trail")]
 z_index = 1
 script = ExtResource("1_ew0gd")
+trail = NodePath("TrailContainer/Trail")
+
+[node name="TrailContainer" type="Node" parent="."]
+
+[node name="Trail" type="Line2D" parent="TrailContainer"]
+scale = Vector2(0.292109, 0.957706)
+width = 60.0
+width_curve = SubResource("Curve_pauyt")
+gradient = SubResource("Gradient_2cq5b")
 
 [node name="SsjAura" parent="." instance=ExtResource("2_pauyt")]
 position = Vector2(1, -26)
@@ -1280,9 +1296,11 @@ position = Vector2(1, -26)
 unique_name_in_owner = true
 script = ExtResource("1_f7u02")
 
-[node name="DashController" type="Node" parent="Controllers"]
+[node name="DashController" type="Node2D" parent="Controllers" node_paths=PackedStringArray("trail")]
 unique_name_in_owner = true
+z_index = 2
 script = ExtResource("2_lk38t")
+trail = NodePath("../../TrailContainer/Trail")
 
 [node name="AttackController" type="Node" parent="Controllers"]
 unique_name_in_owner = true

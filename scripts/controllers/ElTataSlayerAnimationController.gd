@@ -58,7 +58,6 @@ func playAttack2(mouseDirection: Vector2) -> void:
 
 func playTakeDamage() -> void:
 	pass
-	# print("Taking damage!")
 
 func playDeath(mouseDirection: Vector2) -> void:
 	matchDirection("death", mouseDirection)

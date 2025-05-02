@@ -65,6 +65,10 @@ func setupControllers() -> void:
 	dashController.setup(self, $CollisionShape2D)
 
 func _physics_process(_delta: float) -> void:
+
+
+	drawTrail()
+
 	if game.isPaused:
 		return
 
@@ -161,7 +165,6 @@ func _on_attack_area_body_entered(enemy: Enemy) -> void:
 
 	var realDamage = weapon.damage * 2 if isCritic else weapon.damage  
 
-	print("isCritic", isCritic)
 	enemy.takeDamage(realDamage, false, isCritic)
 
 #Activate attack collisions
@@ -181,3 +184,27 @@ func _on_exp_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group(Constants.GROUPS.EXP_DROP):
 		var expDrop = area as ExpDrop
 		expDrop.flyToTarget(self)
+
+
+#Trail
+@export var trail : Line2D
+var trailQueue : Array
+var trailMaxLenth = 20
+
+func drawTrail() -> void:
+	var tween := create_tween()
+
+	if dashController.isDashing:
+		tween.tween_property(trail, "modulate:a", 1.0, 0.1)
+	else:
+		tween.tween_property(trail, "modulate:a", 0.0, 0.3)
+
+	var localPos = trail.to_local(global_position) + Vector2(40, 40)
+	trailQueue.push_front(localPos)
+
+	if trailQueue.size() > trailMaxLenth:
+		trailQueue.pop_back()
+
+	trail.clear_points()
+	for point in trailQueue:
+		trail.add_point(point)
