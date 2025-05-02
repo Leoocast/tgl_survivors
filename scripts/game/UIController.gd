@@ -17,7 +17,7 @@ func _ready():
 	player.connect("lvl_up_signal", _on_lvl_up)
 	player.connect("add_xp_signal", _on_add_xp)
 
-	playerHealthBar.setup(player, player.healthController, player.HEALTH_COLOR, true)
+	playerHealthBar.setup(player, player.healthController, player.healthColor, true)
 	playerXPBar.max_value = player.xpToNextLvl
 
 func showLevelUpUI():

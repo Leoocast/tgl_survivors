@@ -38,6 +38,8 @@ position = Vector2(774, 425)
 scale = Vector2(8.84947, 9.15654)
 
 [node name="Enemy Spawner" parent="." instance=ExtResource("4_fdb3b")]
+position = Vector2(6.10352e-05, 0)
+scale = Vector2(3.32, 3.32)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

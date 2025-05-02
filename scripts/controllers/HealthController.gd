@@ -13,7 +13,7 @@ var isDamaged := false
 var isTakingDamage := false
 
 #-------------------------#
-func setup(_entity: Node2D, _health: int) -> void:
+func setup(_entity: Node2D, _health: float) -> void:
 	self.entity = _entity
 	self.health = _health
 	self.startHealth = _health

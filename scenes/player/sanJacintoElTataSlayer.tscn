@@ -697,7 +697,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_2_down",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -726,7 +726,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_2_left",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -755,7 +755,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_2_right",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -784,7 +784,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_2_up",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -813,7 +813,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_down",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -842,7 +842,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_left",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -871,7 +871,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_right",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -900,7 +900,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_up",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1295,7 +1295,7 @@ script = ExtResource("5_ew0gd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_4wgry")
-animation = &"idle_down"
+animation = &"attack_2_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)
@@ -1313,6 +1313,7 @@ offset_right = 20.0
 offset_bottom = 22.0
 
 [node name="AttackCdBar" type="ProgressBar" parent="UI"]
+visible = false
 layout_mode = 0
 offset_left = 15.0
 offset_top = 33.0

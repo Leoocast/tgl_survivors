@@ -28,13 +28,17 @@ extends CharacterBody2D
 }
 
 # Attributes
-const HEALTH := 20
-const HEALTH_COLOR := Color8(150, 0, 0)
-const BASE_SPEED = 550
-const XP_MULTIPLIER = 1.3
-var speed := BASE_SPEED
+@export var health := 20.0
+@export var healthColor := Color8(150, 0, 0)
+@export var baseSpeed := 550.0
+@export var xpMultiplier = 1.3
+@export var critProb := 0.1
+
+#Internal
+var speed := baseSpeed
 var weapon : Weapon
 var auraDamage := 3.0
+var currentCritProb := critProb
 
 #FIXME: Pasar esto a un controller de XP
 #Exp System 
@@ -56,7 +60,7 @@ func _ready() -> void:
 
 func setupControllers() -> void:
 	animationController.setup($AnimatedSprite2D, ssjAura)
-	healthController.setup(self, HEALTH)
+	healthController.setup(self, health)
 	attackController.setup(self, weapon)
 	dashController.setup(self, $CollisionShape2D)
 
@@ -133,7 +137,7 @@ func checkLvlUp() -> void:
 		# Subir nivel
 		level += 1
 		
-		xpToNextLvl = int(xpToNextLvl * XP_MULTIPLIER)
+		xpToNextLvl = int(xpToNextLvl * xpMultiplier)
 		
 		# Resetear barra para el siguiente nivel
 		lvl_up_signal.emit(level, xpToNextLvl, 0) # XP a 0
@@ -153,7 +157,12 @@ func increaseAttackSpeed(multiplier: float) -> void:
 
 #Signals
 func _on_attack_area_body_entered(enemy: Enemy) -> void:
-	enemy.takeDamage(weapon.damage)
+	var isCritic := randf() < critProb
+
+	var realDamage = weapon.damage * 2 if isCritic else weapon.damage  
+
+	print("isCritic", isCritic)
+	enemy.takeDamage(realDamage, false, isCritic)
 
 #Activate attack collisions
 func _on_animated_sprite_2d_frame_changed() -> void:

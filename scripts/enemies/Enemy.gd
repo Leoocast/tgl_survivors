@@ -55,11 +55,11 @@ func moveTowardsPlayer() -> void:
 		self.velocity = direction * speed
 		move_and_slide()
 
-func takeDamage(damage: float, damageByLevelUp: bool = false) -> void:
+func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic : bool = false) -> void:
 	isTakingDamage = true
 	healthController.takeDamage(damage)
 
-	showDamageLabel(damage)
+	showDamageLabel(damage, isCritic)
 
 	animationController.playTakeDamage()
 	sfx_playHurt()
@@ -80,11 +80,11 @@ func attackPlayer() -> void:
 	
 
 #VFX
-func showDamageLabel(damage: float) -> void:
+func showDamageLabel(damage: float, isCritic : bool = false) -> void:
 	var label = DAMAGE_LABEL_ASSET.instantiate() as DamageLabel
 	label.global_position = self.global_position + Vector2(0, -20)
 	GameUtils.tree.current_scene.add_child(label)
-	label.setup(damage)
+	label.setup(damage, isCritic)
 
 #SFX
 func sfx_playHurt() -> void:
