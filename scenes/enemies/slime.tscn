@@ -181,10 +181,10 @@ shape = SubResource("CircleShape2D_uhx0m")
 debug_color = Color(0, 0.536068, 0.971438, 0.42)
 
 [node name="HealthBar" parent="." instance=ExtResource("9_jjup5")]
-offset_left = -54.0
-offset_top = -69.0
-offset_right = -14.0
-offset_bottom = -29.0001
+offset_left = -12.0439
+offset_top = -22.8418
+offset_right = 10.9561
+offset_bottom = -19.8418
 scale = Vector2(1.02272, 1.02272)
 
 [node name="AttackArea" type="Area2D" parent="."]
@@ -201,6 +201,8 @@ collision_layer = 8
 [node name="PlayerDetector" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_ankfk")
 debug_color = Color(0, 0.842083, 0.3018, 0.42)
+
+[node name="Boss" type="Node2D" parent="."]
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

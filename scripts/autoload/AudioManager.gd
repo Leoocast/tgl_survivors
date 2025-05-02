@@ -45,7 +45,7 @@ func fadeInMusicAndPlay():
 
 func playSelectionUpdateMusic(stream: AudioStreamOggVorbis) -> void:
 	selectionUpdateMusicPlayer.stream = stream
-	selectionUpdateMusicPlayer.volume_db = -10
+	selectionUpdateMusicPlayer.volume_db = -5
 	selectionUpdateMusicPlayer.play()
 
 func stopSelectionUpdateMusic() -> void:
@@ -58,6 +58,7 @@ func playAndAwaitMusic(stream: AudioStream) -> void:
 
 func playSoundEffect(stream: AudioStream) -> void:
 	soundEffectPlayer.stream = stream
+	soundEffectPlayer.volume_db = -14
 	soundEffectPlayer.play()
 
 func playVoice(stream: AudioStream) -> void:
@@ -71,6 +72,7 @@ func playAndAwaitVoice(stream: AudioStream) -> void:
 
 func playAnnouncer(stream: AudioStream) -> void:
 	announcerPlayer.stream = stream
+	announcerPlayer.volume_db = -7
 	announcerPlayer.play()
 
 func stopMusic() -> void:

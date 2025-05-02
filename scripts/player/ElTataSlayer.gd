@@ -8,7 +8,6 @@ extends CharacterBody2D
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
 @onready var game = get_parent() as GameState
 
-
 #Nodes
 @onready var expArea := $ExpArea
 @onready var levelUpDamageArea := $LevelUpDamageArea

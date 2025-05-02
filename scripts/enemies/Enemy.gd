@@ -6,7 +6,7 @@ const DAMAGE_LABEL_ASSET = preload("res://scenes/game/damage_label.tscn")
 
 #Nodes
 @onready var healthController := %HealthController as HealthController
-@onready var healthBarController := %HealthBar as HealthBarController
+@onready var healthBarController := %HealthBar as EnemyHealthBarController
 @onready var attackController := %AttackController as AttackController
 @onready var animationController := %AnimationController as AnimationController
 
@@ -16,7 +16,7 @@ var stopDistance : float
 var weapon: Weapon
 var player: ElTataSlayer
 var game : GameState
-
+var isBoss := false
 #Internal
 var isTakingDamage := false
 var isPlayerInRange := false
@@ -32,8 +32,13 @@ func setup(data: Dictionary) -> void:
 	self.weapon = data.weapon
 	self.sfx_hurt = data.sfx_hurt
 
+	#FIXME:
+	if isBoss:
+		data.health *= 2
+		data.weapon.damage *= 2
+
 	healthController.setup(self, data.health)
-	healthBarController.setup(self, healthController, data.healthColor)
+	healthBarController.setup(self, healthController, data.healthColor, isBoss)
 	attackController.setup(self, data.weapon)
 	animationController.setup(data.sprite)
 	add_child(soundEffectPlayer)
@@ -93,3 +98,7 @@ func sfx_playHurt() -> void:
 
 func death(_damageByLevelUp : bool = false) -> void:
 	pass
+
+func convertIntoMiniBoss() -> void:
+	self.isBoss = true
+	self.scale *= 1.7

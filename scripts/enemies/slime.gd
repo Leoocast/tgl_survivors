@@ -9,7 +9,6 @@ const SPEED := 200.0
 const STOP_DISTANCE := 70.0
 const HEALTH := 2.0
 var SLIME_WEAPON : Weapon
-
 #Signals
 signal died_signal
 
@@ -27,7 +26,7 @@ func _ready():
 		"health": HEALTH, 
 		"healthColor": Color8(214,0,71),
 		"weapon": SLIME_WEAPON,
-		"sprite": $AnimatedSprite2D
+		"sprite": $AnimatedSprite2D,
 	})
 
 	animationController.playIdle()
