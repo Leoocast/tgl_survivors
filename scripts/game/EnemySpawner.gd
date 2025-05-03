@@ -5,7 +5,7 @@ const SLIME_ASSET = preload(Constants.ASSETS.ENEMIES.SLIME)
 const BAT_ASSET = preload("res://scenes/enemies/bat.tscn")
 
 #Nodes
-@onready var player = %Player
+@onready var player = GameUtils.getPlayer()
 @onready var spawner = $Path2D/PathFollow2D
 @onready var game = self.get_parent() as GameState
 

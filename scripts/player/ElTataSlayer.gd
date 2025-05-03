@@ -27,7 +27,7 @@ extends CharacterBody2D
 }
 
 # Attributes
-@export var health := 1 #20
+@export var health := 20 #20
 @export var healthColor := Color8(150, 0, 0)
 @export var baseSpeed := 550.0
 @export var xpMultiplier = 1.3
@@ -53,6 +53,7 @@ signal add_xp_signal(xp: int)
 
 #-------------------------#
 func _ready() -> void:
+	GameUtils.registerInGroup(self, Constants.GROUPS.PLAYER)
 	weapon = Weapon.new(1, 0.5)
 	setupControllers()
 	disableAllAttackCollisions()
@@ -64,7 +65,6 @@ func setupControllers() -> void:
 	dashController.setup(self, $CollisionShape2D)
 
 func _physics_process(_delta: float) -> void:
-
 
 	drawTrail()
 

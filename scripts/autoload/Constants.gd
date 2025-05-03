@@ -1,6 +1,7 @@
 # Constants
 extends Node
 
+#TODO: Separar en 2 archivos, Paths y Globals.
 const SCENES = {
 	"MENU": "res://scenes/menu.tscn",
 	"MENU_OPTIONS": "res://scenes/optionsMenu.tscn",
@@ -32,7 +33,8 @@ const ANIMATIONS = {
 }
 
 const GROUPS = {
-	"EXP_DROP": "expDrop"
+	"EXP_DROP": "expDrop",
+	"PLAYER": "player"
 }
 
 const EL_TATA_SLAYER_ANIMATIONS = {
