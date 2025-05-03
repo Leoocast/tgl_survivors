@@ -39,6 +39,11 @@ func fadeIn(node : Node2D, time: float = 0.5) -> void:
 func flipColliderHorizontal(collider: CollisionShape2D, flip: bool) -> void:
 	if flip:
 		collider.position.x = -abs(collider.position.x)
+
+		print("Absoluto: ", abs(collider.position.x))
+		print("Normal: ", collider.position.x)
+		print("-30: ", collider.position.x - 30)
+
 	else:
 		collider.position.x = abs(collider.position.x)
 	

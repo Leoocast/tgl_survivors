@@ -2,6 +2,7 @@ extends Node2D
 
 #Assets
 const SLIME_ASSET = preload(Constants.ASSETS.ENEMIES.SLIME)
+const BAT_ASSET = preload("res://scenes/enemies/bat.tscn")
 
 #Nodes
 @onready var player = %Player
@@ -10,6 +11,7 @@ const SLIME_ASSET = preload(Constants.ASSETS.ENEMIES.SLIME)
 
 #Config
 const BOSS_PROB := .03
+const BAT_PROB := .1
 
 #-------------------------#
 func _process(_delta):
@@ -21,24 +23,35 @@ func _process(_delta):
 		global_position = player.global_position
 
 func spawnEnemy() -> void:
-	var slimeInstance = SLIME_ASSET.instantiate() as Slime
+
+	var enemy : Enemy
+
+	if getIsBat():
+		enemy = BAT_ASSET.instantiate() as Bat
+	else:
+		enemy = SLIME_ASSET.instantiate() as Slime
 
 	var zIndex = [0, 2].pick_random()
 
 	if getIsBoss():
-		slimeInstance.convertIntoMiniBoss()
+		enemy.convertIntoMiniBoss()
 
-	slimeInstance.setupPlayer(player, game, zIndex)
+	enemy.setupPlayer(player, game, zIndex)
 	spawner.progress_ratio = randf()
-	slimeInstance.global_position = spawner.global_position
-	game.registerEnemy(slimeInstance)
-	get_parent().add_child(slimeInstance)
+	enemy.global_position = spawner.global_position
+	game.registerEnemy(enemy)
+	get_parent().add_child(enemy)
 
 func getIsBoss() -> bool:
-	return randf() < BOSS_PROB
+	return randf() <= BOSS_PROB
+
+	
+func getIsBat() -> bool:
+	return randf() <= BAT_PROB
 
 func _on_timer_timeout() -> void:
 	if game.isPaused:
 		return
 		
+	#FIXME:
 	spawnEnemy()

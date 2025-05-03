@@ -1,13 +1,14 @@
-class_name Slime
+class_name Bat
 extends Enemy
 
 #Preload
 const EXP_DROP_ASSET = preload(Constants.ASSETS.DROP.XP)
 
 #Config
-const SPEED := 150.0
-const STOP_DISTANCE := 70.0
-const HEALTH := 2.0
+const SPEED := 220.0
+const STOP_DISTANCE := 60.0
+const HEALTH := 4.0
+const EXP_VALUE = 2;
 var SLIME_WEAPON : Weapon
 #Signals
 signal died_signal
@@ -76,6 +77,7 @@ func fadeOutAndDisapear():
 
 func isntantiateDrop() -> void:
 	var instance = EXP_DROP_ASSET.instantiate()
+	instance.expValue = EXP_VALUE
 	instance.global_position = self.global_position
 	get_parent().add_child(instance)
 	GameUtils.fadeIn(instance, 0.3)
@@ -84,7 +86,7 @@ func isntantiateDrop() -> void:
 func _on_animated_sprite_2d_frame_changed() -> void:
 	if $AnimatedSprite2D.animation == "attack":
 		var current_frame = $AnimatedSprite2D.frame
-		if current_frame == 3:
+		if current_frame == 2:
 			enableAttackHitbox()
 		else:
 			disableAttackHitbox()

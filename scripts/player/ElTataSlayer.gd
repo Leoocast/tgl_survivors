@@ -27,7 +27,7 @@ extends CharacterBody2D
 }
 
 # Attributes
-@export var health := 20.0
+@export var health := 1 #20
 @export var healthColor := Color8(150, 0, 0)
 @export var baseSpeed := 550.0
 @export var xpMultiplier = 1.3

@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func playMusic(stream: AudioStreamOggVorbis) -> void:
 	musicPlayer.stream = stream
+	musicPlayer.volume_db = -10   
 	musicPlayer.play()
 
 func fadeOutMusicAndPause():
@@ -72,7 +73,7 @@ func playAndAwaitVoice(stream: AudioStream) -> void:
 
 func playAnnouncer(stream: AudioStream) -> void:
 	announcerPlayer.stream = stream
-	announcerPlayer.volume_db = -7
+	# announcerPlayer.volume_db = -7
 	announcerPlayer.play()
 
 func stopMusic() -> void:
