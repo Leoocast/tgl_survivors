@@ -10,7 +10,6 @@ var modulatedOriginalColor := Color8(255,255,255)
 #Internal
 const ANIMATIONS = Constants.ANIMATIONS
 
-
 #-------------------------#
 func setup(_sprite: AnimatedSprite2D) -> void:
 	self.sprite = _sprite

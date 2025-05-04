@@ -86,7 +86,7 @@ func attackPlayer() -> void:
 	
 	await attackController.attack()
 	
-#Signals TODO: Esto va en el animation controller del Enemy
+#Consumers TODO: Esto va en el animation controller del Enemy
 func on_attack_animation_started() -> void:
 	animationController.playAttack()
 	animationController.modulateAttack()

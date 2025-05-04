@@ -4,35 +4,30 @@ extends CharacterBody2D
 #Controllers
 @onready var healthController := %HealthController as HealthController
 @onready var dashController := %DashController as PlayerDashController
+#TODO: PENDIENTE EL PLAYER
 @onready var attackController := %AttackController as ElTataSlayerAttackController
-
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
+#TODO: REVISAR ESTO
 @onready var game = get_parent() as GameState
 
 #Nodes
-@onready var expArea := $ExpArea
-@onready var levelUpDamageArea := $LevelUpDamageArea
 @onready var attackArea := $Weapon/AttackArea
+@onready var collisionAttackMap := PlayerAttackCollisionMap.new()
+@onready var levelUpDamageArea := $LevelUpDamageArea
+@onready var expArea := $ExpArea
 @onready var ssjAura = $SsjAura
+
+#TODO: Revisar si esto va aqui? Lo necesitamos aun?
 @onready var ui_attackCdBar = $UI/AttackCdBar
-@onready var collisionAttackMap := {
-	"up": attackArea.get_node("UpCollision"),
-	"down": attackArea.get_node("DownCollision"),
-	"left": attackArea.get_node("LeftCollision"),
-	"right": attackArea.get_node("RightCollision"),
-	
-	"2_up": attackArea.get_node("UpCollision2"),
-	"2_down": attackArea.get_node("DownCollision2"),
-	"2_left": attackArea.get_node("LeftCollision2"),
-	"2_right": attackArea.get_node("RightCollision2"),
-}
 
 # Attributes
 @export var health := 100 #20
 @export var healthColor := Color8(150, 0, 0)
 @export var baseSpeed := 550.0
-@export var xpMultiplier = 1.3
 @export var critProb := 0.1
+
+#Systems
+var xpSystem: PlayerXPSystem = PlayerXPSystem.new()
 
 #Internal
 var speed := baseSpeed
@@ -40,20 +35,12 @@ var weapon : Weapon
 var auraDamage := 3.0
 var currentCritProb := critProb
 
-#FIXME: Pasar esto a un controller de XP
-#Exp System 
-var xp := 0
-var level := 1
-var xpToNextLvl := 8
-# var xpToNextLvl := 1
-
 #Signals
 signal take_damage_signal(damage: float)
-signal lvl_up_signal(newLvl: int, xpNextLvl: int, currentXp: int)
-signal add_xp_signal(xp: int)
 
 #-------------------------#
 func _ready() -> void:
+	collisionAttackMap.setup(attackArea)
 	GameUtils.registerInGroup(self, Constants.GROUPS.PLAYER)
 	weapon = Weapon.new(1, 0.5)
 	setupControllers()
@@ -125,29 +112,6 @@ func disableAllAttackCollisions() -> void:
 		else:
 			collision.disabled = true
 
-#FIXME: XP System
-func addExp(_xp : int) -> void:
-	xp += _xp
-	checkLvlUp()
-
-func checkLvlUp() -> void:
-	while xp >= xpToNextLvl:
-		# Primero, llenar la barra al tope
-		add_xp_signal.emit(xp)
-		emit_signal("add_xp_signal", xpToNextLvl) # Llenar la barra visualmente
-		
-		xp -= xpToNextLvl
-		
-		# Subir nivel
-		level += 1
-		
-		xpToNextLvl = int(xpToNextLvl * xpMultiplier)
-		
-		# Resetear barra para el siguiente nivel
-		lvl_up_signal.emit(level, xpToNextLvl, 0) # XP a 0
-
-	# Mostrar la experiencia sobrante
-	add_xp_signal.emit(xp)
 
 #Updates FIXME:, mover a UpdatesController
 func increaseMovementSpeed(multiplier: float) -> void:
@@ -178,7 +142,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	disableAllAttackCollisions()
 
 	if isAttacking and currentFrame == activationFrame:
-		collisionAttackMap[animationDirection].disabled = false
+		collisionAttackMap.map[animationDirection].disabled = false
 
 func _on_exp_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group(Constants.GROUPS.EXP_DROP):
