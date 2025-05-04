@@ -43,6 +43,9 @@ func setup(data: Dictionary) -> void:
 	animationController.setup(data.sprite)
 	add_child(soundEffectPlayer)
 
+	attackController.connect("attack_animation_started", on_attack_animation_started)
+	attackController.connect("attack_animation_finished", on_attack_animation_finished)
+
 #FIXME:
 func setupPlayer(_game : GameState, zIndex : int = 0 ) -> void:
 	self.player = GameUtils.getPlayer()
@@ -81,8 +84,16 @@ func attackPlayer() -> void:
 	if not isPlayerInRange or healthController.isDead or attackController.isAttacking: 
 		return
 	
-	await attackController.attack(func ():, animationController.playIdle)
+	await attackController.attack()
 	
+#Signals TODO: Esto va en el animation controller del Enemy
+func on_attack_animation_started() -> void:
+	animationController.playAttack()
+	animationController.modulateAttack()
+
+func on_attack_animation_finished() -> void:
+	animationController.modulateReset()
+	animationController.playIdle()
 
 #VFX
 func showDamageLabel(damage: float, isCritic : bool = false) -> void:

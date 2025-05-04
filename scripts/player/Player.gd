@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var healthController := %HealthController as HealthController
 @onready var dashController := %DashController as PlayerDashController
 @onready var attackController := %AttackController as ElTataSlayerAttackController
+
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
 @onready var game = get_parent() as GameState
 
@@ -27,7 +28,7 @@ extends CharacterBody2D
 }
 
 # Attributes
-@export var health := 20 #20
+@export var health := 100 #20
 @export var healthColor := Color8(150, 0, 0)
 @export var baseSpeed := 550.0
 @export var xpMultiplier = 1.3

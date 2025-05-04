@@ -12,27 +12,41 @@ var isDead := false
 var isDamaged := false
 var isTakingDamage := false
 
+#Signals
+signal died
+signal damaged
+
 #-------------------------#
 func setup(_entity: Node2D, _health: float) -> void:
 	self.entity = _entity
 	self.health = _health
 	self.startHealth = _health
 
-func takeDamage(damage: float, callback: Callable = func ():) -> void:
-	if not canTakeDamage and not isDead:
+func takeDamage(damage: float, executeAtEnd: Callable = func ():) -> void:
+	if not canTakeDamage:
 		return
+
+	isTakingDamage = true
 
 	health -= damage
 
 	if health < startHealth:
 		isDamaged = true
+		damaged.emit()
 
 	if health <= 0:
 		isDead = true
-
+		canTakeDamage = false
 		stopTakingDamage()
+
+		died.emit()
 		
-	callback.call()
+	isTakingDamage = false
+	executeAtEnd.call()
+
+func stopTakingDamage() -> void:
+	canTakeDamage = false
+
 
 func takeDamageTataSlayer(damage: float, mouseDirection: Vector2) -> void:
 	if not canTakeDamage or isDead:
@@ -53,6 +67,3 @@ func takeDamageTataSlayer(damage: float, mouseDirection: Vector2) -> void:
 			entity.animationController.playDeath(mouseDirection)
 
 	isTakingDamage = false
-
-func stopTakingDamage() -> void:
-	canTakeDamage = false

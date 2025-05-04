@@ -9,51 +9,38 @@ var weapon : Node2D
 var isAttacking := false
 var canAttack := true
 
+#Signal
+signal attack_started()
+signal attack_animation_started()
+signal attack_animation_finished()
+signal attack_finished()
+
 #-------------------------#
 func setup(_entity: Node2D, _weapon: Node2D) -> void:
 	self.entity = _entity
 	self.weapon = _weapon
 	
-func attack(executeAfterAttack: Callable = func():, executeAfterAttackAnimation: Callable = func():) -> void:
+func attack() -> void:
 	if not canAttack: 
 		return
 
 	canAttack = false
 	isAttacking = true
-	weapon.shoot()
-	entity.animationController.playAttack()
-	entity.animationController.modulateAttack()
-  
-	if executeAfterAttack.is_valid():
-		executeAfterAttack.call()   
-  
-	await entity.animationController.waitAnimationFinished()
-	entity.animationController.modulateReset()
-	
-	if executeAfterAttackAnimation.is_valid():
-		executeAfterAttackAnimation.call()   
 
-	isAttacking = false
-	await GameUtils.waitFor(weapon.cooldown)
-	canAttack = true
-	
-func elTataSlayerAttack(mouseDirection : Vector2, executeAfterAttack: Callable = func():, executeAfterAttackAnimation: Callable = func():) -> void:
-	if not canAttack: 
-		return
+	attack_started.emit()
 
-	canAttack = false
-	isAttacking = true
 	weapon.shoot()
-	entity.animationController.playAttack(mouseDirection)
-  
-	if executeAfterAttack.is_valid():
-		executeAfterAttack.call()   
+	
+	attack_animation_started.emit()
   
 	await entity.animationController.waitAnimationFinished()
 
-	if executeAfterAttackAnimation.is_valid():
-		executeAfterAttackAnimation.call()   
-
 	isAttacking = false
+	
+	attack_animation_finished.emit()
+
 	await GameUtils.waitFor(weapon.cooldown)
+
 	canAttack = true
+	
+	attack_finished.emit()
