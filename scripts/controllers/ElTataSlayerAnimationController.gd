@@ -4,7 +4,7 @@ class_name ElTataSlayerAnimationController
 extends Node
 
 #Setup
-const BASE_ATTACK_FPS := 10
+const BASE_ATTACK_FPS := 10.0
 var newFps := BASE_ATTACK_FPS
 var sprite : AnimatedSprite2D
 var modulatedTakingDamageColor := Color(2, 2, 2)

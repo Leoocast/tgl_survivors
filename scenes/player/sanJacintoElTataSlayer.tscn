@@ -1279,6 +1279,25 @@ z_index = 1
 script = ExtResource("1_ew0gd")
 trail = NodePath("TrailContainer/Trail")
 
+[node name="Controllers" type="Node" parent="."]
+
+[node name="HealthController" type="Node" parent="Controllers"]
+unique_name_in_owner = true
+script = ExtResource("1_f7u02")
+
+[node name="DashController" type="Node2D" parent="Controllers"]
+unique_name_in_owner = true
+z_index = 2
+script = ExtResource("2_lk38t")
+
+[node name="AttackController" type="Node" parent="Controllers"]
+unique_name_in_owner = true
+script = ExtResource("4_ew0gd")
+
+[node name="AnimationController" type="Node" parent="Controllers"]
+unique_name_in_owner = true
+script = ExtResource("5_ew0gd")
+
 [node name="TrailContainer" type="Node" parent="."]
 
 [node name="Trail" type="Line2D" parent="TrailContainer"]
@@ -1289,26 +1308,6 @@ gradient = SubResource("Gradient_2cq5b")
 
 [node name="SsjAura" parent="." instance=ExtResource("2_pauyt")]
 position = Vector2(1, -26)
-
-[node name="Controllers" type="Node" parent="."]
-
-[node name="HealthController" type="Node" parent="Controllers"]
-unique_name_in_owner = true
-script = ExtResource("1_f7u02")
-
-[node name="DashController" type="Node2D" parent="Controllers" node_paths=PackedStringArray("trail")]
-unique_name_in_owner = true
-z_index = 2
-script = ExtResource("2_lk38t")
-trail = NodePath("../../TrailContainer/Trail")
-
-[node name="AttackController" type="Node" parent="Controllers"]
-unique_name_in_owner = true
-script = ExtResource("4_ew0gd")
-
-[node name="AnimationController" type="Node" parent="Controllers"]
-unique_name_in_owner = true
-script = ExtResource("5_ew0gd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)

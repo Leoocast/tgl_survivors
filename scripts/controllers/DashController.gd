@@ -1,11 +1,5 @@
-class_name DashController
+class_name PlayerDashController
 extends Node2D
-
-
-#Trail
-@export var trail : Line2D
-var trailQueue : Array
-var trailMaxLenth : int
 
 #Config
 const SPEED := 1500
@@ -21,12 +15,10 @@ var isDashing := false
 var canDash := true
 var dashDirection := Vector2.ZERO
 
-
 #-------------------------#
-#FIXME: Que ElTataSlayer herede de player
-func setup(_player: Node2D, _playerCollider: CollisionShape2D) -> void:
-	self.player = _player
-	self.playerCollider = _playerCollider
+func setupPlayer() -> void:
+	self.player = GameUtils.getPlayer()
+	self.playerCollider = GameUtils.getPlayerCollider()
 
 func _physics_process(_delta: float) -> void:
 	if isDashing:

@@ -4,7 +4,7 @@ extends Node
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
 
 #Setup
-var entity : ElTataSlayer
+var entity : Player
 var weapon : Weapon
 
 #Internal
@@ -16,7 +16,7 @@ var firstAttack := true
 var sfx_sword_1 = load("res://assets/audio/sound_effects/sword_effect_1.wav")
 var sfx_sword_2 = load("res://assets/audio/sound_effects/sword_effect_2.wav")
 #-------------------------#
-func setup(_entity: ElTataSlayer, _weapon: Weapon) -> void:
+func setup(_entity: Player, _weapon: Weapon) -> void:
 	self.entity = _entity
 	self.weapon = _weapon
 	

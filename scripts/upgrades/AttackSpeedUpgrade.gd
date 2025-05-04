@@ -6,5 +6,5 @@ func _init() -> void:
 	name = "Arco Recurvado"
 	description = "+15% de Velocidad de Ataque"
 
-func apply(player: ElTataSlayer) -> void:
+func apply(player: Player) -> void:
 	player.increaseAttackSpeed(multiplier)

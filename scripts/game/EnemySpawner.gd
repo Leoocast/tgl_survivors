@@ -36,7 +36,7 @@ func spawnEnemy() -> void:
 	if getIsBoss():
 		enemy.convertIntoMiniBoss()
 
-	enemy.setupPlayer(player, game, zIndex)
+	enemy.setupPlayer(game, zIndex)
 	spawner.progress_ratio = randf()
 	enemy.global_position = spawner.global_position
 	game.registerEnemy(enemy)

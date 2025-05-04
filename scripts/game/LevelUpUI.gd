@@ -7,9 +7,9 @@ var UPGRADE_SCENE = preload("res://scenes/game/upgrade_option.tscn")
 @onready var boxContainer = $CenterContainer/HBoxContainer
 
 #Setup
-var player : ElTataSlayer
+var player : Player
 
-func setup(_player: ElTataSlayer, upgrades : Array[Upgrade]) -> void:
+func setup(_player: Player, upgrades : Array[Upgrade]) -> void:
 	self.player = _player
 
 	clearContainer()

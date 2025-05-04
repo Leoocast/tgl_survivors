@@ -55,11 +55,11 @@ func addExperiencieToTarget() -> void:
 #Signals
 
 # func _on_body_entered(body: Node2D) -> void:
-# 	if body is not ElTataSlayer:
+# 	if body is not Player:
 # 		return
 
 # 	var newExp = expValue * 2 if isMalboro else expValue
-# 	var player = body as ElTataSlayer
+# 	var player = body as Player
 	
 # 	player.addExp(newExp)
 # 	GameUtils.fadeOutAndDissapear(self, 0.2)

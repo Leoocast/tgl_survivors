@@ -1,9 +1,9 @@
-class_name ElTataSlayer
+class_name Player
 extends CharacterBody2D
 
 #Controllers
 @onready var healthController := %HealthController as HealthController
-@onready var dashController := %DashController as DashController
+@onready var dashController := %DashController as PlayerDashController
 @onready var attackController := %AttackController as ElTataSlayerAttackController
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
 @onready var game = get_parent() as GameState
@@ -62,7 +62,7 @@ func setupControllers() -> void:
 	animationController.setup($AnimatedSprite2D, ssjAura)
 	healthController.setup(self, health)
 	attackController.setup(self, weapon)
-	dashController.setup(self, $CollisionShape2D)
+	dashController.setupPlayer()
 
 func _physics_process(_delta: float) -> void:
 

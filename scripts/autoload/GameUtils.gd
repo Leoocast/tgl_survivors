@@ -13,9 +13,12 @@ func getGame() -> GameState:
 	var game = getGlobalNode("Game") as GameState
 	return game
 
-func getPlayer() -> ElTataSlayer:
-	return tree.get_first_node_in_group("player") as ElTataSlayer
+func getPlayer() -> Player:
+	return tree.get_first_node_in_group("player") as Player
 
+func getPlayerCollider() -> CollisionShape2D:
+	var player = getPlayer()
+	return player.get_node("CollisionShape2D") as CollisionShape2D
 	
 func registerInGroup(node: Node, group: String) -> void:
 	node.add_to_group(group)

@@ -14,7 +14,7 @@ const DAMAGE_LABEL_ASSET = preload("res://scenes/game/damage_label.tscn")
 var speed : float 
 var stopDistance : float
 var weapon: Weapon
-var player: ElTataSlayer
+var player: Player
 var game : GameState
 var isBoss := false
 #Internal
@@ -44,8 +44,8 @@ func setup(data: Dictionary) -> void:
 	add_child(soundEffectPlayer)
 
 #FIXME:
-func setupPlayer(_player: Node2D, _game : GameState, zIndex : int = 0 ) -> void:
-	self.player = _player
+func setupPlayer(_game : GameState, zIndex : int = 0 ) -> void:
+	self.player = GameUtils.getPlayer()
 	self.game = _game
 	self.z_index = zIndex
 

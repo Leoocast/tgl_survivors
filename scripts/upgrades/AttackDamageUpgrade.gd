@@ -6,5 +6,5 @@ func _init() -> void:
 	name = "Palito Pinchador"
 	description = "+10% de daño"
 
-func apply(player: ElTataSlayer) -> void:
+func apply(player: Player) -> void:
 	player.increaseAttackDamage(multiplier)

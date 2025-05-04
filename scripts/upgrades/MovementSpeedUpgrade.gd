@@ -6,5 +6,5 @@ func _init() -> void:
 	name = "Botas de Sonic I"
 	description = "+15 Velocidad de Movimiento"
 
-func apply(player: ElTataSlayer) -> void:
+func apply(player: Player) -> void:
 	player.increaseMovementSpeed(multiplier)

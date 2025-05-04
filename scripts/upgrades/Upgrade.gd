@@ -4,5 +4,5 @@ extends Resource
 @export var name: String
 @export var description : String
 
-func apply(_target: ElTataSlayer) -> void:
+func apply(_target: Player) -> void:
 	pass
