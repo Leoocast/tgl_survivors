@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var healthController := %HealthController as HealthController
 @onready var dashController := %DashController as PlayerDashController
 #TODO: PENDIENTE EL PLAYER
-@onready var attackController := %AttackController as ElTataSlayerAttackController
+@onready var attackController := %AttackController as AttackController
 @onready var animationController := %AnimationController as ElTataSlayerAnimationController
 #TODO: REVISAR ESTO
 @onready var game = get_parent() as GameState
@@ -35,11 +35,15 @@ var weapon : Weapon
 var auraDamage := 3.0
 var currentCritProb := critProb
 
+#Audio
+var sfx_sword_1 = load("res://assets/audio/sound_effects/sword_effect_1.wav")
+var sfx_sword_2 = load("res://assets/audio/sound_effects/sword_effect_2.wav")
+
 #-------------------------#
 func _ready() -> void:
 	GameUtils.registerInGroup(self, Constants.GROUPS.PLAYER)
 	collisionAttackMap.setup(attackArea)
-	weapon = Weapon.new(1, 0.5)
+	weapon = Weapon.new(1, 0)
 	setupControllers()
 	disableAllAttackCollisions()
 
@@ -52,6 +56,25 @@ func setupControllers() -> void:
 	healthController.connect("died", on_player_died)
 	healthController.connect("taking_damage_started", on_taking_damage_started)
 	healthController.connect("taking_damage_finished", on_taking_damage_finished)
+
+	attackController.connect("attack_animation_started", on_attack_animation_started)
+	
+
+func on_attack_animation_started() -> void:
+	var mousePosition = calculateMousePosition()
+
+	if attackController.firstAttack:
+		animationController.playAttack(mousePosition)
+		playSfxDelayed()
+	else:
+		animationController.playAttack2(mousePosition)
+		await GameUtils.waitFor(0.1)
+		AudioManager.playSoundEffect(sfx_sword_2)
+
+
+func playSfxDelayed() -> void:
+	await GameUtils.waitFor(0.3)
+	AudioManager.playSoundEffect(sfx_sword_1)
 
 func _physics_process(_delta: float) -> void:
 
@@ -72,7 +95,7 @@ func _physics_process(_delta: float) -> void:
 		move()
 		
 	if not attackController.isAttacking and attackController.canAttack and InputHandler.isAttacking():
-		attackController.attack(mousePosition)
+		attackController.attack()
 
 	if not attackController.isAttacking:
 		animationController.playDefault(mousePosition)
