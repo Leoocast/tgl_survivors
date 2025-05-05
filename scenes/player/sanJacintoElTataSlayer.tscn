@@ -14,11 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://w2uhc7amjlts" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Right-Sheet.png" id="3_bv6fa"]
 [ext_resource type="Texture2D" uid="uid://31efsluwuarv" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Right-Sheet.png" id="3_h2aec"]
 [ext_resource type="Texture2D" uid="uid://i1x4ov3djcwo" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Up-Sheet.png" id="4_dlcrf"]
-[ext_resource type="Script" uid="uid://qd2qmvdelfq7" path="res://scripts/controllers/ElTataSlayerAttackController.gd" id="4_ew0gd"]
+[ext_resource type="Script" uid="uid://qd2qmvdelfq7" path="res://scripts/player/PlayerAttackController.gd" id="4_ew0gd"]
 [ext_resource type="Texture2D" uid="uid://bug533pj87tuh" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Up-Sheet.png" id="4_gmyuh"]
 [ext_resource type="Texture2D" uid="uid://cq71a5wmgdsky" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Up-Sheet.png" id="4_muky4"]
 [ext_resource type="Texture2D" uid="uid://760mujhktmpl" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Down-Sheet.png" id="5_4wgry"]
-[ext_resource type="Script" uid="uid://bod00pxelc5x1" path="res://scripts/controllers/ElTataSlayerAnimationController.gd" id="5_ew0gd"]
+[ext_resource type="Script" uid="uid://bod00pxelc5x1" path="res://scripts/player/PlayerAnimationController.gd" id="5_ew0gd"]
 [ext_resource type="Script" uid="uid://chgnx7qk0pwkc" path="res://scripts/player/PlayerTrail.gd" id="6_2cq5b"]
 [ext_resource type="Texture2D" uid="uid://c3drqk36trqc4" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Left-Sheet.png" id="6_4wgry"]
 [ext_resource type="Texture2D" uid="uid://biopw6ke005ye" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Right-Sheet.png" id="7_ruyvi"]
@@ -1279,9 +1279,8 @@ script = ExtResource("1_ew0gd")
 unique_name_in_owner = true
 script = ExtResource("1_f7u02")
 
-[node name="DashController" type="Node2D" parent="Controllers"]
+[node name="DashController" type="Node" parent="Controllers"]
 unique_name_in_owner = true
-z_index = 2
 script = ExtResource("2_lk38t")
 
 [node name="AttackController" type="Node" parent="Controllers"]
@@ -1306,6 +1305,7 @@ position = Vector2(1, -26)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)
+scale = Vector2(1.00403, 1)
 sprite_frames = SubResource("SpriteFrames_4wgry")
 animation = &"attack_2_left"
 

@@ -8,8 +8,7 @@ extends CharacterBody2D
 @onready var animationController := %AnimationController as PlayerAnimationController
 @onready var trail = $TrailContainer as PlayerTrail
 
-#TODO: REVISAR ESTO, chat gpt tenia algo sobre GameState con enumerables bastante descente.
-#TODO: En el chat de CharacterController Script Unity xd
+#TODO: REVISAR ESTO
 @onready var game = get_parent() as GameState
 
 #Nodes
@@ -28,6 +27,7 @@ extends CharacterBody2D
 #Systems / Managers
 var xpSystem: PlayerXPSystem = PlayerXPSystem.new()
 var sfxManager: PlayerSFXManager = PlayerSFXManager.new()
+var updatesManager: PlayerUpdatesManager = PlayerUpdatesManager.new()
 
 #Internal
 var speed := baseSpeed
@@ -44,13 +44,12 @@ func _ready() -> void:
 	disableAllAttackCollisions()
 
 func setupControllers() -> void:
+	animationController.setupPlayer(self, ssjAura)
 	healthController.setup(self, health)
 	attackController.setup(self, weapon)
 	dashController.setupPlayer()
-	animationController.setupPlayer(self, [
-		ssjAura.get_node("AuraRed"),
-		ssjAura.get_node("AuraYellow")
-	])
+	
+	updatesManager.setupPlayer(self)
 	sfxManager.setupPlayer(self)
 	trail.setupPlayer(self)
 
@@ -68,15 +67,14 @@ func attackSuscriptions() -> void:
 	attackController.connect("attack_animation_started", sfxManager.on_attack_animation_started)
 
 func _physics_process(_delta: float) -> void:
-
-	trail.drawTrail()
-
 	if game.isPaused:
 		return
 
 	if healthController.isDead:
 		return
 	
+	trail.drawTrail()
+
 	var mousePosition = calculateMousePosition()
 	
 	if InputHandler.isDashing():
@@ -107,16 +105,6 @@ func disableAllAttackCollisions() -> void:
 			collision.call_deferred("set_disabled", true)
 		else:
 			collision.disabled = true
-
-#Updates FIXME:, mover a UpdatesController
-func increaseMovementSpeed(multiplier: float) -> void:
-	speed += multiplier
-
-func increaseAttackDamage(multiplier: float) -> void:
-	weapon = Weapon.new(weapon.damage * multiplier, weapon.cooldown)
-
-func increaseAttackSpeed(multiplier: float) -> void:
-	animationController.setAttackFpsMultiplier(multiplier)
 
 #Events
 func _on_attack_area_body_entered(enemy: Enemy) -> void:

@@ -1,5 +1,6 @@
 class_name ExpDrop
 extends Area2D
+
 #Config
 const FLYING_SPEED = 1200
 var expValue := 1
@@ -10,6 +11,7 @@ var isMalboro := false
 var isFlying := false
 var player : Player
 
+#Posible mejora: Crear un ExpDrop base si va a haber diferentes
 #-------------------------#
 func _ready():
 	add_to_group(Constants.GROUPS.EXP_DROP)

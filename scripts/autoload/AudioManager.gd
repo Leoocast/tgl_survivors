@@ -74,7 +74,8 @@ func playAndAwaitVoice(stream: AudioStream) -> void:
 func playAnnouncer(stream: AudioStream) -> void:
 	announcerPlayer.stream = stream
 	# announcerPlayer.volume_db = -7
-	announcerPlayer.play()
+	#TODO: Reactivar esto
+	# announcerPlayer.play()
 
 func stopMusic() -> void:
 	musicPlayer.stop()

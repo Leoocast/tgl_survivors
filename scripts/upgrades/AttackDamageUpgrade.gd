@@ -7,4 +7,4 @@ func _init() -> void:
 	description = "+10% de daño"
 
 func apply(player: Player) -> void:
-	player.increaseAttackDamage(multiplier)
+	player.updatesManager.increaseAttackDamage(multiplier)

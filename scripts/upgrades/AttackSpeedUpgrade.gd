@@ -7,4 +7,4 @@ func _init() -> void:
 	description = "+15% de Velocidad de Ataque"
 
 func apply(player: Player) -> void:
-	player.increaseAttackSpeed(multiplier)
+	player.updatesManager.increaseAttackSpeed(multiplier)

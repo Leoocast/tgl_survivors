@@ -1,5 +1,5 @@
 class_name PlayerDashController
-extends Node2D
+extends Node
 
 #Config
 const SPEED := 1500

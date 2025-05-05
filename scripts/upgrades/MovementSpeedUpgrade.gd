@@ -7,4 +7,4 @@ func _init() -> void:
 	description = "+15 Velocidad de Movimiento"
 
 func apply(player: Player) -> void:
-	player.increaseMovementSpeed(multiplier)
+	player.updatesManager.increaseMovementSpeed(multiplier)

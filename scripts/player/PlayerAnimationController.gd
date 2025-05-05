@@ -20,12 +20,12 @@ var directions = {
 }
 
 #-------------------------#
-func setupPlayer(_player: Player , ssjAura : Array[Node2D]) -> void:
+func setupPlayer(_player: Player , ssjAura : Node2D) -> void:
 	self.player = _player
 	self.setup(player.get_node("AnimatedSprite2D"))
 	
-	self.levelUpAuraRed = ssjAura[0] as AnimatedSprite2D
-	self.levelUpAuraYellow = ssjAura[1] as AnimatedSprite2D
+	self.levelUpAuraRed = ssjAura.get_node("AuraRed") as AnimatedSprite2D
+	self.levelUpAuraYellow = ssjAura.get_node("AuraYellow") as AnimatedSprite2D
 
 #Consumers
 func on_player_died() -> void:
