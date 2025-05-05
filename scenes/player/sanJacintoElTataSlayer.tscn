@@ -1,4 +1,4 @@
-[gd_scene load_steps=196 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=194 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
@@ -1262,12 +1262,6 @@ animations = [{
 radius = 2.0
 height = 14.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ew0gd"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_2bla2"]
-color = Color(0, 0, 0, 0.219608)
-thickness = 10
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_pauyt"]
 radius = 25.0
 
@@ -1320,27 +1314,6 @@ shape = SubResource("CapsuleShape2D_rnjux")
 debug_color = Color(0.914947, 8.29774e-05, 0.714501, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -20.0
-offset_top = -18.0
-offset_right = 20.0
-offset_bottom = 22.0
-
-[node name="AttackCdBar" type="ProgressBar" parent="UI"]
-visible = false
-layout_mode = 0
-offset_left = 15.0
-offset_top = 33.0
-offset_right = 120.0
-offset_bottom = 49.0
-scale = Vector2(0.110131, 0.0787549)
-theme_override_styles/background = SubResource("StyleBoxEmpty_ew0gd")
-theme_override_styles/fill = SubResource("StyleBoxLine_2bla2")
-value = 100.0
-show_percentage = false
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("23_2bla2")

@@ -24,6 +24,11 @@ const ASSETS = {
 	}
 }
 
+const PLAYER_SFX = {
+	"SWORD_1": "res://assets/audio/sound_effects/sword_effect_1.wav",
+	"SWORD_2": "res://assets/audio/sound_effects/sword_effect_2.wav"
+}
+
 const ANIMATIONS = {
     "IDLE" : "idle",
     "RUN" : "run",

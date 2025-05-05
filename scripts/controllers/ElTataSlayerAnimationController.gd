@@ -1,21 +1,17 @@
 
-#FIXME: Esto debe heredar de AnimationController
-class_name ElTataSlayerAnimationController
-extends Node
+class_name PlayerAnimationController
+extends AnimationController
 
 #Setup
 const BASE_ATTACK_FPS := 10.0
 var newFps := BASE_ATTACK_FPS
-var sprite : AnimatedSprite2D
-var modulatedTakingDamageColor := Color(2, 2, 2)
-var modulatedOriginalColor := Color8(255,255,255)
+var player : Player
 
 #VFX
 var levelUpAuraRed: AnimatedSprite2D
 var levelUpAuraYellow: AnimatedSprite2D
 
 #Internal
-const ANIMATIONS = Constants.ANIMATIONS
 var directions = {
 	"up": "_up",
 	"down": "_down",
@@ -24,42 +20,57 @@ var directions = {
 }
 
 #-------------------------#
-func setup(_sprite: AnimatedSprite2D, ssjAura : Node2D) -> void:
-	self.sprite = _sprite
-	#FIXME: Mover a una constante los nombres de los nodos
-	self.levelUpAuraRed = ssjAura.get_node("AuraRed") as AnimatedSprite2D
-	self.levelUpAuraYellow = ssjAura.get_node("AuraYellow") as AnimatedSprite2D
+func setupPlayer(_player: Player , ssjAura : Array[Node2D]) -> void:
+	self.player = _player
+	self.setup(player.get_node("AnimatedSprite2D"))
+	
+	self.levelUpAuraRed = ssjAura[0] as AnimatedSprite2D
+	self.levelUpAuraYellow = ssjAura[1] as AnimatedSprite2D
 
-func playDefault(mouseDirection: Vector2) -> void:
+#Consumers
+func on_player_died() -> void:
+	var mousePosition = player.calculateMousePosition()
+	playDeathDirection(mousePosition)
+
+func on_taking_damage_started() -> void:
+	modulateTakingDamage()
+
+func on_taking_damage_finished() -> void:
+	await GameUtils.waitFor(0.1)
+	modulateReset()
+
+func on_attack_animation_started() -> void:
+	var mousePosition = player.calculateMousePosition() 
+
+	if player.attackController.firstAttack:
+		playAttackMouse(mousePosition)
+		# sfxManager.playAttackSword1Delayed()
+	else:
+		playAttack2Mouse(mousePosition)
+		# await GameUtils.waitFor(0.1)
+		# sfxManager.playAttackSword2()
+
+#-------------------------#
+func playDefaultMouse(mouseDirection: Vector2) -> void:
 	var inputDirection = InputHandler.getDirection()
 	if inputDirection != Vector2.ZERO:
-		playRun(mouseDirection)
+		playRunMouse(mouseDirection)
 	else:
-		playIdle(mouseDirection)
+		playIdleMouse(mouseDirection)
 
-func play(animation: String) -> void:
-	sprite.play(animation)
-
-func playAndAwait(animation: String) -> void:
-	sprite.play(animation)
-	await sprite.animation_finished
-
-func playIdle(direction: Vector2) -> void:
+func playIdleMouse(direction: Vector2) -> void:
 	matchDirection("idle", direction)
 
-func playRun(direction: Vector2) -> void:
+func playRunMouse(direction: Vector2) -> void:
 	matchDirection("run", direction)
 
-func playAttack(mouseDirection: Vector2) -> void:
+func playAttackMouse(mouseDirection: Vector2) -> void:
 	matchDirection("attack", mouseDirection)
 
-func playAttack2(mouseDirection: Vector2) -> void:
+func playAttack2Mouse(mouseDirection: Vector2) -> void:
 	matchDirection("attack_2", mouseDirection)
 
-func playTakeDamage() -> void:
-	pass
-
-func playDeath(mouseDirection: Vector2) -> void:
+func playDeathDirection(mouseDirection: Vector2) -> void:
 	matchDirection("death", mouseDirection)
 
 func waitAnimationFinished() -> void:
@@ -84,12 +95,6 @@ func matchDirection(animationName : String, direction: Vector2) -> void:
 		else:
 			sprite.play(animationName + directions.up)
 	
-func modulateTakingDamage() -> void:
-	sprite.self_modulate = modulatedTakingDamageColor
-
-func modulateReset() -> void:
-	sprite.self_modulate = modulatedOriginalColor
-
 func setAttackFpsMultiplier(multiplier: float) -> void:
 
 	# 8 * 0.2 = 1.6
@@ -120,3 +125,5 @@ func playAndAwaitSsj() -> void:
 
 	levelUpAuraRed.hide()
 	levelUpAuraYellow.hide()
+
+#Consumers

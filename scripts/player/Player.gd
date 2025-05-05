@@ -4,21 +4,18 @@ extends CharacterBody2D
 #Controllers
 @onready var healthController := %HealthController as HealthController
 @onready var dashController := %DashController as PlayerDashController
-#TODO: PENDIENTE EL PLAYER
-@onready var attackController := %AttackController as AttackController
-@onready var animationController := %AnimationController as ElTataSlayerAnimationController
+@onready var attackController := %AttackController as PlayerAttackController
+@onready var animationController := %AnimationController as PlayerAnimationController
+
 #TODO: REVISAR ESTO
 @onready var game = get_parent() as GameState
 
 #Nodes
-@onready var attackArea := $Weapon/AttackArea
 @onready var collisionAttackMap := PlayerAttackCollisionMap.new()
+@onready var attackArea := $Weapon/AttackArea
 @onready var levelUpDamageArea := $LevelUpDamageArea
 @onready var expArea := $ExpArea
 @onready var ssjAura = $SsjAura
-
-#TODO: Revisar si esto va aqui? Lo necesitamos aun?
-@onready var ui_attackCdBar = $UI/AttackCdBar
 
 # Attributes
 @export var health := 5 #20
@@ -26,18 +23,15 @@ extends CharacterBody2D
 @export var baseSpeed := 550.0
 @export var critProb := 0.1
 
-#Systems
+#Systems / Managers
 var xpSystem: PlayerXPSystem = PlayerXPSystem.new()
+var sfxManager: PlayerSFXManager = PlayerSFXManager.new()
 
 #Internal
 var speed := baseSpeed
 var weapon : Weapon
 var auraDamage := 3.0
-var currentCritProb := critProb
-
-#Audio
-var sfx_sword_1 = load("res://assets/audio/sound_effects/sword_effect_1.wav")
-var sfx_sword_2 = load("res://assets/audio/sound_effects/sword_effect_2.wav")
+var currentCritProb: float = critProb
 
 #-------------------------#
 func _ready() -> void:
@@ -48,33 +42,27 @@ func _ready() -> void:
 	disableAllAttackCollisions()
 
 func setupControllers() -> void:
-	animationController.setup($AnimatedSprite2D, ssjAura)
 	healthController.setup(self, health)
 	attackController.setup(self, weapon)
 	dashController.setupPlayer()
+	animationController.setupPlayer(self, [
+		ssjAura.get_node("AuraRed"),
+		ssjAura.get_node("AuraYellow")
+	])
+	sfxManager.setupPlayer(self)
 
-	healthController.connect("died", on_player_died)
-	healthController.connect("taking_damage_started", on_taking_damage_started)
-	healthController.connect("taking_damage_finished", on_taking_damage_finished)
-
-	attackController.connect("attack_animation_started", on_attack_animation_started)
+	healthSuscriptions()
+	attackSuscriptions()
 	
+#Suscriptions
+func healthSuscriptions() -> void: 
+	healthController.connect("died", animationController.on_player_died)
+	healthController.connect("taking_damage_started", animationController.on_taking_damage_started)
+	healthController.connect("taking_damage_finished", animationController.on_taking_damage_finished)
 
-func on_attack_animation_started() -> void:
-	var mousePosition = calculateMousePosition()
-
-	if attackController.firstAttack:
-		animationController.playAttack(mousePosition)
-		playSfxDelayed()
-	else:
-		animationController.playAttack2(mousePosition)
-		await GameUtils.waitFor(0.1)
-		AudioManager.playSoundEffect(sfx_sword_2)
-
-
-func playSfxDelayed() -> void:
-	await GameUtils.waitFor(0.3)
-	AudioManager.playSoundEffect(sfx_sword_1)
+func attackSuscriptions() -> void:
+	attackController.connect("attack_animation_started", animationController.on_attack_animation_started)
+	attackController.connect("attack_animation_started", sfxManager.on_attack_animation_started)
 
 func _physics_process(_delta: float) -> void:
 
@@ -98,7 +86,7 @@ func _physics_process(_delta: float) -> void:
 		attackController.attack()
 
 	if not attackController.isAttacking:
-		animationController.playDefault(mousePosition)
+		animationController.playDefaultMouse(mousePosition)
 	
 func move() -> void:
 	var direction = InputHandler.getDirection()
@@ -117,18 +105,6 @@ func disableAllAttackCollisions() -> void:
 		else:
 			collision.disabled = true
 
-#Consumers #FIXME: Pasar esto al animation controller
-func on_player_died() -> void:
-	var mousePosition = calculateMousePosition()
-	animationController.playDeath(mousePosition)
-
-func on_taking_damage_started() -> void:
-	animationController.modulateTakingDamage()
-
-func on_taking_damage_finished() -> void:
-	await GameUtils.waitFor(0.1)
-	animationController.modulateReset()
-
 #Updates FIXME:, mover a UpdatesController
 func increaseMovementSpeed(multiplier: float) -> void:
 	speed += multiplier
@@ -139,13 +115,9 @@ func increaseAttackDamage(multiplier: float) -> void:
 func increaseAttackSpeed(multiplier: float) -> void:
 	animationController.setAttackFpsMultiplier(multiplier)
 
-#Signals
+#Events
 func _on_attack_area_body_entered(enemy: Enemy) -> void:
-	var isCritic := randf() < critProb
-
-	var realDamage = weapon.damage * 2 if isCritic else weapon.damage  
-
-	enemy.takeDamage(realDamage, false, isCritic)
+	attackController.damageEnemy(enemy)
 
 #Activate attack collisions
 func _on_animated_sprite_2d_frame_changed() -> void:
