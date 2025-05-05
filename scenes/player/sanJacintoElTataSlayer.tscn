@@ -1,4 +1,4 @@
-[gd_scene load_steps=194 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=195 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cq71a5wmgdsky" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Up-Sheet.png" id="4_muky4"]
 [ext_resource type="Texture2D" uid="uid://760mujhktmpl" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Down-Sheet.png" id="5_4wgry"]
 [ext_resource type="Script" uid="uid://bod00pxelc5x1" path="res://scripts/controllers/ElTataSlayerAnimationController.gd" id="5_ew0gd"]
+[ext_resource type="Script" uid="uid://chgnx7qk0pwkc" path="res://scripts/player/PlayerTrail.gd" id="6_2cq5b"]
 [ext_resource type="Texture2D" uid="uid://c3drqk36trqc4" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Left-Sheet.png" id="6_4wgry"]
 [ext_resource type="Texture2D" uid="uid://biopw6ke005ye" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Right-Sheet.png" id="7_ruyvi"]
 [ext_resource type="Texture2D" uid="uid://cka4y6i5bwevc" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Up-Sheet.png" id="8_uo61b"]
@@ -1268,10 +1269,9 @@ radius = 25.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_2cq5b"]
 radius = 24.0
 
-[node name="San Jacinto El Tata Slayer" type="CharacterBody2D" node_paths=PackedStringArray("trail")]
+[node name="San Jacinto El Tata Slayer" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_ew0gd")
-trail = NodePath("TrailContainer/Trail")
 
 [node name="Controllers" type="Node" parent="."]
 
@@ -1293,6 +1293,7 @@ unique_name_in_owner = true
 script = ExtResource("5_ew0gd")
 
 [node name="TrailContainer" type="Node" parent="."]
+script = ExtResource("6_2cq5b")
 
 [node name="Trail" type="Line2D" parent="TrailContainer"]
 scale = Vector2(0.292109, 0.957706)

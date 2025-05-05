@@ -6,8 +6,10 @@ extends CharacterBody2D
 @onready var dashController := %DashController as PlayerDashController
 @onready var attackController := %AttackController as PlayerAttackController
 @onready var animationController := %AnimationController as PlayerAnimationController
+@onready var trail = $TrailContainer as PlayerTrail
 
-#TODO: REVISAR ESTO
+#TODO: REVISAR ESTO, chat gpt tenia algo sobre GameState con enumerables bastante descente.
+#TODO: En el chat de CharacterController Script Unity xd
 @onready var game = get_parent() as GameState
 
 #Nodes
@@ -50,6 +52,7 @@ func setupControllers() -> void:
 		ssjAura.get_node("AuraYellow")
 	])
 	sfxManager.setupPlayer(self)
+	trail.setupPlayer(self)
 
 	healthSuscriptions()
 	attackSuscriptions()
@@ -66,7 +69,7 @@ func attackSuscriptions() -> void:
 
 func _physics_process(_delta: float) -> void:
 
-	drawTrail()
+	trail.drawTrail()
 
 	if game.isPaused:
 		return
@@ -136,27 +139,3 @@ func _on_exp_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group(Constants.GROUPS.EXP_DROP):
 		var expDrop = area as ExpDrop
 		expDrop.flyToTarget(self)
-
-
-#Trail
-@export var trail : Line2D
-var trailQueue : Array
-var trailMaxLenth = 20
-
-func drawTrail() -> void:
-	var tween := create_tween()
-
-	if dashController.isDashing:
-		tween.tween_property(trail, "modulate:a", 1.0, 0.1)
-	else:
-		tween.tween_property(trail, "modulate:a", 0.0, 0.3)
-
-	var localPos = trail.to_local(global_position) + Vector2(40, 40)
-	trailQueue.push_front(localPos)
-
-	if trailQueue.size() > trailMaxLenth:
-		trailQueue.pop_back()
-
-	trail.clear_points()
-	for point in trailQueue:
-		trail.add_point(point)
