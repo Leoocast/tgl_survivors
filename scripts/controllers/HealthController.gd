@@ -13,8 +13,10 @@ var isDamaged := false
 var isTakingDamage := false
 
 #Signals
-signal died
-signal damaged
+signal died()
+signal taking_damage_started()
+signal taking_damage_finished()
+signal damaged(damage: float)
 
 #-------------------------#
 func setup(_entity: Node2D, _health: float) -> void:
@@ -22,17 +24,18 @@ func setup(_entity: Node2D, _health: float) -> void:
 	self.health = _health
 	self.startHealth = _health
 
-func takeDamage(damage: float, executeAtEnd: Callable = func ():) -> void:
-	if not canTakeDamage:
+func takeDamage(damage: float) -> void:
+	if not canTakeDamage or isDead:
 		return
 
 	isTakingDamage = true
+	taking_damage_started.emit()
 
 	health -= damage
 
 	if health < startHealth:
 		isDamaged = true
-		damaged.emit()
+		damaged.emit(damage)
 
 	if health <= 0:
 		isDead = true
@@ -42,28 +45,7 @@ func takeDamage(damage: float, executeAtEnd: Callable = func ():) -> void:
 		died.emit()
 		
 	isTakingDamage = false
-	executeAtEnd.call()
+	taking_damage_finished.emit()
 
 func stopTakingDamage() -> void:
 	canTakeDamage = false
-
-
-func takeDamageTataSlayer(damage: float, mouseDirection: Vector2) -> void:
-	if not canTakeDamage or isDead:
-		return
-
-	isTakingDamage = true
-
-	health -= damage
-
-	if health < startHealth:
-		isDamaged = true
-
-	if health <= 0:
-		isDead = true
-		stopTakingDamage()
-
-		if entity.animationController.playDeath.is_valid:
-			entity.animationController.playDeath(mouseDirection)
-
-	isTakingDamage = false

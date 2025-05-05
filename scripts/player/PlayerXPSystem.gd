@@ -1,5 +1,3 @@
-#TODO: El UI controller debe solamente acceder a los signals y no modificar las props
-#TODO: Revisar GPT para lo de arriba, falta mover el UI Controller para eso.
 class_name PlayerXPSystem
 extends RefCounted
 

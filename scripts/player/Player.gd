@@ -21,7 +21,7 @@ extends CharacterBody2D
 @onready var ui_attackCdBar = $UI/AttackCdBar
 
 # Attributes
-@export var health := 100 #20
+@export var health := 5 #20
 @export var healthColor := Color8(150, 0, 0)
 @export var baseSpeed := 550.0
 @export var critProb := 0.1
@@ -35,13 +35,10 @@ var weapon : Weapon
 var auraDamage := 3.0
 var currentCritProb := critProb
 
-#Signals
-signal take_damage_signal(damage: float)
-
 #-------------------------#
 func _ready() -> void:
-	collisionAttackMap.setup(attackArea)
 	GameUtils.registerInGroup(self, Constants.GROUPS.PLAYER)
+	collisionAttackMap.setup(attackArea)
 	weapon = Weapon.new(1, 0.5)
 	setupControllers()
 	disableAllAttackCollisions()
@@ -51,6 +48,10 @@ func setupControllers() -> void:
 	healthController.setup(self, health)
 	attackController.setup(self, weapon)
 	dashController.setupPlayer()
+
+	healthController.connect("died", on_player_died)
+	healthController.connect("taking_damage_started", on_taking_damage_started)
+	healthController.connect("taking_damage_finished", on_taking_damage_finished)
 
 func _physics_process(_delta: float) -> void:
 
@@ -71,7 +72,7 @@ func _physics_process(_delta: float) -> void:
 		move()
 		
 	if not attackController.isAttacking and attackController.canAttack and InputHandler.isAttacking():
-		attackController.attack(mousePosition, animateAttackCdBar)
+		attackController.attack(mousePosition)
 
 	if not attackController.isAttacking:
 		animationController.playDefault(mousePosition)
@@ -86,25 +87,6 @@ func calculateMousePosition() -> Vector2:
 	var directionToMouse = (mousePosition - global_position).normalized()
 	return directionToMouse
 
-func takeDamage(damage: float) -> void:
-	if healthController.isDead:
-		return
-
-	var mousePosition = calculateMousePosition()
-	
-	animationController.modulateTakingDamage()
-		
-	healthController.takeDamageTataSlayer(damage, mousePosition)
-	take_damage_signal.emit(damage)
-
-	await GameUtils.waitFor(0.1)
-	animationController.modulateReset()
-	
-func animateAttackCdBar() -> void:
-	ui_attackCdBar.value = 0
-	var tween = GameUtils.create_tween()
-	tween.tween_property(ui_attackCdBar, "value", 100, weapon.cooldown + .4).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
-
 func disableAllAttackCollisions() -> void:
 	for collision: CollisionPolygon2D in attackArea.get_children():
 		if healthController.isDead:
@@ -112,6 +94,17 @@ func disableAllAttackCollisions() -> void:
 		else:
 			collision.disabled = true
 
+#Consumers #FIXME: Pasar esto al animation controller
+func on_player_died() -> void:
+	var mousePosition = calculateMousePosition()
+	animationController.playDeath(mousePosition)
+
+func on_taking_damage_started() -> void:
+	animationController.modulateTakingDamage()
+
+func on_taking_damage_finished() -> void:
+	await GameUtils.waitFor(0.1)
+	animationController.modulateReset()
 
 #Updates FIXME:, mover a UpdatesController
 func increaseMovementSpeed(multiplier: float) -> void:

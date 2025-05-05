@@ -99,7 +99,7 @@ func _on_area_2d_body_entered(body:Node2D) -> void:
 #Si esta a rango del collider de ataque, recibe da;o
 func _on_attack_area_body_entered(body:Node2D) -> void:
 	if body is Player:
-		player.takeDamage(weapon.damage)
+		player.healthController.takeDamage(weapon.damage)
 
 func _on_area_2d_body_exited(body:Node2D) -> void:
 	if body is not Player:

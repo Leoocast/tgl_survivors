@@ -10,10 +10,12 @@ extends CanvasLayer
 @onready var upgradesController = %UpgradesController as UpgradesController
 
 #Internal
+#TODO: Combo controller
 var comboCounter := 0
 
+#-------------------------#
 func _ready():
-	player.connect("take_damage_signal", _on_health_changed)
+	player.healthController.connect("damaged", _on_health_changed)
 	player.xpSystem.connect("level_up", on_lvl_up)
 	player.xpSystem.connect("add_xp", on_add_xp)
 
