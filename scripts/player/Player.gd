@@ -12,7 +12,6 @@ extends CharacterBody2D
 @onready var game = get_parent() as GameState
 
 #Nodes
-
 @onready var weapon: Weapon = $Weapon 
 @onready var collisionAttackMap := PlayerAttackCollisionMap.new()
 @onready var attackArea := $Weapon/AttackArea
@@ -21,10 +20,7 @@ extends CharacterBody2D
 @onready var ssjAura = $SsjAura
 
 # Attributes
-@export var health := 5 #20
-@export var healthColor := Color8(150, 0, 0)
-@export var baseSpeed := 550.0
-@export var critProb := 0.1
+@export var attributes : PlayerAttributesResource
 
 #Systems / Managers
 var xpSystem: PlayerXPSystem = PlayerXPSystem.new()
@@ -32,19 +28,23 @@ var sfxManager: PlayerSFXManager = PlayerSFXManager.new()
 var updatesManager: PlayerUpdatesManager = PlayerUpdatesManager.new()
 
 #Internal
-var speed := baseSpeed
-var auraDamage := 3.0
-var currentCritProb: float = critProb
+var currentSpeed: float
+var currentCritprob: float
 
 #-------------------------#
 func _ready() -> void:
 	GameUtils.registerInGroup(self, Constants.GROUPS.PLAYER)
+	setupAttributes()
 	setupComponents()
 	disableAllAttackCollisions()
 
+func setupAttributes() -> void:
+	currentSpeed = attributes.speed
+	currentCritprob = attributes.critProb
+
 func setupComponents() -> void:
 	animationController.setupPlayer(self, ssjAura)
-	healthController.setup(self, health)
+	healthController.setup(self, attributes.health)
 	attackController.setup(self, weapon)
 	dashController.setupPlayer()
 	
@@ -92,7 +92,7 @@ func _physics_process(_delta: float) -> void:
 	
 func move() -> void:
 	var direction = InputHandler.getDirection()
-	self.velocity = direction * speed
+	self.velocity = direction * currentSpeed
 	move_and_slide()
 
 func calculateMousePosition() -> Vector2:

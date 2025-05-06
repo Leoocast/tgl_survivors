@@ -1,10 +1,11 @@
-[gd_scene load_steps=195 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=196 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
 [ext_resource type="Script" uid="uid://djf57iglhnxni" path="res://scripts/controllers/HealthController.gd" id="1_f7u02"]
 [ext_resource type="Texture2D" uid="uid://jlk8ejx7k271" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Down-Sheet.png" id="1_nbhxp"]
 [ext_resource type="Texture2D" uid="uid://crmkugpf3d8fn" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Down-Sheet.png" id="1_rnjux"]
+[ext_resource type="Resource" uid="uid://bldo47c0xbw8b" path="res://scripts/player/PlayerAttributes.tres" id="2_fo76y"]
 [ext_resource type="Script" uid="uid://cg1fh05pqul4o" path="res://scripts/controllers/DashController.gd" id="2_lk38t"]
 [ext_resource type="PackedScene" uid="uid://35gexdxbybke" path="res://scenes/player/ssj.tscn" id="2_pauyt"]
 [ext_resource type="Texture2D" uid="uid://caxirt76mwm8f" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Left-Sheet.png" id="2_son5e"]
@@ -1272,6 +1273,7 @@ radius = 24.0
 [node name="San Jacinto El Tata Slayer" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_ew0gd")
+attributes = ExtResource("2_fo76y")
 
 [node name="Controllers" type="Node" parent="."]
 

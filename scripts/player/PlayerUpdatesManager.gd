@@ -9,7 +9,7 @@ func setupPlayer(_player: Player) -> void:
 	self.player = _player
 
 func increaseMovementSpeed(multiplier: float) -> void:
-	player.speed += multiplier
+	player.currentSpeed += multiplier
 
 func increaseAttackDamage(multiplier: float) -> void:
 	player.weapon.increaseDamageByMultiplier(multiplier)

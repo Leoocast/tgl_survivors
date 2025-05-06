@@ -22,13 +22,14 @@ func executeLevelUpDamage() -> void:
 	if enemiesInside.size() <= 0:
 		return
 
+	var player = entity as Player
 	for enemy : Enemy in enemiesInside:
-		enemy.takeDamage(entity.auraDamage, true)
+		enemy.takeDamage(player.attributes.auraDamage, true)
 	
 func damageEnemy(enemy: Enemy) -> void:
 	var player = self.entity as Player
 
-	var isCritic = randf() < player.critProb as float
+	var isCritic = randf() < player.currentCritprob as float
 
 	var realDamage = weapon.damage * 2 if isCritic else weapon.damage  
 

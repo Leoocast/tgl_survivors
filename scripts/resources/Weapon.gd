@@ -12,7 +12,8 @@ func setup(_damage: float, _cooldown: float):
 	self.cooldown = _cooldown
 
 func increaseDamageByMultiplier(multiplier: float) -> void:
-	self.damage *= multiplier
+	var result = damage * multiplier
+	self.damage += result
 
 func shoot() -> void:
 	pass

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlayerAttributesResource" load_steps=2 format=3 uid="uid://bldo47c0xbw8b"]
+
+[ext_resource type="Script" uid="uid://mslt73km13op" path="res://scripts/player/PlayerAttributesResource.gd" id="1_cpq58"]
+
+[resource]
+script = ExtResource("1_cpq58")
+auraDamage = 3.0
+health = 20.0
+speed = 550.0
+critProb = 0.1
+healthColor = Color(0.588235, 0, 0, 1)
+metadata/_custom_type_script = "uid://2xt8e6irgxjt"
