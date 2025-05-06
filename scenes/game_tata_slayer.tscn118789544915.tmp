@@ -9,7 +9,7 @@
 [ext_resource type="FontFile" uid="uid://bncjg28utk7b4" path="res://assets/fonts/Pixellari.ttf" id="6_h5e45"]
 [ext_resource type="FontFile" uid="uid://c8vs1sqrongty" path="res://assets/fonts/Another Danger - Demo.otf" id="7_6d208"]
 [ext_resource type="PackedScene" uid="uid://do8uedlbkaui3" path="res://scenes/game/lvl_up_ui.tscn" id="9_amjvs"]
-[ext_resource type="Script" uid="uid://cdcbmvctucc3x" path="res://scripts/player/upgrades/UpgradesController.gd" id="10_o4hyi"]
+[ext_resource type="Script" uid="uid://cdcbmvctucc3x" path="res://scripts/controllers/UpgradesController.gd" id="10_o4hyi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41jvh"]
 bg_color = Color(0, 0.625536, 0.99609, 1)
