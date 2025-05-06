@@ -9,9 +9,9 @@ func getGlobalNode(_name: String) -> Node2D:
 	var node := tree.get_root().get_node(_name)
 	return node
 
-func getGame() -> GameState:
-	var game = getGlobalNode("Game") as GameState
-	return game
+func getMain() -> Main:
+	var main = getGlobalNode("Main") as Main
+	return main
 
 func getPlayer() -> Player:
 	return tree.get_first_node_in_group("player") as Player

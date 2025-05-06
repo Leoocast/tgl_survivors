@@ -20,6 +20,7 @@ Constants="*res://scripts/autoload/Constants.gd"
 InputHandler="*res://scripts/autoload/InputHandler.gd"
 GameUtils="*res://scripts/autoload/GameUtils.gd"
 AudioManager="*res://scripts/autoload/AudioManager.gd"
+GameState="*res://scripts/autoload/GameState.gd"
 
 [display]
 

@@ -54,7 +54,7 @@ func attackSuscriptions() -> void:
 	attackController.connect("attack_animation_finished", on_attack_animation_finished)
 
 func defaultProcess() -> void:
-	if game.isPaused:
+	if GameState.isNotRunning():
 		return
 
 	moveTowardsPlayer()
@@ -64,9 +64,7 @@ func defaultProcess() -> void:
 	if healthController.isDamaged && not healthBarController.alreadyShowed:
 		healthBarController.showBars()
 
-#FIXME: No me agrada pero tengo que crear el Script mejorado de game state
-func setupPlayer(_game : GameState, zIndex : int = 0 ) -> void:
-	self.game = _game
+func setupZIndex(zIndex : int = 0 ) -> void:
 	self.z_index = zIndex
 
 func moveTowardsPlayer() -> void:

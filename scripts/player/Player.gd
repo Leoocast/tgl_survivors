@@ -8,9 +8,6 @@ extends CharacterBody2D
 @onready var animationController := %AnimationController as PlayerAnimationController
 @onready var trail = $TrailContainer as PlayerTrail
 
-#TODO: REVISAR ESTO
-@onready var game = get_parent() as GameState
-
 #Nodes
 @onready var weapon: Weapon = $Weapon as Weapon
 @onready var attackArea := $Weapon/AttackArea
@@ -70,9 +67,9 @@ func attackSuscriptions() -> void:
 	attackController.attack_animation_started.connect(sfxManager.on_attack_animation_started)
 
 func _physics_process(_delta: float) -> void:
-	if game.isPaused:
+	if GameState.isNotRunning():
 		return
-
+	
 	if healthController.isDead:
 		return
 	

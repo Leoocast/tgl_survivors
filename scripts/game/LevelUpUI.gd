@@ -30,8 +30,8 @@ func clearContainer() -> void:
 #Signals
 func _on_upgrade_selected(upgrade: Upgrade) -> void:
 	upgrade.apply(player)
-	var game = GameUtils.getGame()
-	var lvlUpUi = game.get_node("LvlUpUI")
+	var main = GameUtils.getMain()
+	var lvlUpUi = main.get_node("LvlUpUI")
 	lvlUpUi.hide()
 	await GameUtils.waitFor(0.1)
-	game.resume()
+	GameState.resume()

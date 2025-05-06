@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://b1s51dtivbell"]
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_6chfy"]
-[ext_resource type="Script" uid="uid://h53677tce2mx" path="res://scripts/game/GameState.gd" id="1_crk6h"]
+[ext_resource type="Script" uid="uid://h53677tce2mx" path="res://scripts/game/Main.gd" id="1_crk6h"]
 [ext_resource type="PackedScene" uid="uid://ck0sepqdcmnr" path="res://scenes/player/sanJacintoElTataSlayer.tscn" id="2_2yqfl"]
 [ext_resource type="PackedScene" uid="uid://biwnsoaronbtp" path="res://scenes/HUD/playerHealthBar.tscn" id="4_41jvh"]
 [ext_resource type="PackedScene" uid="uid://dqewskq6n0yb0" path="res://scenes/game/enemy_spawner.tscn" id="4_fdb3b"]
@@ -18,7 +18,7 @@ bg_color = Color(0, 0.625536, 0.99609, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crk6h"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Game" type="Node2D"]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_crk6h")
 
 [node name="Floor" type="TextureRect" parent="."]

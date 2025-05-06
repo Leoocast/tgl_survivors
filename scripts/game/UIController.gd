@@ -5,7 +5,6 @@ extends CanvasLayer
 @onready var xpLabel := $Control/XPLvl
 @onready var playerXPBar := $Control/PlayerXP
 @onready var lvlUpUi = %LvlUpUI
-@onready var game = get_parent() as GameState
 @onready var upgradesController = %UpgradesController as UpgradesController
 
 
@@ -22,7 +21,7 @@ func showLevelUpUI():
 
 	player.attackController.executeLevelUpDamage()
 
-	game.pause()
+	GameState.pause()
 
 	#FIXME: Esto no se donde deba ir??
 	player.z_index = 99
