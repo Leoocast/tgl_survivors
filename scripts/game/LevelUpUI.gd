@@ -2,10 +2,10 @@ class_name LevelUpUI
 extends CanvasLayer
 
 #Preloads
-var UPGRADE_SCENE = preload("res://scenes/UI/upgrade_option.tscn")
+var UPGRADE_OPTION_SCENE = preload(PATHS.SCENES.PLAYER_UPGRADE_OPTION)
 
 #Nodes
-@onready var boxContainer = $CenterContainer/HBoxContainer
+@onready var boxContainer: HBoxContainer = $CenterContainer/HBoxContainer as HBoxContainer
 @onready var player: Player = %Player as Player
 
 #Managers
@@ -18,10 +18,10 @@ signal upgrade_completed()
 func _ready():
 	player.xpSystem.level_up.connect(on_level_up)
 
-func setup(upgrades : Array[Upgrade]) -> void:
+func setup(upgrades: Array[Upgrade]) -> void:
 	clearContainer()
 	for upgrade in upgrades:
-		var option = UPGRADE_SCENE.instantiate() as UpgradeOption
+		var option = UPGRADE_OPTION_SCENE.instantiate() as UpgradeOption
 		boxContainer.add_child(option)
 
 		option.custom_minimum_size = Vector2(500, 500)

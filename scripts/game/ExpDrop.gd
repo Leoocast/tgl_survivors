@@ -2,19 +2,19 @@ class_name ExpDrop
 extends Area2D
 
 #Config
-const FLYING_SPEED = 1200
-var expValue := 1
-var malboroRatio := 10
+const FLYING_SPEED: float = 1200
+var expValue: float = 1
+var malboroRatio: float = 10
 
 #Internal
-var isMalboro := false
-var isFlying := false
-var player : Player
+var isMalboro: bool = false
+var isFlying: bool = false
+var player: Player
 
 #Posible mejora: Crear un ExpDrop base si va a haber diferentes
 #-------------------------#
 func _ready():
-	add_to_group(Constants.GROUPS.EXP_DROP)
+	add_to_group(GLOBALS.GROUPS.EXP_DROP)
 	self.modulate.a = 0.0
 	var percentage = randi_range(0, 100)
 
@@ -43,7 +43,7 @@ func showCoca() -> void:
 	$Coca.show()
 	$Malboro.hide()
 
-func flyToTarget(_target : Player) -> void: 
+func flyToTarget(_target: Player) -> void: 
 	player = _target
 	isFlying = true
 

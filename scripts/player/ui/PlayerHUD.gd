@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-@onready var playerHealthBar := %PlayerHealthBar as HealthBarController
-@onready var xpLabel := $Control/XPLvl
-@onready var playerXPBar := $Control/PlayerXP
+@onready var playerHealthBar: HealthBarController = %PlayerHealthBar as HealthBarController
+@onready var xpLabel: Label = $Control/XPLvl as Label
+@onready var playerXPBar: ProgressBar = $Control/PlayerXP as ProgressBar
 @onready var player: Player = %Player as Player
 
 #-------------------------#
@@ -24,7 +24,7 @@ func on_health_changed(damage: float) -> void:
 func on_add_xp(xp: int) -> void:
 	playerXPBar.value = clamp(xp, 0, playerXPBar.max_value)
 
-func on_lvl_up(newLvl : int, xpToNextLvl : int, currentXp : int) -> void:
+func on_lvl_up(newLvl: int, xpToNextLvl: int, currentXp: int) -> void:
 	xpLabel.text = str(newLvl)
 	playerXPBar.max_value = xpToNextLvl
 	playerXPBar.value = clamp(currentXp, 0, xpToNextLvl)

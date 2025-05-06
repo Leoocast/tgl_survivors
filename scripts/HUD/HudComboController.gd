@@ -2,9 +2,9 @@ class_name HUDComboController
 extends Control
 
 #Nodes
-@onready var label = $Label
-@onready var timeBar = $ProgressBar
-@onready var comboTimer = $ComboTimer
+@onready var label: Label = $Label as Label
+@onready var timeBar: ProgressBar = $ProgressBar as ProgressBar
+@onready var comboTimer: Timer = $ComboTimer as Timer
 
 #Systems
 var comboSystem: PlayerComboSystem = PlayerComboSystem.new()

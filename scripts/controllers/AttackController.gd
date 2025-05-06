@@ -1,13 +1,13 @@
 class_name AttackController
 extends Node
 
-#Setup
-var entity : Node2D
-var weapon : Node2D
+#Config
+var entity: Node2D
+var weapon: Node2D
 
 #Internal
-var isAttacking := false
-var canAttack := true
+var isAttacking: bool = false
+var canAttack: bool = true
 
 #Signal
 signal attack_started()

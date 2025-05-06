@@ -1,16 +1,16 @@
 class_name HealthController
 extends Node
 
-#Setup
-var entity : Node2D
-var health : float
-var startHealth : float
+#Config
+var entity: Node2D
+var health: float
+var startHealth: float
 
 #Internal
-var canTakeDamage := true
-var isDead := false
-var isDamaged := false
-var isTakingDamage := false
+var canTakeDamage: bool = true
+var isDead: bool = false
+var isDamaged: bool = false
+var isTakingDamage: bool = false
 
 #Signals
 signal died()

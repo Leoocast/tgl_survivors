@@ -2,25 +2,25 @@ class_name Player
 extends CharacterBody2D
 
 #Controllers
-@onready var healthController := %HealthController as PlayerHealthController
-@onready var dashController := %DashController as PlayerDashController
-@onready var attackController := %AttackController as PlayerAttackController
-@onready var animationController := %AnimationController as PlayerAnimationController
-@onready var levelUpUi = %LevelUpUI as LevelUpUI
-@onready var trail = $TrailContainer as PlayerTrail
+@onready var healthController: PlayerHealthController = %HealthController as PlayerHealthController
+@onready var dashController: PlayerDashController = %DashController as PlayerDashController
+@onready var attackController: PlayerAttackController = %AttackController as PlayerAttackController
+@onready var animationController: PlayerAnimationController = %AnimationController as PlayerAnimationController
+@onready var levelUpUi: LevelUpUI= %LevelUpUI as LevelUpUI
+@onready var trail: PlayerTrail= $TrailContainer as PlayerTrail
 
 #Nodes
 @onready var weapon: Weapon = $Weapon as Weapon
-@onready var attackArea := $Weapon/AttackArea
-@onready var levelUpDamageArea := $LevelUpDamageArea
-@onready var expArea := $ExpArea
-@onready var ssjAura = $SsjAura
+@onready var attackArea: Area2D = $Weapon/AttackArea as Area2D
+@onready var levelUpDamageArea: Area2D = $LevelUpDamageArea as Area2D
+@onready var expArea: Area2D = $ExpArea as Area2D
+@onready var ssjAura: Node2D = $SsjAura as Node2D
 
 # Attributes
-@export var attributes : PlayerAttributesResource
+@export var attributes: PlayerAttributesResource
 
 #Config
-var collisionAttackMap := PlayerAttackCollisionMap.new()
+var collisionAttackMap: PlayerAttackCollisionMap = PlayerAttackCollisionMap.new()
 
 #Systems / Managers
 var xpSystem: PlayerXPSystem = PlayerXPSystem.new()
@@ -33,7 +33,7 @@ var currentCritProb: float
 
 #-------------------------#
 func _ready() -> void:
-	GameUtils.registerInGroup(self, Constants.GROUPS.PLAYER)
+	GameUtils.registerInGroup(self, GLOBALS.GROUPS.PLAYER)
 	setupAttributes()
 	setupComponents()
 	disableAllAttackCollisions()
@@ -132,6 +132,6 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 		collisionAttackMap.map[animationDirection].disabled = false
 
 func _on_exp_area_area_entered(area: Area2D) -> void:
-	if area.is_in_group(Constants.GROUPS.EXP_DROP):
+	if area.is_in_group(GLOBALS.GROUPS.EXP_DROP):
 		var expDrop = area as ExpDrop
 		expDrop.flyToTarget(self)

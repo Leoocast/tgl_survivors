@@ -1,24 +1,28 @@
 class_name DamageLabel
 extends Node2D
 
-@export var damageLabel : Label
-@export var criticLabel : Label
-@export var shadow : Label
-@export var criticSprite : Sprite2D
+#Export
+@export var damageLabel: Label
+@export var criticLabel: Label
+@export var shadow: Label
+@export var criticSprite: Sprite2D
 
-const LIFETIME := 0.8
-const FADE_TIME := 0.2
-const FLOAT_SPEED := 30.0
+#Config
+const LIFETIME: float = 0.8
+const FADE_TIME: float = 0.2
+const FLOAT_SPEED: float = 30.0
 
-var velocity := Vector2.UP * FLOAT_SPEED
+#Internal
+var velocity: Vector2 = Vector2.UP * FLOAT_SPEED
 
-func setup(damage: float, isCritic : bool = false) -> void:
+#-------------------------#
+func setup(damage: float, isCritic: bool = false) -> void:
 
 	if isCritic:
 		damageLabel.hide()
 		criticSprite.show()
 
-	var formatted := "%.2f" % damage
+	var formatted: String = "%.2f" % damage
 	formatted = formatted.rstrip("0").rstrip(".")
 	
 	assignTextToLabels(formatted)
@@ -30,7 +34,7 @@ func setup(damage: float, isCritic : bool = false) -> void:
 	scale = Vector2.ONE  
 
 	# Fade in + Scale up
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, FADE_TIME)
 	tween.parallel().tween_property(self, "scale", Vector2.ONE * 1.4, LIFETIME * 0.25)
 
@@ -46,7 +50,7 @@ func setup(damage: float, isCritic : bool = false) -> void:
 
 	queue_free()
 
-func assignTextToLabels(text : String) -> void:
+func assignTextToLabels(text: String) -> void:
 	damageLabel.text = text
 	criticLabel.text = text
 	shadow.text = text

@@ -1,8 +1,8 @@
 class_name Upgrade
 extends Resource
 
-@export var name: String
-@export var description : String
+var name: String
+var description: String
 
 func apply(_target: Player) -> void:
 	pass

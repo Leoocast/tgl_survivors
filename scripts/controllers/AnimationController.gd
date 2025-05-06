@@ -1,14 +1,14 @@
 class_name AnimationController
 extends Node
 
-#Setup
-var sprite : AnimatedSprite2D
-var modulatedAttackColor := Color8(255, 98, 113)
-var modulatedTakingDamageColor := Color(2, 2, 2)
-var modulatedOriginalColor := Color8(255,255,255)
+#Config
+var sprite: AnimatedSprite2D
+var modulatedAttackColor: Color = Color8(255, 98, 113)
+var modulatedTakingDamageColor: Color = Color(2, 2, 2)
+var modulatedOriginalColor: Color = Color8(255,255,255)
 
 #Internal
-const ANIMATIONS = Constants.ANIMATIONS
+const ANIMATIONS: Dictionary = GLOBALS.ANIMATIONS
 
 #-------------------------#
 func setup(_sprite: AnimatedSprite2D) -> void:

@@ -1,6 +1,6 @@
 extends Upgrade
 
-@export var multiplier := 15
+var multiplier: float = 15
 
 func _init() -> void:
 	name = "Botas de Sonic I"

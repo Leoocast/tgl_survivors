@@ -6,7 +6,7 @@ var tree: SceneTree:
 
 #Nodes
 func getGlobalNode(_name: String) -> Node2D:
-	var node := tree.get_root().get_node(_name)
+	var node: Node2D = tree.get_root().get_node(_name)
 	return node
 
 func getMain() -> Main:
@@ -32,7 +32,7 @@ func fadeOutAndDissapear(node: Node2D, time: float = 0.5) -> void:
 	tween.tween_property(node, "modulate:a", 0.0, time)
 	tween.tween_callback(Callable(node, "queue_free"))
 
-func fadeIn(node : Node2D, time: float = 0.5) -> void:
+func fadeIn(node: Node2D, time: float = 0.5) -> void:
 	var tween = create_tween()
 	tween.tween_property(node, "modulate:a", 1.0, time)
 
@@ -77,7 +77,7 @@ func validateEnemyAttributes(attributes: EnemyAttributesResource, type: Node2D) 
 func validationMessage(type: Node2D, message: String) -> String:
 	return "[" + type.name +  "] " + message
 
-func assertWarning(isThere : bool, message: String) -> void:
+func assertWarning(isThere: bool, message: String) -> void:
 	if isThere: 
 		return
 	

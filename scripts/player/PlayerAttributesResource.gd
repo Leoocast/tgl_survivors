@@ -2,4 +2,4 @@
 class_name PlayerAttributesResource
 extends Attributes
 
-@export var auraDamage := 3.0
+@export var auraDamage: float = 3.0

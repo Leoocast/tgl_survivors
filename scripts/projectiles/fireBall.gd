@@ -1,13 +1,13 @@
 extends Area2D
 
 #Config
-var speed := 0.0
-var attackRange := 0.0
-var damage : float
+var speed: float = 0.0
+var attackRange: float = 0.0
+var damage: float
 var direction: Vector2
 
 #Internal
-var travelledDistance := 0.0
+var travelledDistance: float = 0.0
 
 #-------------------------#
 func setup(_speed: float, _attackRange: float, _damage: float, _direction: Vector2) -> void:

@@ -1,22 +1,22 @@
 class_name HealthBarController
 extends Control
 
-#Setup
-var entity : Node2D
-var healthController : HealthController
-var color : Color
-var isPlayerUI := false
+#Config
+var entity: Node2D
+var healthController: HealthController
+var color: Color
+var isPlayerUI: bool = false
 
 #Nodes
-@onready var ui_mainBar := $MainBar
-@onready var ui_whiteBar := $WhiteBar
-@onready var ui_blackBar := $Blackbar
+@onready var ui_mainBar: ProgressBar = $MainBar
+@onready var ui_whiteBar: ProgressBar = $WhiteBar
+@onready var ui_blackBar: ProgressBar = $Blackbar
 
-#Vars
-var alreadyShowed := false
+#Internal
+var alreadyShowed: bool = false
 
 #-------------------------#
-func setup(_entity: Node2D, _healthController: HealthController, _color: Color, _isPlayerUI : bool = false) -> void:
+func setup(_entity: Node2D, _healthController: HealthController, _color: Color, _isPlayerUI: bool = false) -> void:
 	self.entity = _entity
 	self.healthController = _healthController
 	self.color = _color
@@ -67,11 +67,6 @@ func createMainBar() -> void:
 		stylebox.corner_radius_bottom_left = 2
 		stylebox.corner_radius_bottom_right = 2
 
-		# stylebox.border_width_left = 1
-		# stylebox.border_width_top = 1
-		# stylebox.border_width_right = 1
-		# stylebox.border_width_bottom = 1
-	
 	stylebox.bg_color = color
 
 	ui_mainBar.add_theme_stylebox_override("fill", stylebox)

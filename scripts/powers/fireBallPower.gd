@@ -1,16 +1,16 @@
 extends Node2D
 
 #Preload
-const fireBall_asset = preload(Constants.ASSETS.PROJECTILES.FIRE_BAll) 
+const fireBall_asset = preload(PATHS.ASSETS.PROJECTILES.FIRE_BAll) 
 
 #Config
-const cooldown := 0.3
-const DAMAGE := 1.0
-const SPEED := 1150
-const ATTACK_RANGE := 1000
+const cooldown: float = 0.3
+const DAMAGE: float = 1.0
+const SPEED: float = 1150
+const ATTACK_RANGE: float = 1000
 
 #Internal
-var canShoot := true
+var canShoot: bool = true
 
 #-------------------------#
 func _process(_delta: float) -> void:

@@ -2,8 +2,8 @@ class_name Weapon
 extends Node2D
 
 #Setup
-@export var damage : float
-@export var cooldown : float
+@export var damage: float
+@export var cooldown: float
 @export var weaponName: String
 
 #-------------------------#

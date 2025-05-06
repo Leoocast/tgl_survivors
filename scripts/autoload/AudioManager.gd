@@ -1,14 +1,16 @@
 extends Node
 
-@onready var musicPlayer := AudioStreamPlayer.new()
-@onready var selectionUpdateMusicPlayer := AudioStreamPlayer.new()
-@onready var voicePlayer := AudioStreamPlayer.new()
-@onready var announcerPlayer := AudioStreamPlayer.new()
-@onready var soundEffectPlayer := AudioStreamPlayer.new()
+#Nodes
+@onready var musicPlayer: AudioStreamPlayer= AudioStreamPlayer.new()
+@onready var selectionUpdateMusicPlayer: AudioStreamPlayer = AudioStreamPlayer.new()
+@onready var voicePlayer: AudioStreamPlayer = AudioStreamPlayer.new()
+@onready var announcerPlayer: AudioStreamPlayer = AudioStreamPlayer.new()
+@onready var soundEffectPlayer: AudioStreamPlayer = AudioStreamPlayer.new()
 
 #Internal
-var musicActualPosition := 0.0
+var musicActualPosition: float = 0.0
 
+#-------------------------#
 func _ready() -> void:
 	add_child(musicPlayer)
 	add_child(voicePlayer)
@@ -22,16 +24,16 @@ func playMusic(stream: AudioStreamOggVorbis) -> void:
 	musicPlayer.play()
 
 func fadeOutMusicAndPause():
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(musicPlayer, "volume_db", -80, 1.5)
 	tween.tween_callback(Callable(self, "_on_fade_out_complete"))
 
 func fadeOutMusic():
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(musicPlayer, "volume_db", -10, .5)
 
 func fadeInMusic():
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(musicPlayer, "volume_db", 0, .5)
 
 func _pause_music():
@@ -41,7 +43,7 @@ func fadeInMusicAndPlay():
 	musicPlayer.stream_paused = false
 	musicPlayer.volume_db = -80      
 
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(musicPlayer, "volume_db", 0, 0.4)  
 
 func playSelectionUpdateMusic(stream: AudioStreamOggVorbis) -> void:
@@ -73,9 +75,9 @@ func playAndAwaitVoice(stream: AudioStream) -> void:
 
 func playAnnouncer(stream: AudioStream) -> void:
 	announcerPlayer.stream = stream
-	# announcerPlayer.volume_db = -7
+	announcerPlayer.volume_db = -5
 	#TODO: Reactivar esto
-	# announcerPlayer.play()
+	announcerPlayer.play()
 
 func stopMusic() -> void:
 	musicPlayer.stop()

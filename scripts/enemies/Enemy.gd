@@ -2,35 +2,34 @@ class_name Enemy
 extends CharacterBody2D
 
 #Preload
-const DAMAGE_LABEL_ASSET = preload(Constants.ASSETS.DAMAGE_LABEL)
+const DAMAGE_LABEL_ASSET = preload(PATHS.SCENES.DAMAGE_LABEL)
 
 #Nodes
-@onready var healthController := %HealthController as HealthController
-@onready var attackController := %AttackController as AttackController
-@onready var animationController := %AnimationController as AnimationController
-@onready var healthBarController := %HealthBar as EnemyHealthBarController
-@onready var weapon := %Weapon as Weapon
-@onready var sprite =  $AnimatedSprite2D
+@onready var healthController: HealthController = %HealthController as HealthController
+@onready var attackController: AttackController = %AttackController as AttackController
+@onready var animationController: AnimationController = %AnimationController as AnimationController
+@onready var healthBarController: EnemyHealthBarController = %HealthBar as EnemyHealthBarController
+@onready var weapon: Weapon = %Weapon as Weapon
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-# Attributes
-@export var attributes : EnemyAttributesResource
+#Attributes
+@export var attributes: EnemyAttributesResource
 
 #Config
-var game : GameState
-var isBoss := false
-var player : Player = GameUtils.getPlayer()
+var isBoss: bool = false
+var player: Player = GameUtils.getPlayer()
 
 #Internal
-var isPlayerInRange := false
-var currentHealth : float = 1
+var isPlayerInRange: bool = false
+var currentHealth: float = 1
 
 #SFX
-@onready var soundEffectPlayer := AudioStreamPlayer.new()
+@onready var soundEffectPlayer: AudioStreamPlayer = AudioStreamPlayer.new()
 
 #Signals
 signal died()
-#-------------------------#
 
+#-------------------------#
 func setup() -> void:
 	GameUtils.validateEnemyAttributes(attributes, self)
 	setupComponents()
@@ -64,7 +63,7 @@ func defaultProcess() -> void:
 	if healthController.isDamaged && not healthBarController.alreadyShowed:
 		healthBarController.showBars()
 
-func setupZIndex(zIndex : int = 0 ) -> void:
+func setupZIndex(zIndex: int = 0 ) -> void:
 	self.z_index = zIndex
 
 func moveTowardsPlayer() -> void:
@@ -78,7 +77,7 @@ func moveTowardsPlayer() -> void:
 		self.velocity = direction * attributes.speed
 		move_and_slide()
 
-func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic : bool = false) -> void:
+func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = false) -> void:
 	healthController.isTakingDamage = true
 	healthController.takeDamage(damage)
 
@@ -151,7 +150,7 @@ func on_area_2d_body_exited_default(body: Node2D) -> void:
 	isPlayerInRange = false
 
 #VFX
-func showDamageLabel(damage: float, isCritic : bool = false) -> void:
+func showDamageLabel(damage: float, isCritic: bool = false) -> void:
 	var label = DAMAGE_LABEL_ASSET.instantiate() as DamageLabel
 	label.global_position = self.global_position + Vector2(0, -20)
 	GameUtils.tree.current_scene.add_child(label)
@@ -172,7 +171,7 @@ func _deferredMiniBoss() -> void:
 	healthController.health = currentHealth * 2
 	healthBarController.setup(self, healthController, attributes.healthColor, isBoss)
 
-func death(_damageByLevelUp : bool = false) -> void:
+func death(_damageByLevelUp: bool = false) -> void:
 	defaultDeath()
 
 func defaultDeath(_damageByLevelUp: bool = false) -> void:

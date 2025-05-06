@@ -35,6 +35,7 @@ func registerPlayer(_player: Player) -> void:
 func registerLevelUpUI(_levelUpUI: LevelUpUI) -> void:
 	self.levelUpUI = _levelUpUI
 	levelUpUI.upgrade_completed.connect(on_upgrade_completed)
+	levelUpUI.upgrade_completed.connect(player.healthController.on_upgrade_completed)
 
 #-------------------------#
 func setPhase(newPhase: GamePhase) -> void:

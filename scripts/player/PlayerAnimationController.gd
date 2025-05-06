@@ -2,17 +2,17 @@
 class_name PlayerAnimationController
 extends AnimationController
 
-#Setup
-const BASE_ATTACK_FPS := 10.0
-var newFps := BASE_ATTACK_FPS
-var player : Player
+#Config
+const BASE_ATTACK_FPS: float = 10.0
+var newFps: float = BASE_ATTACK_FPS
+var player: Player
 
 #VFX
 var levelUpAuraRed: AnimatedSprite2D
 var levelUpAuraYellow: AnimatedSprite2D
 
 #Internal
-var directions = {
+var directions: Dictionary = {
 	"up": "_up",
 	"down": "_down",
 	"left": "_left",
@@ -20,7 +20,7 @@ var directions = {
 }
 
 #-------------------------#
-func setupPlayer(_player: Player , ssjAura : Node2D) -> void:
+func setupPlayer(_player: Player , ssjAura: Node2D) -> void:
 	self.player = _player
 	self.setup(player.get_node("AnimatedSprite2D"))
 	
@@ -84,7 +84,7 @@ func waitAnimationFinished() -> void:
 func flipHorizontal(flip: bool) -> void:
 	sprite.flip_h = flip
 
-func matchDirection(animationName : String, direction: Vector2) -> void:
+func matchDirection(animationName: String, direction: Vector2) -> void:
 	var isHorizontal = abs(direction.x) > abs(direction.y)
 	var isRight = direction.x > 0
 	var isDown = direction.y > 0

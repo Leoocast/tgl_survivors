@@ -24,7 +24,7 @@ func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 		return
 
 	var player = entity as Player
-	for enemy : Enemy in enemiesInside:
+	for enemy: Enemy in enemiesInside:
 		enemy.takeDamage(player.attributes.auraDamage, true)
 	
 func damageEnemy(enemy: Enemy) -> void:

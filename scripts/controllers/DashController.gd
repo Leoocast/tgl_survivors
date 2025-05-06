@@ -2,18 +2,18 @@ class_name PlayerDashController
 extends Node
 
 #Config
-const SPEED := 1500
-const DURATION := 0.2
-const COOLDOWN := 0.5
+const SPEED: float = 1500
+const DURATION: float = 0.2
+const COOLDOWN: float = 0.5
 
 #Setup player
-var player : Node2D
-var playerCollider : CollisionShape2D
+var player: Node2D
+var playerCollider: CollisionShape2D
 
 #Internal
-var isDashing := false
-var canDash := true
-var dashDirection := Vector2.ZERO
+var isDashing: bool = false
+var canDash: bool = true
+var dashDirection: Vector2 = Vector2.ZERO
 
 #-------------------------#
 func setupPlayer() -> void:

@@ -2,7 +2,7 @@ class_name PlayerUpdatesManager
 extends RefCounted
 
 #Config
-var player : Player
+var player: Player
 
 #-------------------------#
 func setupPlayer(_player: Player) -> void:

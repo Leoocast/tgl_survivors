@@ -1,6 +1,6 @@
 extends Upgrade
 
-var multiplier:float = .1
+var multiplier: float = .1
 
 func _init() -> void:
 	name = "Palito Pinchador"

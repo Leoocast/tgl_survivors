@@ -2,17 +2,21 @@ class_name UpgradeOption
 extends Panel
 
 #Nodes
-@onready var nameLabel = $MarginContainer/Name
-@onready var descLabel = $MarginContainer2/Description
+@onready var nameLabel: Label = $MarginContainer/Name as Label
+@onready var descLabel: Label = $MarginContainer2/Description as Label
+
+#Exports
+@export var upgrade: Upgrade
 
 #Config
-var panelHoverStyle = theme.get_stylebox("hover", "Panel")
-var panelNormalStyle = theme.get_stylebox("normal", "Panel")
+var panelHoverStyle: StyleBox = theme.get_stylebox("hover", "Panel")
+var panelNormalStyle: StyleBox = theme.get_stylebox("normal", "Panel")
 
-@export var upgrade: Upgrade
+#Signals
 signal upgrade_selected_signal(upgrade: Upgrade)
 
-func setup(_name : String, _desc : String) -> void:
+#-------------------------#
+func setup(_name: String, _desc: String) -> void:
 	nameLabel.text = _name
 	descLabel.text = _desc
 

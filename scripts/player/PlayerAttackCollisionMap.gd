@@ -1,8 +1,10 @@
 class_name PlayerAttackCollisionMap
 extends RefCounted
 
-var map : Dictionary
+#Config
+var map: Dictionary
 
+#-------------------------#
 func setup(attackArea: CollisionObject2D) -> void:
 	map = {
 		"up": attackArea.get_node("UpCollision"),

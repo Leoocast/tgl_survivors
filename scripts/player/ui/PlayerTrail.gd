@@ -2,19 +2,19 @@ class_name PlayerTrail
 extends Node
 
 #Nodes
-@onready var trail = $Trail
+@onready var trail: Line2D = $Trail as Line2D
 
 #Config
-var trailQueue : Array
-var trailMaxLenth = 20
-var player : Player
+var trailQueue: Array
+var trailMaxLenth: int = 20
+var player: Player
 
 #-------------------------#
 func setupPlayer(_player: Player) -> void:
 	self.player = _player
 
 func drawTrail() -> void:
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 
 	if player.dashController.isDashing:
 		tween.tween_property(trail, "modulate:a", 1.0, 0.1)

@@ -19,7 +19,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 			self.disableAttackHitbox()
 
 # Cuando entra al rango empieza atacar
-func _on_area_2d_body_entered(body:Node2D) -> void:
+func _on_area_2d_body_entered(body: Node2D) -> void:
 	self.on_area_2d_body_entered_default(body)
 
 #Si esta a rango del collider de ataque, recibe da;o

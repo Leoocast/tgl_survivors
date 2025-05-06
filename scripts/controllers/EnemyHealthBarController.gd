@@ -1,22 +1,22 @@
 class_name EnemyHealthBarController
 extends Control
 
-#Setup
-var entity : Node2D
-var healthController : HealthController
-var color : Color
-var isBoss := false
+#Config
+var entity: Node2D
+var healthController: HealthController
+var color: Color
+var isBoss: bool = false
 
 #Nodes
-#0-Blackbar #1-Mainbar #2Whitebar
-@export var normalBarArray : Array[ProgressBar]
-@export var bossBarArray : Array[ProgressBar]
+#?0-Blackbar #1-Mainbar #2Whitebar
+@export var normalBarArray: Array[ProgressBar]
+@export var bossBarArray: Array[ProgressBar]
 
-#Vars
-var alreadyShowed := false
+#Internal
+var alreadyShowed: bool = false
 
 #-------------------------#
-func setup(_entity: Node2D, _healthController: HealthController, _color: Color, _isBoss : bool = false) -> void:
+func setup(_entity: Node2D, _healthController: HealthController, _color: Color, _isBoss: bool = false) -> void:
 	self.entity = _entity
 	self.healthController = _healthController
 	self.color = _color
@@ -43,7 +43,6 @@ func showBars() -> void:
 func createMainBar() -> void:
 	var stylebox = StyleBoxFlat.new()
 
-	#FIXME:
 	if not isBoss:
 		stylebox.corner_radius_top_left = 8
 		stylebox.corner_radius_top_right = 8
@@ -81,7 +80,7 @@ func setupHealth() -> void:
 		bar.max_value = healthController.health
 		bar.value = healthController.health
 
-func flashWhenTakeDamage(bars :  Array[ProgressBar], damage: float) -> void:
+func flashWhenTakeDamage(bars:  Array[ProgressBar], damage: float) -> void:
 	var current = healthController.health
 
 	var black = bars[0]
