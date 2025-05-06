@@ -16,7 +16,8 @@ func on_attack_finished() -> void:
 		firstAttack = true
 
 #-------------------------#
-func executeLevelUpDamage() -> void:
+func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
+
 	var enemiesInside = entity.levelUpDamageArea.get_overlapping_bodies()
 	
 	if enemiesInside.size() <= 0:

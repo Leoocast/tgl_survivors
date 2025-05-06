@@ -49,3 +49,6 @@ func takeDamage(damage: float) -> void:
 
 func stopTakingDamage() -> void:
 	canTakeDamage = false
+
+func resumeTakingDamage() -> void:
+	canTakeDamage = true

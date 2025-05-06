@@ -39,6 +39,11 @@ func on_taking_damage_finished() -> void:
 	await GameUtils.waitFor(0.1)
 	modulateReset()
 
+func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
+	player.z_index = 99
+	await playAndAwaitSsj()
+	player.z_index = 1
+
 func on_attack_animation_started() -> void:
 	var mousePosition = player.getMouseDirection() 
 

@@ -2,10 +2,11 @@ class_name Player
 extends CharacterBody2D
 
 #Controllers
-@onready var healthController := %HealthController as HealthController
+@onready var healthController := %HealthController as PlayerHealthController
 @onready var dashController := %DashController as PlayerDashController
 @onready var attackController := %AttackController as PlayerAttackController
 @onready var animationController := %AnimationController as PlayerAnimationController
+@onready var levelUpUi = %LevelUpUI as LevelUpUI
 @onready var trail = $TrailContainer as PlayerTrail
 
 #Nodes
@@ -55,6 +56,7 @@ func setupComponents() -> void:
 
 	healthSuscriptions()
 	attackSuscriptions()
+	xpSucriptions()
 	
 #Suscriptions
 func healthSuscriptions() -> void: 
@@ -65,6 +67,14 @@ func healthSuscriptions() -> void:
 func attackSuscriptions() -> void:
 	attackController.attack_animation_started.connect(animationController.on_attack_animation_started)
 	attackController.attack_animation_started.connect(sfxManager.on_attack_animation_started)
+
+func xpSucriptions() -> void:
+	xpSystem.level_up.connect(attackController.on_level_up)
+	xpSystem.level_up.connect(healthController.on_level_up)
+	xpSystem.level_up.connect(animationController.on_level_up)
+
+func levelUpUiSuscriptions() -> void:
+	levelUpUi.upgrade_completed.connect(healthController.on_upgrade_completed)
 
 func _physics_process(_delta: float) -> void:
 	if GameState.isNotRunning():

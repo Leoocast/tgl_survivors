@@ -1,44 +1,24 @@
-class_name PlayerHUD
 extends CanvasLayer
 
 @onready var playerHealthBar := %PlayerHealthBar as HealthBarController
-@onready var player := %Player as Player
 @onready var xpLabel := $Control/XPLvl
 @onready var playerXPBar := $Control/PlayerXP
-@onready var lvlUpUi = %LvlUpUI
-@onready var upgradesController = %UpgradesController as UpgradesController
-
+@onready var player: Player = %Player as Player
 
 #-------------------------#
 func _ready():
-	player.healthController.connect("damaged", _on_health_changed)
-	player.xpSystem.connect("level_up", on_lvl_up)
-	player.xpSystem.connect("add_xp", on_add_xp)
-
 	playerHealthBar.setup(player, player.healthController, player.attributes.healthColor, true)
 	playerXPBar.max_value = player.xpSystem.xpToNextLevel
 
-func showLevelUpUI():
+	setupSuscriptions()
 
-	player.attackController.executeLevelUpDamage()
+func setupSuscriptions() -> void:
+	player.healthController.damaged.connect(on_health_changed)
+	player.xpSystem.level_up.connect(on_lvl_up)
+	player.xpSystem.add_xp.connect(on_add_xp)
 
-	GameState.pause()
-
-	#FIXME: Esto no se donde deba ir??
-	player.z_index = 99
-	player.healthController.canTakeDamage = false
-	await player.animationController.playAndAwaitSsj()
-	player.z_index = 1
-	
-	var randomUpgrades = upgradesController.getRandomUpgrades(3)
-	lvlUpUi.setup(player, randomUpgrades)
-	lvlUpUi.show()
-
-	#FIXME: Esto no se donde deba ir??
-	player.healthController.canTakeDamage = true
-
-#Consumers
-func _on_health_changed(damage: float) -> void:
+#Signall
+func on_health_changed(damage: float) -> void:
 	playerHealthBar.takeDamage(damage)
 
 func on_add_xp(xp: int) -> void:
@@ -48,4 +28,3 @@ func on_lvl_up(newLvl : int, xpToNextLvl : int, currentXp : int) -> void:
 	xpLabel.text = str(newLvl)
 	playerXPBar.max_value = xpToNextLvl
 	playerXPBar.value = clamp(currentXp, 0, xpToNextLvl)
-	showLevelUpUI()

@@ -1,5 +1,5 @@
-class_name UpgradesController
-extends Node
+class_name UpgradesManager
+extends RefCounted
 
 #Preload
 const MOVEMENT_SPEED_UPGRADE = preload("res://scripts/player/upgrades/MovementSpeedUpgrade.gd")
@@ -7,10 +7,7 @@ const ATTACK_DAMAGE_UPGRADE = preload("res://scripts/player/upgrades/AttackDamag
 const ATTACK_sPEED_UPGRADE = preload("res://scripts/player/upgrades/AttackSpeedUpgrade.gd")
 
 #Internal
-var upgrades: Array[Upgrade]
-
-func _ready():
-	upgrades = [
+var upgrades: Array[Upgrade]  = [
 		MOVEMENT_SPEED_UPGRADE.new(),
 		ATTACK_DAMAGE_UPGRADE.new(),
 		ATTACK_sPEED_UPGRADE.new(),

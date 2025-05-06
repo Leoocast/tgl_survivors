@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b1s51dtivbell"]
+[gd_scene load_steps=13 format=3 uid="uid://b1s51dtivbell"]
 
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="1_6chfy"]
 [ext_resource type="Script" uid="uid://h53677tce2mx" path="res://scripts/game/Main.gd" id="1_crk6h"]
@@ -10,7 +10,6 @@
 [ext_resource type="FontFile" uid="uid://c8vs1sqrongty" path="res://assets/fonts/Another Danger - Demo.otf" id="7_6d208"]
 [ext_resource type="Script" uid="uid://undnntiqooxe" path="res://scripts/HUD/HudComboController.gd" id="8_bo8jn"]
 [ext_resource type="PackedScene" uid="uid://do8uedlbkaui3" path="res://scenes/game/lvl_up_ui.tscn" id="9_amjvs"]
-[ext_resource type="Script" uid="uid://cdcbmvctucc3x" path="res://scripts/player/upgrades/UpgradesController.gd" id="10_o4hyi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41jvh"]
 bg_color = Color(0, 0.625536, 0.99609, 1)
@@ -156,10 +155,6 @@ show_percentage = false
 [node name="ComboTimer" type="Timer" parent="HUD/HUDComboController"]
 wait_time = 7.0
 
-[node name="LvlUpUI" parent="." instance=ExtResource("9_amjvs")]
+[node name="LevelUpUI" parent="." instance=ExtResource("9_amjvs")]
 unique_name_in_owner = true
 visible = false
-
-[node name="UpgradesController" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("10_o4hyi")

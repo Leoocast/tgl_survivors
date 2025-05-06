@@ -22,6 +22,7 @@ var isPaused: bool = false
 
 #Ref Inyection
 var comboHud: HUDComboController
+var levelUpUI: LevelUpUI
 var player: Player
 
 func registerComboHud(_comboHud: HUDComboController) -> void:
@@ -29,6 +30,11 @@ func registerComboHud(_comboHud: HUDComboController) -> void:
 
 func registerPlayer(_player: Player) -> void:
 	self.player = _player
+	player.xpSystem.level_up.connect(on_player_level_up)
+
+func registerLevelUpUI(_levelUpUI: LevelUpUI) -> void:
+	self.levelUpUI = _levelUpUI
+	levelUpUI.upgrade_completed.connect(on_upgrade_completed)
 
 #-------------------------#
 func setPhase(newPhase: GamePhase) -> void:
@@ -45,9 +51,6 @@ func pause() -> void:
 	game_paused.emit()
 
 func resume() -> void:
-	if not isPaused:
-		return
-	
 	setPhase(GamePhase.RUNNING)
 	comboHud.comboSystem.resumeTimer()
 	game_resumed.emit()
@@ -64,3 +67,12 @@ func playerDied() -> void:
 #Process conditions
 func isNotRunning() -> bool:
 	return currentPhase != GamePhase.RUNNING
+
+#Signals
+func on_player_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
+	isPaused = true
+	GameState.setPhase(GamePhase.PLAYER_UPGRADE_SELECTION)
+	comboHud.comboSystem.pauseTimer()
+
+func on_upgrade_completed() -> void:
+	resume()
