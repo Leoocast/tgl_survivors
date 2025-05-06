@@ -29,7 +29,7 @@ func executeLevelUpDamage() -> void:
 func damageEnemy(enemy: Enemy) -> void:
 	var player = self.entity as Player
 
-	var isCritic = randf() < player.currentCritprob as float
+	var isCritic = randf() < player.currentCritProb as float
 
 	var realDamage = weapon.damage * 2 if isCritic else weapon.damage  
 

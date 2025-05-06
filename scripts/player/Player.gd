@@ -12,8 +12,7 @@ extends CharacterBody2D
 @onready var game = get_parent() as GameState
 
 #Nodes
-@onready var weapon: Weapon = $Weapon 
-@onready var collisionAttackMap := PlayerAttackCollisionMap.new()
+@onready var weapon: Weapon = $Weapon as Weapon
 @onready var attackArea := $Weapon/AttackArea
 @onready var levelUpDamageArea := $LevelUpDamageArea
 @onready var expArea := $ExpArea
@@ -22,6 +21,9 @@ extends CharacterBody2D
 # Attributes
 @export var attributes : PlayerAttributesResource
 
+#Config
+var collisionAttackMap := PlayerAttackCollisionMap.new()
+
 #Systems / Managers
 var xpSystem: PlayerXPSystem = PlayerXPSystem.new()
 var sfxManager: PlayerSFXManager = PlayerSFXManager.new()
@@ -29,7 +31,7 @@ var updatesManager: PlayerUpdatesManager = PlayerUpdatesManager.new()
 
 #Internal
 var currentSpeed: float
-var currentCritprob: float
+var currentCritProb: float
 
 #-------------------------#
 func _ready() -> void:
@@ -40,7 +42,7 @@ func _ready() -> void:
 
 func setupAttributes() -> void:
 	currentSpeed = attributes.speed
-	currentCritprob = attributes.critProb
+	currentCritProb = attributes.critProb
 
 func setupComponents() -> void:
 	animationController.setupPlayer(self, ssjAura)
@@ -51,7 +53,7 @@ func setupComponents() -> void:
 	updatesManager.setupPlayer(self)
 	sfxManager.setupPlayer(self)
 	trail.setupPlayer(self)
-	weapon.setup(1,0)
+	weapon.setup(attributes.attackDamage, attributes.attackCooldown)
 	collisionAttackMap.setup(attackArea)
 
 	healthSuscriptions()
@@ -76,7 +78,7 @@ func _physics_process(_delta: float) -> void:
 	
 	trail.drawTrail()
 
-	var mousePosition = calculateMousePosition()
+	var mousePosition = getMouseDirection()
 	
 	if InputHandler.isDashing():
 		dashController.tryDash()
@@ -95,10 +97,8 @@ func move() -> void:
 	self.velocity = direction * currentSpeed
 	move_and_slide()
 
-func calculateMousePosition() -> Vector2:
-	var mousePosition = get_global_mouse_position()
-	var directionToMouse = (mousePosition - global_position).normalized()
-	return directionToMouse
+func getMouseDirection() -> Vector2:
+	return (get_global_mouse_position() - global_position).normalized()
 
 func disableAllAttackCollisions() -> void:
 	for collision: CollisionPolygon2D in attackArea.get_children():

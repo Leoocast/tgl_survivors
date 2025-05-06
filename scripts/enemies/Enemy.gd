@@ -2,7 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 #Preload
-const DAMAGE_LABEL_ASSET = preload("res://scenes/game/damage_label.tscn")
+const DAMAGE_LABEL_ASSET = preload(Constants.ASSETS.DAMAGE_LABEL)
 
 #Nodes
 @onready var healthController := %HealthController as HealthController
@@ -10,44 +10,60 @@ const DAMAGE_LABEL_ASSET = preload("res://scenes/game/damage_label.tscn")
 @onready var animationController := %AnimationController as AnimationController
 @onready var healthBarController := %HealthBar as EnemyHealthBarController
 @onready var weapon := %Weapon as Weapon
+@onready var sprite =  $AnimatedSprite2D
+
+# Attributes
+@export var attributes : EnemyAttributesResource
 
 #Config
-var speed : float 
-var stopDistance : float
 var game : GameState
 var isBoss := false
-var player: Player
+var player : Player = GameUtils.getPlayer()
 
 #Internal
 var isPlayerInRange := false
 
 #SFX
 @onready var soundEffectPlayer := AudioStreamPlayer.new()
-var sfx_hurt : AudioStream
 
+#Signals
+signal died()
 #-------------------------#
-func setup(data: Dictionary) -> void:
-	self.speed = data.speed
-	self.stopDistance = data.stopDistance 
-	self.sfx_hurt = data.sfx_hurt
 
-	#FIXME:
-	if isBoss:
-		data.health *= 2
-		weapon.damage *= 2
+func setup() -> void:
+	GameUtils.validateAttributes(attributes, self)
+	setupComponents()
+	attackSuscriptions()
+	
+	animationController.playIdle()
+	healthBarController.hideBars()
 
-	healthController.setup(self, data.health)
-	healthBarController.setup(self, healthController, data.healthColor, isBoss)
-	attackController.setup(self, weapon)
-	animationController.setup(data.sprite)
+	disableAttackHitbox()
 	add_child(soundEffectPlayer)
 
+func setupComponents() -> void:
+	healthController.setup(self, attributes.health)
+	healthBarController.setup(self, healthController, attributes.healthColor, isBoss)
+	attackController.setup(self, weapon)
+	animationController.setup(sprite)
+
+func attackSuscriptions() -> void:
 	attackController.connect("attack_animation_started", on_attack_animation_started)
 	attackController.connect("attack_animation_finished", on_attack_animation_finished)
 
-#FIXME:
+func defaultProcess() -> void:
+	if game.isPaused:
+		return
+
+	moveTowardsPlayer()
+	flipTowardsPlayer()
+	attackPlayer()
+
+	if healthController.isDamaged && not healthBarController.alreadyShowed:
+		healthBarController.showBars()
+
+#FIXME: No me agrada pero tengo que crear el Script mejorado de game state
 func setupPlayer(_game : GameState, zIndex : int = 0 ) -> void:
-	self.player = GameUtils.getPlayer()
 	self.game = _game
 	self.z_index = zIndex
 
@@ -57,9 +73,9 @@ func moveTowardsPlayer() -> void:
 
 	var distance = global_position.distance_to(player.global_position)
 
-	if distance > stopDistance:
+	if distance > attributes.stopDistance:
 		var direction = global_position.direction_to(player.global_position)
-		self.velocity = direction * speed
+		self.velocity = direction * attributes.speed
 		move_and_slide()
 
 func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic : bool = false) -> void:
@@ -85,7 +101,32 @@ func attackPlayer() -> void:
 	
 	await attackController.attack()
 	
-#Consumers TODO: Esto va en el animation controller del Enemy
+func isntantiateDrop() -> void:
+	var instance = attributes.exp_drop_scene.instantiate()
+	instance.global_position = self.global_position
+	get_parent().add_child(instance)
+	GameUtils.fadeIn(instance, 0.3)
+
+func enableAttackHitbox() -> void:
+	$AttackArea/AttackCollision.call_deferred("set_disabled", false)
+	
+func disableAttackHitbox() -> void:
+	$AttackArea/AttackCollision.call_deferred("set_disabled", true)
+
+
+func fadeOutAndDisapear():
+	var tween = create_tween()
+	tween.tween_property(sprite, "modulate:a", 0.0, 0.5)
+	tween.tween_callback(Callable(self, "queue_free"))
+
+func flipTowardsPlayer():
+	var shouldFlip = self.global_position.x > player.global_position.x
+
+	GameUtils.flipColliderHorizontal($AttackArea/AttackCollision, shouldFlip)
+	animationController.flipHorizontal(shouldFlip)
+
+#Consumers
+#TODO si crece: Crear EnemyAnimationController
 func on_attack_animation_started() -> void:
 	animationController.playAttack()
 	animationController.modulateAttack()
@@ -93,6 +134,21 @@ func on_attack_animation_started() -> void:
 func on_attack_animation_finished() -> void:
 	animationController.modulateReset()
 	animationController.playIdle()
+
+func on_area_2d_body_entered_default(body: Node2D) -> void:
+	if body is not Player:
+		return
+	isPlayerInRange = true
+	attackPlayer()
+
+func on_attack_area_body_entered_default(body: Node2D) -> void:
+	if body is Player:
+		player.healthController.takeDamage(weapon.damage)
+
+func on_area_2d_body_exited_default(body: Node2D) -> void:
+	if body is not Player:
+		return
+	isPlayerInRange = false
 
 #VFX
 func showDamageLabel(damage: float, isCritic : bool = false) -> void:
@@ -103,12 +159,31 @@ func showDamageLabel(damage: float, isCritic : bool = false) -> void:
 
 #SFX
 func sfx_playHurt() -> void:
-	soundEffectPlayer.stream = sfx_hurt
+	soundEffectPlayer.stream = attributes.sfx_hurt
 	soundEffectPlayer.play()
 
-func death(_damageByLevelUp : bool = false) -> void:
-	pass
-
 func convertIntoMiniBoss() -> void:
+	call_deferred("_deferredMiniBoss")
+
+func _deferredMiniBoss() -> void:
 	self.isBoss = true
+	#FIXME: No se debe modificar attributes.health, verificar como llamar a los controladores en convertMiniBoss.
+	self.attributes.health *= 2
+	self.weapon.increaseDamageByMultiplier(2)
 	self.scale *= 1.7
+	healthBarController.setup(self, healthController, attributes.healthColor, isBoss)
+
+func death(_damageByLevelUp : bool = false) -> void:
+	defaultDeath()
+
+func defaultDeath(_damageByLevelUp: bool = false) -> void:
+	died.emit()
+	healthBarController.hideBars()
+	await animationController.waitAnimationFinished()
+	animationController.playDeath()
+
+	if not _damageByLevelUp: 
+		isntantiateDrop()
+	
+	fadeOutAndDisapear()
+	$CollisionShape2D.queue_free()

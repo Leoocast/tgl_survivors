@@ -60,7 +60,7 @@ func resume() -> void:
 	push_warning("GAME RESUMED")
 
 func registerEnemy(enemy: Enemy) -> void:
-	enemy.died_signal.connect(_on_enemy_died_suscription)
+	enemy.died.connect(_on_enemy_died_suscription)
 
 func showComboStuff() -> void:
 	comboLabel.show()

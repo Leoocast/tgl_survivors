@@ -26,10 +26,12 @@ func spawnEnemy() -> void:
 
 	var enemy : Enemy
 
-	if getIsBat():
-		enemy = BAT_ASSET.instantiate() as Bat
-	else:
-		enemy = SLIME_ASSET.instantiate() as Slime
+	# if getIsBat():
+	# 	enemy = BAT_ASSET.instantiate() as Bat
+	# else:
+	# 	enemy = SLIME_ASSET.instantiate() as Slime
+	
+	enemy = SLIME_ASSET.instantiate() as Slime
 
 	var zIndex = [0, 2].pick_random()
 

@@ -21,7 +21,8 @@ const ASSETS = {
 	},
 	"DROP": {
 		"XP": "res://scenes/game/exp_drop.tscn"
-	}
+	},
+	"DAMAGE_LABEL": "res://scenes/game/damage_label.tscn"
 }
 
 const PLAYER_SFX = {

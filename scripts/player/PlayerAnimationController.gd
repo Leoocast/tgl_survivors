@@ -29,7 +29,7 @@ func setupPlayer(_player: Player , ssjAura : Node2D) -> void:
 
 #Consumers
 func on_player_died() -> void:
-	var mousePosition = player.calculateMousePosition()
+	var mousePosition = player.getMouseDirection()
 	playDeathDirection(mousePosition)
 
 func on_taking_damage_started() -> void:
@@ -40,7 +40,7 @@ func on_taking_damage_finished() -> void:
 	modulateReset()
 
 func on_attack_animation_started() -> void:
-	var mousePosition = player.calculateMousePosition() 
+	var mousePosition = player.getMouseDirection() 
 
 	if player.attackController.firstAttack:
 		playAttackMouse(mousePosition)

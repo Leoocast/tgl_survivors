@@ -18,14 +18,8 @@ var sfx_hurt_asset = load("res://assets/audio/sound_effects/slime_hurt.wav")
 
 #-------------------------#
 func _ready():
-	self.setup({
-		"sfx_hurt": sfx_hurt_asset, 
-		"speed": SPEED,
-		"stopDistance": STOP_DISTANCE,
-		"health": HEALTH, 
-		"healthColor": Color8(214,0,71),
-		"sprite": $AnimatedSprite2D,
-	})
+
+	self.setup()
 
 	animationController.playIdle()
 	healthBarController.hideBars()

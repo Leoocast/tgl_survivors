@@ -63,3 +63,7 @@ func showHide(node: Node, time: float) -> void:
 	node.show()
 	await GameUtils.waitFor(time)
 	node.hide()
+
+#Validation
+func validateAttributes(attributes: Attributes, type: Node2D) -> void:
+	assert(attributes != null, "[" + type.name +  "]" + " No tiene atributos asigandos en el inspector." )
