@@ -22,6 +22,7 @@ var player : Player = GameUtils.getPlayer()
 
 #Internal
 var isPlayerInRange := false
+var currentHealth : float = 1
 
 #SFX
 @onready var soundEffectPlayer := AudioStreamPlayer.new()
@@ -31,7 +32,7 @@ signal died()
 #-------------------------#
 
 func setup() -> void:
-	GameUtils.validateAttributes(attributes, self)
+	GameUtils.validateEnemyAttributes(attributes, self)
 	setupComponents()
 	attackSuscriptions()
 	
@@ -42,7 +43,8 @@ func setup() -> void:
 	add_child(soundEffectPlayer)
 
 func setupComponents() -> void:
-	healthController.setup(self, attributes.health)
+	currentHealth = attributes.health
+	healthController.setup(self, currentHealth)
 	healthBarController.setup(self, healthController, attributes.healthColor, isBoss)
 	attackController.setup(self, weapon)
 	animationController.setup(sprite)
@@ -167,10 +169,9 @@ func convertIntoMiniBoss() -> void:
 
 func _deferredMiniBoss() -> void:
 	self.isBoss = true
-	#FIXME: No se debe modificar attributes.health, verificar como llamar a los controladores en convertMiniBoss.
-	self.attributes.health *= 2
 	self.weapon.increaseDamageByMultiplier(2)
 	self.scale *= 1.7
+	healthController.health = currentHealth * 2
 	healthBarController.setup(self, healthController, attributes.healthColor, isBoss)
 
 func death(_damageByLevelUp : bool = false) -> void:

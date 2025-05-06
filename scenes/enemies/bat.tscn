@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://dmacfmhocjbng"]
+[gd_scene load_steps=31 format=3 uid="uid://dmacfmhocjbng"]
 
 [ext_resource type="Script" uid="uid://djf57iglhnxni" path="res://scripts/controllers/HealthController.gd" id="1_18mee"]
 [ext_resource type="Texture2D" uid="uid://q0p403yh7k38" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-idle.png" id="1_rt4uy"]
-[ext_resource type="Script" uid="uid://brsqmbqrixtm7" path="res://scenes/enemies/bat.gd" id="1_ss5yy"]
+[ext_resource type="Script" uid="uid://brsqmbqrixtm7" path="res://scripts/enemies/Bat/bat.gd" id="1_ss5yy"]
+[ext_resource type="Resource" uid="uid://ck6dgwlj7f0ch" path="res://scripts/enemies/Bat/BatAttributes.tres" id="2_4ahko"]
 [ext_resource type="Texture2D" uid="uid://cd6mlaph3x4y7" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-attack.png" id="2_4k4o5"]
 [ext_resource type="Script" uid="uid://bd2ck67scl55k" path="res://scripts/controllers/AttackController.gd" id="2_jofwc"]
 [ext_resource type="Script" uid="uid://t0udjpnd1i5s" path="res://scripts/resources/Weapon.gd" id="2_m5s8h"]
@@ -152,6 +153,7 @@ radius = 21.0
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_ss5yy")
+attributes = ExtResource("2_4ahko")
 
 [node name="Weapon" type="Node2D" parent="."]
 unique_name_in_owner = true

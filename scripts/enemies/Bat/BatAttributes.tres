@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyAttributesResource" load_steps=4 format=3 uid="uid://ck6dgwlj7f0ch"]
+
+[ext_resource type="Script" uid="uid://dpxkmmg2u80xb" path="res://scripts/enemies/EnemyAttributesResource.gd" id="1_pvukq"]
+[ext_resource type="PackedScene" uid="uid://cpkcttnyqf0e" path="res://scenes/game/exp_drop.tscn" id="1_vtwow"]
+[ext_resource type="AudioStream" uid="uid://c72xd1lvv2bkt" path="res://assets/audio/sound_effects/slime_hurt.wav" id="3_kts5u"]
+
+[resource]
+script = ExtResource("1_pvukq")
+stopDistance = 70.0
+exp_drop_scene = ExtResource("1_vtwow")
+sfx_hurt = ExtResource("3_kts5u")
+health = 3.0
+healthColor = Color(0.607843, 0, 0, 1)
+attackDamage = 2.0
+attackCooldown = 0.3
+speed = 400.0
+critProb = 0.0
+metadata/_custom_type_script = "uid://dpxkmmg2u80xb"

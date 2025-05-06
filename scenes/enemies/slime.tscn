@@ -213,8 +213,6 @@ collision_layer = 8
 shape = SubResource("CircleShape2D_ankfk")
 debug_color = Color(0, 0.842083, 0.3018, 0.42)
 
-[node name="Boss" type="Node2D" parent="."]
-
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

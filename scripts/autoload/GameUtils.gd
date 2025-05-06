@@ -67,3 +67,18 @@ func showHide(node: Node, time: float) -> void:
 #Validation
 func validateAttributes(attributes: Attributes, type: Node2D) -> void:
 	assert(attributes != null, "[" + type.name +  "]" + " No tiene atributos asigandos en el inspector." )
+
+func validateEnemyAttributes(attributes: EnemyAttributesResource, type: Node2D) -> void:
+	validateAttributes(attributes, type)
+	assert(attributes.exp_drop_scene != null, validationMessage(type, "No tiene <Exp Drop Scene> asignada"))
+	assertWarning(attributes.sfx_hurt != null, validationMessage(type, "No tiene <Sfx Hurt> asignado"))
+	
+#Formatting
+func validationMessage(type: Node2D, message: String) -> String:
+	return "[" + type.name +  "] " + message
+
+func assertWarning(isThere : bool, message: String) -> void:
+	if isThere: 
+		return
+	
+	push_warning(message)
