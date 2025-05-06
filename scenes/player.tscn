@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b2vb8x52hlbhu" path="res://assets/sprites/rpg_sprites/battleChars/bchar_mage00-idle.png" id="6_smehm"]
 [ext_resource type="Texture2D" uid="uid://ccjhyd2iyaaro" path="res://assets/sprites/rpg_sprites/battleChars/bchar_mage00-movingForward.png" id="7_ur7pv"]
 [ext_resource type="PackedScene" uid="uid://bg0laxtfcxvd6" path="res://scenes/powers/fireBallPower.tscn" id="9_ur7pv"]
-[ext_resource type="PackedScene" uid="uid://bc4i6q7r02mdm" path="res://scenes/healthBar.tscn" id="11_3v2ag"]
+[ext_resource type="PackedScene" uid="uid://bc4i6q7r02mdm" path="res://scenes/game/health_bar.tscn" id="11_3v2ag"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
 atlas = ExtResource("5_smehm")

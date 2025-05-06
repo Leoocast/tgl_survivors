@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://bd2ck67scl55k" path="res://scripts/controllers/AttackController.gd" id="2_jofwc"]
 [ext_resource type="Script" uid="uid://t0udjpnd1i5s" path="res://scripts/resources/Weapon.gd" id="2_m5s8h"]
 [ext_resource type="Script" uid="uid://d3t8dbec6nskd" path="res://scripts/controllers/AnimationController.gd" id="3_ss5yy"]
-[ext_resource type="PackedScene" uid="uid://bc4i6q7r02mdm" path="res://scenes/healthBar.tscn" id="6_jofwc"]
+[ext_resource type="PackedScene" uid="uid://bc4i6q7r02mdm" path="res://scenes/game/health_bar.tscn" id="6_jofwc"]
 [ext_resource type="Texture2D" uid="uid://dxywyitix4k0r" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-dead.png" id="6_m0x8h"]
 [ext_resource type="Texture2D" uid="uid://c84svnu40lqio" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-damage.png" id="7_f0cyw"]
 

@@ -2,7 +2,7 @@ class_name LevelUpUI
 extends CanvasLayer
 
 #Preloads
-var UPGRADE_SCENE = preload("res://scenes/game/upgrade_option.tscn")
+var UPGRADE_SCENE = preload("res://scenes/UI/upgrade_option.tscn")
 
 #Nodes
 @onready var boxContainer = $CenterContainer/HBoxContainer

@@ -7,7 +7,7 @@ extends Control
 @onready var comboTimer = $ComboTimer
 
 #Systems
-var comboSystem: ComboSystem = ComboSystem.new()
+var comboSystem: PlayerComboSystem = PlayerComboSystem.new()
 
 #-------------------------#
 func _ready():

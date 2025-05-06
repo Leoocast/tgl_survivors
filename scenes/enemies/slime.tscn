@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://d3t8dbec6nskd" path="res://scripts/controllers/AnimationController.gd" id="4_ikdmk"]
 [ext_resource type="Texture2D" uid="uid://g1kbc8ggdt8b" path="res://assets/sprites/rpg_sprites/battleChars/bchar_slime00-idle.png" id="4_wj7tr"]
 [ext_resource type="Texture2D" uid="uid://cf7pafkjrx7qd" path="res://assets/sprites/rpg_sprites/battleChars/bchar_slime00-damage.png" id="5_yf8vt"]
-[ext_resource type="PackedScene" uid="uid://bc4i6q7r02mdm" path="res://scenes/healthBar.tscn" id="9_jjup5"]
+[ext_resource type="PackedScene" uid="uid://bc4i6q7r02mdm" path="res://scenes/game/health_bar.tscn" id="9_jjup5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jjup5"]
 atlas = ExtResource("2_8d70r")

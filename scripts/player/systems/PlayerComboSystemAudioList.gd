@@ -1,4 +1,4 @@
-class_name ComboSystemAudioList
+class_name PlayerComboSystemAudioList
 extends RefCounted
 
 var announcerAudios: Array[AudioStream] = [

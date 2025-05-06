@@ -1,4 +1,4 @@
-class_name ComboSystem
+class_name PlayerComboSystem
 extends RefCounted
 
 #Config
@@ -6,7 +6,7 @@ const KILL_THRESHOLD:= [15, 30, 50, 75, 100, 150, 250]
 const KILL_MESSAGES := ["DIRTY", "CRAZY","BRUTAL", "ANARCHY", "SAVAGE", "SSADISTIC", "SSSENSATIONAL"]
 const MESSAGE_DURATION := 2.0
 const COMBO_DURATION: float = 7
-var announcerAudios: Array[AudioStream] = ComboSystemAudioList.new().announcerAudios
+var announcerAudios: Array[AudioStream] = PlayerComboSystemAudioList.new().announcerAudios
 
 #Internal
 var timer : Timer

@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cq71a5wmgdsky" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Up-Sheet.png" id="4_muky4"]
 [ext_resource type="Texture2D" uid="uid://760mujhktmpl" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Down-Sheet.png" id="5_4wgry"]
 [ext_resource type="Script" uid="uid://bod00pxelc5x1" path="res://scripts/player/PlayerAnimationController.gd" id="5_ew0gd"]
-[ext_resource type="Script" uid="uid://chgnx7qk0pwkc" path="res://scripts/player/PlayerTrail.gd" id="6_2cq5b"]
+[ext_resource type="Script" uid="uid://chgnx7qk0pwkc" path="res://scripts/player/ui/PlayerTrail.gd" id="6_2cq5b"]
 [ext_resource type="Texture2D" uid="uid://c3drqk36trqc4" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Left-Sheet.png" id="6_4wgry"]
 [ext_resource type="Texture2D" uid="uid://biopw6ke005ye" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Right-Sheet.png" id="7_ruyvi"]
 [ext_resource type="Texture2D" uid="uid://cka4y6i5bwevc" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Up-Sheet.png" id="8_uo61b"]
@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://crwb41dlkyili" path="res://assets/sprites/san_jacinto/5_Template_Death_Left-Sheet.png" id="15_pauyt"]
 [ext_resource type="Texture2D" uid="uid://n2unsq4ttmv0" path="res://assets/sprites/san_jacinto/5_Template_Death_Right-Sheet.png" id="16_2cq5b"]
 [ext_resource type="Texture2D" uid="uid://budwjct5v7ss4" path="res://assets/sprites/san_jacinto/5_Template_Death_Up-Sheet.png" id="17_fo76y"]
-[ext_resource type="Script" uid="uid://b6fb3dkqyjvc3" path="res://scenes/weapons/ElTataSlayerMachete.gd" id="23_2bla2"]
+[ext_resource type="Script" uid="uid://b6fb3dkqyjvc3" path="res://scripts/player/weapons/ElTataSlayerMachete.gd" id="29_fo76y"]
 
 [sub_resource type="Curve" id="Curve_pauyt"]
 _data = [Vector2(0, 0.619601), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -1319,9 +1319,7 @@ debug_color = Color(0.914947, 8.29774e-05, 0.714501, 0.42)
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Weapon" type="Node2D" parent="."]
-script = ExtResource("23_2bla2")
-damage = 1.0
-weaponName = "Machete"
+script = ExtResource("29_fo76y")
 
 [node name="AttackArea" type="Area2D" parent="Weapon"]
 collision_mask = 2

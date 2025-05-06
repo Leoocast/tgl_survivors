@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://bc4i6q7r02mdm"]
 
-[ext_resource type="Script" uid="uid://dnnso753byh66" path="res://scripts/controllers/EnemyHealthBarController.gd" id="1_xpa3b"]
-[ext_resource type="Texture2D" uid="uid://bpmk6hvx25in3" path="res://assets/images/star.png" id="2_xpa3b"]
+[ext_resource type="Script" uid="uid://dnnso753byh66" path="res://scripts/controllers/EnemyHealthBarController.gd" id="1_arjs6"]
+[ext_resource type="Texture2D" uid="uid://bpmk6hvx25in3" path="res://assets/images/star.png" id="2_ierl6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xpa3b"]
 
@@ -88,7 +88,7 @@ offset_top = 18.0
 offset_right = 21.0
 offset_bottom = 20.0
 scale = Vector2(0.401799, 0.401799)
-script = ExtResource("1_xpa3b")
+script = ExtResource("1_arjs6")
 normalBarArray = [NodePath("Normal/BlackBar"), NodePath("Normal/MainBar"), NodePath("Normal/WhiteBar")]
 bossBarArray = [NodePath("Boss/BlackBar"), NodePath("Boss/MainBar"), NodePath("Boss/WhiteBar")]
 
@@ -171,4 +171,4 @@ show_percentage = false
 [node name="Star" type="Sprite2D" parent="Boss"]
 position = Vector2(-0.874, -0.163)
 scale = Vector2(0.360318, 0.360318)
-texture = ExtResource("2_xpa3b")
+texture = ExtResource("2_ierl6")
