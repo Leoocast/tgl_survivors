@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_pvukq")
-stopDistance = 70.0
+stopDistance = 10.0
 exp_drop_scene = ExtResource("1_vtwow")
 sfx_hurt = ExtResource("3_kts5u")
 health = 3.0

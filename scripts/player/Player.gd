@@ -61,13 +61,13 @@ func setupComponents() -> void:
 	
 #Suscriptions
 func healthSuscriptions() -> void: 
-	healthController.connect("died", animationController.on_player_died)
-	healthController.connect("taking_damage_started", animationController.on_taking_damage_started)
-	healthController.connect("taking_damage_finished", animationController.on_taking_damage_finished)
+	healthController.died.connect(animationController.on_player_died)
+	healthController.taking_damage_started.connect(animationController.on_taking_damage_started)
+	healthController.taking_damage_finished.connect(animationController.on_taking_damage_finished)
 
 func attackSuscriptions() -> void:
-	attackController.connect("attack_animation_started", animationController.on_attack_animation_started)
-	attackController.connect("attack_animation_started", sfxManager.on_attack_animation_started)
+	attackController.attack_animation_started.connect(animationController.on_attack_animation_started)
+	attackController.attack_animation_started.connect(sfxManager.on_attack_animation_started)
 
 func _physics_process(_delta: float) -> void:
 	if game.isPaused:

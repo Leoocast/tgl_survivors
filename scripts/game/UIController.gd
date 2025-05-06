@@ -3,15 +3,11 @@ extends CanvasLayer
 @onready var playerHealthBar := %PlayerHealthBar as HealthBarController
 @onready var player := %Player as Player
 @onready var xpLabel := $Control/XPLvl
-@onready var comboLabel := $Control/Combo
 @onready var playerXPBar := $Control/PlayerXP
 @onready var lvlUpUi = %LvlUpUI
 @onready var game = get_parent() as GameState
 @onready var upgradesController = %UpgradesController as UpgradesController
 
-#Internal
-#TODO: Combo controller
-var comboCounter := 0
 
 #-------------------------#
 func _ready():

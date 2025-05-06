@@ -38,11 +38,11 @@ func _pause_music():
 	musicPlayer.stream_paused = true
 
 func fadeInMusicAndPlay():
-	musicPlayer.stream_paused = false  # Reactiva la música
-	musicPlayer.volume_db = -80        # Asegúrate de que empieza en silencio
+	musicPlayer.stream_paused = false
+	musicPlayer.volume_db = -80      
 
 	var tween := create_tween()
-	tween.tween_property(musicPlayer, "volume_db", 0, 0.4)  # Subida suave
+	tween.tween_property(musicPlayer, "volume_db", 0, 0.4)  
 
 func playSelectionUpdateMusic(stream: AudioStreamOggVorbis) -> void:
 	selectionUpdateMusicPlayer.stream = stream
