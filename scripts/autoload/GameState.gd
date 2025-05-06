@@ -21,15 +21,14 @@ var currentPhase: GamePhase = GamePhase.RUNNING
 var isPaused: bool = false
 
 #Ref Inyection
-var comboHud: HudComboController
+var comboHud: HUDComboController
 var player: Player
 
-func registerComboHud(_comboHud: HudComboController) -> void:
+func registerComboHud(_comboHud: HUDComboController) -> void:
 	self.comboHud = _comboHud
 
 func registerPlayer(_player: Player) -> void:
 	self.player = _player
-
 
 #-------------------------#
 func setPhase(newPhase: GamePhase) -> void:

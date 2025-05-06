@@ -2,7 +2,7 @@ class_name Main
 extends Node2D
 
 #Nodes
-@onready var comboHud = %HudComboController as HudComboController
+@onready var comboHud = %HUDComboController as HUDComboController
 
 #FIXME: Audio
 var reawakeR = load("res://assets/audio/music/ReawakeR_-Instrumental-.ogg")

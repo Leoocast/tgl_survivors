@@ -1,4 +1,4 @@
-class_name HudComboController
+class_name HUDComboController
 extends Control
 
 #Nodes

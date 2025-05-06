@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ck0sepqdcmnr" path="res://scenes/player/sanJacintoElTataSlayer.tscn" id="2_2yqfl"]
 [ext_resource type="PackedScene" uid="uid://biwnsoaronbtp" path="res://scenes/HUD/playerHealthBar.tscn" id="4_41jvh"]
 [ext_resource type="PackedScene" uid="uid://dqewskq6n0yb0" path="res://scenes/game/enemy_spawner.tscn" id="4_fdb3b"]
-[ext_resource type="Script" uid="uid://c8mdvk6s6qita" path="res://scripts/game/UIController.gd" id="4_h5e45"]
+[ext_resource type="Script" uid="uid://c8mdvk6s6qita" path="res://scripts/HUD/PlayerHUD.gd" id="4_h5e45"]
 [ext_resource type="FontFile" uid="uid://bncjg28utk7b4" path="res://assets/fonts/Pixellari.ttf" id="6_h5e45"]
 [ext_resource type="FontFile" uid="uid://c8vs1sqrongty" path="res://assets/fonts/Another Danger - Demo.otf" id="7_6d208"]
 [ext_resource type="Script" uid="uid://undnntiqooxe" path="res://scripts/HUD/HudComboController.gd" id="8_bo8jn"]
@@ -108,7 +108,7 @@ scale = Vector2(7.75478, 7.75478)
 theme_override_fonts/font = ExtResource("6_h5e45")
 text = "0"
 
-[node name="HudComboController" type="Control" parent="HUD"]
+[node name="HUDComboController" type="Control" parent="HUD"]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 1
@@ -117,7 +117,7 @@ anchor_right = 1.0
 grow_horizontal = 0
 script = ExtResource("8_bo8jn")
 
-[node name="Label" type="Label" parent="HUD/HudComboController"]
+[node name="Label" type="Label" parent="HUD/HUDComboController"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -134,7 +134,7 @@ theme_override_font_sizes/font_size = 16
 text = "ASSASSINATION"
 horizontal_alignment = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD/HudComboController"]
+[node name="ProgressBar" type="ProgressBar" parent="HUD/HUDComboController"]
 modulate = Color(1, 1, 1, 0.262745)
 layout_mode = 1
 anchors_preset = 7
@@ -153,7 +153,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_crk6h")
 value = 70.0
 show_percentage = false
 
-[node name="ComboTimer" type="Timer" parent="HUD/HudComboController"]
+[node name="ComboTimer" type="Timer" parent="HUD/HUDComboController"]
 wait_time = 7.0
 
 [node name="LvlUpUI" parent="." instance=ExtResource("9_amjvs")]

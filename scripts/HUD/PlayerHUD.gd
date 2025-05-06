@@ -1,3 +1,4 @@
+class_name PlayerHUD
 extends CanvasLayer
 
 @onready var playerHealthBar := %PlayerHealthBar as HealthBarController
