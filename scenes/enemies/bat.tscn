@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://dmacfmhocjbng"]
+[gd_scene load_steps=30 format=3 uid="uid://dmacfmhocjbng"]
 
 [ext_resource type="Script" uid="uid://djf57iglhnxni" path="res://scripts/controllers/HealthController.gd" id="1_18mee"]
 [ext_resource type="Texture2D" uid="uid://q0p403yh7k38" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-idle.png" id="1_rt4uy"]
 [ext_resource type="Script" uid="uid://brsqmbqrixtm7" path="res://scenes/enemies/bat.gd" id="1_ss5yy"]
 [ext_resource type="Texture2D" uid="uid://cd6mlaph3x4y7" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-attack.png" id="2_4k4o5"]
 [ext_resource type="Script" uid="uid://bd2ck67scl55k" path="res://scripts/controllers/AttackController.gd" id="2_jofwc"]
+[ext_resource type="Script" uid="uid://t0udjpnd1i5s" path="res://scripts/interfaces/Weapon.gd" id="2_m5s8h"]
 [ext_resource type="Script" uid="uid://d3t8dbec6nskd" path="res://scripts/controllers/AnimationController.gd" id="3_ss5yy"]
 [ext_resource type="PackedScene" uid="uid://bc4i6q7r02mdm" path="res://scenes/healthBar.tscn" id="6_jofwc"]
 [ext_resource type="Texture2D" uid="uid://dxywyitix4k0r" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-dead.png" id="6_m0x8h"]
@@ -151,6 +152,13 @@ radius = 21.0
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_ss5yy")
+
+[node name="Weapon" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_m5s8h")
+damage = 2.0
+cooldown = 0.3
+metadata/_custom_type_script = "uid://t0udjpnd1i5s"
 
 [node name="Controllers" type="Node" parent="."]
 

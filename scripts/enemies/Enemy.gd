@@ -6,19 +6,19 @@ const DAMAGE_LABEL_ASSET = preload("res://scenes/game/damage_label.tscn")
 
 #Nodes
 @onready var healthController := %HealthController as HealthController
-@onready var healthBarController := %HealthBar as EnemyHealthBarController
 @onready var attackController := %AttackController as AttackController
 @onready var animationController := %AnimationController as AnimationController
+@onready var healthBarController := %HealthBar as EnemyHealthBarController
+@onready var weapon := %Weapon as Weapon
 
 #Config
 var speed : float 
 var stopDistance : float
-var weapon: Weapon
-var player: Player
 var game : GameState
 var isBoss := false
+var player: Player
+
 #Internal
-var isTakingDamage := false
 var isPlayerInRange := false
 
 #SFX
@@ -29,17 +29,16 @@ var sfx_hurt : AudioStream
 func setup(data: Dictionary) -> void:
 	self.speed = data.speed
 	self.stopDistance = data.stopDistance 
-	self.weapon = data.weapon
 	self.sfx_hurt = data.sfx_hurt
 
 	#FIXME:
 	if isBoss:
 		data.health *= 2
-		data.weapon.damage *= 2
+		weapon.damage *= 2
 
 	healthController.setup(self, data.health)
 	healthBarController.setup(self, healthController, data.healthColor, isBoss)
-	attackController.setup(self, data.weapon)
+	attackController.setup(self, weapon)
 	animationController.setup(data.sprite)
 	add_child(soundEffectPlayer)
 
@@ -53,7 +52,7 @@ func setupPlayer(_game : GameState, zIndex : int = 0 ) -> void:
 	self.z_index = zIndex
 
 func moveTowardsPlayer() -> void:
-	if player == null or healthController.isDead or attackController.isAttacking or isTakingDamage: return
+	if player == null or healthController.isDead or attackController.isAttacking or healthController.isTakingDamage: return
 	if self.global_position == Vector2.ZERO: return
 
 	var distance = global_position.distance_to(player.global_position)
@@ -64,7 +63,7 @@ func moveTowardsPlayer() -> void:
 		move_and_slide()
 
 func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic : bool = false) -> void:
-	isTakingDamage = true
+	healthController.isTakingDamage = true
 	healthController.takeDamage(damage)
 
 	showDamageLabel(damage, isCritic)
@@ -78,7 +77,7 @@ func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic : bool = 
 	else:
 		await animationController.waitAnimationFinished()
 		animationController.playIdle()
-	isTakingDamage = false
+	healthController.isTakingDamage = false
 
 func attackPlayer() -> void:
 	if not isPlayerInRange or healthController.isDead or attackController.isAttacking: 

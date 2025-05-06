@@ -17,15 +17,16 @@ var sfx_hurt_asset = load("res://assets/audio/sound_effects/slime_hurt.wav")
 
 #-------------------------#
 func _ready():
-	SLIME_WEAPON = Weapon.new(1, 0.4)
-	
 	self.setup({
 		"sfx_hurt": sfx_hurt_asset, 
 		"speed": SPEED,
 		"stopDistance": STOP_DISTANCE,
 		"health": HEALTH, 
 		"healthColor": Color8(214,0,71),
-		"weapon": SLIME_WEAPON,
+		"weapon": {
+			"damage:": 1.0,
+			"cooldown:": 0.4
+		}		,
 		"sprite": $AnimatedSprite2D,
 	})
 

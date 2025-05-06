@@ -12,6 +12,8 @@ extends CharacterBody2D
 @onready var game = get_parent() as GameState
 
 #Nodes
+
+@onready var weapon: Weapon = $Weapon 
 @onready var collisionAttackMap := PlayerAttackCollisionMap.new()
 @onready var attackArea := $Weapon/AttackArea
 @onready var levelUpDamageArea := $LevelUpDamageArea
@@ -31,19 +33,16 @@ var updatesManager: PlayerUpdatesManager = PlayerUpdatesManager.new()
 
 #Internal
 var speed := baseSpeed
-var weapon : Weapon
 var auraDamage := 3.0
 var currentCritProb: float = critProb
 
 #-------------------------#
 func _ready() -> void:
 	GameUtils.registerInGroup(self, Constants.GROUPS.PLAYER)
-	collisionAttackMap.setup(attackArea)
-	weapon = Weapon.new(1, 0)
-	setupControllers()
+	setupComponents()
 	disableAllAttackCollisions()
 
-func setupControllers() -> void:
+func setupComponents() -> void:
 	animationController.setupPlayer(self, ssjAura)
 	healthController.setup(self, health)
 	attackController.setup(self, weapon)
@@ -52,6 +51,8 @@ func setupControllers() -> void:
 	updatesManager.setupPlayer(self)
 	sfxManager.setupPlayer(self)
 	trail.setupPlayer(self)
+	weapon.setup(1,0)
+	collisionAttackMap.setup(attackArea)
 
 	healthSuscriptions()
 	attackSuscriptions()
