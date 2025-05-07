@@ -17,7 +17,7 @@ const DAMAGE_LABEL_ASSET = preload(PATHS.SCENES.DAMAGE_LABEL)
 
 #Config
 var isBoss: bool = false
-var player: Player = GameUtils.getPlayer()
+var player: Player 
 
 #Internal
 var isPlayerInRange: bool = false
@@ -30,7 +30,12 @@ var currentHealth: float = 1
 signal died()
 
 #-------------------------#
+func setupPlayer() -> void:
+	player = GameUtils.getPlayer()
+
 func setup() -> void:
+	
+	setupPlayer()
 	GameUtils.validateEnemyAttributes(attributes, self)
 	setupComponents()
 	attackSuscriptions()

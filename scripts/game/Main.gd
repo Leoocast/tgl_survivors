@@ -10,7 +10,7 @@ extends Node2D
 var reawakeR = load("res://assets/audio/music/ReawakeR_-Instrumental-.ogg")
 
 #-------------------------#
-func _ready() -> void:
+func _ready() -> void:	
 	GameState.registerComboHud(comboHud)
 	GameState.registerPlayer(player)
 	GameState.registerLevelUpUI(levelUpUi)

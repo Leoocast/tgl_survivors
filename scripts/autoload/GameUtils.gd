@@ -23,6 +23,12 @@ func getPlayerCollider() -> CollisionShape2D:
 func registerInGroup(node: Node, group: String) -> void:
 	node.add_to_group(group)
 
+func waitForPlayer() -> void:
+	while getPlayer() == null:
+		await waitProcessFrame()
+
+	return getPlayer()
+
 #Sprites / Tweens
 func createTween() -> void:
 	return tree.create_tween()
@@ -63,6 +69,9 @@ func showHide(node: Node, time: float) -> void:
 	node.show()
 	await GameUtils.waitFor(time)
 	node.hide()
+
+func waitProcessFrame() -> void:
+	await tree.process_frame
 
 #Validation
 func validateAttributes(attributes: Attributes, type: Node2D) -> void:

@@ -3,7 +3,7 @@ extends Node
 
 #Config
 const SPEED: float = 1500
-const DURATION: float = 0.2
+const DURATION: float = 0.14
 const COOLDOWN: float = 0.5
 
 #Setup player
@@ -38,6 +38,8 @@ func tryDash() -> void:
 	await GameUtils.waitFor(DURATION)
 	isDashing = false
 	
+	await smoothStop()
+
 	# Cooldown
 	await GameUtils.waitFor(COOLDOWN)
 	canDash = true
@@ -45,3 +47,11 @@ func tryDash() -> void:
 func executeDash() -> void:
 	player.velocity = dashDirection * SPEED
 	player.move_and_slide()
+
+func smoothStop() -> void:
+	var velocity = dashDirection * SPEED
+	for i in 10:
+		await get_tree().create_timer(0.01).timeout
+		velocity *= 0.75
+		player.velocity = velocity
+		player.move_and_slide()

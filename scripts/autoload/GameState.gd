@@ -11,6 +11,9 @@ enum GamePhase {
 	VICTORY
 }
 
+#Test
+var isTestMode = false
+
 #Signals
 signal phase_changed(newPhase: GamePhase)
 signal game_paused()
@@ -38,6 +41,11 @@ func registerLevelUpUI(_levelUpUI: LevelUpUI) -> void:
 	levelUpUI.upgrade_completed.connect(player.healthController.on_upgrade_completed)
 
 #-------------------------#
+
+func _ready():
+	pass
+	# useTestMode()
+
 func setPhase(newPhase: GamePhase) -> void:
 	if currentPhase == newPhase:
 		return
@@ -77,3 +85,8 @@ func on_player_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 
 func on_upgrade_completed() -> void:
 	resume()
+
+func useTestMode() -> void:
+	push_warning("<< USING TEST MODE >>")
+	push_warning("Player will not available with: GameUtils.getPlayer()")
+	isTestMode = true

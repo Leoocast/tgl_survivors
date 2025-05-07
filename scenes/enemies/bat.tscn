@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dmacfmhocjbng"]
+[gd_scene load_steps=32 format=3 uid="uid://dmacfmhocjbng"]
 
 [ext_resource type="Script" uid="uid://djf57iglhnxni" path="res://scripts/controllers/HealthController.gd" id="1_18mee"]
 [ext_resource type="Texture2D" uid="uid://q0p403yh7k38" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-idle.png" id="1_rt4uy"]
@@ -140,14 +140,16 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4k4o5"]
-radius = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ahko"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jofwc"]
-radius = 10.7556
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ahko"]
+radius = 8.40733
+height = 20.0175
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ss5yy"]
-radius = 21.0
+radius = 31.9339
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mu8he"]
 
 [node name="Bat" type="CharacterBody2D"]
 z_index = 99
@@ -183,9 +185,9 @@ sprite_frames = SubResource("SpriteFrames_ss5yy")
 animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
-scale = Vector2(2.29811, 2.29811)
-shape = SubResource("CircleShape2D_4k4o5")
+light_mask = 4
+visibility_layer = 4
+shape = SubResource("CircleShape2D_4ahko")
 
 [node name="HealthBar" parent="." instance=ExtResource("6_jofwc")]
 offset_left = -47.0
@@ -195,22 +197,40 @@ offset_bottom = -64.0
 scale = Vector2(4.73245, 4.73245)
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 scale = Vector2(2.49782, 2.49782)
 collision_layer = 8
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(16, 8.407)
-shape = SubResource("CircleShape2D_jofwc")
+position = Vector2(17.215, 2.80244)
+shape = SubResource("CapsuleShape2D_4ahko")
 debug_color = Color(0.947928, 2.69532e-06, 0.580758, 0.42)
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.53212, 1.53212)
 collision_layer = 8
 
 [node name="PlayerDetector" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1, -2)
+scale = Vector2(1.07238, 1.07238)
 shape = SubResource("CircleShape2D_ss5yy")
 debug_color = Color(0, 0.842083, 0.3018, 0.42)
+
+[node name="SeparationArea" type="Area2D" parent="."]
+light_mask = 8
+visibility_layer = 4
+scale = Vector2(7.38739, 7.38739)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationArea"]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-1.70402, -4.68605)
+scale = Vector2(3.34923, 3.34923)
+shape = SubResource("CircleShape2D_mu8he")
+debug_color = Color(0.628343, 0.357853, 0.981004, 0.42)
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

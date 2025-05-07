@@ -1370,6 +1370,7 @@ scale = Vector2(-1, 1)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
 [node name="ExpArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 5
 
@@ -1377,6 +1378,7 @@ collision_mask = 5
 shape = SubResource("CircleShape2D_pauyt")
 
 [node name="LevelUpDamageArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 2
 
