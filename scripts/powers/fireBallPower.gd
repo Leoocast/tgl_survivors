@@ -1,7 +1,7 @@
 extends Node2D
 
 #Preload
-const fireBall_asset = preload(PATHS.ASSETS.PROJECTILES.FIRE_BAll) 
+const fireBall_asset = preload(PATHS.SCENES.PROJECTILES.FIRE_BAll) 
 
 #Config
 const cooldown: float = 0.3

@@ -36,7 +36,9 @@ func spawnEnemy() -> void:
 	if getIsBoss():
 		enemy.convertIntoMiniBoss()
 
-	enemy.setupZIndex(zIndex)
+	if enemy is not Bat:
+		enemy.setupZIndex(zIndex)
+
 	spawner.progress_ratio = randf()
 	enemy.global_position = spawner.global_position
 	main.registerEnemy(enemy)

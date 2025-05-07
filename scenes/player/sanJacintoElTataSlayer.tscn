@@ -1320,9 +1320,12 @@ debug_color = Color(0.914947, 8.29774e-05, 0.714501, 0.42)
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("29_fo76y")
+damage = 1.0
+cooldown = 0.2
+weaponName = "Machete"
 
 [node name="AttackArea" type="Area2D" parent="Weapon"]
-collision_mask = 2
+collision_mask = 6
 
 [node name="DownCollision" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
 visible = false

@@ -150,8 +150,9 @@ radius = 10.7556
 radius = 21.0
 
 [node name="Bat" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 2
+z_index = 99
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_ss5yy")
 attributes = ExtResource("2_4ahko")
 

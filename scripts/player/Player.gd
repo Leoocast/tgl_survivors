@@ -51,7 +51,6 @@ func setupComponents() -> void:
 	updatesManager.setupPlayer(self)
 	sfxManager.setupPlayer(self)
 	trail.setupPlayer(self)
-	weapon.setup(attributes.attackDamage, attributes.attackCooldown)
 	collisionAttackMap.setup(attackArea)
 
 	healthSuscriptions()
