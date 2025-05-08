@@ -15,3 +15,4 @@ void fragment(){
 	
 	COLOR.a = texture_color.a;
 }
+
