@@ -13,6 +13,8 @@ const BAT_ASSET = preload(PATHS.SCENES.ENEMIES.BAT)
 const BOSS_PROB: float = .03
 const BAT_PROB: float = .1
 
+var counter = 0
+
 #-------------------------#
 func _process(_delta):
 
@@ -39,6 +41,8 @@ func spawnEnemy() -> void:
 	if enemy is not Bat:
 		enemy.setupZIndex(zIndex)
 
+	enemy.died.connect(on_enemy_died)
+
 	spawner.progress_ratio = randf()
 	enemy.global_position = spawner.global_position
 	main.registerEnemy(enemy)
@@ -55,5 +59,12 @@ func _on_timer_timeout() -> void:
 	if GameState.isNotRunning():
 		return
 		
-	#FIXME:
+	if counter >= 500:
+		return
+
 	spawnEnemy()
+	print("Enemies: ", counter)
+	counter += 1
+
+func on_enemy_died() -> void:
+	counter -= 1

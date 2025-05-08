@@ -7,14 +7,14 @@ extends Node2D
 @onready var player: Player = %Player as Player
 
 #FIXME: Audio
-var reawakeR = load("res://assets/audio/music/ReawakeR_-Instrumental-.ogg")
+var level1_music= load("res://assets/audio/music/Level_1_Music.ogg")
 
 #-------------------------#
 func _ready() -> void:	
 	GameState.registerComboHud(comboHud)
 	GameState.registerPlayer(player)
 	GameState.registerLevelUpUI(levelUpUi)
-	# AudioManager.playMusic(reawakeR)
+	AudioManager.playMusic(level1_music)
 
 func registerEnemy(enemy: Enemy) -> void:
 	enemy.died.connect(comboHud.comboSystem.on_enemy_died)

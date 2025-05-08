@@ -244,3 +244,123 @@ rotation = 0.00248113
 [node name="Bat20" parent="." instance=ExtResource("10_yk7ts")]
 position = Vector2(-282, -263)
 rotation = 0.00248113
+
+[node name="Bat21" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1818, 1374)
+rotation = 0.00248113
+
+[node name="Bat22" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2074, 1308)
+rotation = 0.00248113
+
+[node name="Bat23" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1907, 1191)
+rotation = 0.00248113
+
+[node name="Bat24" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1811, 1251)
+rotation = 0.00248113
+
+[node name="Bat25" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2067, 1185)
+rotation = 0.00248113
+
+[node name="Bat26" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1900, 1068)
+rotation = 0.00248113
+
+[node name="Bat27" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2187, 1966)
+rotation = 0.00248113
+
+[node name="Bat28" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2443, 1900)
+rotation = 0.00248113
+
+[node name="Bat29" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2276, 1783)
+rotation = 0.00248113
+
+[node name="Bat30" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2180, 1843)
+rotation = 0.00248113
+
+[node name="Bat31" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2436, 1777)
+rotation = 0.00248113
+
+[node name="Bat32" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2269, 1660)
+rotation = 0.00248113
+
+[node name="Bat33" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2493, 1357)
+rotation = 0.00248113
+
+[node name="Bat34" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2749, 1291)
+rotation = 0.00248113
+
+[node name="Bat35" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2582, 1174)
+rotation = 0.00248113
+
+[node name="Bat36" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2486, 1234)
+rotation = 0.00248113
+
+[node name="Bat37" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2742, 1168)
+rotation = 0.00248113
+
+[node name="Bat38" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2575, 1051)
+rotation = 0.00248113
+
+[node name="Bat39" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2132, 840)
+rotation = 0.00248113
+
+[node name="Bat40" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-2388, 774)
+rotation = 0.00248113
+
+[node name="Bat41" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1251, -363)
+rotation = 0.00248113
+
+[node name="Bat42" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1507, -429)
+rotation = 0.00248113
+
+[node name="Bat43" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1340, -546)
+rotation = 0.00248113
+
+[node name="Bat44" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1244, -486)
+rotation = 0.00248113
+
+[node name="Bat45" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1500, -552)
+rotation = 0.00248113
+
+[node name="Bat46" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1333, -669)
+rotation = 0.00248113
+
+[node name="Bat47" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1620, 229)
+rotation = 0.00248113
+
+[node name="Bat48" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1876, 163)
+rotation = 0.00248113
+
+[node name="Bat49" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1709, 45.9998)
+rotation = 0.00248113
+
+[node name="Bat50" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(-1613, 106)
+rotation = 0.00248113

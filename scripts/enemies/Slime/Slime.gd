@@ -6,7 +6,7 @@ func _ready():
 	self.setup()
 
 func _physics_process(_delta):
-	defaultProcess()
+	defaultProcess(calculateSeparation())
 
 # Signals
 # El frame en el que puede atacar

@@ -11,6 +11,7 @@ const DAMAGE_LABEL_ASSET = preload(PATHS.SCENES.DAMAGE_LABEL)
 @onready var healthBarController: EnemyHealthBarController = %HealthBar as EnemyHealthBarController
 @onready var weapon: Weapon = %Weapon as Weapon
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var separationArea : Area2D = $SeparationArea
 
 #Attributes
 @export var attributes: EnemyAttributesResource
@@ -18,6 +19,7 @@ const DAMAGE_LABEL_ASSET = preload(PATHS.SCENES.DAMAGE_LABEL)
 #Config
 var isBoss: bool = false
 var player: Player 
+const SEPARATION_STRENGTH: float = 14000
 
 #Internal
 var isPlayerInRange: bool = false
@@ -132,6 +134,22 @@ func flipTowardsPlayer():
 
 	GameUtils.flipColliderHorizontal($AttackArea/AttackCollision, shouldFlip)
 	animationController.flipHorizontal(shouldFlip)
+
+func calculateSeparation() -> Vector2:
+	var result = Vector2.ZERO
+
+	var overlappingBoddies = separationArea.get_overlapping_bodies()
+
+	for body in overlappingBoddies:
+		if body is not Enemy: continue
+
+		var offset = (global_position - body.global_position) as Vector2
+		var distance = offset.length()
+
+		if distance > 0:
+			result += offset.normalized() / distance
+	
+	return result * SEPARATION_STRENGTH
 
 #Consumers
 #TODO si crece: Crear EnemyAnimationController

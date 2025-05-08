@@ -1,12 +1,6 @@
 class_name Bat
 extends Enemy
 
-#Nodes
-@onready var separationArea : Area2D = $SeparationArea
-
-#Config
-const SEPARATION_STRENGTH: float = 14000
-
 #-------------------------#
 func _ready():
 	self.setup()
@@ -14,23 +8,6 @@ func _ready():
 
 func _physics_process(_delta):
 	defaultProcess(calculateSeparation())
-
-func calculateSeparation() -> Vector2:
-	var result = Vector2.ZERO
-
-	var overlappingBoddies = separationArea.get_overlapping_bodies()
-
-	for body in overlappingBoddies:
-		if body is not Enemy: continue
-
-		var offset = (global_position - body.global_position) as Vector2
-		var distance = offset.length()
-
-		if distance > 0:
-			result += offset.normalized() / distance
-	
-	return result * SEPARATION_STRENGTH
-
 
 # Signals
 # El frame en el que puede atacar

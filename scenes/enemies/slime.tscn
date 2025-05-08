@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ctfsj4jc7odve"]
+[gd_scene load_steps=31 format=3 uid="uid://ctfsj4jc7odve"]
 
 [ext_resource type="Script" uid="uid://dr1vtkhrqpsps" path="res://scripts/enemies/Slime/Slime.gd" id="1_ahq63"]
 [ext_resource type="Script" uid="uid://djf57iglhnxni" path="res://scripts/controllers/HealthController.gd" id="2_7uxu4"]
@@ -152,10 +152,13 @@ radius = 8.06226
 [sub_resource type="CircleShape2D" id="CircleShape2D_ankfk"]
 radius = 18.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ikdmk"]
+radius = 4.58316
+
 [node name="Slime" type="CharacterBody2D"]
 scale = Vector2(4.81573, 4.81573)
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("1_ahq63")
 attributes = ExtResource("2_ikdmk")
 
@@ -212,6 +215,19 @@ collision_layer = 8
 [node name="PlayerDetector" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_ankfk")
 debug_color = Color(0, 0.842083, 0.3018, 0.42)
+
+[node name="SeparationArea" type="Area2D" parent="."]
+light_mask = 8
+visibility_layer = 4
+scale = Vector2(6.44732, 6.44732)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationArea"]
+light_mask = 4
+visibility_layer = 4
+shape = SubResource("CircleShape2D_ikdmk")
+debug_color = Color(0.628343, 0.357853, 0.981004, 0.42)
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
