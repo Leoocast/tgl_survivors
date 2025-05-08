@@ -13,22 +13,7 @@ func _ready():
 	# collision.rotation = 45
 
 func _physics_process(_delta):
-	defaultProcess()
-
-func moveTowardsPlayer() -> void:
-	
-	#TODO FSM
-	if player == null or healthController.isDead or attackController.isAttacking or healthController.isTakingDamage: return
-	if self.global_position == Vector2.ZERO: return
-
-	var distance = global_position.distance_to(player.global_position)
-
-	if distance > attributes.stopDistance:
-		var direction = global_position.direction_to(player.global_position)
-
-		var repulsion = calculateSeparation()
-		self.velocity = (direction * attributes.speed + repulsion).limit_length(attributes.speed)
-		move_and_slide()
+	defaultProcess(calculateSeparation())
 
 func calculateSeparation() -> Vector2:
 	var result = Vector2.ZERO

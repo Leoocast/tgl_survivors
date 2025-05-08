@@ -57,11 +57,11 @@ func attackSuscriptions() -> void:
 	attackController.connect("attack_animation_started", on_attack_animation_started)
 	attackController.connect("attack_animation_finished", on_attack_animation_finished)
 
-func defaultProcess() -> void:
+func defaultProcess(repulsion : Vector2 = Vector2.ZERO) -> void:
 	if GameState.isNotRunning():
 		return
 
-	moveTowardsPlayer()
+	moveTowardsPlayer(repulsion)
 	flipTowardsPlayer()
 	attackPlayer()
 
@@ -71,7 +71,7 @@ func defaultProcess() -> void:
 func setupZIndex(zIndex: int = 0 ) -> void:
 	self.z_index = zIndex
 
-func moveTowardsPlayer() -> void:
+func moveTowardsPlayer(repulsion : Vector2 = Vector2.ZERO) -> void:
 	if player == null or healthController.isDead or attackController.isAttacking or healthController.isTakingDamage: return
 	if self.global_position == Vector2.ZERO: return
 
@@ -79,7 +79,11 @@ func moveTowardsPlayer() -> void:
 
 	if distance > attributes.stopDistance:
 		var direction = global_position.direction_to(player.global_position)
-		self.velocity = direction * attributes.speed
+
+		if repulsion == Vector2.ZERO:
+			self.velocity = direction * attributes.speed
+		else:
+			self.velocity = (direction * attributes.speed + repulsion).limit_length(attributes.speed)
 		move_and_slide()
 
 func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = false) -> void:
