@@ -5,8 +5,8 @@ extends Enemy
 func _ready():
 	self.setup()
 
-func _physics_process(_delta):
-	defaultProcess(calculateSeparation())
+func _physics_process(delta):
+	defaultProcess(delta, calculateSeparation())
 
 # Signals
 # El frame en el que puede atacar

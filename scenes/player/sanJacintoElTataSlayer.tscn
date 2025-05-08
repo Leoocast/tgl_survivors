@@ -1311,6 +1311,8 @@ scale = Vector2(1.00403, 1)
 sprite_frames = SubResource("SpriteFrames_4wgry")
 animation = &"attack_2_left"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)
 shape = SubResource("CapsuleShape2D_rnjux")
@@ -1322,6 +1324,9 @@ debug_color = Color(0.914947, 8.29774e-05, 0.714501, 0.42)
 script = ExtResource("29_fo76y")
 damage = 1.0
 weaponName = "Machete"
+hasKnockback = true
+knockbackPower = 500.0
+knockbackCriticPower = 800.0
 
 [node name="AttackArea" type="Area2D" parent="Weapon"]
 collision_mask = 6

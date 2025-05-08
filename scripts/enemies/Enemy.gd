@@ -7,7 +7,7 @@ const DAMAGE_LABEL_ASSET = preload(PATHS.SCENES.DAMAGE_LABEL)
 #Nodes
 @onready var healthController: HealthController = %HealthController as HealthController
 @onready var attackController: AttackController = %AttackController as AttackController
-@onready var animationController: AnimationController = %AnimationController as AnimationController
+@onready var animationController: EnemyAnimationController = %AnimationController as EnemyAnimationController
 @onready var healthBarController: EnemyHealthBarController = %HealthBar as EnemyHealthBarController
 @onready var weapon: Weapon = %Weapon as Weapon
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -17,9 +17,9 @@ const DAMAGE_LABEL_ASSET = preload(PATHS.SCENES.DAMAGE_LABEL)
 @export var attributes: EnemyAttributesResource
 
 #Config
-var isBoss: bool = false
+@export var isBoss: bool = false
 var player: Player 
-const SEPARATION_STRENGTH: float = 14000
+var knockbackVelocity: Vector2 = Vector2.ZERO
 
 #Internal
 var isPlayerInRange: bool = false
@@ -48,6 +48,9 @@ func setup() -> void:
 	disableAttackHitbox()
 	add_child(soundEffectPlayer)
 
+	if isBoss:
+		convertIntoMiniBoss()
+
 func setupComponents() -> void:
 	currentHealth = attributes.health
 	healthController.setup(self, currentHealth)
@@ -59,7 +62,7 @@ func attackSuscriptions() -> void:
 	attackController.connect("attack_animation_started", on_attack_animation_started)
 	attackController.connect("attack_animation_finished", on_attack_animation_finished)
 
-func defaultProcess(repulsion : Vector2 = Vector2.ZERO) -> void:
+func defaultProcess(delta : float, repulsion : Vector2 = Vector2.ZERO) -> void:
 	if GameState.isNotRunning():
 		return
 
@@ -67,26 +70,35 @@ func defaultProcess(repulsion : Vector2 = Vector2.ZERO) -> void:
 	flipTowardsPlayer()
 	attackPlayer()
 
-	if healthController.isDamaged && not healthBarController.alreadyShowed:
-		healthBarController.showBars()
+	# if healthController.isDamaged && not healthBarController.alreadyShowed:
+	# 	healthBarController.showBars()
+	
+	knockbackVelocity = knockbackVelocity.move_toward(Vector2.ZERO, 1000 * delta)
 
 func setupZIndex(zIndex: int = 0 ) -> void:
 	self.z_index = zIndex
 
 func moveTowardsPlayer(repulsion : Vector2 = Vector2.ZERO) -> void:
-	if player == null or healthController.isDead or attackController.isAttacking or healthController.isTakingDamage: return
-	if self.global_position == Vector2.ZERO: return
+	if player == null or healthController.isDead or attackController.isAttacking or healthController.isTakingDamage:
+		return
+	
+	if global_position == Vector2.ZERO:
+		return
 
-	var distance = global_position.distance_to(player.global_position)
+	var direction = global_position.direction_to(player.global_position)
 
-	if distance > attributes.stopDistance:
-		var direction = global_position.direction_to(player.global_position)
+	# Se mueve con knockback siempre
+	var move_vector = knockbackVelocity
 
-		if repulsion == Vector2.ZERO:
-			self.velocity = direction * attributes.speed
-		else:
-			self.velocity = (direction * attributes.speed + repulsion).limit_length(attributes.speed)
-		move_and_slide()
+	# Solo agrega movimiento hacia el jugador si está lejos
+	if global_position.distance_to(player.global_position) > attributes.stopDistance:
+		move_vector += direction * attributes.speed
+
+	if repulsion != Vector2.ZERO:
+		move_vector += repulsion
+
+	self.velocity = move_vector.limit_length(attributes.speed * 2)
+	move_and_slide()
 
 func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = false) -> void:
 	healthController.isTakingDamage = true
@@ -96,7 +108,9 @@ func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = f
 
 	animationController.playTakeDamage()
 	sfx_playHurt()
-	GameUtils.flash(animationController.sprite)
+
+	animationController.playFlashAnimation()
+	
 	healthBarController.takeDamage(damage)
 	if healthController.isDead:
 		death(damageByLevelUp)
@@ -149,7 +163,11 @@ func calculateSeparation() -> Vector2:
 		if distance > 0:
 			result += offset.normalized() / distance
 	
-	return result * SEPARATION_STRENGTH
+	return result * attributes.hordeSeparationStrength
+
+func applyKnockback(from_position: Vector2, strength: float) -> void:
+	var direction = (global_position - from_position).normalized()
+	knockbackVelocity = direction * strength
 
 #Consumers
 #TODO si crece: Crear EnemyAnimationController
@@ -206,9 +224,8 @@ func defaultDeath(_damageByLevelUp: bool = false) -> void:
 	healthBarController.hideBars()
 	await animationController.waitAnimationFinished()
 	animationController.playDeath()
-
-	if not _damageByLevelUp: 
-		isntantiateDrop()
+# if not _damageByLevelUp: 
+	isntantiateDrop()
 	
 	fadeOutAndDisapear()
 	$CollisionShape2D.queue_free()

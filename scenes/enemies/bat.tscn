@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dmacfmhocjbng"]
+[gd_scene load_steps=37 format=3 uid="uid://dmacfmhocjbng"]
 
 [ext_resource type="Script" uid="uid://djf57iglhnxni" path="res://scripts/controllers/HealthController.gd" id="1_18mee"]
 [ext_resource type="Texture2D" uid="uid://q0p403yh7k38" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-idle.png" id="1_rt4uy"]
@@ -7,10 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://cd6mlaph3x4y7" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-attack.png" id="2_4k4o5"]
 [ext_resource type="Script" uid="uid://bd2ck67scl55k" path="res://scripts/controllers/AttackController.gd" id="2_jofwc"]
 [ext_resource type="Script" uid="uid://t0udjpnd1i5s" path="res://scripts/resources/Weapon.gd" id="2_m5s8h"]
-[ext_resource type="Script" uid="uid://d3t8dbec6nskd" path="res://scripts/controllers/AnimationController.gd" id="3_ss5yy"]
 [ext_resource type="PackedScene" uid="uid://bc4i6q7r02mdm" path="res://scenes/game/health_bar.tscn" id="6_jofwc"]
 [ext_resource type="Texture2D" uid="uid://dxywyitix4k0r" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-dead.png" id="6_m0x8h"]
+[ext_resource type="Script" uid="uid://bejgxjt14wpsg" path="res://scripts/enemies/EnemyAnimationController.gd" id="6_mu8he"]
 [ext_resource type="Texture2D" uid="uid://c84svnu40lqio" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-damage.png" id="7_f0cyw"]
+[ext_resource type="Shader" uid="uid://de7j0xmtf67k1" path="res://shaders/flash.gdshader" id="7_mu8he"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h8sw5"]
+shader = ExtResource("7_mu8he")
+shader_parameter/isAttacking = false
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss5yy"]
 atlas = ExtResource("2_4k4o5")
@@ -140,6 +147,43 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="Animation" id="Animation_jjup5"]
+resource_name = "flash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.149283, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wfyvu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_at850"]
+_data = {
+&"RESET": SubResource("Animation_wfyvu"),
+&"flash": SubResource("Animation_jjup5")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ahko"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ahko"]
@@ -178,12 +222,18 @@ script = ExtResource("2_jofwc")
 
 [node name="AnimationController" type="Node" parent="Controllers"]
 unique_name_in_owner = true
-script = ExtResource("3_ss5yy")
+script = ExtResource("6_mu8he")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_h8sw5")
 scale = Vector2(2.82317, 2.82317)
 sprite_frames = SubResource("SpriteFrames_ss5yy")
 animation = &"attack"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_at850")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 4

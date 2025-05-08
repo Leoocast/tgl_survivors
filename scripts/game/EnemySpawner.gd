@@ -59,7 +59,7 @@ func _on_timer_timeout() -> void:
 	if GameState.isNotRunning():
 		return
 		
-	if counter >= 500:
+	if counter >= 380:
 		return
 
 	spawnEnemy()

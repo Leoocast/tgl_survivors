@@ -37,7 +37,8 @@ project/assembly_name="TGL_SURVIVORS"
 folder_colors={
 "res://assets/": "purple",
 "res://scenes/": "blue",
-"res://scripts/": "green"
+"res://scripts/": "green",
+"res://shaders/": "orange"
 }
 
 [input]

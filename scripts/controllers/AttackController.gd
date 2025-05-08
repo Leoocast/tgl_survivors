@@ -3,7 +3,7 @@ extends Node
 
 #Config
 var entity: Node2D
-var weapon: Node2D
+var weapon: Weapon
 
 #Internal
 var isAttacking: bool = false
@@ -16,7 +16,7 @@ signal attack_animation_finished()
 signal attack_finished()
 
 #-------------------------#
-func setup(_entity: Node2D, _weapon: Node2D) -> void:
+func setup(_entity: Node2D, _weapon: Weapon) -> void:
 	self.entity = _entity
 	self.weapon = _weapon
 	

@@ -6,11 +6,12 @@
 
 [resource]
 script = ExtResource("1_pvukq")
+hordeSeparationStrength = 14000.0
 stopDistance = 64.0
 exp_drop_scene = ExtResource("1_vtwow")
 sfx_hurt = ExtResource("3_kts5u")
 health = 3.0
-healthColor = Color(0.607843, 0, 0, 1)
+healthColor = Color(0.815686, 0, 0, 1)
 speed = 400.0
 critProb = 0.0
 metadata/_custom_type_script = "uid://dpxkmmg2u80xb"

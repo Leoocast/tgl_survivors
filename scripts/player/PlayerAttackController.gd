@@ -34,4 +34,14 @@ func damageEnemy(enemy: Enemy) -> void:
 
 	var realDamage = weapon.damage * 2 if isCritic else weapon.damage  
 
+	if player.weapon.hasKnockback:
+		var knockback = calculateWeaponNockback(isCritic, enemy)
+		enemy.applyKnockback(player.global_position, knockback)
+	
 	enemy.takeDamage(realDamage, false, isCritic)
+
+func calculateWeaponNockback(isCritic : bool, enemy: Enemy) -> float:
+	var knockback =  weapon.knockbackCriticPower if isCritic else weapon.knockbackPower
+	var knockbackWhenBoss = knockback / 1.65
+
+	return knockbackWhenBoss if enemy.isBoss else knockback

@@ -6,7 +6,7 @@
 script = ExtResource("1_cpq58")
 auraDamage = 3.0
 health = 20.0
+healthColor = Color(0.588235, 0, 0, 1)
 speed = 550.0
 critProb = 0.1
-healthColor = Color(0.588235, 0, 0, 1)
 metadata/_custom_type_script = "uid://2xt8e6irgxjt"

@@ -5,6 +5,9 @@ extends Node2D
 @export var damage: float
 @export var cooldown: float
 @export var weaponName: String
+@export var hasKnockback: bool = false
+@export var knockbackPower: float = 1
+@export var knockbackCriticPower: float = 1
 
 #-------------------------#
 func setup(_damage: float, _cooldown: float):
