@@ -47,7 +47,6 @@ func calculateSeparation() -> Vector2:
 	return result * SEPARATION_STRENGTH
 
 
-
 # Signals
 # El frame en el que puede atacar
 func _on_animated_sprite_2d_frame_changed() -> void:
