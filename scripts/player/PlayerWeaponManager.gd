@@ -8,6 +8,9 @@ var currentWeapon: PlayerWeapon
 #0-Sword, 1-Bow
 var weapons : Array[PlayerWeapon]
 
+#Signals
+signal weaponChanged(weapon: Enums.WeaponType)
+
 #-------------------------#
 func _ready():
 	initialize()
@@ -39,10 +42,8 @@ func swapWeapons() -> void:
 
 	if currentWeapon.type == Enums.WeaponType.MACHETE:
 		equipWeapon(Enums.WeaponType.BOW)
-		print("Equipped: ", currentWeapon.name)
-		return
-	
-	if currentWeapon.type == Enums.WeaponType.BOW:
+	elif currentWeapon.type == Enums.WeaponType.BOW:
 		equipWeapon(Enums.WeaponType.MACHETE)
-		print("Equipped: ", currentWeapon.name)
-		return
+
+	print("Equipped: ", currentWeapon.name)
+	weaponChanged.emit(currentWeapon.type)

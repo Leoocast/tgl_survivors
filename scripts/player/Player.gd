@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var dashController: PlayerDashController = %DashController as PlayerDashController
 @onready var attackController: PlayerAttackController = %AttackController as PlayerAttackController
 @onready var animationController: PlayerAnimationController = %AnimationController as PlayerAnimationController
+@onready var aimController: PlayerAimController = $AimController as PlayerAimController
 @onready var weaponManager: PlayerWeaponManager = %WeaponManager as PlayerWeaponManager
 @onready var levelUpUi: LevelUpUI= %LevelUpUI as LevelUpUI
 @onready var trail: PlayerTrail= $TrailContainer as PlayerTrail
@@ -42,6 +43,7 @@ func _ready() -> void:
 	setupAttributes()
 	setupComponents()
 	disableAllAttackCollisions()
+	aimController.hide()
 
 func setupAttributes() -> void:
 	currentSpeed = attributes.speed
@@ -54,6 +56,7 @@ func setupComponents() -> void:
 	healthController.setup(self, attributes.health)
 	attackController.setup(self, weapon)
 	dashController.setupPlayer()
+	aimController.setupPlayer(self)
 	
 	updatesManager.setupPlayer(self)
 	sfxManager.setupPlayer(self)
@@ -73,6 +76,8 @@ func healthSuscriptions() -> void:
 func attackSuscriptions() -> void:
 	attackController.attack_animation_started.connect(animationController.on_attack_animation_started)
 	attackController.attack_animation_started.connect(sfxManager.on_attack_animation_started)
+
+	weaponManager.weaponChanged.connect(on_weapon_changed)
 
 func xpSucriptions() -> void:
 	xpSystem.level_up.connect(attackController.on_level_up)
@@ -141,3 +146,10 @@ func _on_exp_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group(GLOBALS.GROUPS.EXP_DROP):
 		var expDrop = area as ExpDrop
 		expDrop.flyToTarget(self)
+
+func on_weapon_changed(weaponType: Enums.WeaponType) -> void:
+	if weaponType == Enums.WeaponType.BOW:
+		aimController.show()
+		return
+	
+	aimController.hide()

@@ -14,7 +14,7 @@ func _ready() -> void:
 	GameState.registerComboHud(comboHud)
 	GameState.registerPlayer(player)
 	GameState.registerLevelUpUI(levelUpUi)
-	AudioManager.playMusic(level1_music)
+	# AudioManager.playMusic(level1_music)
 
 func registerEnemy(enemy: Enemy) -> void:
 	enemy.died.connect(comboHud.comboSystem.on_enemy_died)

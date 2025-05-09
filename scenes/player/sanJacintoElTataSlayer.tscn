@@ -1,4 +1,4 @@
-[gd_scene load_steps=286 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=289 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
@@ -31,8 +31,10 @@
 [ext_resource type="Texture2D" uid="uid://cka4y6i5bwevc" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Up-Sheet.png" id="8_uo61b"]
 [ext_resource type="Script" uid="uid://c5mopejbhjcne" path="res://scripts/player/weapons/Bow.gd" id="10_lly8k"]
 [ext_resource type="Texture2D" uid="uid://dmecyqqebr77b" path="res://assets/sprites/san_jacinto/5_Template_Death_Down-Sheet.png" id="14_35qer"]
+[ext_resource type="Script" uid="uid://bsseevfs6e3fu" path="res://scenes/player/PlayerAimController.gd" id="15_bomyi"]
 [ext_resource type="Texture2D" uid="uid://crwb41dlkyili" path="res://assets/sprites/san_jacinto/5_Template_Death_Left-Sheet.png" id="15_pauyt"]
 [ext_resource type="Texture2D" uid="uid://n2unsq4ttmv0" path="res://assets/sprites/san_jacinto/5_Template_Death_Right-Sheet.png" id="16_2cq5b"]
+[ext_resource type="Texture2D" uid="uid://dra21fmg4osye" path="res://assets/images/cross_hair.png" id="16_gtnfb"]
 [ext_resource type="Texture2D" uid="uid://budwjct5v7ss4" path="res://assets/sprites/san_jacinto/5_Template_Death_Up-Sheet.png" id="17_fo76y"]
 [ext_resource type="Texture2D" uid="uid://bpm8fkogf0568" path="res://assets/sprites/san_jacinto/Bow/Bow_6_Template_Attack_1_Down-Sheet.png" id="20_7pgxd"]
 [ext_resource type="Texture2D" uid="uid://pydko3kb6ufk" path="res://assets/sprites/san_jacinto/Bow/Bow_6_Template_Attack_1_Left-Sheet.png" id="21_u8wfw"]
@@ -54,6 +56,9 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_2cq5b"]
 colors = PackedColorArray(1, 1, 1, 0.74902, 1, 1, 1, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7hfph"]
+blend_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5njuf"]
 atlas = ExtResource("1_rnjux")
@@ -1922,6 +1927,18 @@ weaponName = "Bow"
 hasKnockback = true
 knockbackPower = 400.0
 knockbackCriticPower = 700.0
+
+[node name="AimController" type="Node2D" parent="."]
+script = ExtResource("15_bomyi")
+
+[node name="Marker2D" type="Marker2D" parent="AimController"]
+material = SubResource("CanvasItemMaterial_7hfph")
+position = Vector2(19, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="AimController/Marker2D"]
+position = Vector2(-1.78814e-07, 0)
+scale = Vector2(-0.00207789, -0.00218075)
+texture = ExtResource("16_gtnfb")
 
 [node name="SsjAura" parent="." instance=ExtResource("2_pauyt")]
 position = Vector2(1, -26)
