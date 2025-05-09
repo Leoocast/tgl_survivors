@@ -8,7 +8,7 @@ uniform float alphaValue : hint_range(0.0, 1.0, 0.1);
 
 void fragment(){
 	vec4 texture_color = texture(TEXTURE, UV);
-		
+
 	if (isDeath) {
 		COLOR = texture_color;
 		COLOR.a *= alphaValue;
@@ -20,4 +20,3 @@ void fragment(){
 		COLOR.a = texture_color.a;
 	}
 }
-
