@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dmacfmhocjbng"]
+[gd_scene load_steps=38 format=3 uid="uid://dmacfmhocjbng"]
 
 [ext_resource type="Script" uid="uid://djf57iglhnxni" path="res://scripts/controllers/HealthController.gd" id="1_18mee"]
 [ext_resource type="Texture2D" uid="uid://q0p403yh7k38" path="res://assets/sprites/rpg_sprites/battleChars/bchar_bat00-idle.png" id="1_rt4uy"]
@@ -15,9 +15,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h8sw5"]
 shader = ExtResource("7_mu8he")
+shader_parameter/isDeath = false
 shader_parameter/isAttacking = false
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
+shader_parameter/alphaValue = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss5yy"]
 atlas = ExtResource("2_4k4o5")
@@ -177,10 +179,63 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/isDeath")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material:shader_parameter/alphaValue")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_at850"]
+resource_name = "death"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isDeath")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/alphaValue")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_at850"]
 _data = {
 &"RESET": SubResource("Animation_wfyvu"),
+&"death": SubResource("Animation_at850"),
 &"flash": SubResource("Animation_jjup5")
 }
 

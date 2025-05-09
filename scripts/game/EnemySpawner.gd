@@ -11,7 +11,7 @@ const BAT_ASSET = preload(PATHS.SCENES.ENEMIES.BAT)
 
 #Config
 const BOSS_PROB: float = .03
-const BAT_PROB: float = .1
+const BAT_PROB: float = .08
 
 var counter = 0
 
@@ -59,7 +59,7 @@ func _on_timer_timeout() -> void:
 	if GameState.isNotRunning():
 		return
 		
-	if counter >= 380:
+	if counter >= 300:
 		return
 
 	spawnEnemy()

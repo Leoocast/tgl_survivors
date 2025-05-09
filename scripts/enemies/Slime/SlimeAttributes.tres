@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_e8c0v")
-hordeSeparationStrength = 2000.0
+hordeSeparationStrength = 12000.0
 stopDistance = 70.0
 exp_drop_scene = ExtResource("1_fw4yj")
 sfx_hurt = ExtResource("3_ebwu0")

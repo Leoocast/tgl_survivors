@@ -26,5 +26,9 @@ func modulateReset() -> void:
 func playFlashAnimation() -> void:
 	animationPlayer.play("flash")
 
+func playDeath() -> void:
+	sprite.play(ANIMATIONS.DEATH)
+	animationPlayer.play("death")
+
 func activateShaderAttack(activate : bool) -> void:
 	shaderMaterial.set_shader_parameter("isAttacking", activate)
