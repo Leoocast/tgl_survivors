@@ -1,4 +1,4 @@
-[gd_scene load_steps=198 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=200 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
@@ -6,11 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://crmkugpf3d8fn" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Down-Sheet.png" id="1_rnjux"]
 [ext_resource type="Resource" uid="uid://bldo47c0xbw8b" path="res://scripts/player/PlayerAttributes.tres" id="2_fo76y"]
 [ext_resource type="Script" uid="uid://cg1fh05pqul4o" path="res://scripts/controllers/DashController.gd" id="2_lk38t"]
+[ext_resource type="Script" uid="uid://c6a5mj7r6qxyk" path="res://scripts/FSM/StateMachine.gd" id="2_lly8k"]
 [ext_resource type="PackedScene" uid="uid://35gexdxbybke" path="res://scenes/player/ssj.tscn" id="2_pauyt"]
 [ext_resource type="Texture2D" uid="uid://caxirt76mwm8f" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Left-Sheet.png" id="2_son5e"]
 [ext_resource type="Texture2D" uid="uid://djt74mxs7da8h" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Left-Sheet.png" id="2_ty0ju"]
 [ext_resource type="Texture2D" uid="uid://twdx03vpwl3u" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Left-Sheet.png" id="2_x3n3s"]
 [ext_resource type="Texture2D" uid="uid://ji5ds6c74hkg" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Right-Sheet.png" id="3_2a547"]
+[ext_resource type="Script" uid="uid://o8hdq0mhonha" path="res://scripts/FSM/State.gd" id="3_46yy8"]
 [ext_resource type="Texture2D" uid="uid://w2uhc7amjlts" path="res://assets/sprites/san_jacinto/Sword_6_Template_Attack_1_Right-Sheet.png" id="3_bv6fa"]
 [ext_resource type="Script" uid="uid://b1mh53jkj8ixp" path="res://scripts/player/PlayerHealthController.gd" id="3_fo76y"]
 [ext_resource type="Texture2D" uid="uid://31efsluwuarv" path="res://assets/sprites/san_jacinto/Sword_8_Template_Attack_2_Right-Sheet.png" id="3_h2aec"]
@@ -1276,6 +1278,13 @@ radius = 24.0
 z_index = 1
 script = ExtResource("1_ew0gd")
 attributes = ExtResource("2_fo76y")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("defaultState")]
+script = ExtResource("2_lly8k")
+defaultState = NodePath("BaseState")
+
+[node name="BaseState" type="Node" parent="StateMachine"]
+script = ExtResource("3_46yy8")
 
 [node name="Controllers" type="Node" parent="."]
 
