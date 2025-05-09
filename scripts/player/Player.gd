@@ -99,12 +99,6 @@ func _physics_process(_delta: float) -> void:
 
 	if not dashController.isDashing:
 		move()
-		
-	if not attackController.isAttacking and attackController.canAttack and InputHandler.isAttacking():
-		attackController.attack()
-
-	# if not attackController.isAttacking:
-	# 	animationController.playDefaultMouse(mousePosition)
 	
 func move() -> void:
 	var direction = InputHandler.getDirection()

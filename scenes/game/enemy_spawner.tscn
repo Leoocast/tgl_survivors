@@ -12,6 +12,7 @@ point_count = 6
 script = ExtResource("1_kaeo0")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
 autostart = true
 
 [node name="Path2D" type="Path2D" parent="."]

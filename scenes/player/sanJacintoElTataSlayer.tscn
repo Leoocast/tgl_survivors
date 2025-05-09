@@ -1,4 +1,4 @@
-[gd_scene load_steps=201 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=202 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://cxx3h235xyogh" path="res://scripts/player/states/PlayerStateRun.gd" id="5_olemm"]
 [ext_resource type="Script" uid="uid://chgnx7qk0pwkc" path="res://scripts/player/ui/PlayerTrail.gd" id="6_2cq5b"]
 [ext_resource type="Texture2D" uid="uid://c3drqk36trqc4" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Left-Sheet.png" id="6_4wgry"]
+[ext_resource type="Script" uid="uid://mii7xqfgwi5h" path="res://scripts/player/states/PlayerStateAttack.gd" id="6_olemm"]
 [ext_resource type="Texture2D" uid="uid://biopw6ke005ye" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Right-Sheet.png" id="7_ruyvi"]
 [ext_resource type="Script" uid="uid://dbs5rnqwurgqc" path="res://scripts/player/PlayerWeaponManager.gd" id="8_qxpum"]
 [ext_resource type="Texture2D" uid="uid://cka4y6i5bwevc" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Up-Sheet.png" id="8_uo61b"]
@@ -1289,6 +1290,9 @@ script = ExtResource("4_c0rco")
 [node name="PlayerStateRun" type="Node" parent="StateMachine"]
 script = ExtResource("5_olemm")
 
+[node name="PlayerStateAttack" type="Node" parent="StateMachine"]
+script = ExtResource("6_olemm")
+
 [node name="Controllers" type="Node" parent="."]
 
 [node name="HealthController" type="Node" parent="Controllers"]
@@ -1427,7 +1431,6 @@ shape = SubResource("CircleShape2D_2cq5b")
 debug_color = Color(0.557828, 0.558126, 0.154713, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(15, 15)
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="Weapon/AttackArea" to="." method="_on_attack_area_body_entered"]

@@ -7,7 +7,13 @@ func on_physics_process(_delta: float) -> void:
 
 func on_input(_event: InputEvent) -> void:
 	
-	if InputHandler.isMoving():
-		return
+	if InputHandler.isAttacking():
+		stateMachine.enterState(states.PlayerStateAttack)
 
-	stateMachine.enterState(states.PlayerStateIdle)
+	if not InputHandler.isMoving():
+		stateMachine.enterState(states.PlayerStateIdle)
+		
+
+	
+
+	

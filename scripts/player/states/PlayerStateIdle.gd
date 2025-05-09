@@ -6,8 +6,8 @@ func on_physics_process(_delta: float) -> void:
 	player.animationController.playIdleMouse(mousePosition)
 
 func on_input(_event: InputEvent) -> void:
-	
-	if not InputHandler.isMoving():
-		return
-	
-	stateMachine.enterState(states.PlayerStateRun)
+	if InputHandler.isAttacking():
+		stateMachine.enterState(states.PlayerStateAttack)
+
+	if InputHandler.isMoving():
+		stateMachine.enterState(states.PlayerStateRun)
