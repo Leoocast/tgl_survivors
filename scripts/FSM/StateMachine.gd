@@ -64,8 +64,6 @@ func initializeState() -> void:
 	currentState.node = ownerNode
 	currentState.stateMachine = self
 	currentState.enter()
-
-	print("State Machine initialized with owner: ", ownerNode.name)
 	print("Start state: ", currentState.name)
 
 func enterState(state: Enums.PlayerStates) -> void:

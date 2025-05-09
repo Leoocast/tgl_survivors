@@ -89,7 +89,8 @@ func _physics_process(_delta: float) -> void:
 	if healthController.isDead:
 		return
 	
-	if InputHandler.isTryingSwapWeapons():
+	if InputHandler.isTryingSwapWeapons() and not attackController.isAttacking:
+		print("attackController.isAttacking",  attackController.isAttacking)
 		weaponManager.swapWeapons()
 
 	trail.drawTrail()
@@ -121,6 +122,10 @@ func _on_attack_area_body_entered(enemy: Enemy) -> void:
 
 #Activate attack collisions
 func _on_animated_sprite_2d_frame_changed() -> void:
+	
+	if weapon.type == Enums.WeaponType.BOW:
+		return
+
 	var sprite = animationController.sprite
 	var animationDirection = sprite.animation.replace("attack_", "")
 	var isAttacking = sprite.animation.contains("attack")

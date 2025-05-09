@@ -19,6 +19,13 @@ var directions: Dictionary = {
 	"right": "_right",
 }
 
+var bowDirections: Dictionary = {
+	"up": "_bow_up",
+	"down": "_bow_down",
+	"left": "_bow_left",
+	"right": "_bow_right",
+}
+
 #-------------------------#
 func setupPlayer(_player: Player , ssjAura: Node2D) -> void:
 	self.player = _player
@@ -46,6 +53,10 @@ func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 
 func on_attack_animation_started() -> void:
 	var mousePosition = player.getMouseDirection() 
+
+	if player.weapon.type == Enums.WeaponType.BOW:
+		playAttackMouse(mousePosition)
+		return
 
 	if player.attackController.firstAttack:
 		playAttackMouse(mousePosition)
@@ -89,16 +100,20 @@ func matchDirection(animationName: String, direction: Vector2) -> void:
 	var isRight = direction.x > 0
 	var isDown = direction.y > 0
 
+	var isBow: bool = player.weapon.type == Enums.WeaponType.BOW
+
+	var suffix: String
+
 	if isHorizontal:
-		if isRight:
-			sprite.play(animationName + directions.right)
-		else:
-			sprite.play(animationName + directions.left)
+		suffix = directions.right if isRight else directions.left
 	else:
-		if isDown:
-			sprite.play(animationName + directions.down)
-		else:
-			sprite.play(animationName + directions.up)
+		suffix = directions.down if isDown else directions.up
+
+	if isBow:
+		suffix = bowDirections.get(suffix.substr(1))
+	
+	sprite.play(animationName + suffix)
+
 	
 func setAttackFpsMultiplier(multiplier: float) -> void:
 
