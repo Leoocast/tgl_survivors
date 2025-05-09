@@ -94,8 +94,6 @@ func _physics_process(_delta: float) -> void:
 
 	trail.drawTrail()
 
-	var mousePosition = getMouseDirection()
-	
 	if InputHandler.isDashing():
 		dashController.tryDash()
 
@@ -105,8 +103,8 @@ func _physics_process(_delta: float) -> void:
 	if not attackController.isAttacking and attackController.canAttack and InputHandler.isAttacking():
 		attackController.attack()
 
-	if not attackController.isAttacking:
-		animationController.playDefaultMouse(mousePosition)
+	# if not attackController.isAttacking:
+	# 	animationController.playDefaultMouse(mousePosition)
 	
 func move() -> void:
 	var direction = InputHandler.getDirection()

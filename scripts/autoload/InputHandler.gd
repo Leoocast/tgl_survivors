@@ -4,6 +4,10 @@ func getDirection() -> Vector2:
 	var direction = Input.get_vector("left", "right", "up", "down")
 	return direction
 
+func isMoving() -> bool:
+	var direction = getDirection()
+	return direction != Vector2.ZERO
+
 func getDirectionX() -> float:
 	var direction = getDirection()
 	return direction.x

@@ -71,9 +71,9 @@ func initializeState() -> void:
 func enterState(state: Enums.PlayerStates) -> void:
 	triggerExitState()
 	
-	#TODO Revisar si hay algo mejor para esto
 	var key = Enums.PlayerStates.find_key(state)
 	currentState = get_node(key)
+	
 	initializeState()
 
 func triggerExitState() -> void:
