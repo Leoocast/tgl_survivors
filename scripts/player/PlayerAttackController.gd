@@ -32,7 +32,7 @@ func damageEnemy(enemy: Enemy) -> void:
 
 	var isCritic = randf() < player.currentCritProb as float
 
-	var realDamage = weapon.damage * 2 if isCritic else weapon.damage  
+	var realDamage = player.weapon.damage * 2 if isCritic else player.weapon.damage  
 
 	if player.weapon.hasKnockback:
 		var knockback = calculateWeaponNockback(isCritic, enemy)

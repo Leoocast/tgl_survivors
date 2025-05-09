@@ -11,7 +11,6 @@ extends CharacterBody2D
 @onready var trail: PlayerTrail= $TrailContainer as PlayerTrail
 
 #Nodes
-@onready var weapon: Weapon = $Weapon as Weapon
 @onready var attackArea: Area2D = $Weapon/AttackArea as Area2D
 @onready var levelUpDamageArea: Area2D = $LevelUpDamageArea as Area2D
 @onready var expArea: Area2D = $ExpArea as Area2D
@@ -31,6 +30,11 @@ var updatesManager: PlayerUpdatesManager = PlayerUpdatesManager.new()
 #Internal
 var currentSpeed: float
 var currentCritProb: float
+
+#Get/Set
+var weapon: PlayerWeapon:
+	get:
+		return weaponManager.currentWeapon
 
 #-------------------------#
 func _ready() -> void:
