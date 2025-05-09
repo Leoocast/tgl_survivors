@@ -13,3 +13,6 @@ func isAttacking() -> bool:
 	
 func isDashing() -> bool:
 	return Input.is_action_just_pressed("dash")
+
+func isTryingSwapWeapons() -> bool:
+	return Input.is_action_just_pressed("swap_weapon")

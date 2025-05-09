@@ -1,4 +1,4 @@
-[gd_scene load_steps=196 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=198 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
@@ -23,12 +23,14 @@
 [ext_resource type="Script" uid="uid://chgnx7qk0pwkc" path="res://scripts/player/ui/PlayerTrail.gd" id="6_2cq5b"]
 [ext_resource type="Texture2D" uid="uid://c3drqk36trqc4" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Left-Sheet.png" id="6_4wgry"]
 [ext_resource type="Texture2D" uid="uid://biopw6ke005ye" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Right-Sheet.png" id="7_ruyvi"]
+[ext_resource type="Script" uid="uid://dbs5rnqwurgqc" path="res://scripts/player/PlayerWeaponManager.gd" id="8_qxpum"]
 [ext_resource type="Texture2D" uid="uid://cka4y6i5bwevc" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Up-Sheet.png" id="8_uo61b"]
+[ext_resource type="Script" uid="uid://c5mopejbhjcne" path="res://scripts/player/weapons/Bow.gd" id="10_lly8k"]
 [ext_resource type="Texture2D" uid="uid://dmecyqqebr77b" path="res://assets/sprites/san_jacinto/5_Template_Death_Down-Sheet.png" id="14_35qer"]
 [ext_resource type="Texture2D" uid="uid://crwb41dlkyili" path="res://assets/sprites/san_jacinto/5_Template_Death_Left-Sheet.png" id="15_pauyt"]
 [ext_resource type="Texture2D" uid="uid://n2unsq4ttmv0" path="res://assets/sprites/san_jacinto/5_Template_Death_Right-Sheet.png" id="16_2cq5b"]
 [ext_resource type="Texture2D" uid="uid://budwjct5v7ss4" path="res://assets/sprites/san_jacinto/5_Template_Death_Up-Sheet.png" id="17_fo76y"]
-[ext_resource type="Script" uid="uid://b6fb3dkqyjvc3" path="res://scripts/player/weapons/ElTataSlayerMachete.gd" id="29_fo76y"]
+[ext_resource type="Script" uid="uid://b6fb3dkqyjvc3" path="res://scripts/player/weapons/Machete.gd" id="29_fo76y"]
 
 [sub_resource type="Curve" id="Curve_pauyt"]
 _data = [Vector2(0, 0.619601), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -1302,6 +1304,28 @@ width = 60.0
 width_curve = SubResource("Curve_pauyt")
 gradient = SubResource("Gradient_2cq5b")
 
+[node name="WeaponManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("8_qxpum")
+
+[node name="Machete" type="Node2D" parent="WeaponManager"]
+script = ExtResource("29_fo76y")
+damage = 1.0
+weaponName = "Machete"
+hasKnockback = true
+knockbackPower = 300.0
+knockbackCriticPower = 600.0
+
+[node name="Bow" type="Node2D" parent="WeaponManager"]
+script = ExtResource("10_lly8k")
+type = 1
+damage = 2.0
+cooldown = 3.0
+weaponName = "Bow"
+hasKnockback = true
+knockbackPower = 400.0
+knockbackCriticPower = 700.0
+
 [node name="SsjAura" parent="." instance=ExtResource("2_pauyt")]
 position = Vector2(1, -26)
 
@@ -1317,8 +1341,6 @@ animation = &"attack_2_left"
 position = Vector2(1, 2)
 shape = SubResource("CapsuleShape2D_rnjux")
 debug_color = Color(0.914947, 8.29774e-05, 0.714501, 0.42)
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("29_fo76y")
@@ -1391,6 +1413,8 @@ position = Vector2(1, -6)
 scale = Vector2(1.12149, 1.12149)
 shape = SubResource("CircleShape2D_2cq5b")
 debug_color = Color(0.557828, 0.558126, 0.154713, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="Weapon/AttackArea" to="." method="_on_attack_area_body_entered"]

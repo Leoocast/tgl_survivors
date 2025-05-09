@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var dashController: PlayerDashController = %DashController as PlayerDashController
 @onready var attackController: PlayerAttackController = %AttackController as PlayerAttackController
 @onready var animationController: PlayerAnimationController = %AnimationController as PlayerAnimationController
+@onready var weaponManager: PlayerWeaponManager = %WeaponManager as PlayerWeaponManager
 @onready var levelUpUi: LevelUpUI= %LevelUpUI as LevelUpUI
 @onready var trail: PlayerTrail= $TrailContainer as PlayerTrail
 
@@ -43,6 +44,8 @@ func setupAttributes() -> void:
 	currentCritProb = attributes.critProb
 
 func setupComponents() -> void:
+	weaponManager.setupPlayer(self)
+	
 	animationController.setupPlayer(self, ssjAura)
 	healthController.setup(self, attributes.health)
 	attackController.setup(self, weapon)
@@ -82,6 +85,9 @@ func _physics_process(_delta: float) -> void:
 	if healthController.isDead:
 		return
 	
+	if InputHandler.isTryingSwapWeapons():
+		weaponManager.swapWeapons()
+
 	trail.drawTrail()
 
 	var mousePosition = getMouseDirection()

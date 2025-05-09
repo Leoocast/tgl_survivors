@@ -1,2 +1,0 @@
-class_name Machete
-extends Weapon

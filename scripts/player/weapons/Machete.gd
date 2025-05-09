@@ -1,0 +1,2 @@
+class_name Machete
+extends PlayerWeapon
