@@ -27,7 +27,7 @@ func setup(_entity: Node2D, _healthController: HealthController, _color: Color, 
 	setupIsBoss()
 	
 func takeDamage(damage: float) -> void:
-	flashWhenTakeDamage(normalBarArray, damage)
+	# flashWhenTakeDamage(normalBarArray, damage)
 	flashWhenTakeDamage(bossBarArray, damage)
 
 func hideBars() -> void:

@@ -41,6 +41,7 @@ func setup() -> void:
 	GameUtils.validateEnemyAttributes(attributes, self)
 	setupComponents()
 	attackSuscriptions()
+	healthSuscriptions()
 	
 	animationController.playIdle()
 	healthBarController.hideBars()
@@ -61,6 +62,9 @@ func setupComponents() -> void:
 func attackSuscriptions() -> void:
 	attackController.connect("attack_animation_started", on_attack_animation_started)
 	attackController.connect("attack_animation_finished", on_attack_animation_finished)
+
+func healthSuscriptions() -> void:
+	healthController.died.connect(on_died)
 
 func defaultProcess(delta : float, repulsion : Vector2 = Vector2.ZERO) -> void:
 	if GameState.isNotRunning():
@@ -100,13 +104,16 @@ func moveTowardsPlayer(repulsion : Vector2 = Vector2.ZERO) -> void:
 	self.velocity = move_vector.limit_length(attributes.speed * 2)
 	move_and_slide()
 
+func on_died() -> void:
+	defaultDeath()
+
 func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = false) -> void:
-	healthController.isTakingDamage = true
 	healthController.takeDamage(damage)
 
 	showDamageLabel(damage, isCritic)
 
 	animationController.playTakeDamage()
+	
 	sfx_playHurt()
 
 	animationController.playFlashAnimation()
@@ -136,7 +143,6 @@ func enableAttackHitbox() -> void:
 	
 func disableAttackHitbox() -> void:
 	$AttackArea/AttackCollision.call_deferred("set_disabled", true)
-
 
 func fadeOutAndDisapear():
 	var tween = create_tween()
@@ -217,15 +223,13 @@ func _deferredMiniBoss() -> void:
 	healthBarController.setup(self, healthController, attributes.healthColor, isBoss)
 
 func death(_damageByLevelUp: bool = false) -> void:
-	defaultDeath()
+	defaultDeath(_damageByLevelUp)
 
 func defaultDeath(_damageByLevelUp: bool = false) -> void:
+	$CollisionShape2D.queue_free()
 	died.emit()
 	healthBarController.hideBars()
 	await animationController.waitAnimationFinished()
 	animationController.playDeath()
-# if not _damageByLevelUp: 
 	isntantiateDrop()
-	
 	fadeOutAndDisapear()
-	$CollisionShape2D.queue_free()

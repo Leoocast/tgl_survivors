@@ -39,7 +39,6 @@ func takeDamage(damage: float) -> void:
 
 	if health <= 0:
 		isDead = true
-		canTakeDamage = false
 		stopTakingDamage()
 
 		died.emit()

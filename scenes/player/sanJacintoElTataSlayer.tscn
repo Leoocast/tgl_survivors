@@ -1127,7 +1127,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_bow_down",
-"speed": 10.0
+"speed": 120.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1150,7 +1150,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_bow_left",
-"speed": 10.0
+"speed": 120.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1173,7 +1173,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_bow_right",
-"speed": 10.0
+"speed": 120.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1196,7 +1196,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_bow_up",
-"speed": 10.0
+"speed": 120.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1922,7 +1922,7 @@ knockbackCriticPower = 600.0
 script = ExtResource("10_lly8k")
 speed = 2000.0
 type = 1
-damage = 1.0
+damage = 9.48237e+07
 weaponName = "Bow"
 hasKnockback = true
 knockbackPower = 400.0
@@ -1949,9 +1949,7 @@ position = Vector2(1, -26)
 position = Vector2(1, 1)
 scale = Vector2(1.00403, 1)
 sprite_frames = SubResource("SpriteFrames_4wgry")
-animation = &"attack_bow_right"
-frame = 5
-frame_progress = 1.0
+animation = &"attack_bow_down"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 
