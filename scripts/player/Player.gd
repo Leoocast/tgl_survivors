@@ -148,6 +148,9 @@ func _on_exp_area_area_entered(area: Area2D) -> void:
 		expDrop.flyToTarget(self)
 
 func on_weapon_changed(weaponType: Enums.WeaponType) -> void:
+
+	attackController.changeWeapon(weapon)
+
 	if weaponType == Enums.WeaponType.BOW:
 		aimController.show()
 		return

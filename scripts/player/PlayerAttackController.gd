@@ -45,3 +45,6 @@ func calculateWeaponNockback(isCritic : bool, enemy: Enemy) -> float:
 	var knockbackWhenBoss = knockback / 1.65
 
 	return knockbackWhenBoss if enemy.isBoss else knockback
+
+func changeWeapon(_weapon: PlayerWeapon) -> void:
+	self.weapon = _weapon

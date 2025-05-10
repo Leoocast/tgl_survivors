@@ -1,8 +1,10 @@
 class_name PlayerAimController
 extends Node2D
 
+#Config
 var player: Player
 
+#-------------------------#
 func setupPlayer(_player: Player) -> void:
 	self.player = _player
 

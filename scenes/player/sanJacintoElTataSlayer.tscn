@@ -1922,7 +1922,6 @@ knockbackCriticPower = 600.0
 script = ExtResource("10_lly8k")
 type = 1
 damage = 2.0
-cooldown = 3.0
 weaponName = "Bow"
 hasKnockback = true
 knockbackPower = 400.0
@@ -1930,6 +1929,8 @@ knockbackCriticPower = 700.0
 
 [node name="AimController" type="Node2D" parent="."]
 script = ExtResource("15_bomyi")
+
+[node name="Source" type="Marker2D" parent="AimController"]
 
 [node name="Marker2D" type="Marker2D" parent="AimController"]
 material = SubResource("CanvasItemMaterial_7hfph")
