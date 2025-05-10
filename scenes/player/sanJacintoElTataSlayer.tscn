@@ -1,4 +1,4 @@
-[gd_scene load_steps=289 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=281 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
@@ -188,14 +188,6 @@ region = Rect2(768, 0, 128, 128)
 atlas = ExtResource("4_gmyuh")
 region = Rect2(896, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_80m0j"]
-atlas = ExtResource("20_7pgxd")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sg718"]
-atlas = ExtResource("20_7pgxd")
-region = Rect2(128, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_cq1a1"]
 atlas = ExtResource("20_7pgxd")
 region = Rect2(256, 0, 128, 128)
@@ -211,14 +203,6 @@ region = Rect2(512, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ifebi"]
 atlas = ExtResource("20_7pgxd")
 region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fo05n"]
-atlas = ExtResource("21_u8wfw")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8a6my"]
-atlas = ExtResource("21_u8wfw")
-region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6si3y"]
 atlas = ExtResource("21_u8wfw")
@@ -236,14 +220,6 @@ region = Rect2(512, 0, 128, 128)
 atlas = ExtResource("21_u8wfw")
 region = Rect2(640, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_un8bs"]
-atlas = ExtResource("22_bomyi")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gccqb"]
-atlas = ExtResource("22_bomyi")
-region = Rect2(128, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_8j304"]
 atlas = ExtResource("22_bomyi")
 region = Rect2(256, 0, 128, 128)
@@ -259,14 +235,6 @@ region = Rect2(512, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ddi8"]
 atlas = ExtResource("22_bomyi")
 region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gxan1"]
-atlas = ExtResource("23_gtnfb")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_al66q"]
-atlas = ExtResource("23_gtnfb")
-region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2lo2r"]
 atlas = ExtResource("23_gtnfb")
@@ -1108,12 +1076,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_80m0j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sg718")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_cq1a1")
 }, {
 "duration": 1.0,
@@ -1127,15 +1089,9 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_bow_down",
-"speed": 120.0
+"speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fo05n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8a6my")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6si3y")
 }, {
@@ -1150,15 +1106,9 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_bow_left",
-"speed": 120.0
+"speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_un8bs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gccqb")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8j304")
 }, {
@@ -1173,15 +1123,9 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_bow_right",
-"speed": 120.0
+"speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gxan1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_al66q")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2lo2r")
 }, {
@@ -1196,7 +1140,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_bow_up",
-"speed": 120.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1922,7 +1866,7 @@ knockbackCriticPower = 600.0
 script = ExtResource("10_lly8k")
 speed = 2000.0
 type = 1
-damage = 9.48237e+07
+damage = 2.0
 weaponName = "Bow"
 hasKnockback = true
 knockbackPower = 400.0
@@ -1949,7 +1893,7 @@ position = Vector2(1, -26)
 position = Vector2(1, 1)
 scale = Vector2(1.00403, 1)
 sprite_frames = SubResource("SpriteFrames_4wgry")
-animation = &"attack_bow_down"
+animation = &"attack_bow_up"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 
