@@ -44,8 +44,8 @@ radius = 13.0
 
 [node name="FireBall" type="Area2D"]
 scale = Vector2(1.5377, 1.5377)
-collision_layer = 4
-collision_mask = 2
+collision_layer = 8
+collision_mask = 6
 script = ExtResource("1_v1dq3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -55,6 +55,7 @@ animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(19, 0)
+scale = Vector2(1.29004, 1.29004)
 shape = SubResource("CircleShape2D_3l08s")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
