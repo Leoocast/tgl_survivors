@@ -38,12 +38,9 @@ func findWeapon(weaponType: Enums.WeaponType) -> PlayerWeapon:
 	return null
 
 func swapWeapons() -> void:
-	print("Current: ", currentWeapon.name)
-
 	if currentWeapon.type == Enums.WeaponType.MACHETE:
 		equipWeapon(Enums.WeaponType.BOW)
 	elif currentWeapon.type == Enums.WeaponType.BOW:
 		equipWeapon(Enums.WeaponType.MACHETE)
 
-	print("Equipped: ", currentWeapon.name)
 	weaponChanged.emit(currentWeapon.type)

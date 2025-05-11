@@ -26,6 +26,8 @@ var bowDirections: Dictionary = {
 	"right": "_bow_right",
 }
 
+var lastFacingDirection: Vector2 = Vector2.ZERO
+
 #-------------------------#
 func setupPlayer(_player: Player , ssjAura: Node2D) -> void:
 	self.player = _player
@@ -70,15 +72,16 @@ func on_attack_animation_started() -> void:
 func playDefaultMouse(mouseDirection: Vector2) -> void:
 	var inputDirection = InputHandler.getDirection()
 	if inputDirection != Vector2.ZERO:
-		playRunMouse(mouseDirection)
+		playRunMouse(inputDirection)
 	else:
-		playIdleMouse(mouseDirection)
+		playIdleMouse(inputDirection)
 
 func playIdleMouse(direction: Vector2) -> void:
 	matchDirection("idle", direction)
 
 func playRunMouse(direction: Vector2) -> void:
 	matchDirection("run", direction)
+	lastFacingDirection = direction.normalized()
 
 func playAttackMouse(mouseDirection: Vector2) -> void:
 	matchDirection("attack", mouseDirection)

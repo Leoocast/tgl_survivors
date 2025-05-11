@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://pgcshttpgbe0"]
+[gd_scene load_steps=13 format=3 uid="uid://pgcshttpgbe0"]
 
 [ext_resource type="Script" uid="uid://h53677tce2mx" path="res://scripts/game/Main.gd" id="1_yk7ts"]
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="2_ajshl"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://undnntiqooxe" path="res://scripts/hud/HudComboController.gd" id="8_5jxlq"]
 [ext_resource type="FontFile" uid="uid://c8vs1sqrongty" path="res://assets/fonts/Another Danger - Demo.otf" id="9_xrtyr"]
 [ext_resource type="PackedScene" uid="uid://do8uedlbkaui3" path="res://scenes/game/lvl_up_ui.tscn" id="10_daiq8"]
-[ext_resource type="PackedScene" uid="uid://ctfsj4jc7odve" path="res://scenes/enemies/slime.tscn" id="11_ajshl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uacia"]
 bg_color = Color(0.654902, 0.592157, 0.478431, 0)
@@ -164,23 +163,3 @@ wait_time = 7.0
 [node name="LevelUpUI" parent="." instance=ExtResource("10_daiq8")]
 unique_name_in_owner = true
 visible = false
-
-[node name="Slime" parent="." instance=ExtResource("11_ajshl")]
-position = Vector2(1403, 336)
-
-[node name="Slime2" parent="." instance=ExtResource("11_ajshl")]
-position = Vector2(1244, -169)
-
-[node name="Slime3" parent="." instance=ExtResource("11_ajshl")]
-position = Vector2(1566, 836)
-isBoss = true
-
-[node name="Slime4" parent="." instance=ExtResource("11_ajshl")]
-position = Vector2(3, 428)
-
-[node name="Slime5" parent="." instance=ExtResource("11_ajshl")]
-position = Vector2(-156, -77)
-
-[node name="Slime6" parent="." instance=ExtResource("11_ajshl")]
-position = Vector2(166, 928)
-isBoss = true

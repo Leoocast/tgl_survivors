@@ -63,7 +63,6 @@ func _on_timer_timeout() -> void:
 		return
 
 	spawnEnemy()
-	print("Enemies: ", counter)
 	counter += 1
 
 func on_enemy_died() -> void:

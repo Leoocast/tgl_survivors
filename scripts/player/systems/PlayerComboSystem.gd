@@ -39,7 +39,8 @@ func on_enemy_died() -> void:
 		
 		timer.start()
 		
-		AudioManager.playAnnouncer(announcerAudios[currentThreshold])
+		#TODO Fix this cuando ya no te aburras
+		# AudioManager.playAnnouncer(announcerAudios[currentThreshold])
 
 		if currentThreshold < KILL_THRESHOLD.size() - 1:
 			currentThreshold += 1 

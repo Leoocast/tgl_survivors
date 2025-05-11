@@ -39,11 +39,14 @@ var weapon: PlayerWeapon:
 
 #-------------------------#
 func _ready() -> void:
+	var joypads = Input.get_connected_joypads()
+	print("Joypads conectados: ", joypads)
 	GameUtils.registerInGroup(self, GLOBALS.GROUPS.PLAYER)
 	setupAttributes()
 	setupComponents()
 	disableAllAttackCollisions()
-	aimController.hide()
+	#TODO
+	# aimController.hide()
 
 func setupAttributes() -> void:
 	currentSpeed = attributes.speed
@@ -87,7 +90,19 @@ func xpSucriptions() -> void:
 func levelUpUiSuscriptions() -> void:
 	levelUpUi.upgrade_completed.connect(healthController.on_upgrade_completed)
 
+
+
+func _input(event):
+	if event is InputEventJoypadButton:
+		print("Botón presionado: ", event.button_index, " | Presionado: ", event.pressed)
+
+	if event is InputEventJoypadMotion:
+		print("Joystick: ", event.axis, " | Valor: ", event.axis_value)
+
 func _physics_process(_delta: float) -> void:
+
+	InputHandler.debugJoypad()
+
 	if GameState.isNotRunning():
 		return
 	
@@ -95,7 +110,6 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	if InputHandler.isTryingSwapWeapons() and not attackController.isAttacking:
-		print("attackController.isAttacking",  attackController.isAttacking)
 		weaponManager.swapWeapons()
 
 	trail.drawTrail()
@@ -112,6 +126,12 @@ func move() -> void:
 	move_and_slide()
 
 func getMouseDirection() -> Vector2:
+
+	var rightStickDirection = InputHandler.getRightStickDirection()
+
+	if rightStickDirection != Vector2.ZERO:
+		return rightStickDirection
+	
 	return (get_global_mouse_position() - global_position).normalized()
 
 func disableAllAttackCollisions() -> void:

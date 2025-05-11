@@ -12,6 +12,12 @@ func _process(_delta: float) -> void:
 	lookAtMouse()
 
 func lookAtMouse() -> void:
+	var rightStickDirection = InputHandler.getRightStickDirection()
+	
+	if rightStickDirection != Vector2.ZERO:
+		self.rotation = rightStickDirection.angle() 
+		return
+
 	var mouse_pos = player.get_global_mouse_position()
 	var direction = (mouse_pos - global_position).normalized()
 	self.rotation = direction.angle()

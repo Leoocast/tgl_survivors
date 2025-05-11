@@ -64,7 +64,6 @@ func initializeState() -> void:
 	currentState.node = ownerNode
 	currentState.stateMachine = self
 	currentState.enter()
-	print("Start state: ", currentState.name)
 
 func enterState(state: Enums.PlayerStates) -> void:
 	triggerExitState()
