@@ -35,7 +35,7 @@ stretch_mode = 1
 [node name="Player" parent="." instance=ExtResource("2_2yqfl")]
 unique_name_in_owner = true
 position = Vector2(774, 425)
-scale = Vector2(8.84947, 9.15654)
+scale = Vector2(3.05916, 3.16531)
 
 [node name="Enemy Spawner" parent="." instance=ExtResource("4_fdb3b")]
 position = Vector2(6.10352e-05, 0)
