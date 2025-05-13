@@ -11,7 +11,7 @@ var canAttack: bool = true
 
 #Signal
 signal attack_started()
-signal attack_animation_started()
+signal attack_animation_started(currentIndex)
 signal attack_animation_finished()
 signal attack_finished()
 
@@ -31,7 +31,7 @@ func attack() -> void:
 
 	weapon.shoot()
 	
-	attack_animation_started.emit()
+	attack_animation_started.emit(0)
   
 	await entity.animationController.waitAnimationFinished()
 

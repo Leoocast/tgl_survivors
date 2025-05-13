@@ -50,16 +50,16 @@ func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 	await playAndAwaitSsj()
 	player.z_index = 1
 
-func on_attack_animation_started() -> void:
+func on_attack_animation_started(index : int = 1) -> void:
 	# var mousePosition = player.getMouseDirection() 
 
 	var inputDirection = InputHandler.getDirection()
 
 	if inputDirection == Vector2.ZERO:
-		playAttackByDirection(lastFacingDirection)
+		playAttackByDirection(lastFacingDirection, index)
 		return
 
-	playAttackByDirection(inputDirection)
+	playAttackByDirection(inputDirection, index)
 
 	# if player.weapon.type == Enums.WeaponType.BOW:
 	# 	playAttackMouse(mousePosition)
@@ -88,8 +88,13 @@ func playRunDirection(direction: Vector2) -> void:
 	matchDirection("run", direction)
 	lastFacingDirection = direction.normalized()
 
-func playAttackByDirection(mouseDirection: Vector2) -> void:
-	matchDirection("attack", mouseDirection)
+func playAttackByDirection(direction: Vector2, attack_number: int) -> void:
+	var dir_str = getClosestDirection(direction)
+	var anim_name = "attack_%s_%d" % [dir_str, attack_number]
+	sprite.play(anim_name)
+
+# func playAttackByDirection(mouseDirection: Vector2) -> void:
+# 	matchDirection("attack", mouseDirection)
 
 func playDeathDirection(mouseDirection: Vector2) -> void:
 	matchDirection("death", mouseDirection)
@@ -156,4 +161,8 @@ func playAndAwaitSsj() -> void:
 	levelUpAuraRed.hide()
 	levelUpAuraYellow.hide()
 
-#Consumers
+func getCurrentAttackFrame() -> int:
+	if str(sprite.animation).begins_with("attack"):
+		return sprite.frame
+	
+	return 0

@@ -1,21 +1,70 @@
 class_name PlayerAttackController
 extends AttackController
 
+@onready var comboTimer1 = $ComboTimer1
+@onready var comboTimer2 = $ComboTimer2
+@onready var allComboTimer = $AllComboTimer
+
 #Internal
-var firstAttack: bool = true
+var currentAttackIndex: int = 1
+var maxCombo: int = 3
+
 
 #-------------------------#
-func _ready():
-	connect("attack_finished", on_attack_finished)
+# func _ready():
+# 	connect("attack_finished", on_attack_finished)
 
-#Consumers
-func on_attack_finished() -> void:
-	if InputHandler.isAttacking():
-		firstAttack = !firstAttack
+# #Consumers
+# func on_attack_finished() -> void:
+	# if InputHandler.isAttacking():
+	# 	firstAttack = !firstAttack
+	# else:
+	# 	firstAttack = true
+
+#-------------------------#
+
+func attack() -> void:
+	if not canAttack: 
+		return
+
+	allComboTimer.start()
+	
+	if currentAttackIndex == 1:
+		comboTimer1.start()
+	
+	if currentAttackIndex == 2:
+		comboTimer2.start()
+
+	canAttack = false
+	isAttacking = true
+
+	attack_started.emit()
+	weapon.shoot()
+	
+	attack_animation_started.emit(currentAttackIndex)
+  
+	if currentAttackIndex == 1:
+		await comboTimer1.timeout
+	elif currentAttackIndex == 2:
+		await comboTimer2.timeout
 	else:
-		firstAttack = true
+		await entity.animationController.waitAnimationFinished()
 
-#-------------------------#
+	isAttacking = false
+	
+	currentAttackIndex += 1
+	if currentAttackIndex > maxCombo:
+		currentAttackIndex = 1
+
+	attack_animation_finished.emit()
+
+	await GameUtils.waitFor(weapon.cooldown)
+	canAttack = true
+	attack_finished.emit()
+
+
+# func attackFinishedRoutine
+
 func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 
 	var enemiesInside = entity.levelUpDamageArea.get_overlapping_bodies()
@@ -48,3 +97,13 @@ func calculateWeaponNockback(isCritic : bool, enemy: Enemy) -> float:
 
 func changeWeapon(_weapon: PlayerWeapon) -> void:
 	self.weapon = _weapon
+
+func _on_all_combo_timer_timeout() -> void:
+	currentAttackIndex = 1
+
+
+func _on_combo_timer_2_timeout() -> void:
+	pass # Replace with function body.
+
+func _on_combo_timer_1_timeout() -> void:
+	pass # Replace with function body.
