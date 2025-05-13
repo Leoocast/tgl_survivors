@@ -5948,11 +5948,7 @@ script = ExtResource("2_lk38t")
 unique_name_in_owner = true
 script = ExtResource("4_ew0gd")
 
-[node name="ComboTimer1" type="Timer" parent="Controllers/AttackController"]
-wait_time = 0.6
-
-[node name="ComboTimer2" type="Timer" parent="Controllers/AttackController"]
-wait_time = 0.3
+[node name="ComboTimer" type="Timer" parent="Controllers/AttackController"]
 
 [node name="AllComboTimer" type="Timer" parent="Controllers/AttackController"]
 wait_time = 0.7
@@ -6109,9 +6105,6 @@ debug_color = Color(0.557828, 0.558126, 0.154713, 0.42)
 position = Vector2(-1, -32)
 zoom = Vector2(5, 5)
 
-[connection signal="timeout" from="Controllers/AttackController/ComboTimer1" to="Controllers/AttackController" method="_on_combo_timer_1_timeout"]
-[connection signal="timeout" from="Controllers/AttackController/ComboTimer2" to="Controllers/AttackController" method="_on_combo_timer_2_timeout"]
-[connection signal="timeout" from="Controllers/AttackController/AllComboTimer" to="Controllers/AttackController" method="_on_all_combo_timer_timeout"]
 [connection signal="frame_changed" from="AnimatedSprite2DLegacy" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="Weapon/AttackArea" to="." method="_on_attack_area_body_entered"]
