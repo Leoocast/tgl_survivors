@@ -12,18 +12,15 @@ var levelUpAuraRed: AnimatedSprite2D
 var levelUpAuraYellow: AnimatedSprite2D
 
 #Internal
-var directions: Dictionary = {
-	"up": "_up",
-	"down": "_down",
-	"left": "_left",
-	"right": "_right",
-}
-
-var bowDirections: Dictionary = {
-	"up": "_bow_up",
-	"down": "_bow_down",
-	"left": "_bow_left",
-	"right": "_bow_right",
+var direction_vectors : Dictionary = {
+	"up": Vector2(0, -1),
+	"up_right": Vector2(1, -1).normalized(),
+	"right": Vector2(1, 0),
+	"down_right": Vector2(1, 1).normalized(),
+	"down": Vector2(0, 1),
+	"down_left": Vector2(-1, 1).normalized(),
+	"left": Vector2(-1, 0),
+	"up_left": Vector2(-1, -1).normalized(),
 }
 
 var lastFacingDirection: Vector2 = Vector2.ZERO
@@ -94,9 +91,6 @@ func playRunDirection(direction: Vector2) -> void:
 func playAttackByDirection(mouseDirection: Vector2) -> void:
 	matchDirection("attack", mouseDirection)
 
-func playAttack2Mouse(mouseDirection: Vector2) -> void:
-	matchDirection("attack_2", mouseDirection)
-
 func playDeathDirection(mouseDirection: Vector2) -> void:
 	matchDirection("death", mouseDirection)
 
@@ -107,24 +101,29 @@ func flipHorizontal(flip: bool) -> void:
 	sprite.flip_h = flip
 
 func matchDirection(animationName: String, direction: Vector2) -> void:
-	var isHorizontal = abs(direction.x) > abs(direction.y)
-	var isRight = direction.x > 0
-	var isDown = direction.y > 0
+	var closestDir = getClosestDirection(direction)
 
-	var isBow: bool = player.weapon.type == Enums.WeaponType.BOW
+	var animationWillPlay = "%s_%s" % [animationName, closestDir]
 
-	var suffix: String
+	print(animationWillPlay)
 
-	if isHorizontal:
-		suffix = directions.right if isRight else directions.left
-	else:
-		suffix = directions.down if isDown else directions.up
+	sprite.play(animationWillPlay)
 
-	if isBow:
-		suffix = bowDirections.get(suffix.substr(1))
-	
-	sprite.play(animationName + suffix)
+func getClosestDirection(inputDir: Vector2) -> String:
+	# if inputDir == Vector2.ZERO:
+	# 	return "down"  # fallback o puedes usar la última dirección
 
+	var bestDot := -INF
+	var bestDirection := "down"
+
+	for key in direction_vectors.keys():
+		var dir = direction_vectors[key]
+		var dot = inputDir.normalized().dot(dir)
+		if dot > bestDot:
+			bestDot = dot
+			bestDirection = key
+
+	return bestDirection
 	
 func setAttackFpsMultiplier(multiplier: float) -> void:
 
