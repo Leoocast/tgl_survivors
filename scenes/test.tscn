@@ -49,7 +49,7 @@ text = "TEST ROOM"
 [node name="Player" parent="." instance=ExtResource("3_ghpyy")]
 unique_name_in_owner = true
 position = Vector2(774, 425)
-scale = Vector2(8.84947, 9.15654)
+scale = Vector2(3.41624, 3.53478)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 visible = false

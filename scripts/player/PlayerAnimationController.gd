@@ -54,36 +54,44 @@ func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 	player.z_index = 1
 
 func on_attack_animation_started() -> void:
-	var mousePosition = player.getMouseDirection() 
+	# var mousePosition = player.getMouseDirection() 
 
-	if player.weapon.type == Enums.WeaponType.BOW:
-		playAttackMouse(mousePosition)
+	var inputDirection = InputHandler.getDirection()
+
+	if inputDirection == Vector2.ZERO:
+		playAttackByDirection(lastFacingDirection)
 		return
 
-	if player.attackController.firstAttack:
-		playAttackMouse(mousePosition)
-		# sfxManager.playAttackSword1Delayed()
-	else:
-		playAttack2Mouse(mousePosition)
-		# await GameUtils.waitFor(0.1)
-		# sfxManager.playAttackSword2()
+	playAttackByDirection(inputDirection)
+
+	# if player.weapon.type == Enums.WeaponType.BOW:
+	# 	playAttackMouse(mousePosition)
+	# 	return
+
+	# if player.attackController.firstAttack:
+	# 	playAttackMouse(mousePosition)
+	# 	# sfxManager.playAttackSword1Delayed()
+	# else:
+	# 	playAttack2Mouse(mousePosition)
+	# 	# await GameUtils.waitFor(0.1)
+	# 	# sfxManager.playAttackSword2()
 
 #-------------------------#
-func playDefaultMouse(mouseDirection: Vector2) -> void:
-	var inputDirection = InputHandler.getDirection()
-	if inputDirection != Vector2.ZERO:
-		playRunMouse(inputDirection)
-	else:
-		playIdleMouse(inputDirection)
+# func playDefaultByDirection() -> void:
+# 	var inputDirection = InputHandler.getDirection()
+# 	if inputDirection != Vector2.ZERO:
+# 		playRunMouse(inputDirection)
+# 	else:
+# 		playIdleMouse(inputDirection)
 
-func playIdleMouse(direction: Vector2) -> void:
-	matchDirection("idle", direction)
+func playIdleDirection() -> void:
+	matchDirection("idle", lastFacingDirection)
 
-func playRunMouse(direction: Vector2) -> void:
+func playRunDirection(direction: Vector2) -> void:
 	matchDirection("run", direction)
 	lastFacingDirection = direction.normalized()
 
-func playAttackMouse(mouseDirection: Vector2) -> void:
+func playAttackByDirection(mouseDirection: Vector2) -> void:
 	matchDirection("attack", mouseDirection)
 
 func playAttack2Mouse(mouseDirection: Vector2) -> void:

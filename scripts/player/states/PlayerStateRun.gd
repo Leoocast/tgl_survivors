@@ -2,8 +2,12 @@ class_name PlayerStateRun
 extends PlayerState
 
 func on_physics_process(_delta: float) -> void:
-	var mousePosition = player.getMouseDirection()
-	player.animationController.playRunMouse(mousePosition)
+	# TODO Cuando holdee shift
+	# var mousePosition = player.getMouseDirection()
+
+	var inputDirection = InputHandler.getDirection()
+
+	player.animationController.playRunDirection(inputDirection)
 
 func on_input(_event: InputEvent) -> void:
 	
