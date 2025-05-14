@@ -4,7 +4,7 @@ extends RefCounted
 #Config
 var level: int = 1
 var xp: float = 0
-var xpToNextLevel: float = 999
+var xpToNextLevel: float = 8
 # var xpToNextLevel: float = 2
 var xpMultiplier: float = 1.3
 

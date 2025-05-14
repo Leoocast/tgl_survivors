@@ -112,9 +112,9 @@ func moveTowardsPlayer(repulsion : Vector2 = Vector2.ZERO) -> void:
 func on_died() -> void:
 	defaultDeath()
 
-func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = false) -> void:
+func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = false, isParry: bool = false, perfectParry: bool = false) -> void:
 	healthController.takeDamage(damage)
-	showDamageLabel(damage, isCritic)
+	showDamageLabel(damage, isCritic, isParry, perfectParry)
 
 	healthBarController.takeDamage(damage)
 	if healthController.isDead:
@@ -203,11 +203,11 @@ func on_area_2d_body_exited_default(body: Node2D) -> void:
 	isPlayerInRange = false
 
 #VFX
-func showDamageLabel(damage: float, isCritic: bool = false) -> void:
+func showDamageLabel(damage: float, isCritic: bool = false, isParry: bool = false, perfectParry: bool = false) -> void:
 	var label = DAMAGE_LABEL_ASSET.instantiate() as DamageLabel
 	label.global_position = self.global_position + Vector2(0, -20)
 	GameUtils.tree.current_scene.add_child(label)
-	label.setup(damage, isCritic)
+	label.setup(damage, isCritic, isParry, perfectParry)
 
 #SFX
 func sfx_playHurt() -> void:

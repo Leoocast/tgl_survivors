@@ -14795,6 +14795,8 @@ wait_time = 0.7
 unique_name_in_owner = true
 script = ExtResource("5_ew0gd")
 
+[node name="ParryBuffTimer" type="Timer" parent="Controllers/AnimationController"]
+
 [node name="TrailContainer" type="Node" parent="."]
 script = ExtResource("6_2cq5b")
 
@@ -14813,8 +14815,8 @@ script = ExtResource("29_fo76y")
 damage = 1.5
 weaponName = "Machete"
 hasKnockback = true
-knockbackPower = 700.0
-knockbackCriticPower = 1000.0
+knockbackPower = 200.0
+knockbackCriticPower = 500.0
 
 [node name="Bow" type="Node2D" parent="WeaponManager"]
 script = ExtResource("10_lly8k")
@@ -14961,6 +14963,7 @@ debug_color = Color(0.557828, 0.558126, 0.154713, 0.42)
 position = Vector2(-1, -32)
 script = ExtResource("148_v23ln")
 
+[connection signal="timeout" from="Controllers/AnimationController/ParryBuffTimer" to="Controllers/AnimationController" method="_on_parry_buff_timer_timeout"]
 [connection signal="frame_changed" from="AnimatedSprite2DLegacy" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2DKnight" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

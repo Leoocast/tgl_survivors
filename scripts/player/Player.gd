@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var weaponManager: PlayerWeaponManager = %WeaponManager as PlayerWeaponManager
 @onready var levelUpUi: LevelUpUI= %LevelUpUI as LevelUpUI
 @onready var trail: PlayerTrail= $TrailContainer as PlayerTrail
+@onready var stateMachine: StateMachine = $StateMachine as StateMachine
 
 #Nodes
 @onready var attackArea: Area2D = $Weapon/AttackArea as Area2D
@@ -44,6 +45,8 @@ var attack_impulse := Vector2.ZERO
 var apply_attack_impulse := false
 
 var isInParryWindow: bool = false
+var isInPerfectParryWindow: bool = false
+var parryType: String = ""
 #-------------------------#
 func _ready() -> void:
 	# var joypads = Input.get_connected_joypads()
@@ -196,13 +199,12 @@ func _on_attack_area_body_entered(enemy: Enemy) -> void:
 	var second = sprite.animation.contains("2")
 	var third = sprite.animation.contains("3")
 
-
 	if first:
 		await GameUtils.freezeFrames(3)
 	elif second:
 		await GameUtils.freezeFrames(2)
 	elif third:
-		await GameUtils.freezeFrames(6)
+		await GameUtils.freezeFrames(5)
 	
 	camera.shake(4, 4)
 	

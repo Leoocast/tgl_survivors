@@ -2,8 +2,11 @@
 class_name PlayerAnimationController
 extends AnimationController
 
+#Nodes
+@onready var parryBuffTimer : Timer = $ParryBuffTimer
+
 #Config
-const BASE_ATTACK_FPS: float = 10.0
+const BASE_ATTACK_FPS: float = 15.0
 var newFps: float = BASE_ATTACK_FPS
 var player: Player
 
@@ -145,23 +148,58 @@ func getClosestDirection(inputDir: Vector2) -> String:
 
 	return bestDirection
 	
-func setAttackFpsMultiplier(multiplier: float) -> void:
+func boostWhenParry() -> void:
+	setAttackFpsMultiplier(.50)
+	parryBuffTimer.start()
+
+
+func _on_parry_buff_timer_timeout() -> void:
+	setAttackFpsMultiplier(1, true)
+
+#TODO Arreglar esta funcion
+func setAttackFpsMultiplier(multiplier: float, reset : bool = false) -> void:
 
 	# 8 * 0.2 = 1.6
 	var result = BASE_ATTACK_FPS * multiplier
 
-	# 8 + 1.6 -> 9.6 + 1.6 -> 11.12 + 1.6, etc..
-	newFps += result
+	if reset:
+		newFps = BASE_ATTACK_FPS
+	else:
+		# 8 + 1.6 -> 9.6 + 1.6 -> 11.12 + 1.6, etc..
+		newFps += result
 	
-	sprite.sprite_frames.set_animation_speed("attack_up", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_down", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_left", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_right", newFps)
+	#TODO Arreglar esto con una funcion
+	sprite.sprite_frames.set_animation_speed("attack_up_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_3", newFps)
 	
-	sprite.sprite_frames.set_animation_speed("attack_2_up", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_2_down", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_2_left", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_2_right", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_left_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_left_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_left_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_right_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_right_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_right_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_up_left_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_left_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_left_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_up_right_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_right_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_right_3", newFps)
+	
+	sprite.sprite_frames.set_animation_speed("attack_down_left_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_left_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_left_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_down_right_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_right_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_right_3", newFps)
 
 func playAndAwaitSsj() -> void:
 

@@ -17,9 +17,17 @@ func takeDamageWithSource(enemy: Enemy) -> void:
 		return
 
 	if player.isInParryWindow and player.isEnemyInParryCone(enemy):
+		#TODO Mover esto de aqui al attack o al player
+		
+		if player.isInPerfectParryWindow:
+			player.stateMachine.currentState.wasPerfectParry = true
+			player.animationController.boostWhenParry()
+			print("BOOSTED!")
+		
 		player.triggerParry()
 		enemy.disableAttackHitbox()
-		enemy.takeDamage(2)
+		#Todo Fix esta wea tambien
+		enemy.takeDamage(2, false, false, true, player.isInPerfectParryWindow)
 		enemy.applyKnockback(player.global_position, 600)
 		# enemy.animationController.modulateReset() 
 		# enemy.animationController.playFlashAnimation()

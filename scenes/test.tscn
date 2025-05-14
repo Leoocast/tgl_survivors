@@ -165,5 +165,5 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Slime" parent="." instance=ExtResource("10_yk7ts")]
-position = Vector2(1336, 85)
+position = Vector2(1334, 82)
 isBoss = true
