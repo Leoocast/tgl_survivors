@@ -11,6 +11,12 @@ const attackEndFrames := {
 	3: 1.1,
 }
 
+const attackImpulses := {
+	1: 1000.0,
+	2: 800.0,
+	3: 100.0,
+}
+
 # Estado interno
 var currentAttackIndex: int = 1
 var maxCombo: int = 3
@@ -27,7 +33,6 @@ func _ready() -> void:
 func attack() -> void:
 	if not canAttack:
 		return
-
 	
 	if comboExpired:
 		currentAttackIndex = 1
@@ -40,6 +45,8 @@ func attack() -> void:
 
 	canAttack = false
 	isAttacking = true
+
+	entity.velocity = Vector2.ZERO
 
 	attack_started.emit()
 	weapon.shoot()

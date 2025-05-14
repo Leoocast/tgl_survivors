@@ -84,6 +84,9 @@ func on_attack_animation_started(index : int = 1) -> void:
 func playIdleDirection() -> void:
 	matchDirection("idle", lastFacingDirection)
 
+func playDashDirection() -> void:
+	matchDirection("dash", lastFacingDirection)
+
 func playRunDirection(direction: Vector2) -> void:
 	matchDirection("run", direction)
 	lastFacingDirection = direction.normalized()

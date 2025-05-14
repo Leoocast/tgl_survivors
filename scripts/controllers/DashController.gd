@@ -2,12 +2,12 @@ class_name PlayerDashController
 extends Node
 
 #Config
-const SPEED: float = 1500
-const DURATION: float = 0.14
+const SPEED: float = 700
+const DURATION: float = 0.5
 const COOLDOWN: float = 0.5
 
 #Setup player
-var player: Node2D
+var player: Player
 var playerCollider: CollisionShape2D
 
 #Internal
@@ -30,6 +30,8 @@ func tryDash() -> void:
 	if not canDash:
 		return
 	
+	player.animationController.playDashDirection()
+
 	dashDirection = InputHandler.getDirection().normalized()
 	isDashing = true
 	canDash = false

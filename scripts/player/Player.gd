@@ -37,6 +37,8 @@ var weapon: PlayerWeapon:
 	get:
 		return weaponManager.currentWeapon
 
+var attack_impulse := Vector2.ZERO
+var apply_attack_impulse := false
 #-------------------------#
 func _ready() -> void:
 	var joypads = Input.get_connected_joypads()
@@ -91,7 +93,6 @@ func levelUpUiSuscriptions() -> void:
 	levelUpUi.upgrade_completed.connect(healthController.on_upgrade_completed)
 
 
-
 func _input(event):
 	if event is InputEventJoypadButton:
 		print("Botón presionado: ", event.button_index, " | Presionado: ", event.pressed)
@@ -117,14 +118,32 @@ func _physics_process(_delta: float) -> void:
 	if InputHandler.isDashing():
 		dashController.tryDash()
 
-	if not dashController.isDashing:
+	if apply_attack_impulse:
+		self.velocity = attack_impulse
+		move_and_slide()
+		apply_attack_impulse = false  # solo un frame
+		attack_impulse = Vector2.ZERO
+	
+	elif not dashController.isDashing and not attackController.isAttacking:
 		move()
+	else:
+		move_and_slide()
 	
 func move() -> void:
 	var direction = InputHandler.getDirection()
 	self.velocity = direction * currentSpeed
-	move_and_slide()
 
+	if direction != Vector2.ZERO:
+		move_and_slide()
+	# move_and_slide()
+
+func applyAttackImpulse(direction: Vector2, force: float) -> void:
+
+	print("FUERZA", force)
+
+	attack_impulse = direction.normalized() * force
+	apply_attack_impulse = true
+	
 func getMouseDirection() -> Vector2:
 
 	var rightStickDirection = InputHandler.getRightStickDirection()
@@ -151,27 +170,29 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	var sprite = animationController.sprite
 	var animationDirection = sprite.animation.replace("attack_", "")
 
-	print("Animation direction", animationDirection)
-
 	var isAttacking = sprite.animation.contains("attack")
 	var currentFrame = sprite.frame
 
 	var activationFrame = 6
-	var desactivationFrame = 9
-
+	
 	if animationDirection.contains("2"):
 		activationFrame = 2
-		desactivationFrame = 5
-
+	
 	if animationDirection.contains("3"):
-		activationFrame = 6
-		desactivationFrame = 10
-
-
+		activationFrame = 2
+	
 	disableAllAttackCollisions()
 
 	if isAttacking and currentFrame == activationFrame:
 		collisionAttackMap.map[animationDirection].disabled = false
+
+		# 2. Aplicar impulso
+		var dir = InputHandler.getDirection()
+		if dir == Vector2.ZERO:
+			dir = animationController.lastFacingDirection
+
+		var force = attackController.attackImpulses.get(attackController.currentAttackIndex, 150.0)
+		applyAttackImpulse(dir, force)
 
 func _on_exp_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group(GLOBALS.GROUPS.EXP_DROP):
