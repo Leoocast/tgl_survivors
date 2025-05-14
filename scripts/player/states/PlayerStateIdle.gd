@@ -12,3 +12,4 @@ func on_input(_event: InputEvent) -> void:
 
 	if InputHandler.isMoving():
 		stateMachine.enterState(states.PlayerStateRun)
+		
