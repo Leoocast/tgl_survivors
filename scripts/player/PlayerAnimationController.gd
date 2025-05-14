@@ -117,6 +117,8 @@ func matchDirection(animationName: String, direction: Vector2) -> void:
 
 	sprite.play(animationWillPlay)
 
+	print("Whatup!")
+
 func getClosestDirection(inputDir: Vector2) -> String:
 	# if inputDir == Vector2.ZERO:
 	# 	return "down"  # fallback o puedes usar la última dirección

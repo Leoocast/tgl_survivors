@@ -2,7 +2,7 @@ class_name PlayerDashController
 extends Node
 
 #Config
-const SPEED: float = 800
+const SPEED: float = 1000
 const DURATION: float = 0.6
 const COOLDOWN: float = 0.5
 

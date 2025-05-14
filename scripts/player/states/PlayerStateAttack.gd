@@ -1,19 +1,15 @@
 class_name PlayerStateAttack
 extends PlayerState
 
-
 func enter() -> void:
 	if not player.attackController.canAttack:
 		return
-	
-	if not player.dashController.isDashing:
-		player.attackController.attack()
 
+	player.attackController.attack()
 		
 func on_physics_process(_delta: float) -> void:
 
 	if not player.attackController.isAttacking and not InputHandler.isAttacking():
-	# if not player.attackController.isAttacking:
 		if InputHandler.isMoving():
 			stateMachine.enterState(states.PlayerStateRun)
 		else:
@@ -22,3 +18,5 @@ func on_physics_process(_delta: float) -> void:
 	if InputHandler.isAttacking() and player.attackController.canAttack:
 		player.attackController.attack()
 	
+	if InputHandler.isDashing():
+		stateMachine.enterState(states.PlayerStateDash)

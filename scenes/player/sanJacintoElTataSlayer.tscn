@@ -1,4 +1,4 @@
-[gd_scene load_steps=1160 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=1161 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://chgnx7qk0pwkc" path="res://scripts/player/ui/PlayerTrail.gd" id="6_2cq5b"]
 [ext_resource type="Texture2D" uid="uid://c3drqk36trqc4" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Left-Sheet.png" id="6_4wgry"]
 [ext_resource type="Script" uid="uid://mii7xqfgwi5h" path="res://scripts/player/states/PlayerStateAttack.gd" id="6_olemm"]
+[ext_resource type="Script" uid="uid://45hrtrnr6f0o" path="res://scripts/player/states/PlayerStateDash.gd" id="7_5r1v5"]
 [ext_resource type="Texture2D" uid="uid://biopw6ke005ye" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Right-Sheet.png" id="7_ruyvi"]
 [ext_resource type="Script" uid="uid://dbs5rnqwurgqc" path="res://scripts/player/PlayerWeaponManager.gd" id="8_qxpum"]
 [ext_resource type="Texture2D" uid="uid://cka4y6i5bwevc" path="res://assets/sprites/san_jacinto/Sword_2_Template_Run_Up-Sheet.png" id="8_uo61b"]
@@ -8019,6 +8020,9 @@ script = ExtResource("5_olemm")
 [node name="PlayerStateAttack" type="Node" parent="StateMachine"]
 script = ExtResource("6_olemm")
 
+[node name="PlayerStateDash" type="Node" parent="StateMachine"]
+script = ExtResource("7_5r1v5")
+
 [node name="Controllers" type="Node" parent="."]
 
 [node name="HealthController" type="Node" parent="Controllers"]
@@ -8074,6 +8078,8 @@ knockbackPower = 400.0
 knockbackCriticPower = 700.0
 
 [node name="AimController" type="Node2D" parent="."]
+position = Vector2(0, -29.2387)
+scale = Vector2(3.84, 3.84)
 script = ExtResource("15_bomyi")
 
 [node name="Source" type="Marker2D" parent="AimController"]

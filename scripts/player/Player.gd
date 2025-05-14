@@ -115,9 +115,6 @@ func _physics_process(_delta: float) -> void:
 
 	trail.drawTrail()
 
-	if InputHandler.isDashing():
-		dashController.tryDash()
-
 	if apply_attack_impulse:
 		self.velocity = attack_impulse
 		move_and_slide()
@@ -135,12 +132,8 @@ func move() -> void:
 	# move_and_slide()
 
 func applyAttackImpulse(direction: Vector2, force: float) -> void:
-
-	print("FUERZA", force)
-
 	attack_impulse = direction.normalized() * force
 	apply_attack_impulse = true
-
 	await get_tree().process_frame
 	attack_impulse = Vector2.ZERO
 	apply_attack_impulse = false
