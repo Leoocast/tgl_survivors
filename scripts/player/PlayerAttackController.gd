@@ -62,6 +62,7 @@ func _on_all_combo_timer_timeout() -> void:
 	
 func attackFinishedRoutine() -> void:
 	isAttacking = false
+	entity.velocity = Vector2.ZERO  # Frenamos completamente
 
 	currentAttackIndex += 1
 	if currentAttackIndex > maxCombo:

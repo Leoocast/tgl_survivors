@@ -121,12 +121,9 @@ func _physics_process(_delta: float) -> void:
 	if apply_attack_impulse:
 		self.velocity = attack_impulse
 		move_and_slide()
-		apply_attack_impulse = false  # solo un frame
-		attack_impulse = Vector2.ZERO
-	
 	elif not dashController.isDashing and not attackController.isAttacking:
 		move()
-	else:
+	elif not dashController.isDashing:
 		move_and_slide()
 	
 func move() -> void:
@@ -143,6 +140,10 @@ func applyAttackImpulse(direction: Vector2, force: float) -> void:
 
 	attack_impulse = direction.normalized() * force
 	apply_attack_impulse = true
+
+	await get_tree().process_frame
+	attack_impulse = Vector2.ZERO
+	apply_attack_impulse = false
 	
 func getMouseDirection() -> Vector2:
 
