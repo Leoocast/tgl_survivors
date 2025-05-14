@@ -12,22 +12,26 @@ func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 func on_upgrade_completed() -> void:
 	resumeTakingDamage()
 
-func takeDamage(damage: float) -> void:
+func takeDamageWithSource(enemy: Enemy) -> void:
 	if not canTakeDamage or isDead:
 		return
 
-	if player.isInParryWindow:
+	if player.isInParryWindow and player.isEnemyInParryCone(enemy):
 		player.triggerParry()
+		enemy.applyKnockback(player.position, 600)
+		enemy.takeDamage(2)
+		# enemy.animationController.modulateReset() 
+		# enemy.animationController.playFlashAnimation()
 		return
 
 	isTakingDamage = true
 	taking_damage_started.emit()
 
-	health -= damage
+	health -= enemy.weapon.damage
 
 	if health < startHealth:
 		isDamaged = true
-		damaged.emit(damage)
+		damaged.emit(enemy.weapon.damage)
 
 	if health <= 0:
 		isDead = true

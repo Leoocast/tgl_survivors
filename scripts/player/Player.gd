@@ -16,6 +16,7 @@ extends CharacterBody2D
 @onready var levelUpDamageArea: Area2D = $LevelUpDamageArea as Area2D
 @onready var expArea: Area2D = $ExpArea as Area2D
 @onready var ssjAura: Node2D = $SsjAura as Node2D
+@onready var camera: PlayerCamera = $Camera2D as PlayerCamera
 
 # Attributes
 @export var attributes: PlayerAttributesResource
@@ -163,7 +164,25 @@ func disableAllAttackCollisions() -> void:
 			collision.disabled = true
 
 func triggerParry() -> void:
+
 	print("PARRIED!")
+	await GameUtils.applySlowMotion(0.2, 4, camera)
+
+	# # await get_tree().create_timer(0.02).timeout
+	# Engine.time_scale = 0.2
+	
+	# for i in range(4):  # 6 frames con slow-mo
+	# 	await get_tree().process_frame
+
+	# Engine.time_scale = 1.0
+
+func isEnemyInParryCone(enemy: Node2D, maxAngleDeg := 90.0) -> bool:
+	var toEnemy = (enemy.global_position - global_position).normalized()
+	var aim = aimController.lastAimDirection.normalized()
+
+	var angleBetween = rad_to_deg(aim.angle_to(toEnemy))
+
+	return abs(angleBetween) <= maxAngleDeg
 
 #Events
 func _on_attack_area_body_entered(enemy: Enemy) -> void:

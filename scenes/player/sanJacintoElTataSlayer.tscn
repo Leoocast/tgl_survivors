@@ -1,4 +1,4 @@
-[gd_scene load_steps=2123 format=3 uid="uid://ck0sepqdcmnr"]
+[gd_scene load_steps=2124 format=3 uid="uid://ck0sepqdcmnr"]
 
 [ext_resource type="Texture2D" uid="uid://b67f4cpo76xmy" path="res://assets/sprites/san_jacinto/Sword_1_Template_Idle_Down-Sheet.png" id="1_1lu2j"]
 [ext_resource type="Script" uid="uid://b0qhwbcuu2sng" path="res://scripts/player/Player.gd" id="1_ew0gd"]
@@ -147,6 +147,7 @@
 [ext_resource type="Texture2D" uid="uid://lo81jxfeutvk" path="res://assets/knight_sword_shield/Walk/KnightSwordShield_Walk_dir4.png" id="135_m34pr"]
 [ext_resource type="Texture2D" uid="uid://b164y20xtal8o" path="res://assets/knight_sword_shield/Walk/KnightSwordShield_Walk_dir5.png" id="136_yg0tq"]
 [ext_resource type="Texture2D" uid="uid://c58ta41glvka3" path="res://assets/knight_sword_shield/Walk/KnightSwordShield_Walk_dir3.png" id="146_pi0a2"]
+[ext_resource type="Script" uid="uid://crnm0t27jgoow" path="res://scenes/player/PlayerCamera.gd" id="148_v23ln"]
 
 [sub_resource type="Curve" id="Curve_pauyt"]
 _data = [Vector2(0, 0.619601), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -14958,6 +14959,7 @@ debug_color = Color(0.557828, 0.558126, 0.154713, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -32)
+script = ExtResource("148_v23ln")
 
 [connection signal="frame_changed" from="AnimatedSprite2DLegacy" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2DKnight" to="." method="_on_animated_sprite_2d_frame_changed"]

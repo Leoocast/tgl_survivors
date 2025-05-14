@@ -193,7 +193,7 @@ func on_area_2d_body_entered_default(body: Node2D) -> void:
 
 func on_attack_area_body_entered_default(body: Node2D) -> void:
 	if body is Player:
-		player.healthController.takeDamage(weapon.damage)
+		player.healthController.takeDamageWithSource(self)
 
 func on_area_2d_body_exited_default(body: Node2D) -> void:
 	if body is not Player:
