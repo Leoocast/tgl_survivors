@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://pgcshttpgbe0"]
+[gd_scene load_steps=14 format=3 uid="uid://pgcshttpgbe0"]
 
 [ext_resource type="Script" uid="uid://h53677tce2mx" path="res://scripts/game/Main.gd" id="1_yk7ts"]
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="2_ajshl"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://undnntiqooxe" path="res://scripts/hud/HudComboController.gd" id="8_5jxlq"]
 [ext_resource type="FontFile" uid="uid://c8vs1sqrongty" path="res://assets/fonts/Another Danger - Demo.otf" id="9_xrtyr"]
 [ext_resource type="PackedScene" uid="uid://do8uedlbkaui3" path="res://scenes/game/lvl_up_ui.tscn" id="10_daiq8"]
+[ext_resource type="PackedScene" uid="uid://ctfsj4jc7odve" path="res://scenes/enemies/slime.tscn" id="10_yk7ts"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uacia"]
 bg_color = Color(0.654902, 0.592157, 0.478431, 0)
@@ -52,7 +53,6 @@ position = Vector2(774, 425)
 scale = Vector2(3.41624, 3.54912)
 
 [node name="HUD" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("5_7mbro")
 
 [node name="Control" type="Control" parent="HUD"]
@@ -163,3 +163,7 @@ wait_time = 7.0
 [node name="LevelUpUI" parent="." instance=ExtResource("10_daiq8")]
 unique_name_in_owner = true
 visible = false
+
+[node name="Slime" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(1336, 85)
+isBoss = true

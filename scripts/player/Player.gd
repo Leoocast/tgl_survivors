@@ -41,10 +41,12 @@ var weapon: PlayerWeapon:
 
 var attack_impulse := Vector2.ZERO
 var apply_attack_impulse := false
+
+var isInParryWindow: bool = false
 #-------------------------#
 func _ready() -> void:
-	var joypads = Input.get_connected_joypads()
-	print("Joypads conectados: ", joypads)
+	# var joypads = Input.get_connected_joypads()
+	# print("Joypads conectados: ", joypads)
 	GameUtils.registerInGroup(self, GLOBALS.GROUPS.PLAYER)
 	setupAttributes()
 	setupComponents()
@@ -96,16 +98,17 @@ func levelUpUiSuscriptions() -> void:
 	levelUpUi.upgrade_completed.connect(healthController.on_upgrade_completed)
 
 
-func _input(event):
-	if event is InputEventJoypadButton:
-		print("Botón presionado: ", event.button_index, " | Presionado: ", event.pressed)
+# func _input(event):
+# 	pass
+	# if event is InputEventJoypadButton:
+	# 	print("Botón presionado: ", event.button_index, " | Presionado: ", event.pressed)
 
-	if event is InputEventJoypadMotion:
-		print("Joystick: ", event.axis, " | Valor: ", event.axis_value)
+	# if event is InputEventJoypadMotion:
+	# 	print("Joystick: ", event.axis, " | Valor: ", event.axis_value)
 
 func _physics_process(_delta: float) -> void:
 
-	InputHandler.debugJoypad()
+	# InputHandler.debugJoypad()
 
 	if GameState.isNotRunning():
 		return
@@ -158,6 +161,9 @@ func disableAllAttackCollisions() -> void:
 			collision.call_deferred("set_disabled", true)
 		else:
 			collision.disabled = true
+
+func triggerParry() -> void:
+	print("PARRIED!")
 
 #Events
 func _on_attack_area_body_entered(enemy: Enemy) -> void:
