@@ -15,8 +15,10 @@ func on_physics_process(_delta: float) -> void:
 
 	player.animationController.playWalkDirection(player.aimController.lastAimDirection)
 
-	if not InputHandler.isShielding():
+	if InputHandler.isParry():
+		stateMachine.enterState(states.PlayerStateParry)
 
+	if not InputHandler.isShielding():
 		if InputHandler.isMoving():
 			stateMachine.enterState(states.PlayerStateRun)
 		else:

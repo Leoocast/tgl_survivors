@@ -7,5 +7,6 @@ enum PlayerStates {
 		PlayerStateRun, 
 		PlayerStateAttack, 
 		PlayerStateDash, 
-		PlayerStateShielding
+		PlayerStateShielding,
+		PlayerStateParry
 	}

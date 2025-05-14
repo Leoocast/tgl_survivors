@@ -24,6 +24,12 @@ func isShielding() -> bool:
 		Input.get_joy_axis(0, JOY_AXIS_TRIGGER_LEFT) > 0.5
 	)
 
+func isParry() -> bool:
+	return (
+		Input.get_action_strength("parry") > 0.5 or 
+		Input.get_joy_axis(0, JOY_AXIS_TRIGGER_RIGHT) > 0.5
+	)
+
 func getDirectionX() -> float:
 	var direction = getDirection()
 	return direction.x

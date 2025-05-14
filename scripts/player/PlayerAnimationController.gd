@@ -102,6 +102,9 @@ func playWalkDirection(direction: Vector2) -> void:
 	matchDirection("walk", direction)
 	lastFacingDirection = direction.normalized()
 
+func playParryDirection(direction: Vector2) -> void:
+	matchDirection("parry", direction)
+
 func playAttackByDirection(direction: Vector2, attack_number: int) -> void:
 	var dir_str = getClosestDirection(direction)
 	var anim_name = "attack_%s_%d" % [dir_str, attack_number]
