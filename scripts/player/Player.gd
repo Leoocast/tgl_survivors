@@ -146,21 +146,32 @@ func _on_attack_area_body_entered(enemy: Enemy) -> void:
 	attackController.damageEnemy(enemy)
 
 #Activate attack collisions
-# func _on_animated_sprite_2d_frame_changed() -> void:
+func _on_animated_sprite_2d_frame_changed() -> void:
 	
-# 	if weapon.type == Enums.WeaponType.BOW:
-# 		return
+	var sprite = animationController.sprite
+	var animationDirection = sprite.animation.replace("attack_", "")
 
-# 	var sprite = animationController.sprite
-# 	var animationDirection = sprite.animation.replace("attack_", "")
-# 	var isAttacking = sprite.animation.contains("attack")
-# 	var currentFrame = sprite.frame
-# 	var activationFrame = 2 if animationDirection.contains("2") else 4
+	print("Animation direction", animationDirection)
 
-# 	disableAllAttackCollisions()
+	var isAttacking = sprite.animation.contains("attack")
+	var currentFrame = sprite.frame
 
-# 	if isAttacking and currentFrame == activationFrame:
-# 		collisionAttackMap.map[animationDirection].disabled = false
+	var activationFrame = 6
+	var desactivationFrame = 9
+
+	if animationDirection.contains("2"):
+		activationFrame = 2
+		desactivationFrame = 5
+
+	if animationDirection.contains("3"):
+		activationFrame = 6
+		desactivationFrame = 10
+
+
+	disableAllAttackCollisions()
+
+	if isAttacking and currentFrame == activationFrame:
+		collisionAttackMap.map[animationDirection].disabled = false
 
 func _on_exp_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group(GLOBALS.GROUPS.EXP_DROP):

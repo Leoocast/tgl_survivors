@@ -177,7 +177,7 @@ func applyKnockback(from_position: Vector2, strength: float) -> void:
 
 #Consumers
 #TODO si crece: Crear EnemyAnimationController
-func on_attack_animation_started() -> void:
+func on_attack_animation_started(_index: int = 0) -> void:
 	animationController.playAttack()
 	animationController.modulateAttack()
 

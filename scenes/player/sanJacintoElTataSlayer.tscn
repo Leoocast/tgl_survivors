@@ -7045,12 +7045,11 @@ animation = &"attack_down"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nptfx")
-animation = &"attack_down_right_1"
+animation = &"attack_down_left_3"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1, -27)
 scale = Vector2(4.12, 4.12)
 shape = SubResource("CapsuleShape2D_rnjux")
@@ -7065,56 +7064,66 @@ knockbackPower = 500.0
 knockbackCriticPower = 800.0
 
 [node name="AttackArea" type="Area2D" parent="Weapon"]
+visible = false
 collision_mask = 6
 
 [node name="DownCollision" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
-visible = false
+position = Vector2(-1.38365, -27.5726)
+scale = Vector2(3.38832, 3.38832)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
 [node name="DownCollision2" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
 visible = false
-scale = Vector2(-1, 1)
+position = Vector2(-1.38365, -27.5726)
+scale = Vector2(-3.38832, 3.38832)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
 [node name="RightCollision" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
-visible = false
+position = Vector2(-1.38365, -27.5726)
 rotation = -1.57079
+scale = Vector2(3.38832, 3.38832)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
 [node name="RightCollision2" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
 visible = false
+position = Vector2(-1.38365, -27.5726)
 rotation = -1.57079
-scale = Vector2(-1, 1)
+scale = Vector2(-3.38832, 3.38832)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
 [node name="UpCollision" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
-visible = false
+position = Vector2(-1.38365, -27.5726)
 rotation = -3.14132
+scale = Vector2(3.38831, 3.38831)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
 [node name="UpCollision2" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
 visible = false
+position = Vector2(-1.38365, -27.5726)
 rotation = -3.14132
-scale = Vector2(-1, 1)
+scale = Vector2(-3.38831, 3.38831)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
 [node name="LeftCollision" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
-visible = false
+position = Vector2(-1.38365, -27.5726)
 rotation = -4.71455
+scale = Vector2(3.38832, 3.38832)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
 [node name="LeftCollision2" type="CollisionPolygon2D" parent="Weapon/AttackArea"]
 visible = false
+position = Vector2(-1.38365, -27.5726)
 rotation = 1.5708
-scale = Vector2(-1, 1)
+scale = Vector2(-3.38832, 3.38832)
 polygon = PackedVector2Array(0, 0, 24, 10, 23, 20, 17, 30, 8, 36, 1, 39, -10, 39, -22, 34, -29, 25, -32, 17, -33, 10, -19, 6)
 
 [node name="ExpArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 8
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExpArea"]
+position = Vector2(-2.38419e-07, -31)
+scale = Vector2(2.67746, 2.67746)
 shape = SubResource("CircleShape2D_pauyt")
 
 [node name="LevelUpDamageArea" type="Area2D" parent="."]
