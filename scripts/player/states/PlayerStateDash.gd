@@ -11,8 +11,7 @@ func on_physics_process(_delta: float) -> void:
 
 	if InputHandler.isAttacking() and player.attackController.canAttack:
 		stateMachine.enterState(states.PlayerStateAttack)
-	
-	if InputHandler.isShielding():
+	elif InputHandler.isShielding():
 		stateMachine.enterState(states.PlayerStateShielding)
 	elif InputHandler.isMoving():
 		stateMachine.enterState(states.PlayerStateRun)
