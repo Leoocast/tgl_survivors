@@ -246,10 +246,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uhx0m"]
-radius = 8.06226
+radius = 10.6261
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ankfk"]
-radius = 18.0
+radius = 22.1087
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikdmk"]
 radius = 4.58316
@@ -312,7 +312,7 @@ scale = Vector2(1.02272, 1.02272)
 collision_layer = 8
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(11, 1)
+position = Vector2(9.55203, 1.03826)
 scale = Vector2(1.45684, 1.45684)
 shape = SubResource("CircleShape2D_uhx0m")
 debug_color = Color(0.947928, 2.69532e-06, 0.580758, 0.42)

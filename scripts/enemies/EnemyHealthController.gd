@@ -1,0 +1,3 @@
+class_name EnemyHealthController
+extends HealthController
+

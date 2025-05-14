@@ -18,8 +18,9 @@ func takeDamageWithSource(enemy: Enemy) -> void:
 
 	if player.isInParryWindow and player.isEnemyInParryCone(enemy):
 		player.triggerParry()
-		enemy.applyKnockback(player.position, 600)
+		enemy.disableAttackHitbox()
 		enemy.takeDamage(2)
+		enemy.applyKnockback(player.global_position, 600)
 		# enemy.animationController.modulateReset() 
 		# enemy.animationController.playFlashAnimation()
 		return

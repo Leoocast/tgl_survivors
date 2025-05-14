@@ -63,12 +63,19 @@ func attackSuscriptions() -> void:
 	attackController.connect("attack_animation_started", on_attack_animation_started)
 	attackController.connect("attack_animation_finished", on_attack_animation_finished)
 
-func healthSuscriptions() -> void:
+func healthSuscriptions() -> void: 
 	healthController.died.connect(on_died)
+	healthController.taking_damage_started.connect(on_taking_damage_started)
+	animationController.take_damage_animation_finished.connect(_on_damage_animation_finished)
+
 
 func defaultProcess(delta : float, repulsion : Vector2 = Vector2.ZERO) -> void:
 	if GameState.isNotRunning():
 		return
+
+	knockbackVelocity = knockbackVelocity.move_toward(Vector2.ZERO, 1000 * delta)
+	self.velocity = knockbackVelocity
+	move_and_slide()
 
 	moveTowardsPlayer(repulsion)
 	flipTowardsPlayer()
@@ -76,14 +83,12 @@ func defaultProcess(delta : float, repulsion : Vector2 = Vector2.ZERO) -> void:
 
 	# if healthController.isDamaged && not healthBarController.alreadyShowed:
 	# 	healthBarController.showBars()
-	
-	knockbackVelocity = knockbackVelocity.move_toward(Vector2.ZERO, 1000 * delta)
 
 func setupZIndex(zIndex: int = 0 ) -> void:
 	self.z_index = zIndex
 
 func moveTowardsPlayer(repulsion : Vector2 = Vector2.ZERO) -> void:
-	if player == null or healthController.isDead or attackController.isAttacking or healthController.isTakingDamage:
+	if player == null or healthController.isDead or attackController.isAttacking:
 		return
 	
 	if global_position == Vector2.ZERO:
@@ -109,22 +114,19 @@ func on_died() -> void:
 
 func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = false) -> void:
 	healthController.takeDamage(damage)
-
 	showDamageLabel(damage, isCritic)
 
-	animationController.playTakeDamage()
-	
-	sfx_playHurt()
-
-	animationController.playFlashAnimation()
-	
 	healthBarController.takeDamage(damage)
 	if healthController.isDead:
 		death(damageByLevelUp)
-	else:
-		await animationController.waitAnimationFinished()
-		animationController.playIdle()
-	healthController.isTakingDamage = false
+
+func on_taking_damage_started() -> void:
+	animationController.playTakeDamage()
+	sfx_playHurt()
+	animationController.playFlashAnimation()
+
+func _on_damage_animation_finished() -> void:
+	animationController.playIdle()
 
 func attackPlayer() -> void:
 	if not isPlayerInRange or healthController.isDead or attackController.isAttacking: 

@@ -166,7 +166,8 @@ func disableAllAttackCollisions() -> void:
 func triggerParry() -> void:
 
 	print("PARRIED!")
-	await GameUtils.applySlowMotion(0.2, 4, camera)
+	await GameUtils.freezeFrames(8)
+	await GameUtils.applySlowMotion(0.2, 10, camera)
 
 	# # await get_tree().create_timer(0.02).timeout
 	# Engine.time_scale = 0.2
@@ -186,8 +187,25 @@ func isEnemyInParryCone(enemy: Node2D, maxAngleDeg := 90.0) -> bool:
 
 #Events
 func _on_attack_area_body_entered(enemy: Enemy) -> void:
-	camera.shake(4, 4)
+
 	attackController.damageEnemy(enemy)
+
+	var sprite = animationController.sprite
+	
+	var first = sprite.animation.contains("1")
+	var second = sprite.animation.contains("2")
+	var third = sprite.animation.contains("3")
+
+
+	if first:
+		await GameUtils.freezeFrames(3)
+	elif second:
+		await GameUtils.freezeFrames(2)
+	elif third:
+		await GameUtils.freezeFrames(6)
+	
+	camera.shake(4, 4)
+	
 
 #Activate attack collisions
 func _on_animated_sprite_2d_frame_changed() -> void:
