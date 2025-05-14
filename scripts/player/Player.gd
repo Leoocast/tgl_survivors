@@ -29,7 +29,9 @@ var sfxManager: PlayerSFXManager = PlayerSFXManager.new()
 var updatesManager: PlayerUpdatesManager = PlayerUpdatesManager.new()
 
 #Internal
+var realSpeed: float
 var currentSpeed: float
+var shieldingSpeed: float = 300
 var currentCritProb: float
 
 #Get/Set
@@ -51,6 +53,7 @@ func _ready() -> void:
 	# aimController.hide()
 
 func setupAttributes() -> void:
+	realSpeed = attributes.speed
 	currentSpeed = attributes.speed
 	currentCritProb = attributes.critProb
 
@@ -109,10 +112,12 @@ func _physics_process(_delta: float) -> void:
 	
 	if healthController.isDead:
 		return
-	
-	if InputHandler.isTryingSwapWeapons() and not attackController.isAttacking:
-		weaponManager.swapWeapons()
 
+	# if InputHandler.isShielding():
+	# 	currentSpeed = 300.0
+	# else:
+	# 	currentSpeed = realSpeed
+	
 	trail.drawTrail()
 
 	if apply_attack_impulse:

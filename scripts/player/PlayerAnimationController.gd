@@ -53,13 +53,20 @@ func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 func on_attack_animation_started(index : int = 1) -> void:
 	# var mousePosition = player.getMouseDirection() 
 
-	var inputDirection = InputHandler.getDirection()
+	var direction : Vector2
 
-	if inputDirection == Vector2.ZERO:
-		playAttackByDirection(lastFacingDirection, index)
+	if InputHandler.isShielding():
+		direction = player.aimController.lastAimDirection
+		playAttackByDirection(direction, index)
 		return
 
-	playAttackByDirection(inputDirection, index)
+	direction = InputHandler.getDirection()
+
+	if direction == Vector2.ZERO:
+		playAttackByDirection(lastFacingDirection, index)
+		return
+	
+	playAttackByDirection(direction, index)
 
 	# if player.weapon.type == Enums.WeaponType.BOW:
 	# 	playAttackMouse(mousePosition)
@@ -91,6 +98,10 @@ func playRunDirection(direction: Vector2) -> void:
 	matchDirection("run", direction)
 	lastFacingDirection = direction.normalized()
 
+func playWalkDirection(direction: Vector2) -> void:
+	matchDirection("walk", direction)
+	lastFacingDirection = direction.normalized()
+
 func playAttackByDirection(direction: Vector2, attack_number: int) -> void:
 	var dir_str = getClosestDirection(direction)
 	var anim_name = "attack_%s_%d" % [dir_str, attack_number]
@@ -113,11 +124,7 @@ func matchDirection(animationName: String, direction: Vector2) -> void:
 
 	var animationWillPlay = "%s_%s" % [animationName, closestDir]
 
-	print(animationWillPlay)
-
 	sprite.play(animationWillPlay)
-
-	print("Whatup!")
 
 func getClosestDirection(inputDir: Vector2) -> String:
 	# if inputDir == Vector2.ZERO:

@@ -6,9 +6,11 @@ func on_physics_process(_delta: float) -> void:
 	# var mousePosition = player.getMouseDirection()
 	
 	
-	if not player.dashController.isDashing:
-		var inputDirection = InputHandler.getDirection()
-		player.animationController.playRunDirection(inputDirection)
+	if player.dashController.isDashing:
+		return
+
+	var inputDirection = InputHandler.getDirection()
+	player.animationController.playRunDirection(inputDirection)
 
 func on_input(_event: InputEvent) -> void:
 	
@@ -20,3 +22,6 @@ func on_input(_event: InputEvent) -> void:
 		
 	if InputHandler.isDashing():
 		stateMachine.enterState(states.PlayerStateDash)
+
+	if InputHandler.isShielding():
+		stateMachine.enterState(states.PlayerStateShielding)
