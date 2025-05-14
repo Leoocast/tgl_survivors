@@ -186,6 +186,7 @@ func isEnemyInParryCone(enemy: Node2D, maxAngleDeg := 90.0) -> bool:
 
 #Events
 func _on_attack_area_body_entered(enemy: Enemy) -> void:
+	camera.shake(4, 4)
 	attackController.damageEnemy(enemy)
 
 #Activate attack collisions

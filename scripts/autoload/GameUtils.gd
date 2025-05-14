@@ -52,7 +52,7 @@ func applySlowMotion(scale: float, frames: int, camera: PlayerCamera = null) -> 
 	Engine.time_scale = scale
 	
 	if camera:
-		camera.shake(10.0, 6)
+		camera.shake(15, 6)
 
 	for i in frames:
 		await get_tree().process_frame
