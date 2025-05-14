@@ -14,7 +14,7 @@ const attackEndFrames := {
 const attackImpulses := {
 	1: 1000.0,
 	2: 800.0,
-	3: 100.0,
+	3: 800.0,
 }
 
 # Estado interno

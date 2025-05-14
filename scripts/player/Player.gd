@@ -168,6 +168,11 @@ func _on_attack_area_body_entered(enemy: Enemy) -> void:
 #Activate attack collisions
 func _on_animated_sprite_2d_frame_changed() -> void:
 	
+	# TODO Esto hace 3 cosas, hay que separarlo y calcular
+	# 1.- Activar los collider de ataque
+	# 2.- Activar los impulsos de ataque
+	# 1.- Activar que se detenga despues del impulso por frame
+
 	var sprite = animationController.sprite
 	var animationDirection = sprite.animation.replace("attack_", "")
 
@@ -180,7 +185,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 		activationFrame = 2
 	
 	if animationDirection.contains("3"):
-		activationFrame = 2
+		activationFrame = 3
 	
 	disableAllAttackCollisions()
 
@@ -194,6 +199,10 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 
 		var force = attackController.attackImpulses.get(attackController.currentAttackIndex, 150.0)
 		applyAttackImpulse(dir, force)
+
+	# Solamente la 3er animacion llega a mas de 9
+	if sprite.animation.contains("3") and currentFrame == 6:
+		self.velocity = Vector2.ZERO
 
 func _on_exp_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group(GLOBALS.GROUPS.EXP_DROP):
