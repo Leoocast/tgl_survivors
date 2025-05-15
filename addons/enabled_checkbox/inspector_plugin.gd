@@ -11,7 +11,7 @@ const TITLE_FONT_SIZE: int = 21
 const TITLE_BACKGROUND_COLOR: Color = Color("#40444c")
 
 #Internal
-var visibleStateBeforeChange = true
+var visibleStateBeforeChange = false
 
 func _can_handle(object):
 	# Aplica a todos los nodos, pero puedes filtrar por tipo si quieres
@@ -53,13 +53,19 @@ func _parse_begin(object):
 func createCheckbox(object) -> CheckBox:
 	var checkbox = CheckBox.new()
 	checkbox.text = "On"
-	checkbox.button_pressed = true
+	
+	# checkbox.button_pressed = true 
+	checkbox.button_pressed = object.process_mode == Node.PROCESS_MODE_INHERIT
 	checkbox.focus_mode = Control.FOCUS_NONE
 	checkbox.size_flags_horizontal  = Control.SIZE_EXPAND
 	checkbox.text = "On"
-	checkbox.button_pressed  = true
+	# checkbox.button_pressed  = true
 
 	checkbox.toggled.connect(func(enabled):
+
+
+		print_rich("[color=#888b90]Arky Addon: Set process_mode[/color]")
+		print_rich("[color=#888b90]Arky Addon: Toggle Visible if was visible[/color]")
 
 		#If is not visible when enabled
 		if not enabled:
