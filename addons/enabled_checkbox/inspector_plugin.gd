@@ -13,6 +13,9 @@ const TITLE_BACKGROUND_COLOR: Color = Color("#40444c")
 #Internal
 var visibleStateBeforeChange = false
 
+#UndoRedo
+var undoRedo : EditorUndoRedoManager 
+
 func _can_handle(object):
 	# Aplica a todos los nodos, pero puedes filtrar por tipo si quieres
 	return object is Node
@@ -50,6 +53,66 @@ func _parse_begin(object):
 	
 	add_custom_control(row)
 
+	# -------------- Reset Position Button --------------
+	var row3 = HBoxContainer.new()
+	row3.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	var label3 = Label.new()
+	label3.text = "Position"
+	label3.size_flags_horizontal = Control.SIZE_EXPAND
+	label3.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+
+	var right_panel3 = createRightPanel()
+	var positionButton = createPositionButton(object)
+	
+	right_panel3.add_child(positionButton)
+	row3.add_child(label3)
+	row3.add_child(right_panel3)
+
+	add_custom_control(row3)
+
+	# -------------- Reset Scale Button --------------
+	var row2 = HBoxContainer.new()
+	row2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	var label2 = Label.new()
+	label2.text = "Scale"
+	label2.size_flags_horizontal = Control.SIZE_EXPAND
+	label2.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+
+	var right_panel2 = createRightPanel()
+	var button = createScaleButton(object)
+	
+	right_panel2.add_child(button)
+	row2.add_child(label2)
+	row2.add_child(right_panel2)
+
+	add_custom_control(row2)
+
+func createPositionButton(object) -> Button:
+	var button = Button.new()
+	button.text = "Reset"
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.pressed.connect(func():
+		undoRedo.create_action("Arky addon: Reset Position")
+		undoRedo.add_undo_property(object, "position", object.position)
+		undoRedo.add_do_property(object, "position", Vector2(0, 0))
+		undoRedo.commit_action()
+	)
+	return button
+
+func createScaleButton(object) -> Button:
+	var button = Button.new()
+	button.text = "Reset"
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.pressed.connect(func():
+		undoRedo.create_action("Arky addon: Reset Scale")
+		undoRedo.add_undo_property(object, "scale", object.scale)
+		undoRedo.add_do_property(object, "scale", Vector2(1, 1))
+		undoRedo.commit_action()
+	)
+	return button
+
 func createCheckbox(object) -> CheckBox:
 	var checkbox = CheckBox.new()
 	checkbox.text = "On"
@@ -62,8 +125,6 @@ func createCheckbox(object) -> CheckBox:
 	# checkbox.button_pressed  = true
 
 	checkbox.toggled.connect(func(enabled):
-
-
 		print_rich("[color=#888b90]Arky Addon: Set process_mode[/color]")
 		print_rich("[color=#888b90]Arky Addon: Toggle Visible if was visible[/color]")
 

@@ -166,8 +166,6 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Slime3" parent="." instance=ExtResource("10_yk7ts")]
-process_mode = 4
-visible = false
-position = Vector2(832, -367)
-scale = Vector2(11.8157, 11.8157)
+position = Vector2(775.165, -441)
+scale = Vector2(8.6, 8.6)
 isBoss = true
