@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cwvekbbv4mh14"
-path="res://.godot/imported/NotoSans-Bold.ttf-990f788a1f78943c0a85a509f0120390.fontdata"
+path="res://.godot/imported/NotoSans-Bold.ttf-7b268d22439f3e02ed5a7e36de72a8d7.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/NotoSans-Bold.ttf"
-dest_files=["res://.godot/imported/NotoSans-Bold.ttf-990f788a1f78943c0a85a509f0120390.fontdata"]
+source_file="res://addons/enabled_checkbox/NotoSans-Bold.ttf"
+dest_files=["res://.godot/imported/NotoSans-Bold.ttf-7b268d22439f3e02ed5a7e36de72a8d7.fontdata"]
 
 [params]
 
