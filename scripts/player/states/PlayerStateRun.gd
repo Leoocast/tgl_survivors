@@ -17,11 +17,13 @@ func on_input(_event: InputEvent) -> void:
 	if InputHandler.isAttacking():
 		stateMachine.enterState(states.PlayerStateAttack)
 
-	if not InputHandler.isMoving():
+	elif InputHandler.isShielding():
+		stateMachine.enterState(states.PlayerStateShielding)
+
+	elif not InputHandler.isMoving():
 		stateMachine.enterState(states.PlayerStateIdle)
 		
-	if InputHandler.isDashing():
+	elif InputHandler.isDashing():
 		stateMachine.enterState(states.PlayerStateDash)
 
-	if InputHandler.isShielding():
-		stateMachine.enterState(states.PlayerStateShielding)
+	

@@ -14796,6 +14796,7 @@ unique_name_in_owner = true
 script = ExtResource("5_ew0gd")
 
 [node name="ParryBuffTimer" type="Timer" parent="Controllers/AnimationController"]
+wait_time = 2.0
 
 [node name="TrailContainer" type="Node" parent="."]
 script = ExtResource("6_2cq5b")
@@ -14815,8 +14816,8 @@ script = ExtResource("29_fo76y")
 damage = 1.5
 weaponName = "Machete"
 hasKnockback = true
-knockbackPower = 200.0
-knockbackCriticPower = 500.0
+knockbackPower = 100.0
+knockbackCriticPower = 400.0
 
 [node name="Bow" type="Node2D" parent="WeaponManager"]
 script = ExtResource("10_lly8k")

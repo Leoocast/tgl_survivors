@@ -41,10 +41,10 @@ func setup(damage: float, isCritic: bool = false, isParry: bool = false, perfect
 			parryLabel.text = "PERFECT!"
 			(parryLabel.get_node("ParryLabel") as Label).text = "PERFECT!"
 		else:
-			parryLabel.text = "GOOD!"
-			(parryLabel.get_node("ParryLabel") as Label).text = "GOOD!"
+			parryLabel.text = "Parried!"
+			(parryLabel.get_node("ParryLabel") as Label).text = "Parried!"
 
-	parryLabelEffect(perfectParry)
+		parryLabelEffect(perfectParry)
 
 func parryLabelEffect(isPerfect: bool) -> void:
 

@@ -12,6 +12,6 @@ exp_drop_scene = ExtResource("1_fw4yj")
 sfx_hurt = ExtResource("3_ebwu0")
 health = 100.0
 healthColor = Color(0.817299, 0.00013118, 7.42176e-05, 1)
-speed = 150.0
+speed = 300.0
 critProb = 0.0
 metadata/_custom_type_script = "uid://dpxkmmg2u80xb"

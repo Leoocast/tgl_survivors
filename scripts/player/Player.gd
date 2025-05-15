@@ -47,6 +47,8 @@ var apply_attack_impulse := false
 var isInParryWindow: bool = false
 var isInPerfectParryWindow: bool = false
 var parryType: String = ""
+var justParriedSuccessfully = false
+var wantsToShield := false
 #-------------------------#
 func _ready() -> void:
 	# var joypads = Input.get_connected_joypads()
@@ -120,6 +122,8 @@ func _physics_process(_delta: float) -> void:
 	if healthController.isDead:
 		return
 
+	wantsToShield = InputHandler.isShielding()
+
 	# if InputHandler.isShielding():
 	# 	currentSpeed = 300.0
 	# else:
@@ -170,7 +174,7 @@ func triggerParry() -> void:
 
 	print("PARRIED!")
 	await GameUtils.freezeFrames(8)
-	await GameUtils.applySlowMotion(0.2, 10, camera)
+	await GameUtils.applySlowMotion(0.4, 10, camera)
 
 	# # await get_tree().create_timer(0.02).timeout
 	# Engine.time_scale = 0.2

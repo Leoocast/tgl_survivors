@@ -312,8 +312,8 @@ scale = Vector2(1.02272, 1.02272)
 collision_layer = 8
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(9.55203, 1.03826)
-scale = Vector2(1.45684, 1.45684)
+position = Vector2(6.64489, -2.69949)
+scale = Vector2(1.79818, 1.79818)
 shape = SubResource("CircleShape2D_uhx0m")
 debug_color = Color(0.947928, 2.69532e-06, 0.580758, 0.42)
 
@@ -321,7 +321,8 @@ debug_color = Color(0.947928, 2.69532e-06, 0.580758, 0.42)
 collision_layer = 8
 
 [node name="PlayerDetector" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(1.24918, 1.24918)
+position = Vector2(-1.03826, -7.0602)
+scale = Vector2(0.953637, 0.953637)
 shape = SubResource("CircleShape2D_ankfk")
 debug_color = Color(0, 0.842083, 0.3018, 0.42)
 

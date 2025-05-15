@@ -2,6 +2,9 @@ class_name PlayerStateShielding
 extends PlayerState
 
 func enter() -> void:
+
+	print("Entrando!")
+
 	player.aimController.lastAimDirection = player.animationController.lastFacingDirection
 	player.currentSpeed = player.shieldingSpeed
 
@@ -15,17 +18,14 @@ func on_physics_process(_delta: float) -> void:
 
 	player.animationController.playWalkDirection(player.aimController.lastAimDirection)
 
-	if InputHandler.isParry():
+	if InputHandler.isAttacking():
+		stateMachine.enterState(states.PlayerStateAttack)
+	elif InputHandler.isParry():
 		stateMachine.enterState(states.PlayerStateParry)
-
-	if not InputHandler.isShielding():
+	elif InputHandler.isDashing():
+		stateMachine.enterState(states.PlayerStateDash)
+	elif not InputHandler.isShielding():
 		if InputHandler.isMoving():
 			stateMachine.enterState(states.PlayerStateRun)
 		else:
 			stateMachine.enterState(states.PlayerStateIdle)
-
-	if InputHandler.isAttacking():
-		stateMachine.enterState(states.PlayerStateAttack)
-
-	if InputHandler.isDashing():
-		stateMachine.enterState(states.PlayerStateDash)

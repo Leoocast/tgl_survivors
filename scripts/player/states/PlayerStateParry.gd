@@ -6,14 +6,16 @@ var wasPerfectParry := false
 func enter() -> void:
 	player.currentSpeed = 0
 	player.animationController.playParryDirection(player.aimController.lastAimDirection)
-	
+
+	# PROTECCIÓN extra: evita reconectar la señal si ya estaba conectada
 	if player.animationController.sprite.animation_finished.is_connected(_on_parry_finished):
 		player.animationController.sprite.animation_finished.disconnect(_on_parry_finished)
 
-	wasPerfectParry = false
-	await startParryWindow()
-
+	# CONECTAR ANTES por si el parry es perfecto y termina ANTES de que tú lo hagas manual
 	player.animationController.sprite.animation_finished.connect(_on_parry_finished, CONNECT_ONE_SHOT)
+
+	# Ahora sí puedes entrar a la ventana de parry
+	await startParryWindow()
 
 func exit() -> void:
 	player.currentSpeed = player.realSpeed
@@ -21,26 +23,31 @@ func exit() -> void:
 	if player.animationController.sprite.animation_finished.is_connected(_on_parry_finished):
 		player.animationController.sprite.animation_finished.disconnect(_on_parry_finished)
 	
+	player.animationController.sprite.stop()
 
+func on_process(_delta):
+	if player.justParriedSuccessfully and player.isInPerfectParryWindow:
+		player.justParriedSuccessfully = false  
+
+		var parryAnim := player.animationController.sprite.animation
+		var totalFrames := player.animationController.sprite.sprite_frames.get_frame_count(parryAnim)
+
+		# Saltar al último frame de la animación de parry
+		player.animationController.sprite.frame = totalFrames - 1
+
+		# _on_parry_finished()
+		
 func _on_parry_finished() -> void:
-	if InputHandler.isShielding():
+	if InputHandler.isAttacking():
+		stateMachine.enterState(states.PlayerStateAttack)
+	elif InputHandler.isShielding():
 		stateMachine.enterState(states.PlayerStateShielding)
 	elif InputHandler.isDashing():
 		stateMachine.enterState(states.PlayerStateDash)
-	elif InputHandler.isAttacking():
-		stateMachine.enterState(states.PlayerStateAttack)
 	elif InputHandler.isMoving():
 		stateMachine.enterState(states.PlayerStateRun)
 	else:
 		stateMachine.enterState(states.PlayerStateIdle)
-
-func onParryCancel() -> void:
-	if InputHandler.isAttacking():
-		stateMachine.enterState(states.PlayerStateAttack)
-	elif InputHandler.isDashing():
-		stateMachine.enterState(states.PlayerStateDash)
-	elif InputHandler.isMoving():
-		stateMachine.enterState(states.PlayerStateRun)
 
 func startParryWindow() -> void:
 	player.isInParryWindow = true
@@ -48,13 +55,6 @@ func startParryWindow() -> void:
 
 	await get_tree().create_timer(0.05).timeout  # ~3 frames a 60fps
 	player.isInPerfectParryWindow = false    
-
-	# Si el parry fue perfecto y ya se consumó, cancela la animación aquí
-	if wasPerfectParry:
-		print("ANIMATION CANCELED!!")
-		onParryCancel()
-		player.isInParryWindow = false  
-		return
 
 	await get_tree().create_timer(0.15).timeout  # ~9 frames a 60fps
 	player.isInParryWindow = false            

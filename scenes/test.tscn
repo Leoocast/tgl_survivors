@@ -25,11 +25,11 @@ bg_color = Color(1, 1, 1, 1)
 script = ExtResource("1_yk7ts")
 
 [node name="Floor" type="TextureRect" parent="."]
-offset_left = -3227.0
-offset_top = -1776.0
-offset_right = 20924.0
-offset_bottom = 10819.0
-scale = Vector2(0.318397, 0.318397)
+offset_left = -5561.0
+offset_top = -3036.0
+offset_right = 18590.0
+offset_bottom = 9559.0
+scale = Vector2(0.537314, 0.537314)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("2_ajshl")
@@ -49,8 +49,9 @@ text = "TEST ROOM"
 
 [node name="Player" parent="." instance=ExtResource("3_ghpyy")]
 unique_name_in_owner = true
+y_sort_enabled = true
 position = Vector2(774, 425)
-scale = Vector2(3.41624, 3.54912)
+scale = Vector2(3.41624, 3.53893)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_7mbro")
@@ -164,6 +165,7 @@ wait_time = 7.0
 unique_name_in_owner = true
 visible = false
 
-[node name="Slime" parent="." instance=ExtResource("10_yk7ts")]
-position = Vector2(1334, 82)
+[node name="Slime3" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(832, -367)
+scale = Vector2(11.8157, 11.8157)
 isBoss = true

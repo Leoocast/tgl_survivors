@@ -149,7 +149,7 @@ func getClosestDirection(inputDir: Vector2) -> String:
 	return bestDirection
 	
 func boostWhenParry() -> void:
-	setAttackFpsMultiplier(.50)
+	setAttackFpsMultiplier(.3)
 	parryBuffTimer.start()
 
 
