@@ -173,9 +173,19 @@ func disableAllAttackCollisions() -> void:
 func triggerParry() -> void:
 
 	print("PARRIED!")
-	await GameUtils.freezeFrames(8)
-	await GameUtils.applySlowMotion(0.4, 10, camera)
 
+	if isInPerfectParryWindow:
+		sfxManager.playPerfectParry()
+		animationController.playBlockingAnimation()
+		await GameUtils.freezeFrames(10)
+		await GameUtils.applySlowMotion(0.4, 15, camera)
+	else:
+		sfxManager.playNormalParry()
+		await GameUtils.freezeFrames(8)
+		await GameUtils.applySlowMotion(0.4, 10, camera)
+	
+	
+	
 	# # await get_tree().create_timer(0.02).timeout
 	# Engine.time_scale = 0.2
 	

@@ -23,7 +23,7 @@ func on_input(_event: InputEvent) -> void:
 	elif not InputHandler.isMoving():
 		stateMachine.enterState(states.PlayerStateIdle)
 		
-	elif InputHandler.isDashing():
+	elif InputHandler.isDashing() and not GameState.isNotRunning():
 		stateMachine.enterState(states.PlayerStateDash)
 
 	

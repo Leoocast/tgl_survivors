@@ -19,7 +19,7 @@ const attackImpulses := {
 
 # Estado interno
 var currentAttackIndex: int = 1
-var maxCombo: int = 3
+var maxCombo: int = 2
 var comboExpired := false
 
 #-------------------------#

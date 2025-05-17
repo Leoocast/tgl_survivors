@@ -27,7 +27,9 @@ const SHADERS = {
 
 const PLAYER_SFX = {
 	"SWORD_1": "res://assets/audio/sound_effects/sword_effect_1.wav",
-	"SWORD_2": "res://assets/audio/sound_effects/sword_effect_2.wav"
+	"SWORD_2": "res://assets/audio/sound_effects/sword_effect_2.wav",
+	"NORMAL_PARRY": "res://assets/audio/sound_effects/normal_parry.ogg",
+	"PERFECT_PARRY": "res://assets/audio/sound_effects/perfect_parry.ogg",
 }
 
 const ANNOUNCER = {

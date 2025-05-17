@@ -14,6 +14,10 @@ var player: Player
 var levelUpAuraRed: AnimatedSprite2D
 var levelUpAuraYellow: AnimatedSprite2D
 
+#Shader
+var shaderMaterial : ShaderMaterial
+var animationPlayer : AnimationPlayer
+
 #Internal
 var direction_vectors : Dictionary = {
 	"up": Vector2(0, -1),
@@ -31,8 +35,11 @@ var lastFacingDirection: Vector2 = Vector2.ZERO
 #-------------------------#
 func setupPlayer(_player: Player , ssjAura: Node2D) -> void:
 	self.player = _player
-	self.setup(player.get_node("AnimatedSprite2D"))
-	
+	var playerSprite = player.get_node("AnimatedSprite2D") as AnimatedSprite2D
+	self.sprite = playerSprite
+	self.shaderMaterial = sprite.material as ShaderMaterial
+	self.animationPlayer = sprite.get_node("AnimationPlayer") as AnimationPlayer
+
 	self.levelUpAuraRed = ssjAura.get_node("AuraRed") as AnimatedSprite2D
 	self.levelUpAuraYellow = ssjAura.get_node("AuraYellow") as AnimatedSprite2D
 
@@ -219,3 +226,8 @@ func getCurrentAttackFrame() -> int:
 		return sprite.frame
 	
 	return 0
+
+
+func playBlockingAnimation() -> void:
+	animationPlayer.play("blocking")
+

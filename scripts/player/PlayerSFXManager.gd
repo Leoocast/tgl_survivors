@@ -10,6 +10,8 @@ var player: Player
 #SFX
 var sfx_sword_1: AudioStream = load(PATHS.PLAYER_SFX.SWORD_1) as AudioStream
 var sfx_sword_2: AudioStream = load(PATHS.PLAYER_SFX.SWORD_2) as AudioStream
+var sfx_normal_parry: AudioStream = load(PATHS.PLAYER_SFX.NORMAL_PARRY) as AudioStream
+var sfx_perfect_parry: AudioStream = load(PATHS.PLAYER_SFX.PERFECT_PARRY) as AudioStream
 
 #-------------------------#
 func _init():
@@ -38,6 +40,14 @@ func playAttackSword1() -> void:
 
 func playAttackSword2() -> void:
 	audioPlayer.stream = sfx_sword_2
+	audioPlayer.play()
+
+func playNormalParry() -> void:
+	audioPlayer.stream = sfx_normal_parry
+	audioPlayer.play()
+
+func playPerfectParry() -> void:
+	audioPlayer.stream = sfx_perfect_parry
 	audioPlayer.play()
 
 func playAttackSword1Delayed() -> void:

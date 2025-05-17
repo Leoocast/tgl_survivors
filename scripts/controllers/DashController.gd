@@ -21,6 +21,7 @@ func setupPlayer() -> void:
 	self.playerCollider = GameUtils.getPlayerCollider()
 
 func _physics_process(_delta: float) -> void:
+	
 	if isDashing:
 		executeDash()
 	
