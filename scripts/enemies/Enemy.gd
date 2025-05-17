@@ -63,12 +63,19 @@ func attackSuscriptions() -> void:
 	attackController.connect("attack_animation_started", on_attack_animation_started)
 	attackController.connect("attack_animation_finished", on_attack_animation_finished)
 
-func healthSuscriptions() -> void:
+func healthSuscriptions() -> void: 
 	healthController.died.connect(on_died)
+	healthController.taking_damage_started.connect(on_taking_damage_started)
+	animationController.take_damage_animation_finished.connect(_on_damage_animation_finished)
+
 
 func defaultProcess(delta : float, repulsion : Vector2 = Vector2.ZERO) -> void:
 	if GameState.isNotRunning():
 		return
+
+	knockbackVelocity = knockbackVelocity.move_toward(Vector2.ZERO, 1000 * delta)
+	self.velocity = knockbackVelocity
+	move_and_slide()
 
 	moveTowardsPlayer(repulsion)
 	flipTowardsPlayer()
@@ -76,14 +83,12 @@ func defaultProcess(delta : float, repulsion : Vector2 = Vector2.ZERO) -> void:
 
 	# if healthController.isDamaged && not healthBarController.alreadyShowed:
 	# 	healthBarController.showBars()
-	
-	knockbackVelocity = knockbackVelocity.move_toward(Vector2.ZERO, 1000 * delta)
 
 func setupZIndex(zIndex: int = 0 ) -> void:
 	self.z_index = zIndex
 
 func moveTowardsPlayer(repulsion : Vector2 = Vector2.ZERO) -> void:
-	if player == null or healthController.isDead or attackController.isAttacking or healthController.isTakingDamage:
+	if player == null or healthController.isDead or attackController.isAttacking:
 		return
 	
 	if global_position == Vector2.ZERO:
@@ -107,24 +112,21 @@ func moveTowardsPlayer(repulsion : Vector2 = Vector2.ZERO) -> void:
 func on_died() -> void:
 	defaultDeath()
 
-func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = false) -> void:
+func takeDamage(damage: float, damageByLevelUp: bool = false, isCritic: bool = false, isParry: bool = false, perfectParry: bool = false) -> void:
 	healthController.takeDamage(damage)
+	showDamageLabel(damage, isCritic, isParry, perfectParry)
 
-	showDamageLabel(damage, isCritic)
-
-	animationController.playTakeDamage()
-	
-	sfx_playHurt()
-
-	animationController.playFlashAnimation()
-	
 	healthBarController.takeDamage(damage)
 	if healthController.isDead:
 		death(damageByLevelUp)
-	else:
-		await animationController.waitAnimationFinished()
-		animationController.playIdle()
-	healthController.isTakingDamage = false
+
+func on_taking_damage_started() -> void:
+	animationController.playTakeDamage()
+	sfx_playHurt()
+	animationController.playFlashAnimation()
+
+func _on_damage_animation_finished() -> void:
+	animationController.playIdle()
 
 func attackPlayer() -> void:
 	if not isPlayerInRange or healthController.isDead or attackController.isAttacking: 
@@ -177,7 +179,7 @@ func applyKnockback(from_position: Vector2, strength: float) -> void:
 
 #Consumers
 #TODO si crece: Crear EnemyAnimationController
-func on_attack_animation_started() -> void:
+func on_attack_animation_started(_index: int = 0) -> void:
 	animationController.playAttack()
 	animationController.modulateAttack()
 
@@ -193,7 +195,7 @@ func on_area_2d_body_entered_default(body: Node2D) -> void:
 
 func on_attack_area_body_entered_default(body: Node2D) -> void:
 	if body is Player:
-		player.healthController.takeDamage(weapon.damage)
+		player.healthController.takeDamageWithSource(self)
 
 func on_area_2d_body_exited_default(body: Node2D) -> void:
 	if body is not Player:
@@ -201,11 +203,11 @@ func on_area_2d_body_exited_default(body: Node2D) -> void:
 	isPlayerInRange = false
 
 #VFX
-func showDamageLabel(damage: float, isCritic: bool = false) -> void:
+func showDamageLabel(damage: float, isCritic: bool = false, isParry: bool = false, perfectParry: bool = false) -> void:
 	var label = DAMAGE_LABEL_ASSET.instantiate() as DamageLabel
 	label.global_position = self.global_position + Vector2(0, -20)
 	GameUtils.tree.current_scene.add_child(label)
-	label.setup(damage, isCritic)
+	label.setup(damage, isCritic, isParry, perfectParry)
 
 #SFX
 func sfx_playHurt() -> void:

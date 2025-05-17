@@ -2,4 +2,11 @@ extends Node
 
 enum WeaponType { MACHETE, BOW } 
 
-enum PlayerStates { PlayerStateIdle, PlayerStateRun, PlayerStateAttack}
+enum PlayerStates { 
+		PlayerStateIdle, 
+		PlayerStateRun, 
+		PlayerStateAttack, 
+		PlayerStateDash, 
+		PlayerStateShielding,
+		PlayerStateParry
+	}

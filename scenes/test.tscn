@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://pgcshttpgbe0"]
+[gd_scene load_steps=14 format=3 uid="uid://pgcshttpgbe0"]
 
 [ext_resource type="Script" uid="uid://h53677tce2mx" path="res://scripts/game/Main.gd" id="1_yk7ts"]
 [ext_resource type="Texture2D" uid="uid://d0oemde8j1lge" path="res://assets/images/test_floor.png" id="2_ajshl"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://undnntiqooxe" path="res://scripts/hud/HudComboController.gd" id="8_5jxlq"]
 [ext_resource type="FontFile" uid="uid://c8vs1sqrongty" path="res://assets/fonts/Another Danger - Demo.otf" id="9_xrtyr"]
 [ext_resource type="PackedScene" uid="uid://do8uedlbkaui3" path="res://scenes/game/lvl_up_ui.tscn" id="10_daiq8"]
+[ext_resource type="PackedScene" uid="uid://ctfsj4jc7odve" path="res://scenes/enemies/slime.tscn" id="10_yk7ts"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uacia"]
 bg_color = Color(0.654902, 0.592157, 0.478431, 0)
@@ -24,11 +25,11 @@ bg_color = Color(1, 1, 1, 1)
 script = ExtResource("1_yk7ts")
 
 [node name="Floor" type="TextureRect" parent="."]
-offset_left = -3227.0
-offset_top = -1776.0
-offset_right = 20924.0
-offset_bottom = 10819.0
-scale = Vector2(0.318397, 0.318397)
+offset_left = -5561.0
+offset_top = -3036.0
+offset_right = 18590.0
+offset_bottom = 9559.0
+scale = Vector2(0.537314, 0.537314)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("2_ajshl")
@@ -48,11 +49,11 @@ text = "TEST ROOM"
 
 [node name="Player" parent="." instance=ExtResource("3_ghpyy")]
 unique_name_in_owner = true
+y_sort_enabled = true
 position = Vector2(774, 425)
-scale = Vector2(8.84947, 9.15654)
+scale = Vector2(3.41624, 3.53893)
 
 [node name="HUD" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("5_7mbro")
 
 [node name="Control" type="Control" parent="HUD"]
@@ -163,3 +164,8 @@ wait_time = 7.0
 [node name="LevelUpUI" parent="." instance=ExtResource("10_daiq8")]
 unique_name_in_owner = true
 visible = false
+
+[node name="Slime3" parent="." instance=ExtResource("10_yk7ts")]
+position = Vector2(775.165, -441)
+scale = Vector2(8.6, 8.6)
+isBoss = true

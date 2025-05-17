@@ -48,6 +48,22 @@ func flipColliderHorizontal(collider: CollisionShape2D, flip: bool) -> void:
 	else:
 		collider.position.x = abs(collider.position.x)
 
+func applySlowMotion(scale: float, frames: int, camera: PlayerCamera = null) -> void:
+	Engine.time_scale = scale
+	
+	if camera:
+		camera.shake(15, 6)
+
+	for i in frames:
+		await get_tree().process_frame
+	Engine.time_scale = 1.0
+
+func freezeFrames(frame_count: int = 4) -> void:
+	Engine.time_scale = 0.0
+	for i in frame_count:
+		await get_tree().process_frame
+	Engine.time_scale = 1.0
+
 #TODO: Create a shader for this
 func flash(sprite: AnimatedSprite2D) -> void:
 	var originalColor = sprite.self_modulate

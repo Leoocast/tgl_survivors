@@ -6,8 +6,9 @@ func enter() -> void:
 		return
 
 	player.attackController.attack()
-
+		
 func on_physics_process(_delta: float) -> void:
+
 	if not player.attackController.isAttacking and not InputHandler.isAttacking():
 		if InputHandler.isMoving():
 			stateMachine.enterState(states.PlayerStateRun)
@@ -17,4 +18,5 @@ func on_physics_process(_delta: float) -> void:
 	if InputHandler.isAttacking() and player.attackController.canAttack:
 		player.attackController.attack()
 	
-
+	if InputHandler.isDashing():
+		stateMachine.enterState(states.PlayerStateDash)

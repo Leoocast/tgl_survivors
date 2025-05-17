@@ -20,7 +20,10 @@ bg_color = Color(1, 1, 1, 1)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_crk6h")
 
-[node name="Floor" type="TextureRect" parent="."]
+[node name="FloorComplete" type="Node" parent="."]
+
+[node name="Floor" type="TextureRect" parent="FloorComplete"]
+z_index = -100
 offset_left = -3227.0
 offset_top = -1776.0
 offset_right = 20924.0
@@ -32,10 +35,621 @@ texture = ExtResource("1_6chfy")
 expand_mode = 1
 stretch_mode = 1
 
+[node name="Floor2" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 4404.0
+offset_top = -1788.0
+offset_right = 28555.0
+offset_bottom = 10807.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor3" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -3264.0
+offset_top = -5895.0
+offset_right = 20887.0
+offset_bottom = 6700.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor4" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 4367.0
+offset_top = -5907.0
+offset_right = 28518.0
+offset_bottom = 6688.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor5" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -18415.0
+offset_top = -1838.0
+offset_right = 5736.0
+offset_bottom = 10757.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor6" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -10784.0
+offset_top = -1850.0
+offset_right = 13367.0
+offset_bottom = 10745.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor7" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -18452.0
+offset_top = -5957.0
+offset_right = 5699.0
+offset_bottom = 6638.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor8" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -10821.0
+offset_top = -5969.0
+offset_right = 13330.0
+offset_bottom = 6626.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor9" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -18745.0
+offset_top = 6014.0
+offset_right = 5406.0
+offset_bottom = 18609.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor10" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -11114.0
+offset_top = 6002.0
+offset_right = 13037.0
+offset_bottom = 18597.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor11" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -18782.0
+offset_top = 1895.0
+offset_right = 5369.0
+offset_bottom = 14490.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor12" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -11151.0
+offset_top = 1883.0
+offset_right = 13000.0
+offset_bottom = 14478.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor13" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -3474.0
+offset_top = 6158.0
+offset_right = 20677.0
+offset_bottom = 18753.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor14" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 4157.0
+offset_top = 6146.0
+offset_right = 28308.0
+offset_bottom = 18741.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor15" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -3511.0
+offset_top = 2039.0
+offset_right = 20640.0
+offset_bottom = 14634.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor16" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 4120.0
+offset_top = 2027.0
+offset_right = 28271.0
+offset_bottom = 14622.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor17" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 11941.0
+offset_top = -1921.0
+offset_right = 36092.0
+offset_bottom = 10674.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor18" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 19572.0
+offset_top = -1933.0
+offset_right = 43723.0
+offset_bottom = 10662.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor19" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 11904.0
+offset_top = -6040.0
+offset_right = 36055.0
+offset_bottom = 6555.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor20" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 19535.0
+offset_top = -6052.0
+offset_right = 43686.0
+offset_bottom = 6543.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor21" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 11797.0
+offset_top = 6034.0
+offset_right = 35948.0
+offset_bottom = 18629.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor22" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 19428.0
+offset_top = 6022.0
+offset_right = 43579.0
+offset_bottom = 18617.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor23" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 11760.0
+offset_top = 1915.0
+offset_right = 35911.0
+offset_bottom = 14510.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor24" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 19391.0
+offset_top = 1903.0
+offset_right = 43542.0
+offset_bottom = 14498.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor25" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -3588.0
+offset_top = -17679.0
+offset_right = 20563.0
+offset_bottom = -5084.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor26" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 4043.0
+offset_top = -17691.0
+offset_right = 28194.0
+offset_bottom = -5096.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor27" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -3625.0
+offset_top = -21798.0
+offset_right = 20526.0
+offset_bottom = -9203.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor28" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 4006.0
+offset_top = -21810.0
+offset_right = 28157.0
+offset_bottom = -9215.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor29" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -18776.0
+offset_top = -17741.0
+offset_right = 5375.0
+offset_bottom = -5146.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor30" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -11145.0
+offset_top = -17753.0
+offset_right = 13006.0
+offset_bottom = -5158.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor31" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -18813.0
+offset_top = -21860.0
+offset_right = 5338.0
+offset_bottom = -9265.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor32" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -11182.0
+offset_top = -21872.0
+offset_right = 12969.0
+offset_bottom = -9277.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor33" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -19106.0
+offset_top = -9889.0
+offset_right = 5045.0
+offset_bottom = 2706.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor34" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -11475.0
+offset_top = -9901.0
+offset_right = 12676.0
+offset_bottom = 2694.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor35" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -19143.0
+offset_top = -14008.0
+offset_right = 5008.0
+offset_bottom = -1413.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor36" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -11512.0
+offset_top = -14020.0
+offset_right = 12639.0
+offset_bottom = -1425.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor37" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -3835.0
+offset_top = -9745.0
+offset_right = 20316.0
+offset_bottom = 2850.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor38" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 3796.0
+offset_top = -9757.0
+offset_right = 27947.0
+offset_bottom = 2838.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor39" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = -3872.0
+offset_top = -13864.0
+offset_right = 20279.0
+offset_bottom = -1269.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor40" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 3759.0
+offset_top = -13876.0
+offset_right = 27910.0
+offset_bottom = -1281.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor41" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 11580.0
+offset_top = -17824.0
+offset_right = 35731.0
+offset_bottom = -5229.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor42" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 19211.0
+offset_top = -17836.0
+offset_right = 43362.0
+offset_bottom = -5241.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor43" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 11543.0
+offset_top = -21943.0
+offset_right = 35694.0
+offset_bottom = -9348.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor44" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 19174.0
+offset_top = -21955.0
+offset_right = 43325.0
+offset_bottom = -9360.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor45" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 11436.0
+offset_top = -9869.0
+offset_right = 35587.0
+offset_bottom = 2726.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor46" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 19067.0
+offset_top = -9881.0
+offset_right = 43218.0
+offset_bottom = 2714.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor47" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 11399.0
+offset_top = -13988.0
+offset_right = 35550.0
+offset_bottom = -1393.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Floor48" type="TextureRect" parent="FloorComplete"]
+z_index = -100
+offset_left = 19030.0
+offset_top = -14000.0
+offset_right = 43181.0
+offset_bottom = -1405.0
+scale = Vector2(0.318397, 0.318397)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_6chfy")
+expand_mode = 1
+stretch_mode = 1
+
 [node name="Player" parent="." instance=ExtResource("2_2yqfl")]
 unique_name_in_owner = true
 position = Vector2(774, 425)
-scale = Vector2(8.84947, 9.15654)
+scale = Vector2(3.05916, 3.16531)
 
 [node name="Enemy Spawner" parent="." instance=ExtResource("4_fdb3b")]
 position = Vector2(6.10352e-05, 0)

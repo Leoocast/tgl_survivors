@@ -2,8 +2,11 @@
 class_name PlayerAnimationController
 extends AnimationController
 
+#Nodes
+@onready var parryBuffTimer : Timer = $ParryBuffTimer
+
 #Config
-const BASE_ATTACK_FPS: float = 10.0
+const BASE_ATTACK_FPS: float = 15.0
 var newFps: float = BASE_ATTACK_FPS
 var player: Player
 
@@ -11,19 +14,20 @@ var player: Player
 var levelUpAuraRed: AnimatedSprite2D
 var levelUpAuraYellow: AnimatedSprite2D
 
-#Internal
-var directions: Dictionary = {
-	"up": "_up",
-	"down": "_down",
-	"left": "_left",
-	"right": "_right",
-}
+#Shader
+var shaderMaterial : ShaderMaterial
+var animationPlayer : AnimationPlayer
 
-var bowDirections: Dictionary = {
-	"up": "_bow_up",
-	"down": "_bow_down",
-	"left": "_bow_left",
-	"right": "_bow_right",
+#Internal
+var direction_vectors : Dictionary = {
+	"up": Vector2(0, -1),
+	"up_right": Vector2(1, -1).normalized(),
+	"right": Vector2(1, 0),
+	"down_right": Vector2(1, 1).normalized(),
+	"down": Vector2(0, 1),
+	"down_left": Vector2(-1, 1).normalized(),
+	"left": Vector2(-1, 0),
+	"up_left": Vector2(-1, -1).normalized(),
 }
 
 var lastFacingDirection: Vector2 = Vector2.ZERO
@@ -31,8 +35,11 @@ var lastFacingDirection: Vector2 = Vector2.ZERO
 #-------------------------#
 func setupPlayer(_player: Player , ssjAura: Node2D) -> void:
 	self.player = _player
-	self.setup(player.get_node("AnimatedSprite2D"))
-	
+	var playerSprite = player.get_node("AnimatedSprite2D") as AnimatedSprite2D
+	self.sprite = playerSprite
+	self.shaderMaterial = sprite.material as ShaderMaterial
+	self.animationPlayer = sprite.get_node("AnimationPlayer") as AnimationPlayer
+
 	self.levelUpAuraRed = ssjAura.get_node("AuraRed") as AnimatedSprite2D
 	self.levelUpAuraYellow = ssjAura.get_node("AuraYellow") as AnimatedSprite2D
 
@@ -53,41 +60,68 @@ func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 	await playAndAwaitSsj()
 	player.z_index = 1
 
-func on_attack_animation_started() -> void:
-	var mousePosition = player.getMouseDirection() 
+func on_attack_animation_started(index : int = 1) -> void:
+	# var mousePosition = player.getMouseDirection() 
 
-	if player.weapon.type == Enums.WeaponType.BOW:
-		playAttackMouse(mousePosition)
+	var direction : Vector2
+
+	if InputHandler.isShielding():
+		direction = player.aimController.lastAimDirection
+		playAttackByDirection(direction, index)
 		return
 
-	if player.attackController.firstAttack:
-		playAttackMouse(mousePosition)
-		# sfxManager.playAttackSword1Delayed()
-	else:
-		playAttack2Mouse(mousePosition)
-		# await GameUtils.waitFor(0.1)
-		# sfxManager.playAttackSword2()
+	direction = InputHandler.getDirection()
+
+	if direction == Vector2.ZERO:
+		playAttackByDirection(lastFacingDirection, index)
+		return
+	
+	playAttackByDirection(direction, index)
+
+	# if player.weapon.type == Enums.WeaponType.BOW:
+	# 	playAttackMouse(mousePosition)
+	# 	return
+
+	# if player.attackController.firstAttack:
+	# 	playAttackMouse(mousePosition)
+	# 	# sfxManager.playAttackSword1Delayed()
+	# else:
+	# 	playAttack2Mouse(mousePosition)
+	# 	# await GameUtils.waitFor(0.1)
+	# 	# sfxManager.playAttackSword2()
 
 #-------------------------#
-func playDefaultMouse(mouseDirection: Vector2) -> void:
-	var inputDirection = InputHandler.getDirection()
-	if inputDirection != Vector2.ZERO:
-		playRunMouse(inputDirection)
-	else:
-		playIdleMouse(inputDirection)
+# func playDefaultByDirection() -> void:
+# 	var inputDirection = InputHandler.getDirection()
+# 	if inputDirection != Vector2.ZERO:
+# 		playRunMouse(inputDirection)
+# 	else:
+# 		playIdleMouse(inputDirection)
 
-func playIdleMouse(direction: Vector2) -> void:
-	matchDirection("idle", direction)
+func playIdleDirection() -> void:
+	matchDirection("idle", lastFacingDirection)
 
-func playRunMouse(direction: Vector2) -> void:
+func playDashDirection() -> void:
+	matchDirection("dash", lastFacingDirection)
+
+func playRunDirection(direction: Vector2) -> void:
 	matchDirection("run", direction)
 	lastFacingDirection = direction.normalized()
 
-func playAttackMouse(mouseDirection: Vector2) -> void:
-	matchDirection("attack", mouseDirection)
+func playWalkDirection(direction: Vector2) -> void:
+	matchDirection("walk", direction)
+	lastFacingDirection = direction.normalized()
 
-func playAttack2Mouse(mouseDirection: Vector2) -> void:
-	matchDirection("attack_2", mouseDirection)
+func playParryDirection(direction: Vector2) -> void:
+	matchDirection("parry", direction)
+
+func playAttackByDirection(direction: Vector2, attack_number: int) -> void:
+	var dir_str = getClosestDirection(direction)
+	var anim_name = "attack_%s_%d" % [dir_str, attack_number]
+	sprite.play(anim_name)
+
+# func playAttackByDirection(mouseDirection: Vector2) -> void:
+# 	matchDirection("attack", mouseDirection)
 
 func playDeathDirection(mouseDirection: Vector2) -> void:
 	matchDirection("death", mouseDirection)
@@ -99,42 +133,80 @@ func flipHorizontal(flip: bool) -> void:
 	sprite.flip_h = flip
 
 func matchDirection(animationName: String, direction: Vector2) -> void:
-	var isHorizontal = abs(direction.x) > abs(direction.y)
-	var isRight = direction.x > 0
-	var isDown = direction.y > 0
+	var closestDir = getClosestDirection(direction)
 
-	var isBow: bool = player.weapon.type == Enums.WeaponType.BOW
+	var animationWillPlay = "%s_%s" % [animationName, closestDir]
 
-	var suffix: String
+	sprite.play(animationWillPlay)
 
-	if isHorizontal:
-		suffix = directions.right if isRight else directions.left
-	else:
-		suffix = directions.down if isDown else directions.up
+func getClosestDirection(inputDir: Vector2) -> String:
+	# if inputDir == Vector2.ZERO:
+	# 	return "down"  # fallback o puedes usar la última dirección
 
-	if isBow:
-		suffix = bowDirections.get(suffix.substr(1))
+	var bestDot := -INF
+	var bestDirection := "down"
+
+	for key in direction_vectors.keys():
+		var dir = direction_vectors[key]
+		var dot = inputDir.normalized().dot(dir)
+		if dot > bestDot:
+			bestDot = dot
+			bestDirection = key
+
+	return bestDirection
 	
-	sprite.play(animationName + suffix)
+func boostWhenParry() -> void:
+	setAttackFpsMultiplier(.3)
+	parryBuffTimer.start()
 
-	
-func setAttackFpsMultiplier(multiplier: float) -> void:
+
+func _on_parry_buff_timer_timeout() -> void:
+	setAttackFpsMultiplier(1, true)
+
+#TODO Arreglar esta funcion
+func setAttackFpsMultiplier(multiplier: float, reset : bool = false) -> void:
 
 	# 8 * 0.2 = 1.6
 	var result = BASE_ATTACK_FPS * multiplier
 
-	# 8 + 1.6 -> 9.6 + 1.6 -> 11.12 + 1.6, etc..
-	newFps += result
+	if reset:
+		newFps = BASE_ATTACK_FPS
+	else:
+		# 8 + 1.6 -> 9.6 + 1.6 -> 11.12 + 1.6, etc..
+		newFps += result
 	
-	sprite.sprite_frames.set_animation_speed("attack_up", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_down", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_left", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_right", newFps)
+	#TODO Arreglar esto con una funcion
+	sprite.sprite_frames.set_animation_speed("attack_up_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_3", newFps)
 	
-	sprite.sprite_frames.set_animation_speed("attack_2_up", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_2_down", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_2_left", newFps)
-	sprite.sprite_frames.set_animation_speed("attack_2_right", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_left_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_left_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_left_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_right_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_right_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_right_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_up_left_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_left_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_left_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_up_right_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_right_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_up_right_3", newFps)
+	
+	sprite.sprite_frames.set_animation_speed("attack_down_left_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_left_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_left_3", newFps)
+
+	sprite.sprite_frames.set_animation_speed("attack_down_right_1", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_right_2", newFps)
+	sprite.sprite_frames.set_animation_speed("attack_down_right_3", newFps)
 
 func playAndAwaitSsj() -> void:
 
@@ -149,4 +221,13 @@ func playAndAwaitSsj() -> void:
 	levelUpAuraRed.hide()
 	levelUpAuraYellow.hide()
 
-#Consumers
+func getCurrentAttackFrame() -> int:
+	if str(sprite.animation).begins_with("attack"):
+		return sprite.frame
+	
+	return 0
+
+
+func playBlockingAnimation() -> void:
+	animationPlayer.play("blocking")
+

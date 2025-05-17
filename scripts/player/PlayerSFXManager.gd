@@ -10,6 +10,8 @@ var player: Player
 #SFX
 var sfx_sword_1: AudioStream = load(PATHS.PLAYER_SFX.SWORD_1) as AudioStream
 var sfx_sword_2: AudioStream = load(PATHS.PLAYER_SFX.SWORD_2) as AudioStream
+var sfx_normal_parry: AudioStream = load(PATHS.PLAYER_SFX.NORMAL_PARRY) as AudioStream
+var sfx_perfect_parry: AudioStream = load(PATHS.PLAYER_SFX.PERFECT_PARRY) as AudioStream
 
 #-------------------------#
 func _init():
@@ -22,13 +24,14 @@ func setupPlayer(_player: Player) -> void:
 
 #Suscriptions
 #Si se empieza a desfazar el audio, que el animation emita el signal justo en el frame adecuado y quitamos el await.
-func on_attack_animation_started() -> void:
-	if player.attackController.firstAttack:
-		await GameUtils.waitFor(0.3)
-		playAttackSword1()
-	else:
-		await GameUtils.waitFor(0.1)
-		playAttackSword2()
+func on_attack_animation_started(_index : int = 0) -> void:
+	pass
+	# if player.attackController.firstAttack:
+	# 	await GameUtils.waitFor(0.3)
+	# 	playAttackSword1()
+	# else:
+	# 	await GameUtils.waitFor(0.1)
+	# 	playAttackSword2()
 
 #-------------------------#
 func playAttackSword1() -> void:
@@ -37,6 +40,14 @@ func playAttackSword1() -> void:
 
 func playAttackSword2() -> void:
 	audioPlayer.stream = sfx_sword_2
+	audioPlayer.play()
+
+func playNormalParry() -> void:
+	audioPlayer.stream = sfx_normal_parry
+	audioPlayer.play()
+
+func playPerfectParry() -> void:
+	audioPlayer.stream = sfx_perfect_parry
 	audioPlayer.play()
 
 func playAttackSword1Delayed() -> void:
