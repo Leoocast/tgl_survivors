@@ -18,7 +18,7 @@ void fragment() {
 		float lum = luminance(base);
 		float diff = abs(lum - target);
 		float mx = clamp(1.0 - diff / span, 0.0, 1.0);
-		
+
 		// Invertido: empieza totalmente teñido, luego vuelve al original
 		colour = mix(tint, base, mx);
 	}

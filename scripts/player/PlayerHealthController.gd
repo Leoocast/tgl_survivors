@@ -12,7 +12,7 @@ func on_level_up(_newLvl: int, _xpNextLvl: int, _currentXp: int) -> void:
 func on_upgrade_completed() -> void:
 	resumeTakingDamage()
 
-func takeDamageWithSource(enemy: Enemy) -> void:
+func takeDamageWithSource(enemy: Node) -> void:
 	if not canTakeDamage or isDead:
 		return
 

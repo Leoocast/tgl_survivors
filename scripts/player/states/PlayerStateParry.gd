@@ -53,8 +53,8 @@ func startParryWindow() -> void:
 	player.isInParryWindow = true
 	player.isInPerfectParryWindow = true
 
-	await get_tree().create_timer(0.05).timeout  # ~3 frames a 60fps
+	await get_tree().create_timer(0.08).timeout  # ~3 frames a 60fps
 	player.isInPerfectParryWindow = false    
 
-	await get_tree().create_timer(0.15).timeout  # ~9 frames a 60fps
+	await get_tree().create_timer(0.12).timeout  # ~9 frames a 60fps
 	player.isInParryWindow = false            

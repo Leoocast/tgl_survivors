@@ -287,7 +287,7 @@ script = ExtResource("6_jjup5")
 material = SubResource("ShaderMaterial_wfyvu")
 position = Vector2(0, -13.0821)
 sprite_frames = SubResource("SpriteFrames_bhme6")
-animation = &"take_damage"
+animation = &"attack"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {

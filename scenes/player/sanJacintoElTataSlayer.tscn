@@ -14743,6 +14743,21 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="Animation" id="Animation_oaamj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isBlocking")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_5mfs0"]
 resource_name = "blocking"
 length = 0.2
@@ -14757,21 +14772,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_oaamj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/isBlocking")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oaamj"]
@@ -14894,6 +14894,7 @@ texture = ExtResource("16_gtnfb")
 position = Vector2(1, -26)
 
 [node name="AnimatedSprite2DLegacy" type="AnimatedSprite2D" parent="."]
+process_mode = 4
 visible = false
 position = Vector2(1, 1)
 scale = Vector2(1.00403, 1)
@@ -14903,6 +14904,7 @@ animation = &"attack_down"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2DLegacy"]
 
 [node name="AnimatedSprite2DKnight" type="AnimatedSprite2D" parent="."]
+process_mode = 4
 visible = false
 sprite_frames = SubResource("SpriteFrames_nptfx")
 animation = &"run_down"
@@ -14912,7 +14914,7 @@ animation = &"run_down"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_oaamj")
 sprite_frames = SubResource("SpriteFrames_5r1v5")
-animation = &"walk_up_left"
+animation = &"attack_down_1"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
